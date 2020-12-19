@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DatingSiteContext))]
-    [Migration("20201219140854_Test")]
-    partial class Test
+    [Migration("20201219215755_AddAllTables")]
+    partial class AddAllTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,21 @@ namespace DataLayer.Migrations
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
+
+            modelBuilder.Entity("DataLayer.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
 
             modelBuilder.Entity("DataLayer.Models.Country", b =>
                 {
@@ -34,6 +49,36 @@ namespace DataLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
+                });
+
+            modelBuilder.Entity("DataLayer.Models.FriendList", b =>
+                {
+                    b.Property<int>("FriendListID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("FriendListID");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("FriendLists");
                 });
 
             modelBuilder.Entity("DataLayer.Models.Game", b =>
@@ -186,16 +231,11 @@ namespace DataLayer.Migrations
                     b.Property<int?>("PersonalityId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
 
                     b.HasIndex("PersonalityId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Users");
                 });
@@ -275,6 +315,21 @@ namespace DataLayer.Migrations
                     b.ToTable("PlatformUser");
                 });
 
+            modelBuilder.Entity("DataLayer.Models.FriendList", b =>
+                {
+                    b.HasOne("DataLayer.Models.Category", null)
+                        .WithMany("FriendLists")
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("DataLayer.Models.User", null)
+                        .WithMany("Friend")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("DataLayer.Models.User", null)
+                        .WithMany("UserID")
+                        .HasForeignKey("UserId1");
+                });
+
             modelBuilder.Entity("DataLayer.Models.Message", b =>
                 {
                     b.HasOne("DataLayer.Models.User", "Reciever")
@@ -314,10 +369,6 @@ namespace DataLayer.Migrations
                     b.HasOne("DataLayer.Models.Personality", "Personality")
                         .WithMany()
                         .HasForeignKey("PersonalityId");
-
-                    b.HasOne("DataLayer.Models.User", null)
-                        .WithMany("Friends")
-                        .HasForeignKey("UserId");
 
                     b.Navigation("Country");
 
@@ -399,9 +450,16 @@ namespace DataLayer.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DataLayer.Models.Category", b =>
+                {
+                    b.Navigation("FriendLists");
+                });
+
             modelBuilder.Entity("DataLayer.Models.User", b =>
                 {
-                    b.Navigation("Friends");
+                    b.Navigation("Friend");
+
+                    b.Navigation("UserID");
                 });
 #pragma warning restore 612, 618
         }

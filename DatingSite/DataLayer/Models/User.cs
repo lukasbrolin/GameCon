@@ -13,8 +13,8 @@ namespace DataLayer.Models
         public int Age { get; set; }
         public string Gender { get; set; }
         public Country Country { get; set; }
-        public IList<User> Friends { get; set; }
-        ///public IList<Category> FriendsCategories { get; set; }
+        public IList<FriendList> UserID { get; set; }
+        public IList<FriendList> Friend { get; set; }
         public Personality Personality { get; set; }
         public IList<Platform> Platforms { get; set; }
         public IList<Game> Games { get; set; }
@@ -22,7 +22,8 @@ namespace DataLayer.Models
 
         public User()
         {
-            this.Friends = new List<User>();
+            this.UserID = new List<FriendList>();
+            this.Friend = new List<FriendList>();
             this.Platforms = new List<Platform>();
             this.Games = new List<Game>();
             this.Genres = new List<Genre>();

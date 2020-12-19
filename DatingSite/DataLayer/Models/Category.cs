@@ -1,13 +1,16 @@
-﻿//using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-//namespace DataLayer.Models
-//{
-//    public class Category
-//    {
-//        public int Id { get; set; }
-//        public string Name { get; set; }
+namespace DataLayer.Models
+{
+    public class Category
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public IList<FriendList> FriendLists { get; set; }
 
-//        public IList<User> User1 { get; set; }
-//        public IList<User> User2 { get; set; }
-//    }
-//}
+        public Category()
+        {
+            this.FriendLists = new List<FriendList>();
+        }
+    }
+}

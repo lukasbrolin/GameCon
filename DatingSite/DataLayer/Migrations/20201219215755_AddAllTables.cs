@@ -1,13 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataLayer.Migrations
 {
-    public partial class AddUsers : Migration
+    public partial class AddAllTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Country",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -16,11 +17,24 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Country", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Game",
+                name: "Countries",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Countries", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Games",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -30,11 +44,11 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Game", x => x.Id);
+                    table.PrimaryKey("PK_Games", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Genre",
+                name: "Genres",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -43,11 +57,11 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Genre", x => x.Id);
+                    table.PrimaryKey("PK_Genres", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Personality",
+                name: "Personalities",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -57,11 +71,11 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Personality", x => x.Id);
+                    table.PrimaryKey("PK_Personalities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Platform",
+                name: "Platforms",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -70,7 +84,7 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Platform", x => x.Id);
+                    table.PrimaryKey("PK_Platforms", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -84,15 +98,15 @@ namespace DataLayer.Migrations
                 {
                     table.PrimaryKey("PK_GameGenre", x => new { x.GamesId, x.GenresId });
                     table.ForeignKey(
-                        name: "FK_GameGenre_Game_GamesId",
+                        name: "FK_GameGenre_Games_GamesId",
                         column: x => x.GamesId,
-                        principalTable: "Game",
+                        principalTable: "Games",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GameGenre_Genre_GenresId",
+                        name: "FK_GameGenre_Genres_GenresId",
                         column: x => x.GenresId,
-                        principalTable: "Genre",
+                        principalTable: "Genres",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -109,55 +123,23 @@ namespace DataLayer.Migrations
                     Age = table.Column<int>(type: "int", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CountryId = table.Column<int>(type: "int", nullable: true),
-                    PersonalityId = table.Column<int>(type: "int", nullable: true),
-                    //UserId = table.Column<int>(type: "int", nullable: true)
+                    PersonalityId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Users_Country_CountryId",
+                        name: "FK_Users_Countries_CountryId",
                         column: x => x.CountryId,
-                        principalTable: "Country",
+                        principalTable: "Countries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Users_Personality_PersonalityId",
+                        name: "FK_Users_Personalities_PersonalityId",
                         column: x => x.PersonalityId,
-                        principalTable: "Personality",
+                        principalTable: "Personalities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    //table.ForeignKey(
-                    //    name: "FK_Users_Users_UserId",
-                    //    column: x => x.UserId,
-                    //    principalTable: "Users",
-                    //    principalColumn: "Id",
-                    //    onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Friends",
-                columns: table => new
-                {
-                    Friend1 = table.Column<int>(type: "int", nullable: false),
-                    Friend2 = table.Column<int>(type: "int", nullable: false),
-                    Category = table.Column<string>(type: "nvarchar(max)", nullable:true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Friends", x => new { x.Friend1, x.Friend2 });
-                    table.ForeignKey(
-                        name: "FK_Friends_Users_Friend1ID",
-                        column: x => x.Friend1,
-                        principalTable: "Users",
-                        principalColumn: "Id")
-                        ;
-                    table.ForeignKey(
-                        name: "FK_Friends_Users_Friend2ID",
-                        column: x => x.Friend2,
-                        principalTable: "Users",
-                        principalColumn: "Id")
-                        ;
                 });
 
             migrationBuilder.CreateTable(
@@ -171,17 +153,51 @@ namespace DataLayer.Migrations
                 {
                     table.PrimaryKey("PK_GamePlatform", x => new { x.GamesId, x.PlatformsId });
                     table.ForeignKey(
-                        name: "FK_GamePlatform_Game_GamesId",
+                        name: "FK_GamePlatform_Games_GamesId",
                         column: x => x.GamesId,
-                        principalTable: "Game",
+                        principalTable: "Games",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GamePlatform_Platform_PlatformsId",
+                        name: "FK_GamePlatform_Platforms_PlatformsId",
                         column: x => x.PlatformsId,
-                        principalTable: "Platform",
+                        principalTable: "Platforms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FriendLists",
+                columns: table => new
+                {
+                    FriendListID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    Friend = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FriendLists", x => x.FriendListID);
+                    table.ForeignKey(
+                        name: "FK_FriendLists_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_FriendLists_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_FriendLists_Users_Friend",
+                        column: x => x.Friend,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -195,9 +211,9 @@ namespace DataLayer.Migrations
                 {
                     table.PrimaryKey("PK_GameUser", x => new { x.GamesId, x.UsersId });
                     table.ForeignKey(
-                        name: "FK_GameUser_Game_GamesId",
+                        name: "FK_GameUser_Games_GamesId",
                         column: x => x.GamesId,
-                        principalTable: "Game",
+                        principalTable: "Games",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -219,9 +235,9 @@ namespace DataLayer.Migrations
                 {
                     table.PrimaryKey("PK_GenreUser", x => new { x.GenresId, x.UsersId });
                     table.ForeignKey(
-                        name: "FK_GenreUser_Genre_GenresId",
+                        name: "FK_GenreUser_Genres_GenresId",
                         column: x => x.GenresId,
-                        principalTable: "Genre",
+                        principalTable: "Genres",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -230,6 +246,34 @@ namespace DataLayer.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Messages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SenderId = table.Column<int>(type: "int", nullable: true),
+                    RecieverId = table.Column<int>(type: "int", nullable: true),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Messages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Messages_Users_RecieverId",
+                        column: x => x.RecieverId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Messages_Users_SenderId",
+                        column: x => x.SenderId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -243,9 +287,9 @@ namespace DataLayer.Migrations
                 {
                     table.PrimaryKey("PK_PlatformUser", x => new { x.PlatformsId, x.UsersId });
                     table.ForeignKey(
-                        name: "FK_PlatformUser_Platform_PlatformsId",
+                        name: "FK_PlatformUser_Platforms_PlatformsId",
                         column: x => x.PlatformsId,
-                        principalTable: "Platform",
+                        principalTable: "Platforms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -255,6 +299,49 @@ namespace DataLayer.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Posts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SenderId = table.Column<int>(type: "int", nullable: true),
+                    RecieverId = table.Column<int>(type: "int", nullable: true),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Posts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Posts_Users_RecieverId",
+                        column: x => x.RecieverId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Posts_Users_SenderId",
+                        column: x => x.SenderId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FriendLists_CategoryId",
+                table: "FriendLists",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FriendLists_UserId",
+                table: "FriendLists",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FriendLists_Friend",
+                table: "FriendLists",
+                column: "Friend");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GameGenre_GenresId",
@@ -277,9 +364,29 @@ namespace DataLayer.Migrations
                 column: "UsersId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Messages_RecieverId",
+                table: "Messages",
+                column: "RecieverId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Messages_SenderId",
+                table: "Messages",
+                column: "SenderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PlatformUser_UsersId",
                 table: "PlatformUser",
                 column: "UsersId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_RecieverId",
+                table: "Posts",
+                column: "RecieverId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_SenderId",
+                table: "Posts",
+                column: "SenderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_CountryId",
@@ -290,15 +397,13 @@ namespace DataLayer.Migrations
                 name: "IX_Users_PersonalityId",
                 table: "Users",
                 column: "PersonalityId");
-
-            //migrationBuilder.CreateIndex(
-            //    name: "IX_Users_UserId",
-            //    table: "Users",
-            //    column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "FriendLists");
+
             migrationBuilder.DropTable(
                 name: "GameGenre");
 
@@ -312,25 +417,34 @@ namespace DataLayer.Migrations
                 name: "GenreUser");
 
             migrationBuilder.DropTable(
+                name: "Messages");
+
+            migrationBuilder.DropTable(
                 name: "PlatformUser");
 
             migrationBuilder.DropTable(
-                name: "Game");
+                name: "Posts");
 
             migrationBuilder.DropTable(
-                name: "Genre");
+                name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Platform");
+                name: "Games");
+
+            migrationBuilder.DropTable(
+                name: "Genres");
+
+            migrationBuilder.DropTable(
+                name: "Platforms");
 
             migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Country");
+                name: "Countries");
 
             migrationBuilder.DropTable(
-                name: "Personality");
+                name: "Personalities");
         }
     }
 }
