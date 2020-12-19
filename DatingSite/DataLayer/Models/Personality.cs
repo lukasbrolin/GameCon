@@ -1,6 +1,6 @@
 ﻿namespace DataLayer.Models
 {
-    class Personality
+    public class Personality
     {
         public int Id { get; set; }
         public string Name { get; set; }

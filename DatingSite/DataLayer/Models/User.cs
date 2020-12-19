@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace DataLayer.Models
 {
-    class User
+    public class User
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -12,6 +13,19 @@ namespace DataLayer.Models
         public int Age { get; set; }
         public string Gender { get; set; }
         public Country Country { get; set; }
+        public IList<User> Friends { get; set; }
+        ///public IList<Category> FriendsCategories { get; set; }
+        public Personality Personality { get; set; }
+        public IList<Platform> Platforms { get; set; }
+        public IList<Game> Games { get; set; }
+        public IList<Genre> Genres { get; set; }
 
+        public User()
+        {
+            this.Friends = new List<User>();
+            this.Platforms = new List<Platform>();
+            this.Games = new List<Game>();
+            this.Genres = new List<Genre>();
+        }
     }
 }

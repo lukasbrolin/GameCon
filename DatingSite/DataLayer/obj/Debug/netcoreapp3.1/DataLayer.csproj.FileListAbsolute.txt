@@ -1,0 +1,12 @@
+C:\Dating_site\DatingSite\datalayer\bin\Debug\netcoreapp3.1\DataLayer.deps.json
+C:\Dating_site\DatingSite\datalayer\bin\Debug\netcoreapp3.1\DataLayer.dll
+C:\Dating_site\DatingSite\datalayer\bin\Debug\netcoreapp3.1\DataLayer.pdb
+C:\Dating_site\DatingSite\datalayer\obj\Debug\netcoreapp3.1\DataLayer.csprojAssemblyReference.cache
+C:\Dating_site\DatingSite\datalayer\obj\Debug\netcoreapp3.1\DataLayer.AssemblyInfoInputs.cache
+C:\Dating_site\DatingSite\datalayer\obj\Debug\netcoreapp3.1\DataLayer.AssemblyInfo.cs
+C:\Dating_site\DatingSite\datalayer\obj\Debug\netcoreapp3.1\DataLayer.csproj.CoreCompileInputs.cache
+C:\Dating_site\DatingSite\datalayer\obj\Debug\netcoreapp3.1\DataLayer.dll
+C:\Dating_site\DatingSite\datalayer\obj\Debug\netcoreapp3.1\DataLayer.pdb
+C:\Dating_site\DatingSite\datalayer\bin\Debug\netcoreapp3.1\DataLayer.runtimeconfig.json
+C:\Dating_site\DatingSite\datalayer\bin\Debug\netcoreapp3.1\DataLayer.runtimeconfig.dev.json
+C:\Dating_site\DatingSite\datalayer\obj\Debug\netcoreapp3.1\DataLayer.genruntimeconfig.cache

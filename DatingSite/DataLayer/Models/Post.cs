@@ -2,7 +2,7 @@
 
 namespace DataLayer.Models
 {
-    class Post
+    public class Post
     {
         public int Id { get; set; }
         public DateTime TimeStamp { get; set; }
