@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DatingSiteContext))]
-    [Migration("20201220102829_AddAllTables")]
+    [Migration("20201220195828_AddAllTables")]
     partial class AddAllTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
