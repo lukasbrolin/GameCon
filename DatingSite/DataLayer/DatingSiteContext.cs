@@ -29,11 +29,18 @@ namespace DataLayer
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<FriendList>().HasKey(f => new { f.UserId, f.Friend });
+            modelBuilder.Entity<FriendList>()
+                .HasOne(f => f.User1)
+                .WithMany()
+                .HasForeignKey(f => f.UserId);
+            modelBuilder.Entity<FriendList>().HasOne(f => f.User2)
+                .WithMany()
+                .HasForeignKey(f => f.Friend);
             // IMPORTANT: we are mapping the entity User to the same table as the entity ApplicationUser
-            modelBuilder.Entity<User>().HasKey(x => x.Id);
-            modelBuilder.Entity<FriendList>().HasKey(x => x.FriendListID);
+            //modelBuilder.Entity<User>().HasKey(x => x.Id);
+            //modelBuilder.Entity<FriendList>().HasKey(x => x.FriendListID);
 
-            
             //modelBuilder.Entity<User>().ToTable("Users");
             //modelBuilder.Entity<FriendList>().ToTable("FriendLists");
         }

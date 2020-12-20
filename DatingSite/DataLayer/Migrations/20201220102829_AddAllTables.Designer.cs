@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DatingSiteContext))]
-    [Migration("20201219215755_AddAllTables")]
+    [Migration("20201220102829_AddAllTables")]
     partial class AddAllTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,10 +53,11 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Models.FriendList", b =>
                 {
-                    b.Property<int>("FriendListID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Friend")
+                        .HasColumnType("int");
 
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
@@ -64,19 +65,11 @@ namespace DataLayer.Migrations
                     b.Property<DateTime>("TimeStamp")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId1")
-                        .HasColumnType("int");
-
-                    b.HasKey("FriendListID");
+                    b.HasKey("UserId", "Friend");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
+                    b.HasIndex("Friend");
 
                     b.ToTable("FriendLists");
                 });
@@ -321,13 +314,21 @@ namespace DataLayer.Migrations
                         .WithMany("FriendLists")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("DataLayer.Models.User", null)
-                        .WithMany("Friend")
-                        .HasForeignKey("UserId");
+                    b.HasOne("DataLayer.Models.User", "User2")
+                        .WithMany()
+                        .HasForeignKey("Friend")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("DataLayer.Models.User", null)
-                        .WithMany("UserID")
-                        .HasForeignKey("UserId1");
+                    b.HasOne("DataLayer.Models.User", "User1")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User1");
+
+                    b.Navigation("User2");
                 });
 
             modelBuilder.Entity("DataLayer.Models.Message", b =>
@@ -453,13 +454,6 @@ namespace DataLayer.Migrations
             modelBuilder.Entity("DataLayer.Models.Category", b =>
                 {
                     b.Navigation("FriendLists");
-                });
-
-            modelBuilder.Entity("DataLayer.Models.User", b =>
-                {
-                    b.Navigation("Friend");
-
-                    b.Navigation("UserID");
                 });
 #pragma warning restore 612, 618
         }

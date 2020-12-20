@@ -170,16 +170,14 @@ namespace DataLayer.Migrations
                 name: "FriendLists",
                 columns: table => new
                 {
-                    FriendListID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Friend = table.Column<int>(type: "int", nullable: false),
                     TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true),
-                    Friend = table.Column<int>(type: "int", nullable: true)
+                    CategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FriendLists", x => x.FriendListID);
+                    table.PrimaryKey("PK_FriendLists", x => new { x.UserId, x.Friend });
                     table.ForeignKey(
                         name: "FK_FriendLists_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -187,14 +185,14 @@ namespace DataLayer.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_FriendLists_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_FriendLists_Users_Friend",
                         column: x => x.Friend,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_FriendLists_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -332,11 +330,6 @@ namespace DataLayer.Migrations
                 name: "IX_FriendLists_CategoryId",
                 table: "FriendLists",
                 column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FriendLists_UserId",
-                table: "FriendLists",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FriendLists_Friend",

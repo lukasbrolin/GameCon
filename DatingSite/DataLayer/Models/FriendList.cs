@@ -7,15 +7,15 @@ namespace DataLayer.Models
 {
     public class FriendList
     {
-        public int FriendListID { get; set; }
-        //public IList<User> Users1 { get; set; }
-        //public IList<User> Users2 { get; set; }
+        public virtual int UserId { get; set; }
+        public virtual int Friend { get; set; }
+        public virtual User User1 { get; set; }
+        public virtual User User2 { get; set; }
         public DateTime TimeStamp { get; set; }
 
         public FriendList()
         {
-            //this.Users1 = new List<User>();
-            //this.Users2 = new List<User>();
+            //this.Friend = new List<User>();
         }
     }
 
