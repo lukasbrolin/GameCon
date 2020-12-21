@@ -22,7 +22,8 @@ _UpgradeReport_Files/
 ###############
 # Directories #
 ###############
-bin/
+bin/Debug/net5.0/*.json
+bin/Debug/net5.0/*.xml
 obj/
 TestResults/
 ###################
@@ -58,7 +59,7 @@ TestResults/
 ehthumbs.db
 Icon?
 Thumbs.db
-[Bb]in
+
 [Oo]bj
 [Tt]est[Rr]esults
 *.suo

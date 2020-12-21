@@ -72,6 +72,30 @@ namespace DataLayer.Migrations
                     b.ToTable("FriendLists");
                 });
 
+            modelBuilder.Entity("DataLayer.Models.FriendRequest", b =>
+                {
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RecieverId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Pending")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("RecieverID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("SenderId", "RecieverId");
+
+                    b.HasIndex("RecieverID");
+
+                    b.ToTable("FriendRequests");
+                });
+
             modelBuilder.Entity("DataLayer.Models.Game", b =>
                 {
                     b.Property<int>("Id")
@@ -201,6 +225,9 @@ namespace DataLayer.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
@@ -219,8 +246,14 @@ namespace DataLayer.Migrations
                     b.Property<string>("Mail")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Online")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("PersonalityId")
                         .HasColumnType("int");
+
+                    b.Property<string>("PreferedLanguage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -229,6 +262,24 @@ namespace DataLayer.Migrations
                     b.HasIndex("PersonalityId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("DataLayer.Models.Visit", b =>
+                {
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Visitor")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserID", "Visitor");
+
+                    b.HasIndex("Visitor");
+
+                    b.ToTable("Visits");
                 });
 
             modelBuilder.Entity("GameGenre", b =>
@@ -329,6 +380,23 @@ namespace DataLayer.Migrations
                     b.Navigation("User2");
                 });
 
+            modelBuilder.Entity("DataLayer.Models.FriendRequest", b =>
+                {
+                    b.HasOne("DataLayer.Models.User", "User2")
+                        .WithMany()
+                        .HasForeignKey("RecieverID");
+
+                    b.HasOne("DataLayer.Models.User", "User1")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User1");
+
+                    b.Navigation("User2");
+                });
+
             modelBuilder.Entity("DataLayer.Models.Message", b =>
                 {
                     b.HasOne("DataLayer.Models.User", "Reciever")
@@ -372,6 +440,25 @@ namespace DataLayer.Migrations
                     b.Navigation("Country");
 
                     b.Navigation("Personality");
+                });
+
+            modelBuilder.Entity("DataLayer.Models.Visit", b =>
+                {
+                    b.HasOne("DataLayer.Models.User", "User1")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataLayer.Models.User", "User2")
+                        .WithMany()
+                        .HasForeignKey("Visitor")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User1");
+
+                    b.Navigation("User2");
                 });
 
             modelBuilder.Entity("GameGenre", b =>

@@ -4,10 +4,10 @@ namespace DataLayer.Models
 {
     public class Genre
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public IList<User> Users { get; set; }
-        public IList<Game> Games { get; set; }
+        public virtual int Id { get; set; }
+        public virtual string Name { get; set; }
+        public virtual IList<User> Users { get; set; }
+        public virtual IList<Game> Games { get; set; }
 
         public Genre()
         {
