@@ -29,7 +29,8 @@ namespace DatingSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DatingSiteContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DatingSiteConnection")));
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DatingSiteConnection")));
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

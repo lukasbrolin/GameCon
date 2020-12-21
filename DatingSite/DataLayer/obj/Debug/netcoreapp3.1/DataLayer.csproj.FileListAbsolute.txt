@@ -10,3 +10,15 @@ C:\Dating_site\DatingSite\datalayer\obj\Debug\netcoreapp3.1\DataLayer.pdb
 C:\Dating_site\DatingSite\datalayer\bin\Debug\netcoreapp3.1\DataLayer.runtimeconfig.json
 C:\Dating_site\DatingSite\datalayer\bin\Debug\netcoreapp3.1\DataLayer.runtimeconfig.dev.json
 C:\Dating_site\DatingSite\datalayer\obj\Debug\netcoreapp3.1\DataLayer.genruntimeconfig.cache
+C:\Users\simpa\Source\Repos\lukasbrolin\Dating_site\DatingSite\DataLayer\bin\Debug\netcoreapp3.1\DataLayer.deps.json
+C:\Users\simpa\Source\Repos\lukasbrolin\Dating_site\DatingSite\DataLayer\bin\Debug\netcoreapp3.1\DataLayer.runtimeconfig.json
+C:\Users\simpa\Source\Repos\lukasbrolin\Dating_site\DatingSite\DataLayer\bin\Debug\netcoreapp3.1\DataLayer.runtimeconfig.dev.json
+C:\Users\simpa\Source\Repos\lukasbrolin\Dating_site\DatingSite\DataLayer\bin\Debug\netcoreapp3.1\DataLayer.dll
+C:\Users\simpa\Source\Repos\lukasbrolin\Dating_site\DatingSite\DataLayer\bin\Debug\netcoreapp3.1\DataLayer.pdb
+C:\Users\simpa\Source\Repos\lukasbrolin\Dating_site\DatingSite\DataLayer\obj\Debug\netcoreapp3.1\DataLayer.csprojAssemblyReference.cache
+C:\Users\simpa\Source\Repos\lukasbrolin\Dating_site\DatingSite\DataLayer\obj\Debug\netcoreapp3.1\DataLayer.AssemblyInfoInputs.cache
+C:\Users\simpa\Source\Repos\lukasbrolin\Dating_site\DatingSite\DataLayer\obj\Debug\netcoreapp3.1\DataLayer.AssemblyInfo.cs
+C:\Users\simpa\Source\Repos\lukasbrolin\Dating_site\DatingSite\DataLayer\obj\Debug\netcoreapp3.1\DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\simpa\Source\Repos\lukasbrolin\Dating_site\DatingSite\DataLayer\obj\Debug\netcoreapp3.1\DataLayer.dll
+C:\Users\simpa\Source\Repos\lukasbrolin\Dating_site\DatingSite\DataLayer\obj\Debug\netcoreapp3.1\DataLayer.pdb
+C:\Users\simpa\Source\Repos\lukasbrolin\Dating_site\DatingSite\DataLayer\obj\Debug\netcoreapp3.1\DataLayer.genruntimeconfig.cache
