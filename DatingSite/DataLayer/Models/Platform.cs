@@ -6,16 +6,12 @@ namespace DataLayer.Models
     public class Platform
     {
         [Required]
-        public virtual int Id { get; set; }
+        public virtual int PlatformId { get; set; }
+        [Required]
         public virtual string Name { get; set; }
 
-        public virtual IList<Game> Games { get; set; }
-        public virtual IList<User> Users { get; set; }
+        public virtual IList<Game> Games { get; set; } = new List<Game>();
+        public virtual IList<User> Users { get; set; } = new List<User>();
 
-        public Platform()
-        {
-            this.Games = new List<Game>();
-            this.Users = new List<User>();
-        }
     }
 }

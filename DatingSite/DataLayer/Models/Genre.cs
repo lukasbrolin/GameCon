@@ -6,17 +6,13 @@ namespace DataLayer.Models
     public class Genre
     {
         [Required]
-        public virtual int Id { get; set; }
+        public virtual int GenreId { get; set; }
+        [Required]
         public virtual string Name { get; set; }
 
 
-        public virtual IList<User> Users { get; set; }
-        public virtual IList<Game> Games { get; set; }
+        public virtual IList<User> Users { get; set; } = new List<User>();
+        public virtual IList<Game> Games { get; set; } = new List<Game>();
 
-        public Genre()
-        {
-            this.Users = new List<User>();
-            this.Games = new List<Game>();
-        }
     }
 }
