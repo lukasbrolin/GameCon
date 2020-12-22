@@ -59,35 +59,83 @@ namespace DataLayer
                 new Category() { CategoryId = 3, Name = "Omegaluls" }
                 );
 
-            //Games
+            //Game
             modelBuilder.Entity<Game>().HasData(
                 new Game() { GameId = 1, Name = "Dota 2", Publisher = "Valve" },
                 new Game() { GameId = 2, Name = "CS:GO", Publisher = "Valve" },
                 new Game() { GameId = 3, Name = "PUBG", Publisher = "Bluehole Corporation" }
                 );
 
-            //Genres
+            //Genre
             modelBuilder.Entity<Genre>().HasData(
                new Genre() { GenreId = 1, Name = "MOBA" },
                new Genre() { GenreId = 2, Name = "FPS" },
                new Genre() { GenreId = 3, Name = "FPS" }
                );
 
-            //Messages
+            //GameGenre
+            modelBuilder.Entity<Game>()
+                .HasMany(g => g.Genres)
+                .WithMany(g => g.Games)
+                .UsingEntity(j => j.ToTable("GameGenre")
+                .HasData(new { GenresGenreId = 1, GamesGameId = 3 })
+               );
+
+            //GamePlatform
+            modelBuilder.Entity<Game>()
+                .HasMany(g => g.Platforms)
+                .WithMany(g => g.Games)
+                .UsingEntity(j => j.ToTable("GamePlatform")
+                .HasData(new { PlatformsPlatformId = 3, GamesGameId = 1 })
+               );
+
+            //GameUser
+            modelBuilder.Entity<Game>()
+                .HasMany(g => g.Users)
+                .WithMany(g => g.Games)
+                .UsingEntity(j => j.ToTable("GameUser")
+                .HasData(new { UsersUserId = 3, GamesGameId = 1 })
+               );
+
+            //GenreUser
+            modelBuilder.Entity<Genre>()
+                .HasMany(g => g.Users)
+                .WithMany(g => g.Genres)
+                .UsingEntity(j => j.ToTable("GenreUser")
+                .HasData(new { UsersUserId = 2, GenresGenreId = 3 })
+               );
+
+            //PlatformUser
+            modelBuilder.Entity<Platform>()
+                .HasMany(g => g.Users)
+                .WithMany(g => g.Platforms)
+                .UsingEntity(j => j.ToTable("PlatformUser")
+                .HasData(new { UsersUserId = 3, PlatformsPlatformId = 2 })
+               );
+
+            //UserUser
+            //modelBuilder.Entity<User>()
+            //    .HasMany(g => g.Users)
+            //    .WithMany(g => g.Users)
+            //    .UsingEntity(j => j.ToTable("UserUser")
+            //    .HasData(new { UsersUserId = 3, UsersUserUd = 2 })
+            //   );
+
+            //Message
             modelBuilder.Entity<Message>().HasData(
                new Message() { MessageId = 1, Content = "Hello muthafucka", ReceiverId = 1, SenderId = 2, TimeStamp = DateTime.Now },
                new Message() { MessageId = 2, Content = "Check this shit out", ReceiverId = 3, SenderId = 1, TimeStamp = DateTime.Now },
                new Message() { MessageId = 3, Content = "SKKRTSKRRRT", ReceiverId = 2, SenderId = 1, TimeStamp = DateTime.Now }
                );
 
-            //Nationalities
+            //Nationalitie
             modelBuilder.Entity<Nationality>().HasData(
               new Nationality() { NationalityId = 1, Name = "Swedish" },
               new Nationality() { NationalityId = 2, Name = "Norwegian" },
               new Nationality() { NationalityId = 3, Name = "South African" }
               );
 
-            //Personalities
+            //Personalitie
             modelBuilder.Entity<Personality>().HasData(
               new Personality() { PersonalityId = 1, Description = "Cute" },
               new Personality() { PersonalityId = 2, Description = "Narcissistic" },
@@ -95,21 +143,21 @@ namespace DataLayer
 
               );
 
-            //Platforms
+            //Platform
             modelBuilder.Entity<Platform>().HasData(
               new Platform() { PlatformId = 1, Name = "XBOX" },
               new Platform() { PlatformId = 2, Name = "PS1" },
               new Platform() { PlatformId = 3, Name = "PS3" }
               );
 
-            //Posts
+            //Post
             modelBuilder.Entity<Post>().HasData(
                new Post() { PostId = 1, ReceiverId = 1, SenderId = 2, Content = "Holy shit dude.", TimeStamp = DateTime.Now },
                new Post() { PostId = 2, ReceiverId = 2, SenderId = 3, Content = "Holy shit dude.", TimeStamp = DateTime.Now },
                new Post() { PostId = 3, ReceiverId = 3, SenderId = 1, Content = "Holy shit dude.", TimeStamp = DateTime.Now }
                );
 
-            //Statuses
+            //Statuse
             modelBuilder.Entity<Status>().HasData(
                new Status() { StatusId = 1, Description = "Pending", },
                new Status() { StatusId = 2, Description = "Accepted", },
@@ -117,19 +165,18 @@ namespace DataLayer
 
                );
 
-            //Visitors
+            //Visitor
             modelBuilder.Entity<Visit>().HasData(
-               new Visit() {VisitId = 1,ReceiverId = 1, TimeStamp = DateTime.Now, SenderId = 1 },
-               new Visit() {VisitId = 2,ReceiverId = 2, TimeStamp = DateTime.Now, SenderId = 3 },
-               new Visit() {VisitId = 3,ReceiverId = 3, TimeStamp = DateTime.Now, SenderId = 2 }
+               new Visit() { VisitId = 1, ReceiverId = 1, TimeStamp = DateTime.Now, SenderId = 1 },
+               new Visit() { VisitId = 2, ReceiverId = 2, TimeStamp = DateTime.Now, SenderId = 3 },
+               new Visit() { VisitId = 3, ReceiverId = 3, TimeStamp = DateTime.Now, SenderId = 2 }
                );
 
-            //Users
+            //User
             modelBuilder.Entity<User>().HasData(
                 new User() { UserId = 1, NationalityId = 1, PersonalityId = 1, FirstName = "Simon", LastName = "Bernsdorff Wallstedt", Mail = "simon.bernsdorff-wallstedt@dating.com", Age = 28, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
                 new User() { UserId = 2, NationalityId = 1, PersonalityId = 2, FirstName = "Lukas", LastName = "Brolin", Mail = "lukas.brolin@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
                 new User() { UserId = 3, NationalityId = 1, PersonalityId = 3, FirstName = "Filip", LastName = "Johansson", Mail = "filip.johansson@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true });
-
         }
     }
 }

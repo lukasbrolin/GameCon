@@ -7,8 +7,8 @@ namespace DataLayer.Models
     {
         [Required]
         public virtual int CategoryId { get; set; }
+
         [Required]
         public virtual string Name { get; set; }
-
     }
 }

@@ -4,14 +4,16 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DatingSiteContext))]
-    partial class DatingSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20201222223810_Seed")]
+    partial class Seed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,7 +161,7 @@ namespace DataLayer.Migrations
                             Content = "Hello muthafucka",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 180, DateTimeKind.Local).AddTicks(552)
+                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 13, DateTimeKind.Local).AddTicks(72)
                         },
                         new
                         {
@@ -167,7 +169,7 @@ namespace DataLayer.Migrations
                             Content = "Check this shit out",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 181, DateTimeKind.Local).AddTicks(7861)
+                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 14, DateTimeKind.Local).AddTicks(6654)
                         },
                         new
                         {
@@ -175,7 +177,7 @@ namespace DataLayer.Migrations
                             Content = "SKKRTSKRRRT",
                             ReceiverId = 2,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 181, DateTimeKind.Local).AddTicks(7886)
+                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 14, DateTimeKind.Local).AddTicks(6677)
                         });
                 });
 
@@ -312,7 +314,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(3194)
+                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(1858)
                         },
                         new
                         {
@@ -320,7 +322,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(3512)
+                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(2172)
                         },
                         new
                         {
@@ -328,7 +330,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(3534)
+                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(2182)
                         });
                 });
 
@@ -490,21 +492,21 @@ namespace DataLayer.Migrations
                             VisitId = 1,
                             ReceiverId = 1,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(6502)
+                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(4160)
                         },
                         new
                         {
                             VisitId = 2,
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(7113)
+                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(4729)
                         },
                         new
                         {
                             VisitId = 3,
                             ReceiverId = 3,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(7124)
+                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(4739)
                         });
                 });
 
@@ -543,13 +545,6 @@ namespace DataLayer.Migrations
                     b.HasIndex("PlatformsPlatformId");
 
                     b.ToTable("GamePlatform");
-
-                    b.HasData(
-                        new
-                        {
-                            GamesGameId = 1,
-                            PlatformsPlatformId = 3
-                        });
                 });
 
             modelBuilder.Entity("GameUser", b =>
@@ -565,13 +560,6 @@ namespace DataLayer.Migrations
                     b.HasIndex("UsersUserId");
 
                     b.ToTable("GameUser");
-
-                    b.HasData(
-                        new
-                        {
-                            GamesGameId = 1,
-                            UsersUserId = 3
-                        });
                 });
 
             modelBuilder.Entity("GenreUser", b =>
@@ -587,13 +575,6 @@ namespace DataLayer.Migrations
                     b.HasIndex("UsersUserId");
 
                     b.ToTable("GenreUser");
-
-                    b.HasData(
-                        new
-                        {
-                            GenresGenreId = 3,
-                            UsersUserId = 2
-                        });
                 });
 
             modelBuilder.Entity("PlatformUser", b =>
@@ -609,13 +590,6 @@ namespace DataLayer.Migrations
                     b.HasIndex("UsersUserId");
 
                     b.ToTable("PlatformUser");
-
-                    b.HasData(
-                        new
-                        {
-                            PlatformsPlatformId = 2,
-                            UsersUserId = 3
-                        });
                 });
 
             modelBuilder.Entity("UserUser", b =>
