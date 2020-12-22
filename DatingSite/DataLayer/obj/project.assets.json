@@ -7362,23 +7362,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lukas\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\simpa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj",
+      "projectUniqueName": "C:\\Users\\simpa\\Source\\Repos\\lukasbrolin\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj",
       "projectName": "DataLayer",
-      "projectPath": "C:\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj",
-      "packagesPath": "C:\\Users\\Lukas\\.nuget\\packages\\",
-      "outputPath": "C:\\Dating_site\\DatingSite\\DataLayer\\obj\\",
+      "projectPath": "C:\\Users\\simpa\\Source\\Repos\\lukasbrolin\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj",
+      "packagesPath": "C:\\Users\\simpa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\simpa\\Source\\Repos\\lukasbrolin\\Dating_site\\DatingSite\\DataLayer\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Lukas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\simpa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

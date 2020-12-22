@@ -1,4 +1,5 @@
-﻿using DatingSite.Models;
+﻿using DataLayer;
+using DatingSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,11 +12,14 @@ namespace DatingSite.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly DatingSiteContext _context;
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DatingSiteContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -30,7 +34,7 @@ namespace DatingSite.Controllers
 
         public IActionResult Test()
         {
-            return View();
+            return View(_context.Users.ToList());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -39,5 +43,4 @@ namespace DatingSite.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
-
 }

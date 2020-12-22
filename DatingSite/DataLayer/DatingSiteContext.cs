@@ -14,6 +14,7 @@ namespace DataLayer
         public DatingSiteContext(DbContextOptions<DatingSiteContext> options) : base(options)
         {
         }
+
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Nationality> Nationalities { get; set; }
         public virtual DbSet<Game> Games { get; set; }
@@ -23,11 +24,12 @@ namespace DataLayer
         public virtual DbSet<Platform> Platforms { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+
         //public virtual DbSet<FriendList> FriendLists { get; set; }
         //public virtual DbSet<FriendRequest> FriendRequests { get; set; }
         public virtual DbSet<Visit> Visits { get; set; }
-        public virtual DbSet<Status> Statuses { get; set; }
 
+        public virtual DbSet<Status> Statuses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,7 +43,6 @@ namespace DataLayer
             //modelBuilder.Entity<Visit>().HasOne(f => f.Sender)
             //    .WithMany()
             //    .HasForeignKey(f => f.SenderId);
-
 
             // IMPORTANT: we are mapping the entity User to the same table as the entity ApplicationUser
             //modelBuilder.Entity<User>().HasKey(x => x.Id);
@@ -57,7 +58,6 @@ namespace DataLayer
                 new Category() { CategoryId = 2, Name = "Pros" },
                 new Category() { CategoryId = 3, Name = "Omegaluls" }
                 );
-
 
             //Games
             modelBuilder.Entity<Game>().HasData(
@@ -92,7 +92,7 @@ namespace DataLayer
               new Personality() { PersonalityId = 1, Description = "Cute" },
               new Personality() { PersonalityId = 2, Description = "Narcissistic" },
               new Personality() { PersonalityId = 3, Description = "Manipulative" }
-              
+
               );
 
             //Platforms
@@ -126,11 +126,10 @@ namespace DataLayer
 
             //Users
             modelBuilder.Entity<User>().HasData(
-                new User() { Id = 1, NationalityId = 1, PersonalityId = 1, FirstName = "Simon", LastName = "Bernsdorff Wallstedt", Mail = "simon.bernsdorff-wallstedt@dating.com", Age = 28, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
-                new User() { Id = 2, NationalityId = 1, PersonalityId = 2, FirstName = "Lukas", LastName = "Brolin", Mail = "lukas.brolin@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
-                new User() { Id = 3, NationalityId = 1, PersonalityId = 3, FirstName = "Filip", LastName = "Johansson", Mail = "filip.johansson@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true });
+                new User() { UserId = 1, NationalityId = 1, PersonalityId = 1, FirstName = "Simon", LastName = "Bernsdorff Wallstedt", Mail = "simon.bernsdorff-wallstedt@dating.com", Age = 28, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
+                new User() { UserId = 2, NationalityId = 1, PersonalityId = 2, FirstName = "Lukas", LastName = "Brolin", Mail = "lukas.brolin@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
+                new User() { UserId = 3, NationalityId = 1, PersonalityId = 3, FirstName = "Filip", LastName = "Johansson", Mail = "filip.johansson@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true });
 
         }
-    
     }
 }
