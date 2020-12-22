@@ -12,8 +12,8 @@ namespace DataLayer
     {
         public DatingSiteContext(DbContextOptions<DatingSiteContext> options) : base(options)
         {
-
         }
+
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Nationality> Nationalities { get; set; }
         public virtual DbSet<Game> Games { get; set; }
@@ -23,11 +23,12 @@ namespace DataLayer
         public virtual DbSet<Platform> Platforms { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+
         //public virtual DbSet<FriendList> FriendLists { get; set; }
         //public virtual DbSet<FriendRequest> FriendRequests { get; set; }
         public virtual DbSet<Visit> Visits { get; set; }
-        public virtual DbSet<Status> Statuses { get; set; }
 
+        public virtual DbSet<Status> Statuses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,7 +42,6 @@ namespace DataLayer
             modelBuilder.Entity<Visit>().HasOne(f => f.User2)
                 .WithMany()
                 .HasForeignKey(f => f.Visitor);
-
 
             // IMPORTANT: we are mapping the entity User to the same table as the entity ApplicationUser
             //modelBuilder.Entity<User>().HasKey(x => x.Id);
@@ -57,7 +57,6 @@ namespace DataLayer
                 new Category() { Id = 2, Name = "Pros" },
                 new Category() { Id = 3, Name = "Omegaluls" }
                 );
-
 
             //Games
             modelBuilder.Entity<Game>().HasData(
@@ -128,8 +127,6 @@ namespace DataLayer
                 new User() { Id = 1, FirstName = "Simon", LastName = "Bernsdorff Wallstedt", Mail = "simon.bernsdorff-wallstedt@dating.com", Age = 28, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
                 new User() { Id = 2, FirstName = "Lukas", LastName = "Brolin", Mail = "lukas.broling@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
                 new User() { Id = 3, FirstName = "Filip", LastName = "Johansson", Mail = "filip.johansson@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true });
-
         }
-    
     }
 }
