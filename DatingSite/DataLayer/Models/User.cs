@@ -9,7 +9,7 @@ namespace DataLayer.Models
     public class User
     {
         [Required]
-        public virtual int Id { get; set; }
+        public virtual int UserId { get; set; }
         [Required]
         public virtual string FirstName { get; set; }
         [Required]
