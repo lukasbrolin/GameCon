@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -20,6 +21,8 @@ namespace DataLayer.Models
         [Required]
         public virtual string Gender { get; set; }
         [Required]
+        public virtual int NationalityId { get; set; }
+        [ForeignKey("NationalityId")]
         public virtual Nationality Nationality { get; set; }
         [Required]
         public virtual string PreferedLanguage { get; set; }
@@ -28,6 +31,8 @@ namespace DataLayer.Models
         [Required]
         public virtual bool Active { get; set; }
         [Required]
+        public virtual int PersonalityId { get; set; }
+        [ForeignKey("PersonalityId")]
         public virtual Personality Personality { get; set; }
 
 
@@ -36,11 +41,12 @@ namespace DataLayer.Models
         public virtual IList<Genre> Genres { get; set; } = new List<Genre>();
         public virtual IList<User> Friends { get; set; } = new List<User>();
         public virtual IList<User> Users { get; set; } = new List<User>();
+        public virtual IList<Post> PostsReceived { get; set; } = new List<Post>();
+        public virtual IList<Post> PostsSent { get; set; } = new List<Post>();
+        public virtual IList<Visit> Visitors { get; set; } = new List<Visit>();
+        public virtual IList<Visit> MyVisits { get; set; } = new List<Visit>();
+        public virtual IList<Message> MessagesReceived { get; set; } = new List<Message>();
+        public virtual IList<Message> MessagesSent { get; set; } = new List<Message>();
 
-        public User()
-        {
-        }
-
-        
     }
 }
