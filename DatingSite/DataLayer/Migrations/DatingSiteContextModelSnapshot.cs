@@ -32,68 +32,23 @@ namespace DataLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-                });
 
-            modelBuilder.Entity("DataLayer.Models.Country", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Countries");
-                });
-
-            modelBuilder.Entity("DataLayer.Models.FriendList", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Friend")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("TimeStamp")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("UserId", "Friend");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("Friend");
-
-                    b.ToTable("FriendLists");
-                });
-
-            modelBuilder.Entity("DataLayer.Models.FriendRequest", b =>
-                {
-                    b.Property<int>("SenderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RecieverId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Pending")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("RecieverID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("TimeStamp")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("SenderId", "RecieverId");
-
-                    b.HasIndex("RecieverID");
-
-                    b.ToTable("FriendRequests");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Noobs"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Pros"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Omegaluls"
+                        });
                 });
 
             modelBuilder.Entity("DataLayer.Models.Game", b =>
@@ -112,6 +67,26 @@ namespace DataLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Games");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Dota 2",
+                            Publisher = "Valve"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "CS:GO",
+                            Publisher = "Valve"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "PUBG",
+                            Publisher = "Bluehole Corporation"
+                        });
                 });
 
             modelBuilder.Entity("DataLayer.Models.Genre", b =>
@@ -127,6 +102,23 @@ namespace DataLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "MOBA"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "FPS"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "FPS"
+                        });
                 });
 
             modelBuilder.Entity("DataLayer.Models.Message", b =>
@@ -136,10 +128,10 @@ namespace DataLayer.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("RecieverId")
+                    b.Property<int>("RecieverId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SenderId")
+                    b.Property<int>("SenderId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -155,6 +147,64 @@ namespace DataLayer.Migrations
                     b.HasIndex("SenderId");
 
                     b.ToTable("Messages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            RecieverId = 1,
+                            SenderId = 2,
+                            Text = "Hello muthafucka",
+                            TimeStamp = new DateTime(2020, 12, 22, 11, 37, 44, 926, DateTimeKind.Local).AddTicks(1662)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            RecieverId = 3,
+                            SenderId = 1,
+                            Text = "Check this shit out",
+                            TimeStamp = new DateTime(2020, 12, 22, 11, 37, 44, 930, DateTimeKind.Local).AddTicks(2759)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            RecieverId = 2,
+                            SenderId = 1,
+                            Text = "SKKRTSKRRRT",
+                            TimeStamp = new DateTime(2020, 12, 22, 11, 37, 44, 930, DateTimeKind.Local).AddTicks(2797)
+                        });
+                });
+
+            modelBuilder.Entity("DataLayer.Models.Nationality", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Nationalities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Swedish"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Norwegian"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "South African"
+                        });
                 });
 
             modelBuilder.Entity("DataLayer.Models.Personality", b =>
@@ -167,12 +217,26 @@ namespace DataLayer.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Personalities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Cute"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Narcissistic"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Manipulative"
+                        });
                 });
 
             modelBuilder.Entity("DataLayer.Models.Platform", b =>
@@ -188,6 +252,23 @@ namespace DataLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Platforms");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "XBOX"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "PS1"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "PS3"
+                        });
                 });
 
             modelBuilder.Entity("DataLayer.Models.Post", b =>
@@ -197,10 +278,10 @@ namespace DataLayer.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("RecieverId")
+                    b.Property<int>("RecieverId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SenderId")
+                    b.Property<int>("SenderId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -216,6 +297,59 @@ namespace DataLayer.Migrations
                     b.HasIndex("SenderId");
 
                     b.ToTable("Posts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            RecieverId = 1,
+                            SenderId = 2,
+                            Text = "Holy shit dude.",
+                            TimeStamp = new DateTime(2020, 12, 22, 11, 37, 44, 932, DateTimeKind.Local).AddTicks(508)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            RecieverId = 2,
+                            SenderId = 3,
+                            Text = "Holy shit dude.",
+                            TimeStamp = new DateTime(2020, 12, 22, 11, 37, 44, 932, DateTimeKind.Local).AddTicks(1471)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            RecieverId = 3,
+                            SenderId = 1,
+                            Text = "Holy shit dude.",
+                            TimeStamp = new DateTime(2020, 12, 22, 11, 37, 44, 932, DateTimeKind.Local).AddTicks(1507)
+                        });
+                });
+
+            modelBuilder.Entity("DataLayer.Models.Status", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Pending"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Blocked"
+                        });
                 });
 
             modelBuilder.Entity("DataLayer.Models.User", b =>
@@ -231,20 +365,24 @@ namespace DataLayer.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CountryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mail")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("NationalityId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Online")
                         .HasColumnType("bit");
@@ -253,15 +391,54 @@ namespace DataLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PreferedLanguage")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CountryId");
+                    b.HasIndex("NationalityId");
 
                     b.HasIndex("PersonalityId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Active = true,
+                            Age = 28,
+                            FirstName = "Simon",
+                            Gender = "Male",
+                            LastName = "Bernsdorff Wallstedt",
+                            Mail = "simon.bernsdorff-wallstedt@dating.com",
+                            Online = false,
+                            PreferedLanguage = "Swedish"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Active = true,
+                            Age = 27,
+                            FirstName = "Lukas",
+                            Gender = "Male",
+                            LastName = "Brolin",
+                            Mail = "lukas.broling@dating.com",
+                            Online = false,
+                            PreferedLanguage = "Swedish"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Active = true,
+                            Age = 27,
+                            FirstName = "Filip",
+                            Gender = "Male",
+                            LastName = "Johansson",
+                            Mail = "filip.johansson@dating.com",
+                            Online = false,
+                            PreferedLanguage = "Swedish"
+                        });
                 });
 
             modelBuilder.Entity("DataLayer.Models.Visit", b =>
@@ -280,6 +457,26 @@ namespace DataLayer.Migrations
                     b.HasIndex("Visitor");
 
                     b.ToTable("Visits");
+
+                    b.HasData(
+                        new
+                        {
+                            UserID = 1,
+                            Visitor = 1,
+                            TimeStamp = new DateTime(2020, 12, 22, 11, 37, 44, 932, DateTimeKind.Local).AddTicks(5669)
+                        },
+                        new
+                        {
+                            UserID = 2,
+                            Visitor = 3,
+                            TimeStamp = new DateTime(2020, 12, 22, 11, 37, 44, 932, DateTimeKind.Local).AddTicks(6553)
+                        },
+                        new
+                        {
+                            UserID = 3,
+                            Visitor = 2,
+                            TimeStamp = new DateTime(2020, 12, 22, 11, 37, 44, 932, DateTimeKind.Local).AddTicks(6565)
+                        });
                 });
 
             modelBuilder.Entity("GameGenre", b =>
@@ -357,55 +554,34 @@ namespace DataLayer.Migrations
                     b.ToTable("PlatformUser");
                 });
 
-            modelBuilder.Entity("DataLayer.Models.FriendList", b =>
+            modelBuilder.Entity("UserUser", b =>
                 {
-                    b.HasOne("DataLayer.Models.Category", null)
-                        .WithMany("FriendLists")
-                        .HasForeignKey("CategoryId");
+                    b.Property<int>("FriendsId")
+                        .HasColumnType("int");
 
-                    b.HasOne("DataLayer.Models.User", "User2")
-                        .WithMany()
-                        .HasForeignKey("Friend")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
 
-                    b.HasOne("DataLayer.Models.User", "User1")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasKey("FriendsId", "UsersId");
 
-                    b.Navigation("User1");
+                    b.HasIndex("UsersId");
 
-                    b.Navigation("User2");
-                });
-
-            modelBuilder.Entity("DataLayer.Models.FriendRequest", b =>
-                {
-                    b.HasOne("DataLayer.Models.User", "User2")
-                        .WithMany()
-                        .HasForeignKey("RecieverID");
-
-                    b.HasOne("DataLayer.Models.User", "User1")
-                        .WithMany()
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User1");
-
-                    b.Navigation("User2");
+                    b.ToTable("UserUser");
                 });
 
             modelBuilder.Entity("DataLayer.Models.Message", b =>
                 {
                     b.HasOne("DataLayer.Models.User", "Reciever")
                         .WithMany()
-                        .HasForeignKey("RecieverId");
+                        .HasForeignKey("RecieverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DataLayer.Models.User", "Sender")
                         .WithMany()
-                        .HasForeignKey("SenderId");
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Reciever");
 
@@ -416,11 +592,15 @@ namespace DataLayer.Migrations
                 {
                     b.HasOne("DataLayer.Models.User", "Reciever")
                         .WithMany()
-                        .HasForeignKey("RecieverId");
+                        .HasForeignKey("RecieverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DataLayer.Models.User", "Sender")
                         .WithMany()
-                        .HasForeignKey("SenderId");
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Reciever");
 
@@ -429,15 +609,15 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Models.User", b =>
                 {
-                    b.HasOne("DataLayer.Models.Country", "Country")
+                    b.HasOne("DataLayer.Models.Nationality", "Nationality")
                         .WithMany()
-                        .HasForeignKey("CountryId");
+                        .HasForeignKey("NationalityId");
 
                     b.HasOne("DataLayer.Models.Personality", "Personality")
                         .WithMany()
                         .HasForeignKey("PersonalityId");
 
-                    b.Navigation("Country");
+                    b.Navigation("Nationality");
 
                     b.Navigation("Personality");
                 });
@@ -536,9 +716,19 @@ namespace DataLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DataLayer.Models.Category", b =>
+            modelBuilder.Entity("UserUser", b =>
                 {
-                    b.Navigation("FriendLists");
+                    b.HasOne("DataLayer.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("FriendsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataLayer.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
