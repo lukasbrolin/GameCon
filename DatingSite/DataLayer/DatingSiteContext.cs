@@ -126,8 +126,9 @@ namespace DataLayer
             //Users
             modelBuilder.Entity<User>().HasData(
                 new User() { Id = 1, FirstName = "Simon", LastName = "Bernsdorff Wallstedt", Mail = "simon.bernsdorff-wallstedt@dating.com", Age = 28, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
-                new User() { Id = 2, FirstName = "Lukas", LastName = "Brolin", Mail = "lukas.broling@dating.com", Age = 27,PreferedLanguage = "Swedish" , Online = false, Gender = "Male", Active = true },
+                new User() { Id = 2, FirstName = "Lukas", LastName = "Brolin", Mail = "lukas.broling@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
                 new User() { Id = 3, FirstName = "Filip", LastName = "Johansson", Mail = "filip.johansson@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true });
+
         }
     
     }
