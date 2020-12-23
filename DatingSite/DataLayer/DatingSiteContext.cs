@@ -36,22 +36,6 @@ namespace DataLayer
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Visit>().HasKey(f => new { f.ReceiverId, f.SenderId });
-            //modelBuilder.Entity<Visit>()
-            //    .HasOne(f => f.Receiver)
-            //    .WithMany()
-            //    .HasForeignKey(f => f.ReceiverId);
-            //modelBuilder.Entity<Visit>().HasOne(f => f.Sender)
-            //    .WithMany()
-            //    .HasForeignKey(f => f.SenderId);
-
-            // IMPORTANT: we are mapping the entity User to the same table as the entity ApplicationUser
-            //modelBuilder.Entity<User>().HasKey(x => x.Id);
-            //modelBuilder.Entity<FriendList>().HasKey(x => x.FriendListID);
-
-            //modelBuilder.Entity<User>().ToTable("Users");
-            //modelBuilder.Entity<FriendList>().ToTable("FriendLists");
-
             /* SEED DATA */
             //Categories
             modelBuilder.Entity<Category>().HasData(
@@ -114,7 +98,6 @@ namespace DataLayer
                 .HasData(new { UsersUserId = 3, PlatformsPlatformId = 2 })
                );
 
-
             ////UserUser
             //modelBuilder.Entity<User>()
             //    .HasMany(g => g.Users)
@@ -122,7 +105,6 @@ namespace DataLayer
             //    .UsingEntity(j => j.ToTable("UserUser")
             //    .HasData(new { UserId = 3, FriendsId = 2 })
             //   );
-
 
             //modelBuilder.Entity<User>()
             //    .HasMany(p => p.Users)
@@ -174,9 +156,9 @@ namespace DataLayer
 
             //Friend
             modelBuilder.Entity<Friend>().HasData(
-                new Friend() { FriendId = 1, SenderId = 1, ReceiverId = 2, CategoryId = 1, StatusId = 1},
-                new Friend() { FriendId = 2, SenderId = 2, ReceiverId = 3, CategoryId = 2, StatusId = 2},
-                new Friend() { FriendId = 3, SenderId = 3, ReceiverId = 1, CategoryId = 1, StatusId = 2}
+                new Friend() { FriendId = 1, SenderId = 1, ReceiverId = 2, CategoryId = 1, StatusId = 1 },
+                new Friend() { FriendId = 2, SenderId = 2, ReceiverId = 3, CategoryId = 2, StatusId = 2 },
+                new Friend() { FriendId = 3, SenderId = 3, ReceiverId = 1, CategoryId = 1, StatusId = 2 }
             );
 
             //Post
@@ -186,7 +168,7 @@ namespace DataLayer
                new Post() { PostId = 3, ReceiverId = 3, SenderId = 1, Content = "Holy shit dude.", TimeStamp = DateTime.Now }
                );
 
-            //Statuse
+            //Status
             modelBuilder.Entity<Status>().HasData(
                new Status() { StatusId = 1, Description = "Pending", },
                new Status() { StatusId = 2, Description = "Accepted", },
