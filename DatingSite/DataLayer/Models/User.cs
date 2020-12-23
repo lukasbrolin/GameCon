@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Models
 {
@@ -50,8 +51,8 @@ namespace DataLayer.Models
         public virtual IList<Platform> Platforms { get; set; } = new List<Platform>();
         public virtual IList<Game> Games { get; set; } = new List<Game>();
         public virtual IList<Genre> Genres { get; set; } = new List<Genre>();
-        public virtual IList<User> Friends { get; set; } = new List<User>();
-        public virtual IList<User> Users { get; set; } = new List<User>();
+        public virtual IList<Friend> Friends { get; set; } = new List<Friend>();
+        public virtual IList<Friend> Users { get; set; } = new List<Friend>();
         public virtual IList<Post> PostsReceived { get; set; } = new List<Post>();
         public virtual IList<Post> PostsSent { get; set; } = new List<Post>();
         public virtual IList<Visit> Visitors { get; set; } = new List<Visit>();

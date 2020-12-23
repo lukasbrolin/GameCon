@@ -52,6 +52,64 @@ namespace DataLayer.Migrations
                         });
                 });
 
+            modelBuilder.Entity("DataLayer.Models.Friend", b =>
+                {
+                    b.Property<int>("FriendId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FriendId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("Friends");
+
+                    b.HasData(
+                        new
+                        {
+                            FriendId = 1,
+                            CategoryId = 1,
+                            ReceiverId = 2,
+                            SenderId = 1,
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            FriendId = 2,
+                            CategoryId = 2,
+                            ReceiverId = 3,
+                            SenderId = 2,
+                            StatusId = 2
+                        },
+                        new
+                        {
+                            FriendId = 3,
+                            CategoryId = 1,
+                            ReceiverId = 1,
+                            SenderId = 3,
+                            StatusId = 2
+                        });
+                });
+
             modelBuilder.Entity("DataLayer.Models.Game", b =>
                 {
                     b.Property<int>("GameId")
@@ -159,7 +217,7 @@ namespace DataLayer.Migrations
                             Content = "Hello muthafucka",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 180, DateTimeKind.Local).AddTicks(552)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 785, DateTimeKind.Local).AddTicks(1659)
                         },
                         new
                         {
@@ -167,7 +225,7 @@ namespace DataLayer.Migrations
                             Content = "Check this shit out",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 181, DateTimeKind.Local).AddTicks(7861)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 788, DateTimeKind.Local).AddTicks(7092)
                         },
                         new
                         {
@@ -175,7 +233,7 @@ namespace DataLayer.Migrations
                             Content = "SKKRTSKRRRT",
                             ReceiverId = 2,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 181, DateTimeKind.Local).AddTicks(7886)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 788, DateTimeKind.Local).AddTicks(7119)
                         });
                 });
 
@@ -312,7 +370,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(3194)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(1344)
                         },
                         new
                         {
@@ -320,7 +378,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(3512)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(1840)
                         },
                         new
                         {
@@ -328,7 +386,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(3534)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(1852)
                         });
                 });
 
@@ -490,21 +548,21 @@ namespace DataLayer.Migrations
                             VisitId = 1,
                             ReceiverId = 1,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(6502)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(5121)
                         },
                         new
                         {
                             VisitId = 2,
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(7113)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(5953)
                         },
                         new
                         {
                             VisitId = 3,
                             ReceiverId = 3,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(7124)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(5965)
                         });
                 });
 
@@ -618,19 +676,39 @@ namespace DataLayer.Migrations
                         });
                 });
 
-            modelBuilder.Entity("UserUser", b =>
+            modelBuilder.Entity("DataLayer.Models.Friend", b =>
                 {
-                    b.Property<int>("FriendsUserId")
-                        .HasColumnType("int");
+                    b.HasOne("DataLayer.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("UsersUserId")
-                        .HasColumnType("int");
+                    b.HasOne("DataLayer.Models.User", "Receiver")
+                        .WithMany("Friends")
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasKey("FriendsUserId", "UsersUserId");
+                    b.HasOne("DataLayer.Models.User", "Sender")
+                        .WithMany("Users")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasIndex("UsersUserId");
+                    b.HasOne("DataLayer.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.ToTable("UserUser");
+                    b.Navigation("Category");
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("DataLayer.Models.Message", b =>
@@ -784,23 +862,10 @@ namespace DataLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("UserUser", b =>
-                {
-                    b.HasOne("DataLayer.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("FriendsUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DataLayer.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersUserId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("DataLayer.Models.User", b =>
                 {
+                    b.Navigation("Friends");
+
                     b.Navigation("MessagesReceived");
 
                     b.Navigation("MessagesSent");
@@ -810,6 +875,8 @@ namespace DataLayer.Migrations
                     b.Navigation("PostsReceived");
 
                     b.Navigation("PostsSent");
+
+                    b.Navigation("Users");
 
                     b.Navigation("Visitors");
                 });

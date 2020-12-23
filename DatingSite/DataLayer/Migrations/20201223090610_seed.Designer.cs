@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DatingSiteContext))]
-    [Migration("20201222223810_Seed")]
-    partial class Seed
+    [Migration("20201223090610_seed")]
+    partial class seed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -51,6 +51,64 @@ namespace DataLayer.Migrations
                         {
                             CategoryId = 3,
                             Name = "Omegaluls"
+                        });
+                });
+
+            modelBuilder.Entity("DataLayer.Models.Friend", b =>
+                {
+                    b.Property<int>("FriendId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FriendId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("Friends");
+
+                    b.HasData(
+                        new
+                        {
+                            FriendId = 1,
+                            CategoryId = 1,
+                            ReceiverId = 2,
+                            SenderId = 1,
+                            StatusId = 1
+                        },
+                        new
+                        {
+                            FriendId = 2,
+                            CategoryId = 2,
+                            ReceiverId = 3,
+                            SenderId = 2,
+                            StatusId = 2
+                        },
+                        new
+                        {
+                            FriendId = 3,
+                            CategoryId = 1,
+                            ReceiverId = 1,
+                            SenderId = 3,
+                            StatusId = 2
                         });
                 });
 
@@ -161,7 +219,7 @@ namespace DataLayer.Migrations
                             Content = "Hello muthafucka",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 13, DateTimeKind.Local).AddTicks(72)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 785, DateTimeKind.Local).AddTicks(1659)
                         },
                         new
                         {
@@ -169,7 +227,7 @@ namespace DataLayer.Migrations
                             Content = "Check this shit out",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 14, DateTimeKind.Local).AddTicks(6654)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 788, DateTimeKind.Local).AddTicks(7092)
                         },
                         new
                         {
@@ -177,7 +235,7 @@ namespace DataLayer.Migrations
                             Content = "SKKRTSKRRRT",
                             ReceiverId = 2,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 14, DateTimeKind.Local).AddTicks(6677)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 788, DateTimeKind.Local).AddTicks(7119)
                         });
                 });
 
@@ -314,7 +372,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(1858)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(1344)
                         },
                         new
                         {
@@ -322,7 +380,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(2172)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(1840)
                         },
                         new
                         {
@@ -330,7 +388,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(2182)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(1852)
                         });
                 });
 
@@ -492,21 +550,21 @@ namespace DataLayer.Migrations
                             VisitId = 1,
                             ReceiverId = 1,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(4160)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(5121)
                         },
                         new
                         {
                             VisitId = 2,
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(4729)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(5953)
                         },
                         new
                         {
                             VisitId = 3,
                             ReceiverId = 3,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(4739)
+                            TimeStamp = new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(5965)
                         });
                 });
 
@@ -545,6 +603,13 @@ namespace DataLayer.Migrations
                     b.HasIndex("PlatformsPlatformId");
 
                     b.ToTable("GamePlatform");
+
+                    b.HasData(
+                        new
+                        {
+                            GamesGameId = 1,
+                            PlatformsPlatformId = 3
+                        });
                 });
 
             modelBuilder.Entity("GameUser", b =>
@@ -560,6 +625,13 @@ namespace DataLayer.Migrations
                     b.HasIndex("UsersUserId");
 
                     b.ToTable("GameUser");
+
+                    b.HasData(
+                        new
+                        {
+                            GamesGameId = 1,
+                            UsersUserId = 3
+                        });
                 });
 
             modelBuilder.Entity("GenreUser", b =>
@@ -575,6 +647,13 @@ namespace DataLayer.Migrations
                     b.HasIndex("UsersUserId");
 
                     b.ToTable("GenreUser");
+
+                    b.HasData(
+                        new
+                        {
+                            GenresGenreId = 3,
+                            UsersUserId = 2
+                        });
                 });
 
             modelBuilder.Entity("PlatformUser", b =>
@@ -590,21 +669,48 @@ namespace DataLayer.Migrations
                     b.HasIndex("UsersUserId");
 
                     b.ToTable("PlatformUser");
+
+                    b.HasData(
+                        new
+                        {
+                            PlatformsPlatformId = 2,
+                            UsersUserId = 3
+                        });
                 });
 
-            modelBuilder.Entity("UserUser", b =>
+            modelBuilder.Entity("DataLayer.Models.Friend", b =>
                 {
-                    b.Property<int>("FriendsUserId")
-                        .HasColumnType("int");
+                    b.HasOne("DataLayer.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("UsersUserId")
-                        .HasColumnType("int");
+                    b.HasOne("DataLayer.Models.User", "Receiver")
+                        .WithMany("Friends")
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasKey("FriendsUserId", "UsersUserId");
+                    b.HasOne("DataLayer.Models.User", "Sender")
+                        .WithMany("Users")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasIndex("UsersUserId");
+                    b.HasOne("DataLayer.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.ToTable("UserUser");
+                    b.Navigation("Category");
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("DataLayer.Models.Message", b =>
@@ -758,23 +864,10 @@ namespace DataLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("UserUser", b =>
-                {
-                    b.HasOne("DataLayer.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("FriendsUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DataLayer.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersUserId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("DataLayer.Models.User", b =>
                 {
+                    b.Navigation("Friends");
+
                     b.Navigation("MessagesReceived");
 
                     b.Navigation("MessagesSent");
@@ -784,6 +877,8 @@ namespace DataLayer.Migrations
                     b.Navigation("PostsReceived");
 
                     b.Navigation("PostsSent");
+
+                    b.Navigation("Users");
 
                     b.Navigation("Visitors");
                 });
