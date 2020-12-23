@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataLayer;
 using DataLayer.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace DatingSite.Controllers
 {
@@ -22,6 +23,8 @@ namespace DatingSite.Controllers
         // GET: Games
         public async Task<IActionResult> Index()
         {
+            var username = HttpContext.User.Identity.Name;
+            Console.WriteLine(username);
             return View(await _context.Games.ToListAsync());
         }
 

@@ -54,7 +54,7 @@ namespace DataLayer.Repositories
 
         public bool UserExists(int id)
         {
-            return _context.Users.Any(user => e.UserId == id);
+            return _context.Users.Any(user => user.UserId == id);
         }
     }
 }

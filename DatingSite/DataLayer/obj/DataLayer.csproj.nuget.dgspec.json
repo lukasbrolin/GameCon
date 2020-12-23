@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\dating_site\\datingsite\\DataLayer\\DataLayer.csproj": {}
+    "C:\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj": {}
   },
   "projects": {
-    "C:\\dating_site\\datingsite\\DataLayer\\DataLayer.csproj": {
+    "C:\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dating_site\\datingsite\\DataLayer\\DataLayer.csproj",
+        "projectUniqueName": "C:\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj",
         "projectName": "DataLayer",
-        "projectPath": "C:\\dating_site\\datingsite\\DataLayer\\DataLayer.csproj",
+        "projectPath": "C:\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj",
         "packagesPath": "C:\\Users\\Lukas\\.nuget\\packages\\",
-        "outputPath": "C:\\dating_site\\datingsite\\DataLayer\\obj\\",
+        "outputPath": "C:\\Dating_site\\DatingSite\\DataLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
