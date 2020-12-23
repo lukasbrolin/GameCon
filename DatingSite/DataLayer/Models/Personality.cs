@@ -6,6 +6,7 @@ namespace DataLayer.Models
     {
         [Required]
         public virtual int PersonalityId { get; set; }
+
         [Required]
         public virtual string Description { get; set; }
     }
