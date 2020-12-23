@@ -161,7 +161,8 @@ namespace DataLayer
             modelBuilder.Entity<Personality>().HasData(
               new Personality() { PersonalityId = 1, Description = "Cute" },
               new Personality() { PersonalityId = 2, Description = "Narcissistic" },
-              new Personality() { PersonalityId = 3, Description = "Manipulative" }
+              new Personality() { PersonalityId = 3, Description = "Manipulative" },
+              new Personality() { PersonalityId = 4, Description = "Strategist" }
 
               );
 
@@ -169,7 +170,11 @@ namespace DataLayer
             modelBuilder.Entity<Platform>().HasData(
               new Platform() { PlatformId = 1, Name = "XBOX" },
               new Platform() { PlatformId = 2, Name = "PS1" },
-              new Platform() { PlatformId = 3, Name = "PS3" }
+              new Platform() { PlatformId = 3, Name = "PS3" },
+              new Platform() { PlatformId = 4, Name = "PC" },
+              new Platform() { PlatformId = 5, Name = "PS5" }
+
+
               );
 
             //Friend
@@ -205,7 +210,8 @@ namespace DataLayer
             modelBuilder.Entity<User>().HasData(
                 new User() { UserId = 1, NationalityId = 1, PersonalityId = 1, FirstName = "Simon", LastName = "Bernsdorff Wallstedt", Mail = "simon.bernsdorff-wallstedt@dating.com", Age = 28, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
                 new User() { UserId = 2, NationalityId = 1, PersonalityId = 2, FirstName = "Lukas", LastName = "Brolin", Mail = "lukas.brolin@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
-                new User() { UserId = 3, NationalityId = 1, PersonalityId = 3, FirstName = "Filip", LastName = "Johansson", Mail = "filip.johansson@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true });
+                new User() { UserId = 3, NationalityId = 1, PersonalityId = 3, FirstName = "Filip", LastName = "Johansson", Mail = "filip.johansson@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
+                new User() { UserId = 4, NationalityId = 1, PersonalityId = 4, FirstName = "Magnus", LastName = "Karlsson", Mail = "magnus.karlsson@dating.com", Age = 22, PreferedLanguage = "English", Online = false, Gender = "Male", Active = true });
         }
     }
 }
