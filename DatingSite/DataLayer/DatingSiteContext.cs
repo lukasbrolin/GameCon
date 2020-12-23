@@ -16,6 +16,7 @@ namespace DataLayer
         }
 
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Friend> Friends { get; set; }
         public virtual DbSet<Nationality> Nationalities { get; set; }
         public virtual DbSet<Game> Games { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
@@ -113,13 +114,34 @@ namespace DataLayer
                 .HasData(new { UsersUserId = 3, PlatformsPlatformId = 2 })
                );
 
-            //UserUser
+
+            ////UserUser
             //modelBuilder.Entity<User>()
             //    .HasMany(g => g.Users)
             //    .WithMany(g => g.Users)
             //    .UsingEntity(j => j.ToTable("UserUser")
-            //    .HasData(new { UsersUserId = 3, UsersUserUd = 2 })
+            //    .HasData(new { UserId = 3, FriendsId = 2 })
             //   );
+
+
+            //modelBuilder.Entity<User>()
+            //    .HasMany(p => p.Users)
+            //    .WithMany(p => p.Friends)
+            //    .UsingEntity<Dictionary<string, object>>(
+            //        "UserUser",
+            //        j => j
+            //            .HasOne<User>()
+            //            .WithMany()
+            //            .HasForeignKey("UserId")
+            //            .HasConstraintName("FK_UserUser_Users_UserId")
+            //            .OnDelete(DeleteBehavior.Cascade),
+            //        j => j
+            //            .HasOne<User>()
+            //            .WithMany()
+            //            .HasForeignKey("FriendId")
+            //            .HasConstraintName("FK_UserUser_Users_FriendId")
+            //            .OnDelete(DeleteBehavior.ClientCascade))
+            //            .HasData(new { UserId = 3, FriendId = 2, CategoryId = 1, StatusId = 1});
 
             //Message
             modelBuilder.Entity<Message>().HasData(
@@ -149,6 +171,13 @@ namespace DataLayer
               new Platform() { PlatformId = 2, Name = "PS1" },
               new Platform() { PlatformId = 3, Name = "PS3" }
               );
+
+            //Friend
+            modelBuilder.Entity<Friend>().HasData(
+                new Friend() { FriendId = 1, SenderId = 1, ReceiverId = 2, CategoryId = 1, StatusId = 1},
+                new Friend() { FriendId = 2, SenderId = 2, ReceiverId = 3, CategoryId = 2, StatusId = 2},
+                new Friend() { FriendId = 3, SenderId = 3, ReceiverId = 1, CategoryId = 1, StatusId = 2}
+            );
 
             //Post
             modelBuilder.Entity<Post>().HasData(

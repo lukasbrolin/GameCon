@@ -3,178 +3,163 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataLayer.Migrations
 {
-    public partial class Seed2 : Migration
+    public partial class seed : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.InsertData(
-                table: "GamePlatform",
-                columns: new[] { "GamesGameId", "PlatformsPlatformId" },
-                values: new object[] { 1, 3 });
-
-            migrationBuilder.InsertData(
-                table: "GameUser",
-                columns: new[] { "GamesGameId", "UsersUserId" },
-                values: new object[] { 1, 3 });
-
-            migrationBuilder.InsertData(
-                table: "GenreUser",
-                columns: new[] { "GenresGenreId", "UsersUserId" },
-                values: new object[] { 3, 2 });
+                table: "Friends",
+                columns: new[] { "FriendId", "CategoryId", "ReceiverId", "SenderId", "StatusId" },
+                values: new object[,]
+                {
+                    { 1, 1, 2, 1, 1 },
+                    { 2, 2, 3, 2, 2 },
+                    { 3, 1, 1, 3, 2 }
+                });
 
             migrationBuilder.UpdateData(
                 table: "Messages",
                 keyColumn: "MessageId",
                 keyValue: 1,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 50, 44, 180, DateTimeKind.Local).AddTicks(552));
+                value: new DateTime(2020, 12, 23, 10, 6, 9, 785, DateTimeKind.Local).AddTicks(1659));
 
             migrationBuilder.UpdateData(
                 table: "Messages",
                 keyColumn: "MessageId",
                 keyValue: 2,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 50, 44, 181, DateTimeKind.Local).AddTicks(7861));
+                value: new DateTime(2020, 12, 23, 10, 6, 9, 788, DateTimeKind.Local).AddTicks(7092));
 
             migrationBuilder.UpdateData(
                 table: "Messages",
                 keyColumn: "MessageId",
                 keyValue: 3,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 50, 44, 181, DateTimeKind.Local).AddTicks(7886));
-
-            migrationBuilder.InsertData(
-                table: "PlatformUser",
-                columns: new[] { "PlatformsPlatformId", "UsersUserId" },
-                values: new object[] { 2, 3 });
+                value: new DateTime(2020, 12, 23, 10, 6, 9, 788, DateTimeKind.Local).AddTicks(7119));
 
             migrationBuilder.UpdateData(
                 table: "Posts",
                 keyColumn: "PostId",
                 keyValue: 1,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(3194));
+                value: new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(1344));
 
             migrationBuilder.UpdateData(
                 table: "Posts",
                 keyColumn: "PostId",
                 keyValue: 2,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(3512));
+                value: new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(1840));
 
             migrationBuilder.UpdateData(
                 table: "Posts",
                 keyColumn: "PostId",
                 keyValue: 3,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(3534));
+                value: new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(1852));
 
             migrationBuilder.UpdateData(
                 table: "Visits",
                 keyColumn: "VisitId",
                 keyValue: 1,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(6502));
+                value: new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(5121));
 
             migrationBuilder.UpdateData(
                 table: "Visits",
                 keyColumn: "VisitId",
                 keyValue: 2,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(7113));
+                value: new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(5953));
 
             migrationBuilder.UpdateData(
                 table: "Visits",
                 keyColumn: "VisitId",
                 keyValue: 3,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 50, 44, 182, DateTimeKind.Local).AddTicks(7124));
+                value: new DateTime(2020, 12, 23, 10, 6, 9, 790, DateTimeKind.Local).AddTicks(5965));
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData(
-                table: "GamePlatform",
-                keyColumns: new[] { "GamesGameId", "PlatformsPlatformId" },
-                keyValues: new object[] { 1, 3 });
+                table: "Friends",
+                keyColumn: "FriendId",
+                keyValue: 1);
 
             migrationBuilder.DeleteData(
-                table: "GameUser",
-                keyColumns: new[] { "GamesGameId", "UsersUserId" },
-                keyValues: new object[] { 1, 3 });
+                table: "Friends",
+                keyColumn: "FriendId",
+                keyValue: 2);
 
             migrationBuilder.DeleteData(
-                table: "GenreUser",
-                keyColumns: new[] { "GenresGenreId", "UsersUserId" },
-                keyValues: new object[] { 3, 2 });
-
-            migrationBuilder.DeleteData(
-                table: "PlatformUser",
-                keyColumns: new[] { "PlatformsPlatformId", "UsersUserId" },
-                keyValues: new object[] { 2, 3 });
+                table: "Friends",
+                keyColumn: "FriendId",
+                keyValue: 3);
 
             migrationBuilder.UpdateData(
                 table: "Messages",
                 keyColumn: "MessageId",
                 keyValue: 1,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 38, 10, 13, DateTimeKind.Local).AddTicks(72));
+                value: new DateTime(2020, 12, 23, 10, 0, 5, 723, DateTimeKind.Local).AddTicks(9531));
 
             migrationBuilder.UpdateData(
                 table: "Messages",
                 keyColumn: "MessageId",
                 keyValue: 2,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 38, 10, 14, DateTimeKind.Local).AddTicks(6654));
+                value: new DateTime(2020, 12, 23, 10, 0, 5, 727, DateTimeKind.Local).AddTicks(7960));
 
             migrationBuilder.UpdateData(
                 table: "Messages",
                 keyColumn: "MessageId",
                 keyValue: 3,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 38, 10, 14, DateTimeKind.Local).AddTicks(6677));
+                value: new DateTime(2020, 12, 23, 10, 0, 5, 727, DateTimeKind.Local).AddTicks(8006));
 
             migrationBuilder.UpdateData(
                 table: "Posts",
                 keyColumn: "PostId",
                 keyValue: 1,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(1858));
+                value: new DateTime(2020, 12, 23, 10, 0, 5, 728, DateTimeKind.Local).AddTicks(9204));
 
             migrationBuilder.UpdateData(
                 table: "Posts",
                 keyColumn: "PostId",
                 keyValue: 2,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(2172));
+                value: new DateTime(2020, 12, 23, 10, 0, 5, 728, DateTimeKind.Local).AddTicks(9966));
 
             migrationBuilder.UpdateData(
                 table: "Posts",
                 keyColumn: "PostId",
                 keyValue: 3,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(2182));
+                value: new DateTime(2020, 12, 23, 10, 0, 5, 728, DateTimeKind.Local).AddTicks(9980));
 
             migrationBuilder.UpdateData(
                 table: "Visits",
                 keyColumn: "VisitId",
                 keyValue: 1,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(4160));
+                value: new DateTime(2020, 12, 23, 10, 0, 5, 729, DateTimeKind.Local).AddTicks(3930));
 
             migrationBuilder.UpdateData(
                 table: "Visits",
                 keyColumn: "VisitId",
                 keyValue: 2,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(4729));
+                value: new DateTime(2020, 12, 23, 10, 0, 5, 729, DateTimeKind.Local).AddTicks(5013));
 
             migrationBuilder.UpdateData(
                 table: "Visits",
                 keyColumn: "VisitId",
                 keyValue: 3,
                 column: "TimeStamp",
-                value: new DateTime(2020, 12, 22, 23, 38, 10, 15, DateTimeKind.Local).AddTicks(4739));
+                value: new DateTime(2020, 12, 23, 10, 0, 5, 729, DateTimeKind.Local).AddTicks(5028));
         }
     }
 }

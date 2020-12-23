@@ -127,7 +127,7 @@ namespace DataLayer.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -142,7 +142,7 @@ namespace DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                     table.ForeignKey(
                         name: "FK_Users_Nationalities_NationalityId",
                         column: x => x.NationalityId,
@@ -182,15 +182,55 @@ namespace DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Friends",
+                columns: table => new
+                {
+                    FriendId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SenderId = table.Column<int>(type: "int", nullable: false),
+                    ReceiverId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    StatusId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Friends", x => x.FriendId);
+                    table.ForeignKey(
+                        name: "FK_Friends_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Friends_Statuses_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Statuses",
+                        principalColumn: "StatusId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Friends_Users_ReceiverId",
+                        column: x => x.ReceiverId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Friends_Users_SenderId",
+                        column: x => x.SenderId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "GameUser",
                 columns: table => new
                 {
                     GamesGameId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
+                    UsersUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GameUser", x => new { x.GamesGameId, x.UsersId });
+                    table.PrimaryKey("PK_GameUser", x => new { x.GamesGameId, x.UsersUserId });
                     table.ForeignKey(
                         name: "FK_GameUser_Games_GamesGameId",
                         column: x => x.GamesGameId,
@@ -198,10 +238,10 @@ namespace DataLayer.Migrations
                         principalColumn: "GameId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GameUser_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_GameUser_Users_UsersUserId",
+                        column: x => x.UsersUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -210,11 +250,11 @@ namespace DataLayer.Migrations
                 columns: table => new
                 {
                     GenresGenreId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
+                    UsersUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GenreUser", x => new { x.GenresGenreId, x.UsersId });
+                    table.PrimaryKey("PK_GenreUser", x => new { x.GenresGenreId, x.UsersUserId });
                     table.ForeignKey(
                         name: "FK_GenreUser_Genres_GenresGenreId",
                         column: x => x.GenresGenreId,
@@ -222,10 +262,10 @@ namespace DataLayer.Migrations
                         principalColumn: "GenreId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GenreUser_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_GenreUser_Users_UsersUserId",
+                        column: x => x.UsersUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -247,13 +287,13 @@ namespace DataLayer.Migrations
                         name: "FK_Messages_Users_ReceiverId",
                         column: x => x.ReceiverId,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Messages_Users_SenderId",
                         column: x => x.SenderId,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -262,11 +302,11 @@ namespace DataLayer.Migrations
                 columns: table => new
                 {
                     PlatformsPlatformId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
+                    UsersUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PlatformUser", x => new { x.PlatformsPlatformId, x.UsersId });
+                    table.PrimaryKey("PK_PlatformUser", x => new { x.PlatformsPlatformId, x.UsersUserId });
                     table.ForeignKey(
                         name: "FK_PlatformUser_Platforms_PlatformsPlatformId",
                         column: x => x.PlatformsPlatformId,
@@ -274,10 +314,10 @@ namespace DataLayer.Migrations
                         principalColumn: "PlatformId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PlatformUser_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_PlatformUser_Users_UsersUserId",
+                        column: x => x.UsersUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -299,53 +339,14 @@ namespace DataLayer.Migrations
                         name: "FK_Posts_Users_ReceiverId",
                         column: x => x.ReceiverId,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Posts_Users_SenderId",
                         column: x => x.SenderId,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserUser",
-                columns: table => new
-                {
-                    FriendsId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
-                    StatusId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserUser", x => new { x.FriendsId, x.UsersId });
-                    table.ForeignKey(
-                        name: "FK_UserUser_Users_FriendsId",
-                        column: x => x.FriendsId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserUser_Users_UsersId",
-                        column: x => x.UsersId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_UserUser_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_UserUser_Status_StatusId",
-                        column: x => x.StatusId,
-                        principalTable: "Statuses",
-                        principalColumn: "StatusId",
-                        onDelete: ReferentialAction.Restrict);
-
                 });
 
             migrationBuilder.CreateTable(
@@ -365,13 +366,13 @@ namespace DataLayer.Migrations
                         name: "FK_Visits_Users_ReceiverId",
                         column: x => x.ReceiverId,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Visits_Users_SenderId",
                         column: x => x.SenderId,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -446,38 +447,58 @@ namespace DataLayer.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Active", "Age", "FirstName", "Gender", "LastName", "Mail", "NationalityId", "Online", "PersonalityId", "PreferedLanguage" },
-                values: new object[] { 1, true, 28, "Simon", "Male", "Bernsdorff Wallstedt", "simon.bernsdorff-wallstedt@dating.com", 1, false, 1, "Swedish" });
+                table: "GameGenre",
+                columns: new[] { "GamesGameId", "GenresGenreId" },
+                values: new object[] { 3, 1 });
+
+            migrationBuilder.InsertData(
+                table: "GamePlatform",
+                columns: new[] { "GamesGameId", "PlatformsPlatformId" },
+                values: new object[] { 1, 3 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Active", "Age", "FirstName", "Gender", "LastName", "Mail", "NationalityId", "Online", "PersonalityId", "PreferedLanguage" },
-                values: new object[] { 2, true, 27, "Lukas", "Male", "Brolin", "lukas.brolin@dating.com", 1, false, 2, "Swedish" });
+                columns: new[] { "UserId", "Active", "Age", "FirstName", "Gender", "LastName", "Mail", "NationalityId", "Online", "PersonalityId", "PreferedLanguage" },
+                values: new object[,]
+                {
+                    { 1, true, 28, "Simon", "Male", "Bernsdorff Wallstedt", "simon.bernsdorff-wallstedt@dating.com", 1, false, 1, "Swedish" },
+                    { 2, true, 27, "Lukas", "Male", "Brolin", "lukas.brolin@dating.com", 1, false, 2, "Swedish" },
+                    { 3, true, 27, "Filip", "Male", "Johansson", "filip.johansson@dating.com", 1, false, 3, "Swedish" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Active", "Age", "FirstName", "Gender", "LastName", "Mail", "NationalityId", "Online", "PersonalityId", "PreferedLanguage" },
-                values: new object[] { 3, true, 27, "Filip", "Male", "Johansson", "filip.johansson@dating.com", 1, false, 3, "Swedish" });
+                table: "GameUser",
+                columns: new[] { "GamesGameId", "UsersUserId" },
+                values: new object[] { 1, 3 });
+
+            migrationBuilder.InsertData(
+                table: "GenreUser",
+                columns: new[] { "GenresGenreId", "UsersUserId" },
+                values: new object[] { 3, 2 });
 
             migrationBuilder.InsertData(
                 table: "Messages",
                 columns: new[] { "MessageId", "Content", "ReceiverId", "SenderId", "TimeStamp" },
                 values: new object[,]
                 {
-                    { 1, "Hello muthafucka", 1, 2, new DateTime(2020, 12, 22, 22, 5, 4, 716, DateTimeKind.Local).AddTicks(9702) },
-                    { 3, "SKKRTSKRRRT", 2, 1, new DateTime(2020, 12, 22, 22, 5, 4, 719, DateTimeKind.Local).AddTicks(9770) },
-                    { 2, "Check this shit out", 3, 1, new DateTime(2020, 12, 22, 22, 5, 4, 719, DateTimeKind.Local).AddTicks(9729) }
+                    { 1, "Hello muthafucka", 1, 2, new DateTime(2020, 12, 23, 10, 0, 5, 723, DateTimeKind.Local).AddTicks(9531) },
+                    { 3, "SKKRTSKRRRT", 2, 1, new DateTime(2020, 12, 23, 10, 0, 5, 727, DateTimeKind.Local).AddTicks(8006) },
+                    { 2, "Check this shit out", 3, 1, new DateTime(2020, 12, 23, 10, 0, 5, 727, DateTimeKind.Local).AddTicks(7960) }
                 });
+
+            migrationBuilder.InsertData(
+                table: "PlatformUser",
+                columns: new[] { "PlatformsPlatformId", "UsersUserId" },
+                values: new object[] { 2, 3 });
 
             migrationBuilder.InsertData(
                 table: "Posts",
                 columns: new[] { "PostId", "Content", "ReceiverId", "SenderId", "TimeStamp" },
                 values: new object[,]
                 {
-                    { 1, "Holy shit dude.", 1, 2, new DateTime(2020, 12, 22, 22, 5, 4, 720, DateTimeKind.Local).AddTicks(7998) },
-                    { 2, "Holy shit dude.", 2, 3, new DateTime(2020, 12, 22, 22, 5, 4, 720, DateTimeKind.Local).AddTicks(8446) },
-                    { 3, "Holy shit dude.", 3, 1, new DateTime(2020, 12, 22, 22, 5, 4, 720, DateTimeKind.Local).AddTicks(8458) }
+                    { 1, "Holy shit dude.", 1, 2, new DateTime(2020, 12, 23, 10, 0, 5, 728, DateTimeKind.Local).AddTicks(9204) },
+                    { 2, "Holy shit dude.", 2, 3, new DateTime(2020, 12, 23, 10, 0, 5, 728, DateTimeKind.Local).AddTicks(9966) },
+                    { 3, "Holy shit dude.", 3, 1, new DateTime(2020, 12, 23, 10, 0, 5, 728, DateTimeKind.Local).AddTicks(9980) }
                 });
 
             migrationBuilder.InsertData(
@@ -485,10 +506,30 @@ namespace DataLayer.Migrations
                 columns: new[] { "VisitId", "ReceiverId", "SenderId", "TimeStamp" },
                 values: new object[,]
                 {
-                    { 1, 1, 1, new DateTime(2020, 12, 22, 22, 5, 4, 721, DateTimeKind.Local).AddTicks(1875) },
-                    { 2, 2, 3, new DateTime(2020, 12, 22, 22, 5, 4, 721, DateTimeKind.Local).AddTicks(2972) },
-                    { 3, 3, 2, new DateTime(2020, 12, 22, 22, 5, 4, 721, DateTimeKind.Local).AddTicks(2984) }
+                    { 1, 1, 1, new DateTime(2020, 12, 23, 10, 0, 5, 729, DateTimeKind.Local).AddTicks(3930) },
+                    { 2, 2, 3, new DateTime(2020, 12, 23, 10, 0, 5, 729, DateTimeKind.Local).AddTicks(5013) },
+                    { 3, 3, 2, new DateTime(2020, 12, 23, 10, 0, 5, 729, DateTimeKind.Local).AddTicks(5028) }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Friends_CategoryId",
+                table: "Friends",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Friends_ReceiverId",
+                table: "Friends",
+                column: "ReceiverId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Friends_SenderId",
+                table: "Friends",
+                column: "SenderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Friends_StatusId",
+                table: "Friends",
+                column: "StatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GameGenre_GenresGenreId",
@@ -501,14 +542,14 @@ namespace DataLayer.Migrations
                 column: "PlatformsPlatformId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GameUser_UsersId",
+                name: "IX_GameUser_UsersUserId",
                 table: "GameUser",
-                column: "UsersId");
+                column: "UsersUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GenreUser_UsersId",
+                name: "IX_GenreUser_UsersUserId",
                 table: "GenreUser",
-                column: "UsersId");
+                column: "UsersUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_ReceiverId",
@@ -521,9 +562,9 @@ namespace DataLayer.Migrations
                 column: "SenderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PlatformUser_UsersId",
+                name: "IX_PlatformUser_UsersUserId",
                 table: "PlatformUser",
-                column: "UsersId");
+                column: "UsersUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_ReceiverId",
@@ -546,11 +587,6 @@ namespace DataLayer.Migrations
                 column: "PersonalityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserUser_UsersId",
-                table: "UserUser",
-                column: "UsersId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Visits_ReceiverId",
                 table: "Visits",
                 column: "ReceiverId");
@@ -564,7 +600,7 @@ namespace DataLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Friends");
 
             migrationBuilder.DropTable(
                 name: "GameGenre");
@@ -588,13 +624,13 @@ namespace DataLayer.Migrations
                 name: "Posts");
 
             migrationBuilder.DropTable(
-                name: "Statuses");
-
-            migrationBuilder.DropTable(
-                name: "UserUser");
-
-            migrationBuilder.DropTable(
                 name: "Visits");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Statuses");
 
             migrationBuilder.DropTable(
                 name: "Games");
