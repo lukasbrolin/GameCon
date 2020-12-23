@@ -44,5 +44,17 @@ namespace DataLayer.Repositories
         {
             return _context.Users.FirstOrDefault(x => x.UserId.Equals(id));
         }
+
+        public void DeleteUser(int id)
+        {
+            var user = _context.Users.Find(id);
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+        }
+
+        public bool UserExists(int id)
+        {
+            return _context.Users.Any(user => e.UserId == id);
+        }
     }
 }
