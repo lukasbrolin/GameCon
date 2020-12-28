@@ -24,6 +24,8 @@ namespace DatingSite.Controllers
 
         public IActionResult Index()
         {
+            Debug.Write(User.Identity.Name);
+            Console.Write(User.Identity.Name);
             return View();
         }
 

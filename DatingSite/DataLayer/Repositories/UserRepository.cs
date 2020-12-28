@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataLayer.Repositories
 {
-    internal class UserRepository
+    public class UserRepository
     {
         private readonly DatingSiteContext _context;
 
@@ -38,6 +38,7 @@ namespace DataLayer.Repositories
         public void AddUser(User user)
         {
             _context.Users.Add(user);
+            _context.SaveChanges();
         }
 
         public User getUserById(int id)
