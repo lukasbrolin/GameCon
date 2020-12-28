@@ -190,10 +190,10 @@ namespace DataLayer
 
             //User
             modelBuilder.Entity<User>().HasData(
-                new User() { UserId = 1, NationalityId = 1, PersonalityId = 1, FirstName = "Simon", LastName = "Bernsdorff Wallstedt", Mail = "simon.bernsdorff-wallstedt@dating.com", Age = 28, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
-                new User() { UserId = 2, NationalityId = 1, PersonalityId = 2, FirstName = "Lukas", LastName = "Brolin", Mail = "lukas.brolin@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
-                new User() { UserId = 3, NationalityId = 1, PersonalityId = 3, FirstName = "Filip", LastName = "Johansson", Mail = "filip.johansson@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true },
-                new User() { UserId = 4, NationalityId = 1, PersonalityId = 4, FirstName = "Magnus", LastName = "Karlsson", Mail = "magnus.karlsson@dating.com", Age = 22, PreferedLanguage = "English", Online = false, Gender = "Male", Active = true });
+                new User() { UserId = 1, NationalityId = 1, PersonalityId = 1, FirstName = "Simon", LastName = "Bernsdorff Wallstedt", Mail = "simon.bernsdorff-wallstedt@dating.com", Age = 28, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 2, NationalityId = 1, PersonalityId = 2, FirstName = "Lukas", LastName = "Brolin", Mail = "lukas.brolin@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 3, NationalityId = 1, PersonalityId = 3, FirstName = "Filip", LastName = "Johansson", Mail = "filip.johansson@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 4, NationalityId = 1, PersonalityId = 4, FirstName = "Magnus", LastName = "Karlsson", Mail = "magnus.karlsson@dating.com", Age = 22, PreferedLanguage = "English", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" });
         }
     }
 }

@@ -10,5 +10,6 @@ namespace DataLayer.Models
 
         [Required]
         public virtual string Name { get; set; }
+
     }
 }
