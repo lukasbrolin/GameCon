@@ -217,7 +217,7 @@ namespace DataLayer.Migrations
                             Content = "Hello muthafucka",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 532, DateTimeKind.Local).AddTicks(1730)
+                            TimeStamp = new DateTime(2020, 12, 28, 16, 52, 43, 569, DateTimeKind.Local).AddTicks(8966)
                         },
                         new
                         {
@@ -225,7 +225,7 @@ namespace DataLayer.Migrations
                             Content = "Check this shit out",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 533, DateTimeKind.Local).AddTicks(9390)
+                            TimeStamp = new DateTime(2020, 12, 28, 16, 52, 43, 571, DateTimeKind.Local).AddTicks(6249)
                         },
                         new
                         {
@@ -233,7 +233,7 @@ namespace DataLayer.Migrations
                             Content = "SKKRTSKRRRT",
                             ReceiverId = 2,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 533, DateTimeKind.Local).AddTicks(9420)
+                            TimeStamp = new DateTime(2020, 12, 28, 16, 52, 43, 571, DateTimeKind.Local).AddTicks(6272)
                         });
                 });
 
@@ -385,7 +385,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 534, DateTimeKind.Local).AddTicks(7366)
+                            TimeStamp = new DateTime(2020, 12, 28, 16, 52, 43, 572, DateTimeKind.Local).AddTicks(3311)
                         },
                         new
                         {
@@ -393,7 +393,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 534, DateTimeKind.Local).AddTicks(7719)
+                            TimeStamp = new DateTime(2020, 12, 28, 16, 52, 43, 572, DateTimeKind.Local).AddTicks(3635)
                         },
                         new
                         {
@@ -401,7 +401,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 534, DateTimeKind.Local).AddTicks(7728)
+                            TimeStamp = new DateTime(2020, 12, 28, 16, 52, 43, 572, DateTimeKind.Local).AddTicks(3645)
                         });
                 });
 
@@ -585,21 +585,21 @@ namespace DataLayer.Migrations
                             VisitId = 1,
                             ReceiverId = 1,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 534, DateTimeKind.Local).AddTicks(9928)
+                            TimeStamp = new DateTime(2020, 12, 28, 16, 52, 43, 572, DateTimeKind.Local).AddTicks(5757)
                         },
                         new
                         {
                             VisitId = 2,
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 535, DateTimeKind.Local).AddTicks(560)
+                            TimeStamp = new DateTime(2020, 12, 28, 16, 52, 43, 572, DateTimeKind.Local).AddTicks(6325)
                         },
                         new
                         {
                             VisitId = 3,
                             ReceiverId = 3,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 535, DateTimeKind.Local).AddTicks(569)
+                            TimeStamp = new DateTime(2020, 12, 28, 16, 52, 43, 572, DateTimeKind.Local).AddTicks(6335)
                         });
                 });
 

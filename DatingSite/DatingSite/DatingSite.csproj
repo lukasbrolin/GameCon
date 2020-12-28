@@ -7,6 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\img\Game\AMONG US.jpg" />
+    <None Include="wwwroot\img\Game\CSGO.jpg" />
+    <None Include="wwwroot\img\Game\DOTA2.jpg" />
+    <None Include="wwwroot\img\Game\PUBG.jpg" />
+    <None Include="wwwroot\img\Game\WOW.jpg" />
+    <None Include="wwwroot\img\Genre\Explore.png" />
+    <None Include="wwwroot\img\Genre\King Of The Hill.png" />
+    <None Include="wwwroot\img\Genre\MMO.png" />
+    <None Include="wwwroot\img\Genre\Moba.png" />
+    <None Include="wwwroot\img\Genre\Open world.png" />
+    <None Include="wwwroot\img\Genre\Shooting.png" />
+    <None Include="wwwroot\img\Genre\Strategy.png" />
+    <None Include="wwwroot\img\Platform\PC.png" />
+    <None Include="wwwroot\img\Platform\PS.png" />
+    <None Include="wwwroot\img\Platform\Xbox.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.1" />
