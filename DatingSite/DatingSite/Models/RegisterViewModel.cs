@@ -8,25 +8,25 @@ namespace DatingSite.Models
 {
     public class RegisterViewModel
     {
-        [Display(Name = "First name:")]
+        [Display(Name = "First name")]
         public string FirstName { get; set; }
 
-        [Display(Name = "Last name:")]
+        [Display(Name = "Last name")]
         public virtual string LastName { get; set; }
 
-        [Display(Name = "Age:")]
+        [Display(Name = "Age")]
         public virtual int Age { get; set; }
 
-        [Display(Name = "Gender:")]
+        [Display(Name = "Gender")]
         public virtual string Gender { get; set; }
 
-        [Display(Name = "Nationality:")]
+        [Display(Name = "Nationality")]
         public virtual int Nationality { get; set; }
 
-        [Display(Name = "Language:")]
+        [Display(Name = "Language")]
         public virtual string Language { get; set; }
 
-        [Display(Name = "Personality:")]
+        [Display(Name = "Personality")]
         public virtual int Personality { get; set; }
     }
 }
