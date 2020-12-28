@@ -7,7 +7,7 @@ namespace DataLayer.Models
     {
         [Required]
         public virtual int FriendId { get; set; }
-
+        //halloj
         [Required]
         public virtual int SenderId { get; set; }
 
