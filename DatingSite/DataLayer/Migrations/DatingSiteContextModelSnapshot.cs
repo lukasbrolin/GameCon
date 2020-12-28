@@ -217,7 +217,7 @@ namespace DataLayer.Migrations
                             Content = "Hello muthafucka",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 23, 10, 17, 57, 563, DateTimeKind.Local).AddTicks(8449)
+                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 532, DateTimeKind.Local).AddTicks(1730)
                         },
                         new
                         {
@@ -225,7 +225,7 @@ namespace DataLayer.Migrations
                             Content = "Check this shit out",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 23, 10, 17, 57, 565, DateTimeKind.Local).AddTicks(5876)
+                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 533, DateTimeKind.Local).AddTicks(9390)
                         },
                         new
                         {
@@ -233,7 +233,7 @@ namespace DataLayer.Migrations
                             Content = "SKKRTSKRRRT",
                             ReceiverId = 2,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 23, 10, 17, 57, 565, DateTimeKind.Local).AddTicks(5900)
+                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 533, DateTimeKind.Local).AddTicks(9420)
                         });
                 });
 
@@ -300,6 +300,11 @@ namespace DataLayer.Migrations
                         {
                             PersonalityId = 3,
                             Description = "Manipulative"
+                        },
+                        new
+                        {
+                            PersonalityId = 4,
+                            Description = "Strategist"
                         });
                 });
 
@@ -333,6 +338,16 @@ namespace DataLayer.Migrations
                         {
                             PlatformId = 3,
                             Name = "PS3"
+                        },
+                        new
+                        {
+                            PlatformId = 4,
+                            Name = "PC"
+                        },
+                        new
+                        {
+                            PlatformId = 5,
+                            Name = "PS5"
                         });
                 });
 
@@ -370,7 +385,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 23, 10, 17, 57, 566, DateTimeKind.Local).AddTicks(3059)
+                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 534, DateTimeKind.Local).AddTicks(7366)
                         },
                         new
                         {
@@ -378,7 +393,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2020, 12, 23, 10, 17, 57, 566, DateTimeKind.Local).AddTicks(3379)
+                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 534, DateTimeKind.Local).AddTicks(7719)
                         },
                         new
                         {
@@ -386,7 +401,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 23, 10, 17, 57, 566, DateTimeKind.Local).AddTicks(3390)
+                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 534, DateTimeKind.Local).AddTicks(7728)
                         });
                 });
 
@@ -444,6 +459,10 @@ namespace DataLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImgUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -481,6 +500,7 @@ namespace DataLayer.Migrations
                             Age = 28,
                             FirstName = "Simon",
                             Gender = "Male",
+                            ImgUrl = "Images/User/User.jpg",
                             LastName = "Bernsdorff Wallstedt",
                             Mail = "simon.bernsdorff-wallstedt@dating.com",
                             NationalityId = 1,
@@ -495,6 +515,7 @@ namespace DataLayer.Migrations
                             Age = 27,
                             FirstName = "Lukas",
                             Gender = "Male",
+                            ImgUrl = "Images/User/User.jpg",
                             LastName = "Brolin",
                             Mail = "lukas.brolin@dating.com",
                             NationalityId = 1,
@@ -509,12 +530,28 @@ namespace DataLayer.Migrations
                             Age = 27,
                             FirstName = "Filip",
                             Gender = "Male",
+                            ImgUrl = "Images/User/User.jpg",
                             LastName = "Johansson",
                             Mail = "filip.johansson@dating.com",
                             NationalityId = 1,
                             Online = false,
                             PersonalityId = 3,
                             PreferedLanguage = "Swedish"
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            Active = true,
+                            Age = 22,
+                            FirstName = "Magnus",
+                            Gender = "Male",
+                            ImgUrl = "Images/User/User.jpg",
+                            LastName = "Karlsson",
+                            Mail = "magnus.karlsson@dating.com",
+                            NationalityId = 1,
+                            Online = false,
+                            PersonalityId = 4,
+                            PreferedLanguage = "English"
                         });
                 });
 
@@ -548,21 +585,21 @@ namespace DataLayer.Migrations
                             VisitId = 1,
                             ReceiverId = 1,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 23, 10, 17, 57, 566, DateTimeKind.Local).AddTicks(5500)
+                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 534, DateTimeKind.Local).AddTicks(9928)
                         },
                         new
                         {
                             VisitId = 2,
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2020, 12, 23, 10, 17, 57, 566, DateTimeKind.Local).AddTicks(6080)
+                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 535, DateTimeKind.Local).AddTicks(560)
                         },
                         new
                         {
                             VisitId = 3,
                             ReceiverId = 3,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 23, 10, 17, 57, 566, DateTimeKind.Local).AddTicks(6090)
+                            TimeStamp = new DateTime(2020, 12, 28, 12, 47, 10, 535, DateTimeKind.Local).AddTicks(569)
                         });
                 });
 

@@ -27,6 +27,9 @@ namespace DataLayer.Models
         [Required]
         public virtual int NationalityId { get; set; }
 
+        [Required]
+        public virtual string ImgUrl { get; set; }
+
         [ForeignKey("NationalityId")]
         public virtual Nationality Nationality { get; set; }
 
