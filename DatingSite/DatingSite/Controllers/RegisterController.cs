@@ -39,8 +39,7 @@ namespace DatingSite.Controllers
 
             var userRepo = new UserRepository(_context);
             userRepo.AddUser(user);
-            //return RedirectToPage("RegisterConfirmation");
-            return RedirectToPage("RegisterConfirmation", new { email = user.Mail });
+            return RedirectToPage("RegisterConfirmation");
         }
     }
 }
