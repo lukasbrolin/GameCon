@@ -1,5 +1,6 @@
 ﻿using DataLayer.Models;
 using DataLayer.Repositories;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +11,10 @@ namespace DatingSite.Models
 {
     public class GameViewModel
     {
+        public GameViewModel(string name)
+        {
+            this.Name = name;
+        }
         [Display(Name = "Game")]
         public string Name { get; set; }
 
