@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DatingSite.Models.GameViewModel>
+﻿@model IEnumerable<DatingSite.Models.PlatformViewModel>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,7 +6,7 @@
 
 <div class="wrapper">
     <div class="title">
-        Choose your favorite games
+        Choose your platform
     </div>
     <hr />
     <form asp-action="Submit">
@@ -38,5 +38,3 @@
         </div>
     </form>
 </div>
-
-

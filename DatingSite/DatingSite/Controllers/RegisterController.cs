@@ -52,7 +52,7 @@ namespace DatingSite.Controllers
             user.ImgUrl = "Default";
 
             userRepo.AddUser(user);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Games");
         }
     }
 }

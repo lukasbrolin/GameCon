@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DatingSite.Models.GameViewModel>
+﻿@model IEnumerable<DatingSite.Models.GenreViewModel>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,7 +6,7 @@
 
 <div class="wrapper">
     <div class="title">
-        Choose your favorite games
+        Choose your favorite genres
     </div>
     <hr />
     <form asp-action="Submit">
@@ -31,12 +31,11 @@
         }
         <div class="form_group">
             @*@using (Html.BeginForm("MyAction", "GamesController"))
-                {*@
+            {*@
             <input type="submit" value="Create" class="btn btn-primary" />
             @*<input type="button" name="next_btn" class="next_btn" value="Next" />*@
             @*}*@
         </div>
     </form>
+    
 </div>
-
-

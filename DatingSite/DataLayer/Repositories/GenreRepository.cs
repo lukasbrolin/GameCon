@@ -20,6 +20,12 @@ namespace DataLayer.Repositories
             return _context.Genres.ToList();
         }
 
+        public IList<String> GetGenreNames()
+        {
+            return _context.Genres.Cast<Genre>().Select(x => x.Name).ToList();
+
+        }
+
         public void AddGenre(Genre genre)
         {
             _context.Genres.Add(genre);

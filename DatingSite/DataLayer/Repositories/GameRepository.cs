@@ -25,12 +25,7 @@ namespace DataLayer.Repositories
 
         }
 
-        public IList<String> GetGamesNames()
-        {
-            return _context.Games.Cast<Game>().Select(x => x.Name).ToList();
-
-        }
-
+        
         public void AddGame(Game game)
         {
             _context.Games.Add(game);

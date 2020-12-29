@@ -18,6 +18,12 @@ namespace DataLayer.Repositories
             return _context.Platforms.ToList();
         }
 
+        public IList<string> GetPlatformNames()
+        {
+            return _context.Platforms.Cast<Platform>().Select(x => x.Name).ToList();
+
+        }
+
         public void AddPlatform(Platform platform)
         {
             _context.Platforms.Add(platform);
