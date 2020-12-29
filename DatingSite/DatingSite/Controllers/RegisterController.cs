@@ -17,6 +17,10 @@ namespace DatingSite.Controllers
 
         public ActionResult Index()
         {
+            var personalityRepo = new PersonalityRepository(_context);
+            var nationalityRepo = new NationalityRepository(_context);
+            ViewBag.PList = personalityRepo.GetPersonalities();
+            ViewBag.NList = nationalityRepo.GetNationalities();
             return View(new RegisterViewModel());
         }
 
