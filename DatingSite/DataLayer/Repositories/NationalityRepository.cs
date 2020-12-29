@@ -28,7 +28,7 @@ namespace DataLayer.Repositories
             return _context.Nationalities.FirstOrDefault(x => x.NationalityId.Equals(id));
         }
 
-        public int GetNationNalityByName(string name)
+        public int GetNationalityIdByName(string name)
         {
             return _context.Nationalities.FirstOrDefault(i => i.Name == name).NationalityId;
         }
@@ -37,6 +37,5 @@ namespace DataLayer.Repositories
         {
             return _context.Nationalities.Cast<Nationality>().Select(x => x.Name).ToList();
         }
-
     }
 }
