@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 mx-auto">
@@ -44,7 +43,12 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Nationality" class="control-label"></label>
-                    <input asp-for="Nationality" class="form-control" />
+                    <select asp-for="Nationality" class="form-control">
+                        @foreach (var item in ViewBag.NList)
+                        {
+                            <option>@item.Name</option>
+                        }
+                    </select>
                     <span asp-validation-for="Nationality" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -54,7 +58,12 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Personality" class="control-label"></label>
-                    <input asp-for="Personality" class="form-control" />
+                    <select asp-for="Personality" class="form-control">
+                        @foreach (var item in ViewBag.PList)
+                        {
+                            <option>@item.Description</option>
+                        }
+                    </select>
                     <span asp-validation-for="Personality" class="text-danger"></span>
                 </div>
                 <div class=" form-group">
@@ -66,9 +75,7 @@
             </form>
         </div>
     </div>
-
 </div>
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
