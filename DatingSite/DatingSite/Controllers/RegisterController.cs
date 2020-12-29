@@ -3,7 +3,6 @@ using DataLayer.Models;
 using DataLayer.Repositories;
 using DatingSite.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace DatingSite.Controllers
 {
@@ -24,6 +23,9 @@ namespace DatingSite.Controllers
         [HttpPost]
         public ActionResult Register(RegisterViewModel model)
         {
+            var userRepo = new UserRepository(_context);
+            var nationalityRepo = new NationalityRepository(_context);
+            var personalityRepo = new PersonalityRepository(_context);
             var user = new User();
 
             user.FirstName = model.FirstName;
@@ -31,15 +33,15 @@ namespace DatingSite.Controllers
             user.Mail = User.Identity.Name;
             user.Age = model.Age;
             user.Gender = model.Gender;
-            user.NationalityId = model.Nationality;
             user.PreferedLanguage = model.Language;
-            user.PersonalityId = model.Personality;
+            user.NationalityId = nationalityRepo.GetNationalityIdByName(model.Nationality);
+            user.PersonalityId = personalityRepo.GetPersonalityIdByName(model.Personality);
             user.Active = true;
             user.Online = true;
+            user.ImgUrl = "Default";
 
-            var userRepo = new UserRepository(_context);
             userRepo.AddUser(user);
-            return RedirectToPage("RegisterConfirmation");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

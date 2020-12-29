@@ -28,5 +28,9 @@ namespace DataLayer.Repositories
             return _context.Personalities.FirstOrDefault(x => x.PersonalityId.Equals(id));
         }
 
+        public int GetPersonalityIdByName(string name)
+        {
+            return _context.Personalities.FirstOrDefault(i => i.Description == name).PersonalityId;
+        }
     }
 }

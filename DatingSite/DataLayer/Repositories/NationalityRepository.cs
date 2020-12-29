@@ -28,5 +28,9 @@ namespace DataLayer.Repositories
             return _context.Nationalities.FirstOrDefault(x => x.NationalityId.Equals(id));
         }
 
+        public int GetNationalityIdByName(string name)
+        {
+            return _context.Nationalities.FirstOrDefault(i => i.Name == name).NationalityId;
+        }
     }
 }
