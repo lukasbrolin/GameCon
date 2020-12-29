@@ -11,6 +11,22 @@ namespace DataLayer.Repositories
         public PersonalityRepository(DatingSiteContext context)
         {
             _context = context;
+           
+        }
+
+        public List<string> getAll()
+        {
+            var list = new List<string>();
+            var games = _context.Games.ToList();
+            foreach (var d in games)
+            {
+                _context.Entry(d).Collection(x => x.Users).Load();
+                foreach (User c in d.Users)
+                {
+                    list.Add(d.Name + " + " +c.FirstName);
+                }
+            }
+            return list;
         }
 
         public List<Personality> GetPersonalities()
