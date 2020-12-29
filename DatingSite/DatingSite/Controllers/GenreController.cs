@@ -32,7 +32,7 @@ namespace DatingSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Submit(RegisterViewModel model)
+        public ActionResult Submit(GenreViewModel model)
         {
             
             return RedirectToAction("Index", "Platform");
