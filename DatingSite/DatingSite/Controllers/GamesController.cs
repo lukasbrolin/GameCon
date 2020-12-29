@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataLayer;
 using DataLayer.Models;
+using DatingSite.Models;
+using DataLayer.Repositories;
 
 namespace DatingSite.Controllers
 {
@@ -21,7 +23,16 @@ namespace DatingSite.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Games.ToListAsync());
+            var gameRepository = new GameRepository(_context);
+            List<GameViewModel> model = new List<GameViewModel>();
+            foreach (var index in gameRepository.GetGamesNames())
+            {
+                model.Add(new GameViewModel(index));
+            }
+            //model.AddRange(new ProfileViewModel(gameRepository.GetGamesNames))
+            //return View(await _context.Games.ToListAsync());
+            return View(model);
         }
+       
     }
 }
