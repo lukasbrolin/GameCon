@@ -11,15 +11,12 @@ namespace DatingSite.Models
 {
     public class GameViewModel
     {
+        public GameViewModel(string name)
+        {
+            Name = name;
+        }
 
         [Display(Name = "Game")]
         public string Name { get; set; }
-
-        public GameViewModel(string name)
-        {
-            this.Name = name;
-        }
     }
-
-
 }
