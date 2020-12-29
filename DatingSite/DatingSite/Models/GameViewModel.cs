@@ -17,6 +17,12 @@ namespace DatingSite.Models
         }
         [Display(Name = "Game")]
         public string Name { get; set; }
-       
+
+        public GameViewModel(string name)
+        {
+            this.Name = name;
+        }
     }
+
+
 }

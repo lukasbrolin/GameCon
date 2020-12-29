@@ -25,7 +25,7 @@ namespace DatingSite.Controllers
         {
             var gameRepository = new GameRepository(_context);
             List<GameViewModel> model = new List<GameViewModel>();
-            foreach (var index in gameRepository.GetGamesNames())
+            foreach(var index in gameRepository.GetGamesNames())
             {
                 model.Add(new GameViewModel(index));
             }
