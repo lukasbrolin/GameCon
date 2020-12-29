@@ -3,6 +3,7 @@ using DataLayer.Models;
 using DataLayer.Repositories;
 using DatingSite.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace DatingSite.Controllers
@@ -22,18 +23,12 @@ namespace DatingSite.Controllers
             var nationalityRepo = new NationalityRepository(_context);
             ViewBag.PList = personalityRepo.GetPersonalities();
             ViewBag.NList = nationalityRepo.GetNationalities();
-            return View(new RegisterViewModel());
-        }
-
-        public PartialViewResult _Nationality()
-        {
-            var nationalityRepo = new NationalityRepository(_context);
-            List<NationalityViewModel> model = new List<NationalityViewModel>();
-            foreach (var index in nationalityRepo.GetNationalityNames())
+            Console.WriteLine(personalityRepo.getAll().Count);
+            foreach(var d in personalityRepo.getAll())
             {
-                model.Add(new NationalityViewModel(index));
+                Console.WriteLine(d);
             }
-            return PartialView(model);
+            return View(new RegisterViewModel());
         }
 
         [HttpPost]

@@ -33,5 +33,6 @@ namespace DatingSite.Controllers
             //return View(await _context.Games.ToListAsync());
             return View(model);
         }
+       
     }
 }
