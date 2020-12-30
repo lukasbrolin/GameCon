@@ -1,6 +1,4 @@
 ﻿using DataLayer;
-using DataLayer.Repositories;
-using DatingSite.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,48 +8,34 @@ using System.Threading.Tasks;
 
 namespace DatingSite.Controllers
 {
-    public class PlatformController : Controller
+    public class SignedInController : Controller
     {
         private readonly DatingSiteContext _context;
 
-        // GET: PlatformController
-        public PlatformController(DatingSiteContext context)
+        public SignedInController(DatingSiteContext context)
         {
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        // GET: SignedInController
+        public ActionResult Index()
         {
-            var platformRepository = new PlatformRepository(_context);
-            List<PlatformViewModel> model = new List<PlatformViewModel>();
-            foreach (var index in platformRepository.GetPlatformNames())
-            {
-                model.Add(new PlatformViewModel(index));
-            }
-            return View(model);
+            return View();
         }
 
-        [HttpPost]
-        public ActionResult Submit(string[] CheckBoxes)
-        {
-            var userRepository = new UserRepository(_context);
-            userRepository.SetUserPlatforms(User.Identity.Name, CheckBoxes);
-            return RedirectToAction("Index", "Home");
-        }
-
-        // GET: PlatformController/Details/5
+        // GET: SignedInController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: PlatformController/Create
+        // GET: SignedInController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: PlatformController/Create
+        // POST: SignedInController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -66,13 +50,13 @@ namespace DatingSite.Controllers
             }
         }
 
-        // GET: PlatformController/Edit/5
+        // GET: SignedInController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: PlatformController/Edit/5
+        // POST: SignedInController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -87,13 +71,13 @@ namespace DatingSite.Controllers
             }
         }
 
-        // GET: PlatformController/Delete/5
+        // GET: SignedInController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: PlatformController/Delete/5
+        // POST: SignedInController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
