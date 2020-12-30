@@ -19,9 +19,12 @@ namespace DatingSite.Controllers
             _context = context;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(CardViewModel model)
         {
-            return View(_context.Users.ToList());
+            var userRepository = new UserRepository(_context);
+            var list = userRepository.GetUsers();
+            model.Users = list;
+            return View(model);
         }
 
         // GET: SignedInController/Details/5
