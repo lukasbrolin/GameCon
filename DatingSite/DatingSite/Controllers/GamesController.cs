@@ -33,6 +33,20 @@ namespace DatingSite.Controllers
             //return View(await _context.Games.ToListAsync());
             return View(model);
         }
-       
+
+        [HttpPost]
+        public ActionResult Submit(string[] CheckBoxes)
+        {
+            Console.WriteLine(CheckBoxes);
+            var userRepository = new UserRepository(_context);
+            //var list = new List<string>();
+            //foreach (var index in model)
+            //{
+            //    list.Add(index.Name);
+            //}
+            userRepository.SetUserGames(User.Identity.Name, CheckBoxes);
+            return RedirectToAction("Index", "Genre");
+        }
+
     }
 }

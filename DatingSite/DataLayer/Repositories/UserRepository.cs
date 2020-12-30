@@ -1,4 +1,5 @@
 ﻿using DataLayer.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,60 @@ namespace DataLayer.Repositories
         {
             return _context.Users.ToList();
         }
+
+        public List<string> getUserGamesAll()
+        {
+            var list = new List<string>();
+            var games = _context.Games.ToList();
+            foreach (var d in games)
+            {
+                _context.Entry(d).Collection(x => x.Users).Load();
+                foreach (User c in d.Users)
+                {
+                    list.Add(d.Name + " + " + c.FirstName);
+                }
+            }
+            return list;
+        }
+
+        public void SetUserGames(string mail, string[] selectedGames)
+        {
+            var userToUpdate = _context.Users.Include(i => i.Games).Where(i => i.Mail == mail).Single();
+            var games = _context.Games.ToList();
+            foreach (var d in selectedGames)
+            {
+                foreach(var e in games)
+                {
+                    if (e.Name.Equals(d))
+                    {
+                        //foreach(var g in _context.Users.ToList())
+                        //{
+                        //    g.Games.Add(e);
+                        //}
+                        var x = _context.Users.Select(x => x).Where(x => x.Mail == mail).ToList();
+                        x[0].Games.Add(e);
+                        var y = _context.Games.Select(x => x).Where(x => x.Name == e.Name).ToList();
+                        y[0].Users.Add(x[0]);
+                     
+                    }
+                }
+                //_context
+            }
+            //UpdateUserGames(selectedGames, userToUpdate);
+            _context.SaveChanges();
+        }
+
+        //public void UpdateUserGames(string[] selectedGames, User userToUpdate)
+        //{
+        //    var selectedGamesList = new List<string>(selectedGames);
+        //    foreach(var game in _context.Games)
+        //    {
+        //        if (selectedGamesList.Contains(game.Name))
+        //        {
+        //            if(!)
+        //        }
+        //    }
+        //}
 
         public List<User> GetUserByName(string search)
         {
