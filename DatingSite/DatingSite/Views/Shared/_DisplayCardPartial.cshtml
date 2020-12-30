@@ -1,10 +1,15 @@
 ﻿@using DataLayer.Models
+@using DatingSite.Models
 @model User
 
 <div class="card mx-auto" style="width: 18rem;">
     <img class="card-img-top" src="~/img/Avatars/avatar3.png" alt="Card image cap">
     <div class="card-body">
         <h2 class="card-title">@Model.FirstName @Model.Age</h2>
+        @foreach (var item in Model.Games)
+        {
+            <h3>gggg</h3>
+        }
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
     <ul class="list-group list-group-flush">
