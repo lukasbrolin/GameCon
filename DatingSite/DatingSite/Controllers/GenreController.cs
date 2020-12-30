@@ -28,7 +28,9 @@ namespace DatingSite.Controllers
             }
             //model.AddRange(new ProfileViewModel(gameRepository.GetGamesNames))
             //return View(await _context.Games.ToListAsync());
+            
             return View(model);
+            
         }
 
         [HttpPost]

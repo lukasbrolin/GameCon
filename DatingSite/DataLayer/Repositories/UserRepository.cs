@@ -36,6 +36,57 @@ namespace DataLayer.Repositories
             return list;
         }
 
+        public List<Game> GetUserGamesByMail(string mail)
+        {
+            var list = new List<Game>();
+            var games = _context.Games.ToList();
+            foreach (var d in games)
+            {
+                _context.Entry(d).Collection(x => x.Users).Load();
+                foreach (User c in d.Users)
+                {
+                    if(c.Mail.Equals(mail))
+                    list.Add(d);
+                }
+            }
+            return list;
+        }
+
+        
+        public List<Genre> GetUserGenresByMail(string mail)
+        {
+            var list = new List<Genre>();
+            var genres = _context.Genres.ToList();
+            foreach (var d in genres)
+            {
+                _context.Entry(d).Collection(x => x.Users).Load();
+                foreach (User c in d.Users)
+                {
+                    if (c.Mail.Equals(mail))
+                        list.Add(d);
+                }
+            }
+            return list;
+        }
+
+       
+
+        public List<Platform> GetUserPlatformsByMail(string mail)
+        {
+            var list = new List<Platform>();
+            var platforms = _context.Platforms.ToList();
+            foreach (var d in platforms)
+            {
+                _context.Entry(d).Collection(x => x.Users).Load();
+                foreach (User c in d.Users)
+                {
+                    if (c.Mail.Equals(mail))
+                        list.Add(d);
+                }
+            }
+            return list;
+        }
+
         public void SetUserGames(string mail, string[] selectedGames)
         {
             var games = _context.Games.ToList();
@@ -128,6 +179,11 @@ namespace DataLayer.Repositories
         public User getUserById(int id)
         {
             return _context.Users.FirstOrDefault(x => x.UserId.Equals(id));
+        }
+
+        public User getUserByMail(string mail)
+        {
+            return _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
         }
 
         public void DeleteUser(int id)

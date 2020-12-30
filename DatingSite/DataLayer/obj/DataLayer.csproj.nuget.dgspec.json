@@ -1,21 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\simpa\\source\\repos\\lukasbrolin\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj": {}
+    "C:\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\simpa\\source\\repos\\lukasbrolin\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj": {
+    "C:\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\simpa\\source\\repos\\lukasbrolin\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj",
+        "projectUniqueName": "C:\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj",
         "projectName": "DataLayer",
-        "projectPath": "C:\\Users\\simpa\\source\\repos\\lukasbrolin\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj",
-        "packagesPath": "C:\\Users\\simpa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\simpa\\source\\repos\\lukasbrolin\\Dating_site\\DatingSite\\DataLayer\\obj\\",
+        "projectPath": "C:\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj",
+        "packagesPath": "C:\\Users\\Lukas\\.nuget\\packages\\",
+        "outputPath": "C:\\Dating_site\\DatingSite\\DataLayer\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\simpa\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Lukas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"

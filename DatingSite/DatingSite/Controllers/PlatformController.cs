@@ -36,6 +36,8 @@ namespace DatingSite.Controllers
         {
             var userRepository = new UserRepository(_context);
             userRepository.SetUserPlatforms(User.Identity.Name, CheckBoxes);
+            var scoreController = new ScoreCalculator(_context);
+            scoreController.GetTotalScoreAllUsersPerUser(User.Identity.Name);
             return RedirectToAction("Index", "Home");
         }
 
