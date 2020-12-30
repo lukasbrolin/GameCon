@@ -32,9 +32,10 @@ namespace DatingSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Submit(GenreViewModel model)
+        public ActionResult Submit(string[] CheckBoxes)
         {
-            
+            var userRepository = new UserRepository(_context);
+            userRepository.SetUserGenres(User.Identity.Name, CheckBoxes);
             return RedirectToAction("Index", "Platform");
         }
 

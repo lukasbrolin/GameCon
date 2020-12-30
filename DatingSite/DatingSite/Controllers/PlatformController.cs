@@ -33,9 +33,10 @@ namespace DatingSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Submit(PlatformViewModel model)
+        public ActionResult Submit(string[] CheckBoxes)
         {
-
+            var userRepository = new UserRepository(_context);
+            userRepository.SetUserPlatforms(User.Identity.Name, CheckBoxes);
             return RedirectToAction("Index", "Home");
         }
 
