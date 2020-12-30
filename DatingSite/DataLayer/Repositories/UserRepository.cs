@@ -38,11 +38,11 @@ namespace DataLayer.Repositories
 
         public void SetUserGames(string mail, string[] selectedGames)
         {
-            var userToUpdate = _context.Users.Include(i => i.Games).Where(i => i.Mail == mail).Single();
+            //var userToUpdate = _context.Users.Include(i => i.Games).Where(i => i.Mail == mail).Single();
             var games = _context.Games.ToList();
             foreach (var d in selectedGames)
             {
-                foreach(var e in games)
+                foreach (var e in games)
                 {
                     if (e.Name.Equals(d))
                     {
@@ -54,7 +54,6 @@ namespace DataLayer.Repositories
                         x[0].Games.Add(e);
                         var y = _context.Games.Select(x => x).Where(x => x.Name == e.Name).ToList();
                         y[0].Users.Add(x[0]);
-                     
                     }
                 }
                 //_context

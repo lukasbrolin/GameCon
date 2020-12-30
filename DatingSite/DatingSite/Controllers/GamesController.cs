@@ -37,7 +37,6 @@ namespace DatingSite.Controllers
         [HttpPost]
         public ActionResult Submit(string[] CheckBoxes)
         {
-            Console.WriteLine(CheckBoxes);
             var userRepository = new UserRepository(_context);
             //var list = new List<string>();
             //foreach (var index in model)
