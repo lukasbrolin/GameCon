@@ -4,39 +4,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="wrapper">
-    <div class="title">
-        Choose your favorite games
-    </div>
-    <hr />
-    <form asp-action="Submit">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @foreach (var item in Model)
-        {
-            @Html.DisplayFor(modelItem => item.Name)
-
-            <div class="container">
-                <label class="game_option">
-                    <input type="checkbox" name="CheckBoxes" value="@item.Name" class="checkbox">
-                    <div class="inner_option">
-                        <div class="tickmark"></div>
-                        <div class="icon"></div>
-                        <div class="name">
-                        </div>
-                    </div>
-                </label>
-
-
-            </div>
-        }
-        <div class="form_group">
-            @*@using (Html.BeginForm("MyAction", "GamesController"))
-                {*@
-            <input type="submit" value="Create" class="btn btn-primary" />
-            @*<input type="button" name="next_btn" class="next_btn" value="Next" />*@
-            @*}*@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h1 class="text-left">Chose your favorite games</h1>
+            <hr />
+            <form asp-action="Submit" class="form-check mx-auto">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @foreach (var item in Model)
+                {
+                    @Html.DisplayFor(modelItem => item.Name)
+                    <label class="game_option form-check-label">
+                        <input type="checkbox" name="CheckBoxes" value="@item.Name" class="checkbox mr-2">
+                    </label>
+                }
+                <div class="form_group">
+                    <input type="submit" value="Next step" class="btn btn-primary" />
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 
 
