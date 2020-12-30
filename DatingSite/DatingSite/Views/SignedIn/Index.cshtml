@@ -1,21 +1,8 @@
-﻿@model IEnumerable<DataLayer.Models.User>
+﻿@model DatingSite.Models.CardViewModel
 
-@{
-    ViewData["Title"] = "Index";
-}
-
-<div class="row">
-    <div class="col-md-8 mx-auto">
-
-        <h1>Potential Matches?</h1>
-
-        @foreach (var item in Model)
-        {
-
-            @Html.DisplayFor(modelItem => item.FirstName)
-            @Html.DisplayFor(modelItem => item.LastName)
-            @Html.DisplayFor(modelItem => item.Age)
-            @Html.DisplayFor(modelItem => item.Gender)
-        }
+    <div class="container h-100">
+    @foreach (var item in Model.Users)
+    {
+        <partial name="_DisplayCardPartial" model="item" />
+    }
     </div>
-</div>
