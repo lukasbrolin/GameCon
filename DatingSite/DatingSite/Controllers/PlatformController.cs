@@ -36,7 +36,7 @@ namespace DatingSite.Controllers
         {
             var userRepository = new UserRepository(_context);
             userRepository.SetUserPlatforms(User.Identity.Name, CheckBoxes);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "SignedIn");
         }
 
         // GET: PlatformController/Details/5

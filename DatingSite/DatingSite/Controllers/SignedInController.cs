@@ -1,4 +1,6 @@
 ﻿using DataLayer;
+using DataLayer.Repositories;
+using DatingSite.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,10 +19,9 @@ namespace DatingSite.Controllers
             _context = context;
         }
 
-        // GET: SignedInController
         public ActionResult Index()
         {
-            return View();
+            return View(_context.Users.ToList());
         }
 
         // GET: SignedInController/Details/5
