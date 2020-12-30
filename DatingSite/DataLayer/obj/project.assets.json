@@ -7362,19 +7362,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\simpa\\.nuget\\packages\\": {}
+    "C:\\Users\\filip\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\simpa\\source\\repos\\lukasbrolin\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj",
+      "projectUniqueName": "C:\\Users\\filip\\source\\repos\\FinalDating\\DatingSite\\DataLayer\\DataLayer.csproj",
       "projectName": "DataLayer",
-      "projectPath": "C:\\Users\\simpa\\source\\repos\\lukasbrolin\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj",
-      "packagesPath": "C:\\Users\\simpa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\simpa\\source\\repos\\lukasbrolin\\Dating_site\\DatingSite\\DataLayer\\obj\\",
+      "projectPath": "C:\\Users\\filip\\source\\repos\\FinalDating\\DatingSite\\DataLayer\\DataLayer.csproj",
+      "packagesPath": "C:\\Users\\filip\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\filip\\source\\repos\\FinalDating\\DatingSite\\DataLayer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\simpa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\filip\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
