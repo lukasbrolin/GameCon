@@ -47,7 +47,7 @@ namespace DataLayer
             //Game
             modelBuilder.Entity<Game>().HasData(
                 new Game() { GameId = 1, Name = "Dota 2", Publisher = "Valve" },
-                new Game() { GameId = 2, Name = "CS:GO", Publisher = "Valve" },
+                new Game() { GameId = 2, Name = "CSGO", Publisher = "Valve" },
                 new Game() { GameId = 3, Name = "PUBG", Publisher = "Bluehole Corporation" },
                 new Game() { GameId = 4, Name = "World of Warcraft", Publisher = "Blizzard" },
                 new Game() { GameId = 5, Name = "Among us", Publisher = "InnerSloth" }

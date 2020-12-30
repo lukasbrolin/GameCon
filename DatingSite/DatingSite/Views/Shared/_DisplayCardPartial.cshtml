@@ -5,25 +5,38 @@
     <img class="card-img-top" src="~/img/Avatars/avatar3.png" alt="Card image cap">
     <div class="card-body">
         <h2 class="card-title">@Model.Item1.FirstName @Model.Item1.Age</h2>
-        @foreach (var game in Model.Item2)
-        {
-            <h3 class="card-text">@game.Name</h3>
-        }
-        @foreach (var genre in Model.Item3)
-        {
-            <h3 class="card-text">@genre.Name</h3>
-        }
-        @foreach (var platform in Model.Item4)
-        {
-            <h3 class="card-text">@platform.Name</h3>
-        }
         <h3 class="card-text"></h3>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">Cras justo odio</li>
-        <li class="list-group-item">Dapibus ac facilisis in</li>
-        <li class="list-group-item">Vestibulum at eros</li>
+        <li class="list-group-item text-center">
+            <h5 class="list-group-item">Games</h5>
+            @foreach (var game in Model.Item2)
+            {
+                <div style="width:30%; display:inline-block;">
+                @(game.Name + " ")
+                <img style="width: 20px; height:20px;" src="~/img/Game/@(game.Name).jpg" />
+                </div>
+            }
+            </li>
+        <li class="list-group-item text-center">
+            <h5 class="list-group-item">Genres</h5>
+            @foreach (var genre in Model.Item3)
+            {
+                @(genre.Name + " ")
+            }
+        </li>
+        <li class="list-group-item text-center" >
+            <h5 class="list-group-item">Platforms</h5>
+            @foreach (var platform in Model.Item4)
+            {
+            <div>
+                @(platform.Name + " ")
+                
+            </div>
+            }
+
+        </li>
     </ul>
     <div class="card-body">
         <a href="#" class="card-link">Card link</a>

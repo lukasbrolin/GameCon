@@ -4,14 +4,16 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DatingSiteContext))]
-    partial class DatingSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20201230153232_UpdateSeed")]
+    partial class UpdateSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,7 +141,7 @@ namespace DataLayer.Migrations
                         new
                         {
                             GameId = 2,
-                            Name = "CSGO",
+                            Name = "CS:GO",
                             Publisher = "Valve"
                         },
                         new
@@ -249,7 +251,7 @@ namespace DataLayer.Migrations
                             Content = "Hello muthafucka",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 30, 16, 34, 17, 740, DateTimeKind.Local).AddTicks(5585)
+                            TimeStamp = new DateTime(2020, 12, 30, 16, 32, 32, 298, DateTimeKind.Local).AddTicks(668)
                         },
                         new
                         {
@@ -257,7 +259,7 @@ namespace DataLayer.Migrations
                             Content = "Check this shit out",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 30, 16, 34, 17, 742, DateTimeKind.Local).AddTicks(3610)
+                            TimeStamp = new DateTime(2020, 12, 30, 16, 32, 32, 299, DateTimeKind.Local).AddTicks(8527)
                         },
                         new
                         {
@@ -265,7 +267,7 @@ namespace DataLayer.Migrations
                             Content = "SKKRTSKRRRT",
                             ReceiverId = 2,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 30, 16, 34, 17, 742, DateTimeKind.Local).AddTicks(3632)
+                            TimeStamp = new DateTime(2020, 12, 30, 16, 32, 32, 299, DateTimeKind.Local).AddTicks(8552)
                         });
                 });
 
@@ -442,7 +444,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 30, 16, 34, 17, 743, DateTimeKind.Local).AddTicks(1499)
+                            TimeStamp = new DateTime(2020, 12, 30, 16, 32, 32, 300, DateTimeKind.Local).AddTicks(6413)
                         },
                         new
                         {
@@ -450,7 +452,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2020, 12, 30, 16, 34, 17, 743, DateTimeKind.Local).AddTicks(1921)
+                            TimeStamp = new DateTime(2020, 12, 30, 16, 32, 32, 300, DateTimeKind.Local).AddTicks(6770)
                         },
                         new
                         {
@@ -458,7 +460,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 30, 16, 34, 17, 743, DateTimeKind.Local).AddTicks(1930)
+                            TimeStamp = new DateTime(2020, 12, 30, 16, 32, 32, 300, DateTimeKind.Local).AddTicks(6779)
                         });
                 });
 
@@ -747,21 +749,21 @@ namespace DataLayer.Migrations
                             VisitId = 1,
                             ReceiverId = 1,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 30, 16, 34, 17, 743, DateTimeKind.Local).AddTicks(4139)
+                            TimeStamp = new DateTime(2020, 12, 30, 16, 32, 32, 300, DateTimeKind.Local).AddTicks(8992)
                         },
                         new
                         {
                             VisitId = 2,
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2020, 12, 30, 16, 34, 17, 743, DateTimeKind.Local).AddTicks(4776)
+                            TimeStamp = new DateTime(2020, 12, 30, 16, 32, 32, 300, DateTimeKind.Local).AddTicks(9667)
                         },
                         new
                         {
                             VisitId = 3,
                             ReceiverId = 3,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 30, 16, 34, 17, 743, DateTimeKind.Local).AddTicks(4785)
+                            TimeStamp = new DateTime(2020, 12, 30, 16, 32, 32, 300, DateTimeKind.Local).AddTicks(9679)
                         });
                 });
 
