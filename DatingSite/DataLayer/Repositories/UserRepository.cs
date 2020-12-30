@@ -21,18 +21,78 @@ namespace DataLayer.Repositories
             return _context.Users.ToList();
         }
 
-        public List<string> getUserGamesAll()
+        public List<string> getUserGamesById(int userId)
         {
             var list = new List<string>();
             var games = _context.Games.ToList();
-            foreach (var d in games)
+            var user = _context.Users.FirstOrDefault(x => x.UserId.Equals(userId));
+            _context.Entry(user).Collection(x => x.Games).Load();
+            _context.Entry(user).Collection(y => y.Genres).Load();
+            foreach(var game in user.Games)
             {
-                _context.Entry(d).Collection(x => x.Users).Load();
-                foreach (User c in d.Users)
-                {
-                    list.Add(d.Name + " + " + c.FirstName);
-                }
+                list.Add(game.Name);
             }
+            foreach(var genre in user.Genres)
+            {
+                list.Add(genre.Name);
+            }
+            //foreach (var d in games)
+            //{
+            //    _context.Entry(d).Collection(x => x.Users).Load();
+            //    foreach (User c in d.Users)
+            //    {
+            //        list.Add(d.Name + " + " + c.FirstName);
+            //    }
+            //}
+            return list;
+        }
+
+        public List<(User,List<Game>,List<Genre>,List<Platform>)> getUserGames()
+        {
+            var list = new List<(User, List<Game>, List<Genre>, List<Platform>)>();
+            var users = _context.Users.ToList();
+            int i = 0;
+            foreach(var user in users)
+            {
+                list.Add((user, new List<Game>(), new List<Genre>(), new List<Platform>()));
+
+                _context.Entry(user).Collection(x => x.Games).Load();
+                _context.Entry(user).Collection(x => x.Genres).Load();
+                _context.Entry(user).Collection(x => x.Platforms).Load();
+                foreach (var game in user.Games)
+                {
+                    list[i].Item2.Add(game);
+                }
+                foreach(var genre in user.Genres)
+                {
+                    list[i].Item3.Add(genre);
+                }
+                foreach (var platform in user.Platforms)
+                {
+                    list[i].Item4.Add(platform);
+                }
+                i++;
+            }
+            //var games = _context.Games.ToList();
+            ////var user = _context.Users.FirstOrDefault(x => x.UserId.Equals(userId));
+            //_context.Entry(user).Collection(x => x.Games).Load();
+            //_context.Entry(user).Collection(y => y.Genres).Load();
+            //foreach (var game in user.Games)
+            //{
+            //    list.Add(game.Name);
+            //}
+            //foreach (var genre in user.Genres)
+            //{
+            //    list.Add(genre.Name);
+            //}
+            //foreach (var d in games)
+            //{
+            //    _context.Entry(d).Collection(x => x.Users).Load();
+            //    foreach (User c in d.Users)
+            //    {
+            //        list.Add(d.Name + " + " + c.FirstName);
+            //    }
+            //}
             return list;
         }
 

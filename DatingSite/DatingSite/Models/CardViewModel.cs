@@ -14,5 +14,7 @@ namespace DatingSite.Models
         //}
 
         public List<User> Users { get; set; }
+
+        public List<(User, List<Game>, List<Genre>, List<Platform>)> UserGamesGenrePlatforms { get; set; }
     }
 }

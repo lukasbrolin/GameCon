@@ -1,7 +1,7 @@
 ﻿@model DatingSite.Models.CardViewModel
 
     <div class="container h-100">
-    @foreach (var item in Model.Users)
+    @foreach (var item in Model.UserGamesGenrePlatforms)
     {
         <partial name="_DisplayCardPartial" model="item" />
     }
