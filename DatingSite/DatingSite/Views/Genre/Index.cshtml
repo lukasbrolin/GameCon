@@ -11,24 +11,35 @@
     <hr />
     <form asp-action="Submit">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+            @*@Html.DisplayFor(modelItem => item.Name)*@
+
+    <div class="container">
         @foreach (var item in Model)
         {
-            @Html.DisplayFor(modelItem => item.Name)
+            <label class="option_item form-check-label" style="border: 0;">
+                <input type="checkbox" name="CheckBoxes" value="@item.Name" class="checkbox">
+                <div class="option_inner facebook" style="display:flex;">
+                    <img src="~/img/Genre/@(item.Name).png" style="position: absolute;top:0;left:0; width: 100%; height:100%; object-fit: contain;" />
+                    <div class="tickmark"></div>
+                    <div class="card-img" style="background-image: url('/wwwroot/img/Game/AMONG US.jpg')"></div>
+                    <div class="name" style="bottom:0">@item.Name</div>
+                </div>
 
-            <div class="container">
-                <label class="game_option">
-                    <input type="checkbox" name="CheckBoxes" value="@item.Name" class="checkbox">
-                    <div class="inner_option">
-                        <div class="tickmark"></div>
-                        <div class="icon"></div>
-                        <div class="name">
-                        </div>
+            </label>
+            @*<label class="game_option">
+                <input type="checkbox" name="CheckBoxes" value="@item.Name" class="checkbox">
+                <div class="inner_option">
+                    <div class="tickmark"></div>
+                    <div class="icon"></div>
+                    <div class="name">
                     </div>
-                </label>
+                </div>
+            </label>*@
 
-
-            </div>
         }
+    </div>
+        
         <div class="form_group">
             @*@using (Html.BeginForm("MyAction", "GamesController"))
             {*@
