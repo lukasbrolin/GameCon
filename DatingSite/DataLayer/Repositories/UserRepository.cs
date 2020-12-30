@@ -38,7 +38,6 @@ namespace DataLayer.Repositories
 
         public void SetUserGames(string mail, string[] selectedGames)
         {
-            //var userToUpdate = _context.Users.Include(i => i.Games).Where(i => i.Mail == mail).Single();
             var games = _context.Games.ToList();
             foreach (var d in selectedGames)
             {
@@ -46,19 +45,50 @@ namespace DataLayer.Repositories
                 {
                     if (e.Name.Equals(d))
                     {
-                        //foreach(var g in _context.Users.ToList())
-                        //{
-                        //    g.Games.Add(e);
-                        //}
-                        var x = _context.Users.Select(x => x).Where(x => x.Mail == mail).ToList();
-                        x[0].Games.Add(e);
-                        var y = _context.Games.Select(x => x).Where(x => x.Name == e.Name).ToList();
-                        y[0].Users.Add(x[0]);
+                        var x = _context.Users.FirstOrDefault<User>(x => x.Mail.Equals(mail));
+                        x.Games.Add(e);
+                        var y = _context.Games.FirstOrDefault<Game>(y => y.Name.Equals(e.Name));
+                        y.Users.Add(x);
                     }
                 }
-                //_context
             }
-            //UpdateUserGames(selectedGames, userToUpdate);
+            _context.SaveChanges();
+        }
+        public void SetUserGenres(string mail, string[] selectedGenres)
+        {
+            var genres = _context.Genres.ToList();
+            foreach (var d in selectedGenres)
+            {
+                foreach (var e in genres)
+                {
+                    if (e.Name.Equals(d))
+                    {
+                        var x = _context.Users.FirstOrDefault<User>(x => x.Mail.Equals(mail));
+                        x.Genres.Add(e);
+                        var y = _context.Genres.FirstOrDefault<Genre>(y => y.Name.Equals(e.Name));
+                        y.Users.Add(x);
+                    }
+                }
+            }
+            _context.SaveChanges();
+        }
+
+        public void SetUserPlatforms(string mail, string[] selectedPlatforms)
+        {
+            var platforms = _context.Platforms.ToList();
+            foreach (var d in selectedPlatforms)
+            {
+                foreach (var e in platforms)
+                {
+                    if (e.Name.Equals(d))
+                    {
+                        var x = _context.Users.FirstOrDefault<User>(x => x.Mail.Equals(mail));
+                        x.Platforms.Add(e);
+                        var y = _context.Platforms.FirstOrDefault<Platform>(y => y.Name.Equals(e.Name));
+                        y.Users.Add(x);
+                    }
+                }
+            }
             _context.SaveChanges();
         }
 
