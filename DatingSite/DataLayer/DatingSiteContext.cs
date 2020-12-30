@@ -48,14 +48,21 @@ namespace DataLayer
             modelBuilder.Entity<Game>().HasData(
                 new Game() { GameId = 1, Name = "Dota 2", Publisher = "Valve" },
                 new Game() { GameId = 2, Name = "CS:GO", Publisher = "Valve" },
-                new Game() { GameId = 3, Name = "PUBG", Publisher = "Bluehole Corporation" }
+                new Game() { GameId = 3, Name = "PUBG", Publisher = "Bluehole Corporation" },
+                new Game() { GameId = 4, Name = "World of Warcraft", Publisher = "Blizzard" },
+                new Game() { GameId = 5, Name = "Among us", Publisher = "InnerSloth" }
                 );
 
             //Genre
             modelBuilder.Entity<Genre>().HasData(
                new Genre() { GenreId = 1, Name = "MOBA" },
                new Genre() { GenreId = 2, Name = "FPS" },
-               new Genre() { GenreId = 3, Name = "FPS" }
+               new Genre() { GenreId = 3, Name = "Explore" },
+               new Genre() { GenreId = 4, Name = "King of the hill" },
+               new Genre() { GenreId = 5, Name = "MMO" },
+               new Genre() { GenreId = 6, Name = "Strategy" },
+               new Genre() { GenreId = 7, Name = "Open world"}
+
                );
 
             //GameGenre
@@ -63,7 +70,19 @@ namespace DataLayer
                 .HasMany(g => g.Genres)
                 .WithMany(g => g.Games)
                 .UsingEntity(j => j.ToTable("GameGenre")
-                .HasData(new { GenresGenreId = 1, GamesGameId = 3 })
+                .HasData(
+                new { GenresGenreId = 1, GamesGameId = 1 },
+                new { GenresGenreId = 6, GamesGameId = 1 },
+                new { GenresGenreId = 2, GamesGameId = 2 },
+                new { GenresGenreId = 6, GamesGameId = 2 },
+                new { GenresGenreId = 2, GamesGameId = 3 },
+                new { GenresGenreId = 4, GamesGameId = 3 },
+                new { GenresGenreId = 6, GamesGameId = 3 },
+                new { GenresGenreId = 7, GamesGameId = 3 },
+                new { GenresGenreId = 3, GamesGameId = 4 },
+                new { GenresGenreId = 5, GamesGameId = 4 },
+                new { GenresGenreId = 7, GamesGameId = 4 },
+                new { GenresGenreId = 6, GamesGameId = 5 })
                );
 
             //GamePlatform
@@ -71,7 +90,13 @@ namespace DataLayer
                 .HasMany(g => g.Platforms)
                 .WithMany(g => g.Games)
                 .UsingEntity(j => j.ToTable("GamePlatform")
-                .HasData(new { PlatformsPlatformId = 3, GamesGameId = 1 })
+                .HasData(new { PlatformsPlatformId = 3, GamesGameId = 1 },
+                new { PlatformsPlatformId = 1, GamesGameId = 2 },
+                new { PlatformsPlatformId = 2, GamesGameId = 2 },
+                new { PlatformsPlatformId = 3, GamesGameId = 2 },
+                new { PlatformsPlatformId = 3, GamesGameId = 3 },
+                new { PlatformsPlatformId = 3, GamesGameId = 4 },
+                new { PlatformsPlatformId = 3, GamesGameId = 5 })
                );
 
             //GameUser
@@ -79,7 +104,34 @@ namespace DataLayer
                 .HasMany(g => g.Users)
                 .WithMany(g => g.Games)
                 .UsingEntity(j => j.ToTable("GameUser")
-                .HasData(new { UsersUserId = 3, GamesGameId = 1 })
+                .HasData(new { UsersUserId = 3, GamesGameId = 1 },
+                new { UsersUserId = 1, GamesGameId = 1 },
+                new { UsersUserId = 1, GamesGameId = 2 },
+                new { UsersUserId = 1, GamesGameId = 3 },
+                new { UsersUserId = 2, GamesGameId = 1 },
+                new { UsersUserId = 2, GamesGameId = 2 },
+                new { UsersUserId = 2, GamesGameId = 3 },
+                new { UsersUserId = 2, GamesGameId = 4 },
+                new { UsersUserId = 3, GamesGameId = 2 },
+                new { UsersUserId = 3, GamesGameId = 3 },
+                new { UsersUserId = 4, GamesGameId = 1 },
+                new { UsersUserId = 4, GamesGameId = 2 },
+                new { UsersUserId = 4, GamesGameId = 4 },
+                new { UsersUserId = 4, GamesGameId = 5 },
+                new { UsersUserId = 5, GamesGameId = 1 },
+                new { UsersUserId = 5, GamesGameId = 4 },
+                new { UsersUserId = 5, GamesGameId = 5 },
+                new { UsersUserId = 6, GamesGameId = 2 },
+                new { UsersUserId = 6, GamesGameId = 3 },
+                new { UsersUserId = 6, GamesGameId = 4 },
+                new { UsersUserId = 7, GamesGameId = 4 },
+                new { UsersUserId = 8, GamesGameId = 1 },
+                new { UsersUserId = 8, GamesGameId = 4 },
+                new { UsersUserId = 8, GamesGameId = 5 },
+                new { UsersUserId = 9, GamesGameId = 1 },
+                new { UsersUserId = 10, GamesGameId = 2 },
+                new { UsersUserId = 11, GamesGameId = 2 },
+                new { UsersUserId = 11, GamesGameId = 4 })
                );
 
             //GenreUser
@@ -87,7 +139,32 @@ namespace DataLayer
                 .HasMany(g => g.Users)
                 .WithMany(g => g.Genres)
                 .UsingEntity(j => j.ToTable("GenreUser")
-                .HasData(new { UsersUserId = 2, GenresGenreId = 3 })
+                .HasData(new { UsersUserId = 1, GenresGenreId = 1 },
+                new { UsersUserId = 1, GenresGenreId = 2 },
+                new { UsersUserId = 1, GenresGenreId = 3 },
+                new { UsersUserId = 2, GenresGenreId = 4 },
+                new { UsersUserId = 2, GenresGenreId = 1 },
+                new { UsersUserId = 2, GenresGenreId = 2 },
+                new { UsersUserId = 3, GenresGenreId = 4 },
+                new { UsersUserId = 3, GenresGenreId = 5 },
+                new { UsersUserId = 3, GenresGenreId = 6 },
+                new { UsersUserId = 4, GenresGenreId = 1 },
+                new { UsersUserId = 4, GenresGenreId = 4 },
+                new { UsersUserId = 4, GenresGenreId = 7 },
+                new { UsersUserId = 5, GenresGenreId = 1 },
+                new { UsersUserId = 5, GenresGenreId = 2 },
+                new { UsersUserId = 5, GenresGenreId = 3 },
+                new { UsersUserId = 6, GenresGenreId = 1 },
+                new { UsersUserId = 6, GenresGenreId = 2 },
+                new { UsersUserId = 6, GenresGenreId = 6 },
+                new { UsersUserId = 7, GenresGenreId = 2 },
+                new { UsersUserId = 8, GenresGenreId = 3 },
+                new { UsersUserId = 9, GenresGenreId = 4 },
+                new { UsersUserId = 10, GenresGenreId = 3 },
+                new { UsersUserId = 10, GenresGenreId = 4 },
+                new { UsersUserId = 11, GenresGenreId = 4 },
+                new { UsersUserId = 11, GenresGenreId = 5 },
+                new { UsersUserId = 11, GenresGenreId = 7 })
                );
 
             //PlatformUser
@@ -95,7 +172,22 @@ namespace DataLayer
                 .HasMany(g => g.Users)
                 .WithMany(g => g.Platforms)
                 .UsingEntity(j => j.ToTable("PlatformUser")
-                .HasData(new { UsersUserId = 3, PlatformsPlatformId = 2 })
+                .HasData(new { UsersUserId = 1, PlatformsPlatformId = 3 },
+                new { UsersUserId = 1, PlatformsPlatformId = 2 },
+                new { UsersUserId = 2, PlatformsPlatformId = 3 },
+                new { UsersUserId = 3, PlatformsPlatformId = 3 },
+                new { UsersUserId = 3, PlatformsPlatformId = 1 },
+                new { UsersUserId = 4, PlatformsPlatformId = 1 },
+                new { UsersUserId = 4, PlatformsPlatformId = 3 },
+                new { UsersUserId = 5, PlatformsPlatformId = 3 },
+                new { UsersUserId = 5, PlatformsPlatformId = 1 },
+                new { UsersUserId = 6, PlatformsPlatformId = 3 },
+                new { UsersUserId = 7, PlatformsPlatformId = 3 },
+                new { UsersUserId = 8, PlatformsPlatformId = 3 },
+                new { UsersUserId = 9, PlatformsPlatformId = 3 },
+                new { UsersUserId = 10, PlatformsPlatformId = 3 },
+                new { UsersUserId = 10, PlatformsPlatformId = 2 },
+                new { UsersUserId = 11, PlatformsPlatformId = 3 })
                );
 
             ////UserUser
@@ -136,7 +228,12 @@ namespace DataLayer
             modelBuilder.Entity<Nationality>().HasData(
               new Nationality() { NationalityId = 1, Name = "Swedish" },
               new Nationality() { NationalityId = 2, Name = "Norwegian" },
-              new Nationality() { NationalityId = 3, Name = "South African" }
+              new Nationality() { NationalityId = 3, Name = "Danish" },
+              new Nationality() { NationalityId = 4, Name = "German" },
+              new Nationality() { NationalityId = 5, Name = "English" },
+              new Nationality() { NationalityId = 6, Name = "Spanish" },
+              new Nationality() { NationalityId = 7, Name = "French" },
+              new Nationality() { NationalityId = 8, Name = "American" }
               );
 
             //Personalitie
@@ -144,19 +241,17 @@ namespace DataLayer
               new Personality() { PersonalityId = 1, Description = "Cute" },
               new Personality() { PersonalityId = 2, Description = "Narcissistic" },
               new Personality() { PersonalityId = 3, Description = "Manipulative" },
-              new Personality() { PersonalityId = 4, Description = "Strategist" }
+              new Personality() { PersonalityId = 4, Description = "Shy" },
+              new Personality() { PersonalityId = 5, Description = "Leader" },
+              new Personality() { PersonalityId = 6, Description = "Strategist" }
 
               );
 
             //Platform
             modelBuilder.Entity<Platform>().HasData(
               new Platform() { PlatformId = 1, Name = "XBOX" },
-              new Platform() { PlatformId = 2, Name = "PS1" },
-              new Platform() { PlatformId = 3, Name = "PS3" },
-              new Platform() { PlatformId = 4, Name = "PC" },
-              new Platform() { PlatformId = 5, Name = "PS5" }
-
-
+              new Platform() { PlatformId = 2, Name = "PS" },
+              new Platform() { PlatformId = 3, Name = "PC" }
               );
 
             //Friend
@@ -193,7 +288,14 @@ namespace DataLayer
                 new User() { UserId = 1, NationalityId = 1, PersonalityId = 1, FirstName = "Simon", LastName = "Bernsdorff Wallstedt", Mail = "simon.bernsdorff-wallstedt@dating.com", Age = 28, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
                 new User() { UserId = 2, NationalityId = 1, PersonalityId = 2, FirstName = "Lukas", LastName = "Brolin", Mail = "lukas.brolin@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
                 new User() { UserId = 3, NationalityId = 1, PersonalityId = 3, FirstName = "Filip", LastName = "Johansson", Mail = "filip.johansson@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
-                new User() { UserId = 4, NationalityId = 1, PersonalityId = 4, FirstName = "Magnus", LastName = "Karlsson", Mail = "magnus.karlsson@dating.com", Age = 22, PreferedLanguage = "English", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" });
+                new User() { UserId = 4, NationalityId = 1, PersonalityId = 4, FirstName = "Magnus", LastName = "Fredriksson", Mail = "magnus.fredriksson@dating.com", Age = 34, PreferedLanguage = "English", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 5, NationalityId = 2, PersonalityId = 2, FirstName = "Didrik", LastName = "Hjelm", Mail = "didrik.hjelm@dating.com", Age = 22, PreferedLanguage = "Norwegian", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 6, NationalityId = 2, PersonalityId = 5, FirstName = "Selma", LastName = "Nordheim", Mail = "selma.nordheim@dating.com", Age = 25, PreferedLanguage = "Norwegian", Online = false, Gender = "Female", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 7, NationalityId = 1, PersonalityId = 1, FirstName = "Kassandra", LastName = "Lökholm", Mail = "kassandra.Lökholm@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Female", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 8, NationalityId = 1, PersonalityId = 5, FirstName = "Kent", LastName = "Andersson", Mail = "kent.andersson@dating.com", Age = 31, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 9, NationalityId = 4, PersonalityId = 3, FirstName = "Sebastian", LastName = "Vettel", Mail = "sebastian.vettel@dating.com", Age = 41, PreferedLanguage = "German", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 10, NationalityId = 4, PersonalityId = 3, FirstName = "Nico", LastName = "Rosberg", Mail = "nico.rosberg@dating.com", Age = 38, PreferedLanguage = "German", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 11, NationalityId = 5, PersonalityId = 4, FirstName = "Emma", LastName = "Watson", Mail = "emma.watson@dating.com", Age = 30, PreferedLanguage = "English", Online = false, Gender = "Female", Active = true, ImgUrl = "Images/User/User.jpg" });
         }
     }
 }

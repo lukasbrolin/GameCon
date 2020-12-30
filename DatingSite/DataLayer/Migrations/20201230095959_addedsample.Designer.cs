@@ -4,14 +4,16 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DatingSiteContext))]
-    partial class DatingSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20201230095959_addedsample")]
+    partial class addedsample
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,7 +251,7 @@ namespace DataLayer.Migrations
                             Content = "Hello muthafucka",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 30, 11, 21, 5, 577, DateTimeKind.Local).AddTicks(1693)
+                            TimeStamp = new DateTime(2020, 12, 30, 10, 59, 59, 21, DateTimeKind.Local).AddTicks(3650)
                         },
                         new
                         {
@@ -257,7 +259,7 @@ namespace DataLayer.Migrations
                             Content = "Check this shit out",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 30, 11, 21, 5, 578, DateTimeKind.Local).AddTicks(8987)
+                            TimeStamp = new DateTime(2020, 12, 30, 10, 59, 59, 23, DateTimeKind.Local).AddTicks(2487)
                         },
                         new
                         {
@@ -265,7 +267,7 @@ namespace DataLayer.Migrations
                             Content = "SKKRTSKRRRT",
                             ReceiverId = 2,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 30, 11, 21, 5, 578, DateTimeKind.Local).AddTicks(9009)
+                            TimeStamp = new DateTime(2020, 12, 30, 10, 59, 59, 23, DateTimeKind.Local).AddTicks(2513)
                         });
                 });
 
@@ -442,7 +444,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 30, 11, 21, 5, 579, DateTimeKind.Local).AddTicks(3785)
+                            TimeStamp = new DateTime(2020, 12, 30, 10, 59, 59, 23, DateTimeKind.Local).AddTicks(7557)
                         },
                         new
                         {
@@ -450,7 +452,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2020, 12, 30, 11, 21, 5, 579, DateTimeKind.Local).AddTicks(3981)
+                            TimeStamp = new DateTime(2020, 12, 30, 10, 59, 59, 23, DateTimeKind.Local).AddTicks(7763)
                         },
                         new
                         {
@@ -458,7 +460,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 30, 11, 21, 5, 579, DateTimeKind.Local).AddTicks(3990)
+                            TimeStamp = new DateTime(2020, 12, 30, 10, 59, 59, 23, DateTimeKind.Local).AddTicks(7772)
                         });
                 });
 
@@ -747,21 +749,21 @@ namespace DataLayer.Migrations
                             VisitId = 1,
                             ReceiverId = 1,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2020, 12, 30, 11, 21, 5, 579, DateTimeKind.Local).AddTicks(5282)
+                            TimeStamp = new DateTime(2020, 12, 30, 10, 59, 59, 23, DateTimeKind.Local).AddTicks(9034)
                         },
                         new
                         {
                             VisitId = 2,
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2020, 12, 30, 11, 21, 5, 579, DateTimeKind.Local).AddTicks(5611)
+                            TimeStamp = new DateTime(2020, 12, 30, 10, 59, 59, 23, DateTimeKind.Local).AddTicks(9377)
                         },
                         new
                         {
                             VisitId = 3,
                             ReceiverId = 3,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2020, 12, 30, 11, 21, 5, 579, DateTimeKind.Local).AddTicks(5619)
+                            TimeStamp = new DateTime(2020, 12, 30, 10, 59, 59, 23, DateTimeKind.Local).AddTicks(9385)
                         });
                 });
 
@@ -788,42 +790,12 @@ namespace DataLayer.Migrations
                         new
                         {
                             GamesGameId = 1,
-                            GenresGenreId = 6
-                        },
-                        new
-                        {
-                            GamesGameId = 2,
-                            GenresGenreId = 2
-                        },
-                        new
-                        {
-                            GamesGameId = 2,
-                            GenresGenreId = 6
-                        },
-                        new
-                        {
-                            GamesGameId = 3,
                             GenresGenreId = 2
                         },
                         new
                         {
                             GamesGameId = 3,
                             GenresGenreId = 4
-                        },
-                        new
-                        {
-                            GamesGameId = 3,
-                            GenresGenreId = 6
-                        },
-                        new
-                        {
-                            GamesGameId = 3,
-                            GenresGenreId = 7
-                        },
-                        new
-                        {
-                            GamesGameId = 4,
-                            GenresGenreId = 3
                         },
                         new
                         {
@@ -837,8 +809,8 @@ namespace DataLayer.Migrations
                         },
                         new
                         {
-                            GamesGameId = 5,
-                            GenresGenreId = 6
+                            GamesGameId = 4,
+                            GenresGenreId = 3
                         });
                 });
 
@@ -860,36 +832,6 @@ namespace DataLayer.Migrations
                         new
                         {
                             GamesGameId = 1,
-                            PlatformsPlatformId = 3
-                        },
-                        new
-                        {
-                            GamesGameId = 2,
-                            PlatformsPlatformId = 1
-                        },
-                        new
-                        {
-                            GamesGameId = 2,
-                            PlatformsPlatformId = 2
-                        },
-                        new
-                        {
-                            GamesGameId = 2,
-                            PlatformsPlatformId = 3
-                        },
-                        new
-                        {
-                            GamesGameId = 3,
-                            PlatformsPlatformId = 3
-                        },
-                        new
-                        {
-                            GamesGameId = 4,
-                            PlatformsPlatformId = 3
-                        },
-                        new
-                        {
-                            GamesGameId = 5,
                             PlatformsPlatformId = 3
                         });
                 });
@@ -913,141 +855,6 @@ namespace DataLayer.Migrations
                         {
                             GamesGameId = 1,
                             UsersUserId = 3
-                        },
-                        new
-                        {
-                            GamesGameId = 1,
-                            UsersUserId = 1
-                        },
-                        new
-                        {
-                            GamesGameId = 2,
-                            UsersUserId = 1
-                        },
-                        new
-                        {
-                            GamesGameId = 3,
-                            UsersUserId = 1
-                        },
-                        new
-                        {
-                            GamesGameId = 1,
-                            UsersUserId = 2
-                        },
-                        new
-                        {
-                            GamesGameId = 2,
-                            UsersUserId = 2
-                        },
-                        new
-                        {
-                            GamesGameId = 3,
-                            UsersUserId = 2
-                        },
-                        new
-                        {
-                            GamesGameId = 4,
-                            UsersUserId = 2
-                        },
-                        new
-                        {
-                            GamesGameId = 2,
-                            UsersUserId = 3
-                        },
-                        new
-                        {
-                            GamesGameId = 3,
-                            UsersUserId = 3
-                        },
-                        new
-                        {
-                            GamesGameId = 1,
-                            UsersUserId = 4
-                        },
-                        new
-                        {
-                            GamesGameId = 2,
-                            UsersUserId = 4
-                        },
-                        new
-                        {
-                            GamesGameId = 4,
-                            UsersUserId = 4
-                        },
-                        new
-                        {
-                            GamesGameId = 5,
-                            UsersUserId = 4
-                        },
-                        new
-                        {
-                            GamesGameId = 1,
-                            UsersUserId = 5
-                        },
-                        new
-                        {
-                            GamesGameId = 4,
-                            UsersUserId = 5
-                        },
-                        new
-                        {
-                            GamesGameId = 5,
-                            UsersUserId = 5
-                        },
-                        new
-                        {
-                            GamesGameId = 2,
-                            UsersUserId = 6
-                        },
-                        new
-                        {
-                            GamesGameId = 3,
-                            UsersUserId = 6
-                        },
-                        new
-                        {
-                            GamesGameId = 4,
-                            UsersUserId = 6
-                        },
-                        new
-                        {
-                            GamesGameId = 4,
-                            UsersUserId = 7
-                        },
-                        new
-                        {
-                            GamesGameId = 1,
-                            UsersUserId = 8
-                        },
-                        new
-                        {
-                            GamesGameId = 4,
-                            UsersUserId = 8
-                        },
-                        new
-                        {
-                            GamesGameId = 5,
-                            UsersUserId = 8
-                        },
-                        new
-                        {
-                            GamesGameId = 1,
-                            UsersUserId = 9
-                        },
-                        new
-                        {
-                            GamesGameId = 2,
-                            UsersUserId = 10
-                        },
-                        new
-                        {
-                            GamesGameId = 2,
-                            UsersUserId = 11
-                        },
-                        new
-                        {
-                            GamesGameId = 4,
-                            UsersUserId = 11
                         });
                 });
 
@@ -1068,133 +875,8 @@ namespace DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            GenresGenreId = 1,
-                            UsersUserId = 1
-                        },
-                        new
-                        {
-                            GenresGenreId = 2,
-                            UsersUserId = 1
-                        },
-                        new
-                        {
                             GenresGenreId = 3,
-                            UsersUserId = 1
-                        },
-                        new
-                        {
-                            GenresGenreId = 4,
                             UsersUserId = 2
-                        },
-                        new
-                        {
-                            GenresGenreId = 1,
-                            UsersUserId = 2
-                        },
-                        new
-                        {
-                            GenresGenreId = 2,
-                            UsersUserId = 2
-                        },
-                        new
-                        {
-                            GenresGenreId = 4,
-                            UsersUserId = 3
-                        },
-                        new
-                        {
-                            GenresGenreId = 5,
-                            UsersUserId = 3
-                        },
-                        new
-                        {
-                            GenresGenreId = 6,
-                            UsersUserId = 3
-                        },
-                        new
-                        {
-                            GenresGenreId = 1,
-                            UsersUserId = 4
-                        },
-                        new
-                        {
-                            GenresGenreId = 4,
-                            UsersUserId = 4
-                        },
-                        new
-                        {
-                            GenresGenreId = 7,
-                            UsersUserId = 4
-                        },
-                        new
-                        {
-                            GenresGenreId = 1,
-                            UsersUserId = 5
-                        },
-                        new
-                        {
-                            GenresGenreId = 2,
-                            UsersUserId = 5
-                        },
-                        new
-                        {
-                            GenresGenreId = 3,
-                            UsersUserId = 5
-                        },
-                        new
-                        {
-                            GenresGenreId = 1,
-                            UsersUserId = 6
-                        },
-                        new
-                        {
-                            GenresGenreId = 2,
-                            UsersUserId = 6
-                        },
-                        new
-                        {
-                            GenresGenreId = 6,
-                            UsersUserId = 6
-                        },
-                        new
-                        {
-                            GenresGenreId = 2,
-                            UsersUserId = 7
-                        },
-                        new
-                        {
-                            GenresGenreId = 3,
-                            UsersUserId = 8
-                        },
-                        new
-                        {
-                            GenresGenreId = 4,
-                            UsersUserId = 9
-                        },
-                        new
-                        {
-                            GenresGenreId = 3,
-                            UsersUserId = 10
-                        },
-                        new
-                        {
-                            GenresGenreId = 4,
-                            UsersUserId = 10
-                        },
-                        new
-                        {
-                            GenresGenreId = 4,
-                            UsersUserId = 11
-                        },
-                        new
-                        {
-                            GenresGenreId = 5,
-                            UsersUserId = 11
-                        },
-                        new
-                        {
-                            GenresGenreId = 7,
-                            UsersUserId = 11
                         });
                 });
 
@@ -1215,83 +897,8 @@ namespace DataLayer.Migrations
                     b.HasData(
                         new
                         {
-                            PlatformsPlatformId = 3,
-                            UsersUserId = 1
-                        },
-                        new
-                        {
                             PlatformsPlatformId = 2,
-                            UsersUserId = 1
-                        },
-                        new
-                        {
-                            PlatformsPlatformId = 3,
-                            UsersUserId = 2
-                        },
-                        new
-                        {
-                            PlatformsPlatformId = 3,
                             UsersUserId = 3
-                        },
-                        new
-                        {
-                            PlatformsPlatformId = 1,
-                            UsersUserId = 3
-                        },
-                        new
-                        {
-                            PlatformsPlatformId = 1,
-                            UsersUserId = 4
-                        },
-                        new
-                        {
-                            PlatformsPlatformId = 3,
-                            UsersUserId = 4
-                        },
-                        new
-                        {
-                            PlatformsPlatformId = 3,
-                            UsersUserId = 5
-                        },
-                        new
-                        {
-                            PlatformsPlatformId = 1,
-                            UsersUserId = 5
-                        },
-                        new
-                        {
-                            PlatformsPlatformId = 3,
-                            UsersUserId = 6
-                        },
-                        new
-                        {
-                            PlatformsPlatformId = 3,
-                            UsersUserId = 7
-                        },
-                        new
-                        {
-                            PlatformsPlatformId = 3,
-                            UsersUserId = 8
-                        },
-                        new
-                        {
-                            PlatformsPlatformId = 3,
-                            UsersUserId = 9
-                        },
-                        new
-                        {
-                            PlatformsPlatformId = 3,
-                            UsersUserId = 10
-                        },
-                        new
-                        {
-                            PlatformsPlatformId = 2,
-                            UsersUserId = 10
-                        },
-                        new
-                        {
-                            PlatformsPlatformId = 3,
-                            UsersUserId = 11
                         });
                 });
 
