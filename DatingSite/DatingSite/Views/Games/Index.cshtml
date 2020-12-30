@@ -2,28 +2,55 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8 mx-auto">
-            <h1 class="text-left">Chose your favorite games</h1>
-            <hr />
-            <form asp-action="Submit" class="form-check mx-auto">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @foreach (var item in Model)
-                {
-                    @Html.DisplayFor(modelItem => item.Name)
-                    <label class="game_option form-check-label">
-                        <input type="checkbox" name="CheckBoxes" value="@item.Name" class="checkbox mr-2">
-                    </label>
-                }
-                <div class="form_group">
-                    <input type="submit" value="Next step" class="btn btn-primary" />
-                </div>
-            </form>
+
+
+
+
+<div class="card-columns">
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            <div class="card-img" style="background-image: url('~/wwwroot/img/Game/PUBG.jpg')"></div>
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <label class="game_option form-check-label">
+                    <input type="checkbox" name="CheckBoxes" value="@item.Name" class="checkSwag">
+                </label>
+
+
+            </div>
         </div>
-    </div>
+    }
 </div>
+
+
+
+
+<form asp-action="Submit" class="form-check mx-auto">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <label class="option_item form-check-label">
+                <input type="checkbox" name="CheckBoxes" value="@item.Name" class="checkbox">
+                <div class="option_inner facebook">
+                    <div class="tickmark"></div>
+                    <div class="card-img" style="background-image: url('/wwwroot/img/Game/AMONG US.jpg')"></div>
+                    <div class="name">@item.Name</div>
+                </div>
+
+            </label>
+        }
+    </div>
+
+
+    <div class="form_group">
+        <input type="submit" value="Next step" class="btn btn-primary" />
+    </div>
+</form>
+
 
 

@@ -105,14 +105,13 @@ namespace DataLayer.Repositories
                 _context.Entry(d).Collection(x => x.Users).Load();
                 foreach (User c in d.Users)
                 {
-                    if(c.Mail.Equals(mail))
-                    list.Add(d);
+                    if (c.Mail.Equals(mail))
+                        list.Add(d);
                 }
             }
             return list;
         }
 
-        
         public List<Genre> GetUserGenresByMail(string mail)
         {
             var list = new List<Genre>();
@@ -128,8 +127,6 @@ namespace DataLayer.Repositories
             }
             return list;
         }
-
-       
 
         public List<Platform> GetUserPlatformsByMail(string mail)
         {
@@ -165,6 +162,7 @@ namespace DataLayer.Repositories
             }
             _context.SaveChanges();
         }
+
         public void SetUserGenres(string mail, string[] selectedGenres)
         {
             var genres = _context.Genres.ToList();
