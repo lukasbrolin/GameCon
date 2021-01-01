@@ -1,10 +1,13 @@
 ﻿@using DataLayer.Models
-@model (User, List<Game>, List<Genre>, List<Platform>,int)
+@model CardViewModel
+@*@model (User, List<Game>, List<Genre>, List<Platform>,int)*@
 
-<div class="card mx-auto" style="width: 18rem;">
+<div class="card mx-auto" style="width: 40vw;height:70vh; margin-bottom: 20rem;">
     <img class="card-img-top" src="~/img/Avatars/avatar3.png" alt="Card image cap">
     <div class="card-body">
-        <h2 class="card-title">@Model.Item1.FirstName @Model.Item1.Age</h2>
+        <h2 class="card-title">@Model.User.NickName, @Model.User.Age</h2>
+        <h4 class="card-subtitle">@Model.User.FirstName @Model.User.LastName</h4>
+        <h4 class="card-subtitle">@Model.User.Nationality.Name <img src="~/img/Countries-Icon/@(@Model.User.Nationality.Name).png" style="width: 20px; height:20px;"/></h4>
         <h3 class="card-text"></h3>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     </div>
@@ -13,14 +16,14 @@
             <h5 class="list-group-item">Score</h5>
             
                 <div style="width:30%; display:inline-block;">
-                    <h1>@Model.Item5</h1>
+                    <h1>@Model.Score</h1>
                     
                 </div>
            
         </li>
         <li class="list-group-item text-center">
             <h5 class="list-group-item">Games</h5>
-            @foreach (var game in Model.Item2)
+            @foreach (var game in Model.Games)
             {
                 <div style="width:30%; display:inline-block;">
                     @(game.Name + " ")
@@ -30,7 +33,7 @@
         </li>
         <li class="list-group-item text-center">
             <h5 class="list-group-item">Genres</h5>
-            @foreach (var genre in Model.Item3)
+            @foreach (var genre in Model.Genres)
             {
                 <div style="width:30%; display:inline-block;">
                     @(genre.Name + " ")
@@ -40,7 +43,7 @@
         </li>
         <li class="list-group-item text-center">
             <h5 class="list-group-item">Platforms</h5>
-            @foreach (var platform in Model.Item4)
+            @foreach (var platform in Model.Platforms)
             {
                 <div style="width:30%; display:inline-block;">
                     @(platform.Name + " ")

@@ -1,7 +1,7 @@
-﻿@model DatingSite.Models.CardViewModel
+﻿@model List<DatingSite.Models.CardViewModel>
 
     <div class="container h-100">
-    @foreach (var item in Model.UserGamesGenrePlatforms)
+    @foreach (var item in Model)
     {
         <partial name="_DisplayCardPartial" model="item" />
     }

@@ -4,14 +4,16 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DatingSiteContext))]
-    partial class DatingSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20210101214146_UpdateNationality")]
+    partial class UpdateNationality
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,7 +251,7 @@ namespace DataLayer.Migrations
                             Content = "Hello muthafucka",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 277, DateTimeKind.Local).AddTicks(5281)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 41, 45, 880, DateTimeKind.Local).AddTicks(3036)
                         },
                         new
                         {
@@ -257,7 +259,7 @@ namespace DataLayer.Migrations
                             Content = "Check this shit out",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 279, DateTimeKind.Local).AddTicks(2602)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 41, 45, 882, DateTimeKind.Local).AddTicks(707)
                         },
                         new
                         {
@@ -265,7 +267,7 @@ namespace DataLayer.Migrations
                             Content = "SKKRTSKRRRT",
                             ReceiverId = 2,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 279, DateTimeKind.Local).AddTicks(2625)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 41, 45, 882, DateTimeKind.Local).AddTicks(732)
                         });
                 });
 
@@ -308,7 +310,7 @@ namespace DataLayer.Migrations
                         new
                         {
                             NationalityId = 5,
-                            Name = "Great Britain"
+                            Name = "England"
                         },
                         new
                         {
@@ -442,7 +444,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(334)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 41, 45, 882, DateTimeKind.Local).AddTicks(8516)
                         },
                         new
                         {
@@ -450,7 +452,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(696)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 41, 45, 882, DateTimeKind.Local).AddTicks(8875)
                         },
                         new
                         {
@@ -458,7 +460,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(707)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 41, 45, 882, DateTimeKind.Local).AddTicks(8885)
                         });
                 });
 
@@ -531,15 +533,15 @@ namespace DataLayer.Migrations
                     b.Property<int>("NationalityId")
                         .HasColumnType("int");
 
-                    b.Property<string>("NickName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("Online")
                         .HasColumnType("bit");
 
                     b.Property<int>("PersonalityId")
                         .HasColumnType("int");
+
+                    b.Property<string>("PreferedLanguage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
 
@@ -561,9 +563,9 @@ namespace DataLayer.Migrations
                             LastName = "Bernsdorff Wallstedt",
                             Mail = "simon.bernsdorff-wallstedt@dating.com",
                             NationalityId = 1,
-                            NickName = "Pandrum",
                             Online = false,
-                            PersonalityId = 1
+                            PersonalityId = 1,
+                            PreferedLanguage = "Swedish"
                         },
                         new
                         {
@@ -576,9 +578,9 @@ namespace DataLayer.Migrations
                             LastName = "Brolin",
                             Mail = "lukas.brolin@dating.com",
                             NationalityId = 1,
-                            NickName = "brollestar",
                             Online = false,
-                            PersonalityId = 2
+                            PersonalityId = 2,
+                            PreferedLanguage = "Swedish"
                         },
                         new
                         {
@@ -591,9 +593,9 @@ namespace DataLayer.Migrations
                             LastName = "Johansson",
                             Mail = "filip.johansson@dating.com",
                             NationalityId = 1,
-                            NickName = "paraplydricka",
                             Online = false,
-                            PersonalityId = 3
+                            PersonalityId = 3,
+                            PreferedLanguage = "Swedish"
                         },
                         new
                         {
@@ -606,9 +608,9 @@ namespace DataLayer.Migrations
                             LastName = "Fredriksson",
                             Mail = "magnus.fredriksson@dating.com",
                             NationalityId = 1,
-                            NickName = "magge",
                             Online = false,
-                            PersonalityId = 4
+                            PersonalityId = 4,
+                            PreferedLanguage = "English"
                         },
                         new
                         {
@@ -621,9 +623,9 @@ namespace DataLayer.Migrations
                             LastName = "Hjelm",
                             Mail = "didrik.hjelm@dating.com",
                             NationalityId = 2,
-                            NickName = "didhje",
                             Online = false,
-                            PersonalityId = 2
+                            PersonalityId = 2,
+                            PreferedLanguage = "Norwegian"
                         },
                         new
                         {
@@ -636,9 +638,9 @@ namespace DataLayer.Migrations
                             LastName = "Nordheim",
                             Mail = "selma.nordheim@dating.com",
                             NationalityId = 2,
-                            NickName = "Selma",
                             Online = false,
-                            PersonalityId = 5
+                            PersonalityId = 5,
+                            PreferedLanguage = "Norwegian"
                         },
                         new
                         {
@@ -651,9 +653,9 @@ namespace DataLayer.Migrations
                             LastName = "Lökholm",
                             Mail = "kassandra.Lökholm@dating.com",
                             NationalityId = 1,
-                            NickName = "Kassi",
                             Online = false,
-                            PersonalityId = 1
+                            PersonalityId = 1,
+                            PreferedLanguage = "Swedish"
                         },
                         new
                         {
@@ -666,9 +668,9 @@ namespace DataLayer.Migrations
                             LastName = "Andersson",
                             Mail = "kent.andersson@dating.com",
                             NationalityId = 1,
-                            NickName = "Kentaflenta",
                             Online = false,
-                            PersonalityId = 5
+                            PersonalityId = 5,
+                            PreferedLanguage = "Swedish"
                         },
                         new
                         {
@@ -681,9 +683,9 @@ namespace DataLayer.Migrations
                             LastName = "Vettel",
                             Mail = "sebastian.vettel@dating.com",
                             NationalityId = 4,
-                            NickName = "Vettelmano",
                             Online = false,
-                            PersonalityId = 3
+                            PersonalityId = 3,
+                            PreferedLanguage = "German"
                         },
                         new
                         {
@@ -696,9 +698,9 @@ namespace DataLayer.Migrations
                             LastName = "Rosberg",
                             Mail = "nico.rosberg@dating.com",
                             NationalityId = 4,
-                            NickName = "Spyking",
                             Online = false,
-                            PersonalityId = 3
+                            PersonalityId = 3,
+                            PreferedLanguage = "German"
                         },
                         new
                         {
@@ -711,9 +713,9 @@ namespace DataLayer.Migrations
                             LastName = "Watson",
                             Mail = "emma.watson@dating.com",
                             NationalityId = 5,
-                            NickName = "Hermione",
                             Online = false,
-                            PersonalityId = 4
+                            PersonalityId = 4,
+                            PreferedLanguage = "English"
                         });
                 });
 
@@ -747,21 +749,21 @@ namespace DataLayer.Migrations
                             VisitId = 1,
                             ReceiverId = 1,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(2959)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 41, 45, 883, DateTimeKind.Local).AddTicks(1223)
                         },
                         new
                         {
                             VisitId = 2,
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(3611)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 41, 45, 883, DateTimeKind.Local).AddTicks(1870)
                         },
                         new
                         {
                             VisitId = 3,
                             ReceiverId = 3,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(3622)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 41, 45, 883, DateTimeKind.Local).AddTicks(1880)
                         });
                 });
 

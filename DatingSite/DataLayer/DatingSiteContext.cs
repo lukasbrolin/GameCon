@@ -226,14 +226,14 @@ namespace DataLayer
 
             //Nationalitie
             modelBuilder.Entity<Nationality>().HasData(
-              new Nationality() { NationalityId = 1, Name = "Swedish" },
-              new Nationality() { NationalityId = 2, Name = "Norwegian" },
-              new Nationality() { NationalityId = 3, Name = "Danish" },
-              new Nationality() { NationalityId = 4, Name = "German" },
-              new Nationality() { NationalityId = 5, Name = "English" },
-              new Nationality() { NationalityId = 6, Name = "Spanish" },
-              new Nationality() { NationalityId = 7, Name = "French" },
-              new Nationality() { NationalityId = 8, Name = "American" }
+              new Nationality() { NationalityId = 1, Name = "Sweden" },
+              new Nationality() { NationalityId = 2, Name = "Norway" },
+              new Nationality() { NationalityId = 3, Name = "Denmark" },
+              new Nationality() { NationalityId = 4, Name = "Germany" },
+              new Nationality() { NationalityId = 5, Name = "Great Britain" },
+              new Nationality() { NationalityId = 6, Name = "Spain" },
+              new Nationality() { NationalityId = 7, Name = "France" },
+              new Nationality() { NationalityId = 8, Name = "USA" }
               );
 
             //Personalitie
@@ -285,17 +285,17 @@ namespace DataLayer
 
             //User
             modelBuilder.Entity<User>().HasData(
-                new User() { UserId = 1, NationalityId = 1, PersonalityId = 1, FirstName = "Simon", LastName = "Bernsdorff Wallstedt", Mail = "simon.bernsdorff-wallstedt@dating.com", Age = 28, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
-                new User() { UserId = 2, NationalityId = 1, PersonalityId = 2, FirstName = "Lukas", LastName = "Brolin", Mail = "lukas.brolin@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
-                new User() { UserId = 3, NationalityId = 1, PersonalityId = 3, FirstName = "Filip", LastName = "Johansson", Mail = "filip.johansson@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
-                new User() { UserId = 4, NationalityId = 1, PersonalityId = 4, FirstName = "Magnus", LastName = "Fredriksson", Mail = "magnus.fredriksson@dating.com", Age = 34, PreferedLanguage = "English", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
-                new User() { UserId = 5, NationalityId = 2, PersonalityId = 2, FirstName = "Didrik", LastName = "Hjelm", Mail = "didrik.hjelm@dating.com", Age = 22, PreferedLanguage = "Norwegian", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
-                new User() { UserId = 6, NationalityId = 2, PersonalityId = 5, FirstName = "Selma", LastName = "Nordheim", Mail = "selma.nordheim@dating.com", Age = 25, PreferedLanguage = "Norwegian", Online = false, Gender = "Female", Active = true, ImgUrl = "Images/User/User.jpg" },
-                new User() { UserId = 7, NationalityId = 1, PersonalityId = 1, FirstName = "Kassandra", LastName = "Lökholm", Mail = "kassandra.Lökholm@dating.com", Age = 27, PreferedLanguage = "Swedish", Online = false, Gender = "Female", Active = true, ImgUrl = "Images/User/User.jpg" },
-                new User() { UserId = 8, NationalityId = 1, PersonalityId = 5, FirstName = "Kent", LastName = "Andersson", Mail = "kent.andersson@dating.com", Age = 31, PreferedLanguage = "Swedish", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
-                new User() { UserId = 9, NationalityId = 4, PersonalityId = 3, FirstName = "Sebastian", LastName = "Vettel", Mail = "sebastian.vettel@dating.com", Age = 41, PreferedLanguage = "German", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
-                new User() { UserId = 10, NationalityId = 4, PersonalityId = 3, FirstName = "Nico", LastName = "Rosberg", Mail = "nico.rosberg@dating.com", Age = 38, PreferedLanguage = "German", Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
-                new User() { UserId = 11, NationalityId = 5, PersonalityId = 4, FirstName = "Emma", LastName = "Watson", Mail = "emma.watson@dating.com", Age = 30, PreferedLanguage = "English", Online = false, Gender = "Female", Active = true, ImgUrl = "Images/User/User.jpg" });
+                new User() { UserId = 1, NationalityId = 1, PersonalityId = 1,NickName="Pandrum", FirstName = "Simon", LastName = "Bernsdorff Wallstedt", Mail = "simon.bernsdorff-wallstedt@dating.com", Age = 28, Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 2, NationalityId = 1, PersonalityId = 2,NickName="brollestar", FirstName = "Lukas", LastName = "Brolin", Mail = "lukas.brolin@dating.com", Age = 27, Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 3, NationalityId = 1, PersonalityId = 3,NickName="paraplydricka", FirstName = "Filip", LastName = "Johansson", Mail = "filip.johansson@dating.com", Age = 27, Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 4, NationalityId = 1, PersonalityId = 4,NickName="magge", FirstName = "Magnus", LastName = "Fredriksson", Mail = "magnus.fredriksson@dating.com", Age = 34, Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 5, NationalityId = 2, PersonalityId = 2,NickName="didhje", FirstName = "Didrik", LastName = "Hjelm", Mail = "didrik.hjelm@dating.com", Age = 22, Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 6, NationalityId = 2, PersonalityId = 5,NickName="Selma", FirstName = "Selma", LastName = "Nordheim", Mail = "selma.nordheim@dating.com", Age = 25, Online = false, Gender = "Female", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 7, NationalityId = 1, PersonalityId = 1,NickName="Kassi", FirstName = "Kassandra", LastName = "Lökholm", Mail = "kassandra.Lökholm@dating.com", Age = 27, Online = false, Gender = "Female", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 8, NationalityId = 1, PersonalityId = 5,NickName="Kentaflenta", FirstName = "Kent", LastName = "Andersson", Mail = "kent.andersson@dating.com", Age = 31, Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 9, NationalityId = 4, PersonalityId = 3,NickName="Vettelmano", FirstName = "Sebastian", LastName = "Vettel", Mail = "sebastian.vettel@dating.com", Age = 41, Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 10, NationalityId = 4, PersonalityId = 3,NickName="Spyking", FirstName = "Nico", LastName = "Rosberg", Mail = "nico.rosberg@dating.com", Age = 38, Online = false, Gender = "Male", Active = true, ImgUrl = "Images/User/User.jpg" },
+                new User() { UserId = 11, NationalityId = 5, PersonalityId = 4,NickName="Hermione", FirstName = "Emma", LastName = "Watson", Mail = "emma.watson@dating.com", Age = 30, Online = false, Gender = "Female", Active = true, ImgUrl = "Images/User/User.jpg" });
         }
     }
 }

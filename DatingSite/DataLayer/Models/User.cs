@@ -10,6 +10,9 @@ namespace DataLayer.Models
         public virtual int UserId { get; set; }
 
         [Required]
+        public virtual string NickName { get; set; }
+
+        [Required]
         public virtual string FirstName { get; set; }
 
         [Required]
@@ -32,9 +35,6 @@ namespace DataLayer.Models
 
         [ForeignKey("NationalityId")]
         public virtual Nationality Nationality { get; set; }
-
-        [Required]
-        public virtual string PreferedLanguage { get; set; }
 
         [Required]
         public virtual bool Online { get; set; }

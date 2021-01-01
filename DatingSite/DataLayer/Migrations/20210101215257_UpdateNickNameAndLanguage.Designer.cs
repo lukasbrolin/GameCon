@@ -4,14 +4,16 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(DatingSiteContext))]
-    partial class DatingSiteContextModelSnapshot : ModelSnapshot
+    [Migration("20210101215257_UpdateNickNameAndLanguage")]
+    partial class UpdateNickNameAndLanguage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,7 +251,7 @@ namespace DataLayer.Migrations
                             Content = "Hello muthafucka",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 277, DateTimeKind.Local).AddTicks(5281)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 52, 56, 918, DateTimeKind.Local).AddTicks(6913)
                         },
                         new
                         {
@@ -257,7 +259,7 @@ namespace DataLayer.Migrations
                             Content = "Check this shit out",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 279, DateTimeKind.Local).AddTicks(2602)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 52, 56, 920, DateTimeKind.Local).AddTicks(4755)
                         },
                         new
                         {
@@ -265,7 +267,7 @@ namespace DataLayer.Migrations
                             Content = "SKKRTSKRRRT",
                             ReceiverId = 2,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 279, DateTimeKind.Local).AddTicks(2625)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 52, 56, 920, DateTimeKind.Local).AddTicks(4786)
                         });
                 });
 
@@ -308,7 +310,7 @@ namespace DataLayer.Migrations
                         new
                         {
                             NationalityId = 5,
-                            Name = "Great Britain"
+                            Name = "England"
                         },
                         new
                         {
@@ -442,7 +444,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(334)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 52, 56, 921, DateTimeKind.Local).AddTicks(2689)
                         },
                         new
                         {
@@ -450,7 +452,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(696)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 52, 56, 921, DateTimeKind.Local).AddTicks(3048)
                         },
                         new
                         {
@@ -458,7 +460,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(707)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 52, 56, 921, DateTimeKind.Local).AddTicks(3058)
                         });
                 });
 
@@ -747,21 +749,21 @@ namespace DataLayer.Migrations
                             VisitId = 1,
                             ReceiverId = 1,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(2959)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 52, 56, 921, DateTimeKind.Local).AddTicks(5248)
                         },
                         new
                         {
                             VisitId = 2,
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(3611)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 52, 56, 921, DateTimeKind.Local).AddTicks(5886)
                         },
                         new
                         {
                             VisitId = 3,
                             ReceiverId = 3,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(3622)
+                            TimeStamp = new DateTime(2021, 1, 1, 22, 52, 56, 921, DateTimeKind.Local).AddTicks(5896)
                         });
                 });
 

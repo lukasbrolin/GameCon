@@ -8,8 +8,22 @@ namespace DatingSite.Models
 {
     public class CardViewModel
     {
-        public List<User> Users { get; set; }
+        public CardViewModel()
+        {
+        }
 
-        public IOrderedEnumerable<(User, List<Game>, List<Genre>, List<Platform>, int)> UserGamesGenrePlatforms { get; set; }
+        public User User { get; set; }
+
+        //public IOrderedEnumerable<(User, List<Game>, List<Genre>, List<Platform>, int)> UserGamesGenrePlatforms { get; set; }
+
+        public List<Game> Games { get; set; }
+
+        public List<Genre> Genres { get; set; }
+
+        public List<Platform> Platforms { get; set; }
+
+        public int Score { get; set; }
+
+        
     }
 }

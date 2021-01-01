@@ -22,14 +22,29 @@ namespace DatingSite.Controllers
         public ActionResult Index(CardViewModel model)
         {
             var userRepository = new UserRepository(_context);
+            var nationalityRepository = new NationalityRepository(_context);
+            var personalityRepository = new PersonalityRepository(_context);
             var list = userRepository.GetUsers();
-            model.Users = list;
-            model.UserGamesGenrePlatforms = userRepository.getUserGames(User.Identity.Name);
+            //model.Users = list;
+            //model.UserGamesGenrePlatforms = userRepository.getUserGames(User.Identity.Name);
+            List<CardViewModel> modelList = new List<CardViewModel>();
             //foreach(var x in model.UserGames)
             //{
             //    Console.WriteLine(x);
             //}
-            return View(model);
+            foreach (var user in userRepository.getUserGames(User.Identity.Name))
+            {
+                user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
+                user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
+                CardViewModel CModel = new CardViewModel();
+                CModel.User = user.Item1;
+                CModel.Games = user.Item2;
+                CModel.Genres = user.Item3;
+                CModel.Platforms = user.Item4;
+                CModel.Score = user.Item5;
+                modelList.Add(CModel);
+            }
+            return View(modelList);
         }
 
 

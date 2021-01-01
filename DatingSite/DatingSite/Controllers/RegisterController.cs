@@ -39,12 +39,12 @@ namespace DatingSite.Controllers
             var personalityRepo = new PersonalityRepository(_context);
             var user = new User();
 
+            user.NickName = model.NickName;
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
             user.Mail = User.Identity.Name;
             user.Age = model.Age;
             user.Gender = model.Gender;
-            user.PreferedLanguage = model.Language;
             user.NationalityId = nationalityRepo.GetNationalityIdByName(model.Nationality);
             user.PersonalityId = personalityRepo.GetPersonalityIdByName(model.Personality);
             user.Active = true;

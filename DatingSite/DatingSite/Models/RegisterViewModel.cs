@@ -9,6 +9,10 @@ namespace DatingSite.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Nick name")]
+        public string NickName { get; set; }
+
+        [Required]
         [Display(Name = "First name")]
         public string FirstName { get; set; }
 
