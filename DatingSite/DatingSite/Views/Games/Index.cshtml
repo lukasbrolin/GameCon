@@ -38,12 +38,11 @@
     <div class="container">
         @foreach (var item in Model)
         {
-            <label class="option_item form-check-label" style="min-width: 260px; border: 0;">
+            <label class="option_item form-check-label">
                 <input type="checkbox" name="CheckBoxes" value="@item.Name" class="checkbox">
                 <div class="option_inner facebook">
-                    <img src="~/img/Game/@(item.Name).jpg" style="position: absolute;top:0;left:0; width: 100%; height:100%; object-fit: cover;" />
+                    <img src="~/img/Game/@(item.Name).jpg" class="img-fluid position-absolute fixed-top card-img-top " style="object-fit:cover" />
                     <div class="tickmark"></div>
-                    <div class="card-img" style="background-image: url('/wwwroot/img/Game/AMONG US.jpg')"></div>
                     <div class="name">@item.Name</div>
                 </div>
 

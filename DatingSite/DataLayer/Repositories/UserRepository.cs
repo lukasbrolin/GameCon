@@ -47,14 +47,21 @@ namespace DataLayer.Repositories
             return list;
         }
 
-        public List<(User,List<Game>,List<Genre>,List<Platform>)> getUserGames()
+        public IOrderedEnumerable<(User,List<Game>,List<Genre>,List<Platform>,int)> getUserGames(string mail)
         {
-            var list = new List<(User, List<Game>, List<Genre>, List<Platform>)>();
+            var list = new List<(User, List<Game>, List<Genre>, List<Platform>,int)>();
             var users = _context.Users.ToList();
+            ScoreCalculator scoreCalculator = new ScoreCalculator(_context);
             int i = 0;
             foreach(var user in users)
             {
-                list.Add((user, new List<Game>(), new List<Genre>(), new List<Platform>()));
+                if(user.Mail.Equals(mail))
+                {
+                    continue;
+                }
+                int score = 0;
+                score = scoreCalculator.GetTotalScoreAllUsersPerUser(mail)[user.UserId];
+                list.Add((user, new List<Game>(), new List<Genre>(), new List<Platform>(),score));
 
                 _context.Entry(user).Collection(x => x.Games).Load();
                 _context.Entry(user).Collection(x => x.Genres).Load();
@@ -93,7 +100,7 @@ namespace DataLayer.Repositories
             //        list.Add(d.Name + " + " + c.FirstName);
             //    }
             //}
-            return list;
+            return list.OrderByDescending(o=>o.Item5);
         }
 
         public List<Game> GetUserGamesByMail(string mail)

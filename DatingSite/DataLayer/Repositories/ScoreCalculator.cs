@@ -54,6 +54,14 @@ namespace DataLayer.Repositories
             return ScoreList;
         }
 
+        //public int GetGameScoreUserPerUser(string mail, int id)
+        //{
+        //    List<Game> userGames = _userRepository.GetUserGamesByMail(mail);
+        //    List<Game> userGames = _userRepository.GetUserGamesByMail(mail);
+
+
+        //}
+
         public Dictionary<int, int> GetGenreScoreAllUsersPerUser(string mail)
         {
             Dictionary<int, int> ScoreList = new Dictionary<int, int>();
@@ -130,15 +138,24 @@ namespace DataLayer.Repositories
             foreach (var user in Users)
             {
                 int i = 0;
-                if (user.Mail.Equals(mail))
+                if (!user.PersonalityId.Equals(null))
                 {
-                    continue;
+                    if (user.Mail.Equals(mail))
+                    {
+                        continue;
+                    }
+                    if (user.PersonalityId.Equals(thisUser.PersonalityId))
+                    {
+                        i++;
+                    }
+                    ScoreList.Add(user.UserId, i);
                 }
-                if(user.PersonalityId.Equals(thisUser.PersonalityId))
+                else
                 {
-                    i++;
+                    ScoreList.Add(user.UserId, i);
                 }
-                ScoreList.Add(user.UserId, i);
+                
+                
             }
             
             return ScoreList;

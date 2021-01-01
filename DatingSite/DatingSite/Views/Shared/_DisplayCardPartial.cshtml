@@ -1,5 +1,5 @@
 ﻿@using DataLayer.Models
-@model (User, List<Game>, List<Genre>, List<Platform>)
+@model (User, List<Game>, List<Genre>, List<Platform>,int)
 
 <div class="card mx-auto" style="width: 18rem;">
     <img class="card-img-top" src="~/img/Avatars/avatar3.png" alt="Card image cap">
@@ -10,30 +10,42 @@
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item text-center">
+            <h5 class="list-group-item">Score</h5>
+            
+                <div style="width:30%; display:inline-block;">
+                    <h1>@Model.Item5</h1>
+                    
+                </div>
+           
+        </li>
+        <li class="list-group-item text-center">
             <h5 class="list-group-item">Games</h5>
             @foreach (var game in Model.Item2)
             {
                 <div style="width:30%; display:inline-block;">
-                @(game.Name + " ")
-                <img style="width: 20px; height:20px;" src="~/img/Game/@(game.Name).jpg" />
+                    @(game.Name + " ")
+                    <img style="width: 20px; height:20px;" src="~/img/Game/@(game.Name).jpg" />
                 </div>
             }
-            </li>
+        </li>
         <li class="list-group-item text-center">
             <h5 class="list-group-item">Genres</h5>
             @foreach (var genre in Model.Item3)
             {
-                @(genre.Name + " ")
+                <div style="width:30%; display:inline-block;">
+                    @(genre.Name + " ")
+                    <img style="width: 20px; height:20px;" src="~/img/Genre/@(genre.Name).png" />
+                </div>
             }
         </li>
-        <li class="list-group-item text-center" >
+        <li class="list-group-item text-center">
             <h5 class="list-group-item">Platforms</h5>
             @foreach (var platform in Model.Item4)
             {
-            <div>
-                @(platform.Name + " ")
-                
-            </div>
+                <div style="width:30%; display:inline-block;">
+                    @(platform.Name + " ")
+                    <img style="width: 20px; height:20px;" src="~/img/Platform/@(platform.Name).png" />
+                </div>
             }
 
         </li>

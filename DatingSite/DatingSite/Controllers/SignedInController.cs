@@ -24,7 +24,7 @@ namespace DatingSite.Controllers
             var userRepository = new UserRepository(_context);
             var list = userRepository.GetUsers();
             model.Users = list;
-            model.UserGamesGenrePlatforms = userRepository.getUserGames();
+            model.UserGamesGenrePlatforms = userRepository.getUserGames(User.Identity.Name);
             //foreach(var x in model.UserGames)
             //{
             //    Console.WriteLine(x);
