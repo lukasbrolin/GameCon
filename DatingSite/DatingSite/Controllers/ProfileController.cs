@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace DatingSite.Controllers
 {
-    public class SignedInController : Controller
+    public class ProfileController : Controller
     {
         private readonly DatingSiteContext _context;
 
-        public SignedInController(DatingSiteContext context)
+        public ProfileController(DatingSiteContext context)
         {
             _context = context;
         }
-
+        // GET: ProfileController
         public ActionResult Index(CardViewModel model)
         {
             var userRepository = new UserRepository(_context);
@@ -34,33 +34,35 @@ namespace DatingSite.Controllers
             //}
             foreach (var user in userRepository.getUserGamesGenresPlatformsScore(User.Identity.Name))
             {
-                user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
-                user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
-                CardViewModel CModel = new CardViewModel();
-                CModel.User = user.Item1;
-                CModel.Games = user.Item2;
-                CModel.Genres = user.Item3;
-                CModel.Platforms = user.Item4;
-                CModel.Score = user.Item5;
-                modelList.Add(CModel);
+                if (user.Item1.Mail.Equals(User.Identity.Name))
+                {
+                    user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
+                    user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
+                    model.User = user.Item1;
+                    model.Games = user.Item2;
+                    model.Genres = user.Item3;
+                    model.Platforms = user.Item4;
+                    //model.Score = user.Item5;
+                    break;
+                }
+                
             }
-            return View(modelList);
+            return View(model);
         }
 
-
-        // GET: SignedInController/Details/5
+        // GET: ProfileController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: SignedInController/Create
+        // GET: ProfileController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: SignedInController/Create
+        // POST: ProfileController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -75,13 +77,13 @@ namespace DatingSite.Controllers
             }
         }
 
-        // GET: SignedInController/Edit/5
+        // GET: ProfileController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: SignedInController/Edit/5
+        // POST: ProfileController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -96,13 +98,13 @@ namespace DatingSite.Controllers
             }
         }
 
-        // GET: SignedInController/Delete/5
+        // GET: ProfileController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: SignedInController/Delete/5
+        // POST: ProfileController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

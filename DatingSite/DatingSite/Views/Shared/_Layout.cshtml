@@ -17,7 +17,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1" style="list-style-type: none;">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="Index">Register</a>
                         </li>
@@ -27,8 +27,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="SignedIn" asp-action="Index">Match</a>
                         </li>
+
                         <li>
-                            <form method="get">
+                            <form method="get" asp-action="Search">
                                 <div class="input-group ">
                                     <input class="form-control" @*asp-for="SearchTerm"*@ />
                                     <div class="input-group-append">
@@ -39,6 +40,10 @@
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
+                    @* Create Partial for settings, account *@
+                    <li class="nav-item navbar-nav">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Index"><img style="height:20px; width:20px;"src="~/img/Avatars/avatar5.png" /></a>
+                    </li>
                 </div>
             </div>
         </nav>
