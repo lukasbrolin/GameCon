@@ -3,7 +3,8 @@
 @*@model (User, List<Game>, List<Genre>, List<Platform>,int)*@
 
 <div class="card mx-auto" style="width: 40vw;height:70vh; margin-bottom: 20rem;">
-    <img class="card-img-top" src="~/img/Avatars/avatar3.png" alt="Card image cap">
+    <img class="card-img-top" src="@Url.Content(Model.User.ImgUrl)" alt="Card image cap"> 
+    @* @Url.Content(url) *@
     <div class="card-body">
         <h2 class="card-title">@Model.User.NickName, @Model.User.Age</h2>
         <h4 class="card-subtitle">@Model.User.FirstName @Model.User.LastName</h4>

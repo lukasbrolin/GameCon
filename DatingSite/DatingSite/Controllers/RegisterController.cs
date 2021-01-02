@@ -2,9 +2,11 @@
 using DataLayer.Models;
 using DataLayer.Repositories;
 using DatingSite.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace DatingSite.Controllers
 {
@@ -32,7 +34,7 @@ namespace DatingSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterViewModel model)
+        public ActionResult Register(RegisterViewModel model, IFormFile file)
         {
             var userRepo = new UserRepository(_context);
             var nationalityRepo = new NationalityRepository(_context);
@@ -51,7 +53,41 @@ namespace DatingSite.Controllers
             user.Online = true;
             user.ImgUrl = "Default";
 
+
+            if (file != null)
+            {
+                try
+                {
+
+                    string imgUrl = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+
+
+                    // Till utvecklarna: Spara inte på för långa sökvägar. Windows begränsar längden på sökvägen och bilden kan ej sparas. 
+                    if (imgUrl.ToLower().Contains(".jpeg") || imgUrl.ToLower().Contains(".jpg") || imgUrl.Contains(".png"))
+                    {
+                        string savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img\\avatars", imgUrl);
+                        string relPath = System.IO.Path.Combine("~/img/avatars/" + imgUrl);
+                        /*string savePath = Path.Combine("C:\\", imgName);*/
+                        using (var fileStream = new FileStream(savePath, FileMode.Create))
+                        {
+                            file.CopyTo(fileStream);
+                        }
+
+
+                        user.ImgUrl = relPath;
+
+                    }
+
+                }
+
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
             userRepo.AddUser(user);
+
+
             return RedirectToAction("Index", "Games");
         }
     }
