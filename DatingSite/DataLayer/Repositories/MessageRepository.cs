@@ -23,10 +23,14 @@ namespace DataLayer.Repositories
             _context.Messages.Add(message);
         }
 
-        public Message GetMessageById(int id)
+        public Message GetMessageByUser(User user)
         {
-            return _context.Messages.FirstOrDefault(x => x.MessageId.Equals(id));
+            return _context.Messages.FirstOrDefault(x => x.MessageId.Equals(user));
         }
 
+        public List<Message> GetMessages(int id)
+        {
+            return _context.Messages.ToList().Where(u => u.SenderId == id).ToList();
+        }
     }
 }

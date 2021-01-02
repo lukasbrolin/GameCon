@@ -27,5 +27,6 @@ namespace DataLayer.Models
         public virtual DateTime TimeStamp { get; set; }
 
         public virtual string Content { get; set; }
+        public virtual bool IsRead { get; set; }
     }
 }

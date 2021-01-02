@@ -2,99 +2,94 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-
-body{
-    margin-bottom:0!important;
-}
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    margin-bottom: 0 !important;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
 }
 
-.selection{
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+.selection {
     font-size: 3000px;
 }
 
-.game_option{
+.game_option {
     display: inline-flex;
 }
 
-
-.form_group
-{
-
-}
-
-
-.container {
+.container-game {
     display: flex;
     flex-wrap: wrap;
 }
 
-    .container .option_item {
+    .container-game .option_item {
         display: block;
         position: relative;
         width: 175px;
@@ -103,7 +98,7 @@ body {
         border: 5px solid red;
     }
 
-        .container .option_item .checkbox {
+        .container-game .option_item .checkbox {
             position: absolute;
             top: 0;
             left: 0;
@@ -141,7 +136,6 @@ body {
     border-color: #3b5999;
     color: #3b5999;
 }
-
 
 .option_item .option_inner .tickmark {
     position: absolute;
@@ -200,8 +194,8 @@ body {
     box-shadow: 0 10px 20px rgba(37,33,82,.12), 0 4px 8px rgba(37,33,82,.06);
 }
 
-.div-group{
-    display:flex;
+.div-group {
+    display: flex;
 }
 
 #home-video {
@@ -210,22 +204,63 @@ body {
     object-fit: cover
 }
 
-.bg-div{
-    background-color:black;
-    min-height:100vh;
-    min-width:100vw;
-    z-index:-1;
+.bg-div {
+    background-color: black;
+    min-height: 100vh;
+    min-width: 100vw;
+    z-index: -1;
 }
 
-.np{
-    padding: 0!important;
+.np {
+    padding: 0 !important;
 }
-
-
-
 
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
+}
+
+/*
+* ==========================================
+* CHAT
+* ==========================================
+*/
+body {
+    min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    width: 5px;
+    background: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 1em;
+    background-color: #ddd;
+    outline: 1px solid slategrey;
+    border-radius: 1rem;
+}
+
+.text-small {
+    font-size: 0.9rem;
+}
+
+.messages-box,
+.chat-box {
+    height: 510px;
+    overflow-y: scroll;
+}
+
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+input::placeholder {
+    font-size: 0.9rem;
+    color: #999;
 }

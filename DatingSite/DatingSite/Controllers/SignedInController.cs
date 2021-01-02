@@ -47,7 +47,6 @@ namespace DatingSite.Controllers
             return View(modelList);
         }
 
-
         // GET: SignedInController/Details/5
         public ActionResult Details(int id)
         {
@@ -115,6 +114,15 @@ namespace DatingSite.Controllers
             {
                 return View();
             }
+        }
+
+        public IActionResult Chat(ChatViewModel model)
+        {
+            var userRepo = new UserRepository(_context);
+            var user = userRepo.getUserByMail(User.Identity.Name);
+            var messageRepo = new MessageRepository(_context);
+            model.Messages = messageRepo.GetMessages(user.UserId);
+            return View(model);
         }
     }
 }

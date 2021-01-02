@@ -1,0 +1,18 @@
+﻿@model DatingSite.Models.ChatViewModel
+
+@{
+    ViewData["Title"] = "Chat";
+}
+
+<div class="container">
+<h1>Recent</h1>
+@foreach (var item in Model.Messages) {
+    <div class="rounded border p-2 mb-1">
+    <h5>
+        @item.Sender.FirstName <p class="text-muted" style="font-size: 14px">@item.TimeStamp</p> 
+
+    </h5>
+        @item.Content
+    </div>
+}
+</div>

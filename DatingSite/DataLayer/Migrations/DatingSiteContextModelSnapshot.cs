@@ -225,6 +225,9 @@ namespace DataLayer.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
                     b.Property<int>("ReceiverId")
                         .HasColumnType("int");
 
@@ -247,25 +250,28 @@ namespace DataLayer.Migrations
                         {
                             MessageId = 1,
                             Content = "Hello muthafucka",
+                            IsRead = false,
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 277, DateTimeKind.Local).AddTicks(5281)
+                            TimeStamp = new DateTime(2021, 1, 2, 20, 6, 2, 612, DateTimeKind.Local).AddTicks(5647)
                         },
                         new
                         {
                             MessageId = 2,
                             Content = "Check this shit out",
+                            IsRead = false,
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 279, DateTimeKind.Local).AddTicks(2602)
+                            TimeStamp = new DateTime(2021, 1, 2, 20, 6, 2, 614, DateTimeKind.Local).AddTicks(2696)
                         },
                         new
                         {
                             MessageId = 3,
                             Content = "SKKRTSKRRRT",
+                            IsRead = false,
                             ReceiverId = 2,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 279, DateTimeKind.Local).AddTicks(2625)
+                            TimeStamp = new DateTime(2021, 1, 2, 20, 6, 2, 614, DateTimeKind.Local).AddTicks(2721)
                         });
                 });
 
@@ -442,7 +448,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 1,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(334)
+                            TimeStamp = new DateTime(2021, 1, 2, 20, 6, 2, 614, DateTimeKind.Local).AddTicks(9527)
                         },
                         new
                         {
@@ -450,7 +456,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(696)
+                            TimeStamp = new DateTime(2021, 1, 2, 20, 6, 2, 614, DateTimeKind.Local).AddTicks(9843)
                         },
                         new
                         {
@@ -458,7 +464,7 @@ namespace DataLayer.Migrations
                             Content = "Holy shit dude.",
                             ReceiverId = 3,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(707)
+                            TimeStamp = new DateTime(2021, 1, 2, 20, 6, 2, 614, DateTimeKind.Local).AddTicks(9853)
                         });
                 });
 
@@ -747,21 +753,21 @@ namespace DataLayer.Migrations
                             VisitId = 1,
                             ReceiverId = 1,
                             SenderId = 1,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(2959)
+                            TimeStamp = new DateTime(2021, 1, 2, 20, 6, 2, 615, DateTimeKind.Local).AddTicks(1794)
                         },
                         new
                         {
                             VisitId = 2,
                             ReceiverId = 2,
                             SenderId = 3,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(3611)
+                            TimeStamp = new DateTime(2021, 1, 2, 20, 6, 2, 615, DateTimeKind.Local).AddTicks(2346)
                         },
                         new
                         {
                             VisitId = 3,
                             ReceiverId = 3,
                             SenderId = 2,
-                            TimeStamp = new DateTime(2021, 1, 1, 23, 1, 1, 280, DateTimeKind.Local).AddTicks(3622)
+                            TimeStamp = new DateTime(2021, 1, 2, 20, 6, 2, 615, DateTimeKind.Local).AddTicks(2354)
                         });
                 });
 
