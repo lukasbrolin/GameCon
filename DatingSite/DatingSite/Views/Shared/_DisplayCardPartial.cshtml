@@ -65,7 +65,10 @@
         </li>
     </ul>
     <div class="card-body player-info-items">
-        <a href="#" class="card-link">Profile</a>
-        <a href="#" class="card-link">Match</a>
+        <a asp-controller="Profile" asp-action="Index" asp-route-mail="@Model.User.Mail" class="card-link">
+            Profile
+
+        </a>
+        <a asp-controller="Profile" asp-action="Index"  class="card-link">Match</a>
     </div>
 </div>

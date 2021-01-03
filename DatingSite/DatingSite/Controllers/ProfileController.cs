@@ -19,7 +19,7 @@ namespace DatingSite.Controllers
             _context = context;
         }
         // GET: ProfileController
-        public ActionResult Index(CardViewModel model)
+        public ActionResult Index(CardViewModel model, string mail)
         {
             var userRepository = new UserRepository(_context);
             var nationalityRepository = new NationalityRepository(_context);
@@ -34,7 +34,7 @@ namespace DatingSite.Controllers
             //}
             foreach (var user in userRepository.getUserGamesGenresPlatformsScore(User.Identity.Name))
             {
-                if (user.Item1.Mail.Equals(User.Identity.Name))
+                if (user.Item1.Mail.Equals(mail))
                 {
                     user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
                     user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
@@ -45,12 +45,23 @@ namespace DatingSite.Controllers
                     //model.Score = user.Item5;
                     break;
                 }
-                
+                else if (user.Item1.Mail.Equals(User.Identity.Name))
+                {
+                    user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
+                    user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
+                    model.User = user.Item1;
+                    model.Games = user.Item2;
+                    model.Genres = user.Item3;
+                    model.Platforms = user.Item4;
+                    //model.Score = user.Item5;
+                    break;
+                }
+
             }
             return View(model);
         }
 
-        // GET: ProfileController/Details/5
+                        // GET: ProfileController/Details/5
         public ActionResult Details(int id)
         {
             return View();
