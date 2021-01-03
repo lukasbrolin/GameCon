@@ -318,6 +318,7 @@ input::placeholder {
 
 .display-inlineblock{
     display:inline-block;
+    text-align:center;
 }
 
 .gamelbl{
@@ -326,9 +327,37 @@ input::placeholder {
     
 }
 
+.paddingauto{
+    padding:0 !important
+}
+
+.genrelbl{
+    min-height:150px;
+    min-width:150px;
+}
+
 .hide1{
     visibility:hidden;
 }
+
+.genreimg{
+    height:80%;
+    width:80%;
+    margin:auto;
+}
+
+.mg-top-80{
+    margin-top:80%;
+}
+
+.mg-top-2{
+    margin-top:2rem;
+}
+
+.pd-top-05{
+    padding-top:0.5rem;
+}
+
 
 .container-g {
     width: 100%;
