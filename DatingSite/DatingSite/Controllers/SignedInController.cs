@@ -25,24 +25,23 @@ namespace DatingSite.Controllers
             var nationalityRepository = new NationalityRepository(_context);
             var personalityRepository = new PersonalityRepository(_context);
             var list = userRepository.GetUsers();
-            //model.Users = list;
-            //model.UserGamesGenrePlatforms = userRepository.getUserGames(User.Identity.Name);
             List<CardViewModel> modelList = new List<CardViewModel>();
-            //foreach(var x in model.UserGames)
-            //{
-            //    Console.WriteLine(x);
-            //}
             foreach (var user in userRepository.getUserGamesGenresPlatformsScore(User.Identity.Name))
             {
+                if (!user.Item1.Mail.Equals(User.Identity.Name)) { 
                 user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
-                user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
-                CardViewModel CModel = new CardViewModel();
+                    user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
+
+                    CardViewModel CModel = new CardViewModel();
+
                 CModel.User = user.Item1;
                 CModel.Games = user.Item2;
                 CModel.Genres = user.Item3;
                 CModel.Platforms = user.Item4;
                 CModel.Score = user.Item5;
+
                 modelList.Add(CModel);
+                }
             }
             return View(modelList);
         }

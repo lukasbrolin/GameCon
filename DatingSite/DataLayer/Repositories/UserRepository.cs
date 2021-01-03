@@ -47,16 +47,16 @@ namespace DataLayer.Repositories
             return list;
         }
 
-        public IOrderedEnumerable<(User,List<Game>,List<Genre>,List<Platform>,int)> getUserGamesGenresPlatformsScore(string mail)
+        public IOrderedEnumerable<(User,List<Game>,List<Genre>,List<Platform>,int?)> getUserGamesGenresPlatformsScore(string mail)
         {
-            var list = new List<(User, List<Game>, List<Genre>, List<Platform>,int)>();
+            var list = new List<(User, List<Game>, List<Genre>, List<Platform>,int?)>();
             var users = _context.Users.ToList();
             ScoreCalculator scoreCalculator = new ScoreCalculator(_context);
             int i = 0;
             foreach(var user in users)
             {
 
-                int score = 0;
+                int? score = null;
                 if (!user.Mail.Equals(mail))
                 {
                     score = scoreCalculator.GetTotalScoreAllUsersPerUser(mail)[user.UserId];

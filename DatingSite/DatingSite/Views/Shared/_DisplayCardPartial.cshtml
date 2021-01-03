@@ -2,17 +2,21 @@
 @model CardViewModel
 @*@model (User, List<Game>, List<Genre>, List<Platform>,int)*@
 
-<div class="card mx-auto" style="width: 40vw;height:70vh; margin-bottom: 20rem;">
-    <img class="card-img-top" src="@Url.Content(Model.User.ImgUrl)" alt="Card image cap"> 
-    @* @Url.Content(url) *@
-    <div class="card-body">
-        <h2 class="card-title">@Model.User.NickName, @Model.User.Age</h2>
-        <h4 class="card-subtitle">@Model.User.FirstName @Model.User.LastName</h4>
-        <h4 class="card-subtitle">@Model.User.Nationality.Name <img src="~/img/Countries-Icon/@(@Model.User.Nationality.Name).png" style="width: 20px; height:20px;"/></h4>
-        <h3 class="card-text"></h3>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+<div class="card mx-auto card-properties">
+    <div class="cardheader">
+        <img class="cardimg" src="@Url.Content(Model.User.ImgUrl)" alt="Card image cap">
+        @* @Url.Content(url) *@
+        <div class="card-body profile-info">
+            <h2 class="card-title">@Model.User.NickName, @Model.User.Age</h2>
+            <h4 class="card-subtitle">@Model.User.FirstName @Model.User.LastName</h4>
+            <h4 class="card-subtitle">@Model.User.Nationality.Name <img src="~/img/Countries-Icon/@(@Model.User.Nationality.Name).png" style="width: 20px; height:20px;" /></h4>
+            <h3 class="card-text"></h3>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
     </div>
     <ul class="list-group list-group-flush">
+        @if (Model.Score.HasValue)
+        {
         <li class="list-group-item text-center">
             <h5 class="list-group-item">Score</h5>
             
@@ -22,40 +26,46 @@
                 </div>
            
         </li>
-        <li class="list-group-item text-center">
-            <h5 class="list-group-item">Games</h5>
+        }
+    <li class="list-group-item text-center">
+        <h5 class="list-group-item">Games</h5>
+        <div class="player-info-items">
             @foreach (var game in Model.Games)
             {
-                <div style="width:30%; display:inline-block;">
+                <div class="player-info">
                     @(game.Name + " ")
-                    <img style="width: 20px; height:20px;" src="~/img/Game/@(game.Name).jpg" />
+                    <img class="img-game" src="~/img/Game/@(game.Name).jpg" />
                 </div>
             }
-        </li>
+         </div>
+    </li>
         <li class="list-group-item text-center">
             <h5 class="list-group-item">Genres</h5>
-            @foreach (var genre in Model.Genres)
-            {
-                <div style="width:30%; display:inline-block;">
-                    @(genre.Name + " ")
-                    <img style="width: 20px; height:20px;" src="~/img/Genre/@(genre.Name).png" />
-                </div>
-            }
+            <div class="player-info-items">
+                @foreach (var genre in Model.Genres)
+                {
+                    <div class="player-info">
+                        @(genre.Name + " ")
+                        <img class="img-genre" src="~/img/Genre/@(genre.Name).png" />
+                    </div>
+                }
+            </div>
         </li>
         <li class="list-group-item text-center">
             <h5 class="list-group-item">Platforms</h5>
-            @foreach (var platform in Model.Platforms)
-            {
-                <div style="width:30%; display:inline-block;">
-                    @(platform.Name + " ")
-                    <img style="width: 20px; height:20px;" src="~/img/Platform/@(platform.Name).png" />
-                </div>
-            }
-
+            <div class="player-info-items">
+                @foreach (var platform in Model.Platforms)
+                {
+                    <div class="player-info">
+                        @(platform.Name + " ")
+                        <img class="img-platform" src="~/img/Platform/@(platform.Name).png" />
+                    </div>
+                }
+            </div>
         </li>
     </ul>
-    <div class="card-body">
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
+    <div class="card-body player-info-items">
+        <a href="#" class="card-link">Profile</a>
+        <a href="#" class="card-link">Match</a>
     </div>
 </div>

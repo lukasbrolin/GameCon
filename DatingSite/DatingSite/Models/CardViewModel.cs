@@ -22,7 +22,7 @@ namespace DatingSite.Models
 
         public List<Platform> Platforms { get; set; }
 
-        public int Score { get; set; }
+        public Nullable<int> Score { get; set; }
 
         
     }
