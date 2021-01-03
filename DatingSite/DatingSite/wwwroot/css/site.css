@@ -311,3 +311,27 @@ input::placeholder {
     margin-bottom: 6rem;
     margin-top:2rem;
 }
+
+.display-flex{
+    display:flex;
+}
+
+.display-inlineblock{
+    display:inline-block;
+}
+
+.gamelbl{
+    min-width:49%;
+    height:22vh;
+    
+}
+
+.hide1{
+    visibility:hidden;
+}
+
+.container-g {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}

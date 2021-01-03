@@ -18,6 +18,19 @@ namespace DataLayer.Repositories
             return _context.Friends.ToList();
         }
 
+        public List<User> GetFriendsIdByMail(string mail)
+        {
+            var userRepository = new UserRepository(_context);
+            var userIdList = new List<int>();
+            userIdList = _context.Friends.Where(x => x.SenderId.Equals(userRepository.getUserIdByMail(mail))).Select(y => y.ReceiverId).ToList();
+            var friendList = new List<User>();
+            foreach(var user in userIdList)
+            {
+                friendList.Add(userRepository.getUserById(user));
+            }
+            return friendList;
+        }
+
         public void AddFriend(Friend friend)
         {
             _context.Friends.Add(friend);

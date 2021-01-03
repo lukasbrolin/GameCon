@@ -21,6 +21,11 @@ namespace DataLayer.Repositories
             return _context.Users.ToList();
         }
 
+        public int getUserIdByMail(string mail)
+        {
+            return _context.Users.FirstOrDefault(x => x.Mail.Equals(mail)).UserId;
+        }
+
         public List<string> getUserGamesById(int userId)
         {
             var list = new List<string>();

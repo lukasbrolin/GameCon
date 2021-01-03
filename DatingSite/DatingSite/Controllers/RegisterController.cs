@@ -25,11 +25,6 @@ namespace DatingSite.Controllers
             var nationalityRepo = new NationalityRepository(_context);
             ViewBag.PList = personalityRepo.GetPersonalities();
             ViewBag.NList = nationalityRepo.GetNationalities();
-            Console.WriteLine(personalityRepo.getAll().Count);
-            foreach(var d in personalityRepo.getAll())
-            {
-                Console.WriteLine(d);
-            }
             return View(new RegisterViewModel());
         }
 
@@ -51,43 +46,31 @@ namespace DatingSite.Controllers
             user.PersonalityId = personalityRepo.GetPersonalityIdByName(model.Personality);
             user.Active = true;
             user.Online = true;
-            user.ImgUrl = "Default";
-
 
             if (file != null)
             {
                 try
                 {
-
                     string imgUrl = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
 
-
-                    // Till utvecklarna: Spara inte på för långa sökvägar. Windows begränsar längden på sökvägen och bilden kan ej sparas. 
                     if (imgUrl.ToLower().Contains(".jpeg") || imgUrl.ToLower().Contains(".jpg") || imgUrl.Contains(".png"))
                     {
                         string savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img\\avatars", imgUrl);
                         string relPath = System.IO.Path.Combine("~/img/avatars/" + imgUrl);
-                        /*string savePath = Path.Combine("C:\\", imgName);*/
                         using (var fileStream = new FileStream(savePath, FileMode.Create))
                         {
                             file.CopyTo(fileStream);
                         }
 
-
                         user.ImgUrl = relPath;
-
                     }
-
                 }
-
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
             }
             userRepo.AddUser(user);
-
-
             return RedirectToAction("Index", "Games");
         }
     }

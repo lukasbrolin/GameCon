@@ -26,13 +26,8 @@ namespace DatingSite.Controllers
             var nationalityRepository = new NationalityRepository(_context);
             var personalityRepository = new PersonalityRepository(_context);
             var list = userRepository.GetUsers();
-            //model.Users = list;
-            //model.UserGamesGenrePlatforms = userRepository.getUserGames(User.Identity.Name);
             List<CardViewModel> modelList = new List<CardViewModel>();
-            //foreach(var x in model.UserGames)
-            //{
-            //    Console.WriteLine(x);
-            //}
+
             foreach (var user in userRepository.getUserGamesGenresPlatformsScore(User.Identity.Name))
             {
                 if (user.Item1.NickName.Equals(profile))
