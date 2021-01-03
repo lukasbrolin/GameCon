@@ -19,7 +19,7 @@ namespace DatingSite.Controllers
             _context = context;
         }
         // GET: ProfileController
-        public ActionResult Index(CardViewModel model, string mail)
+        public ActionResult Index(CardViewModel model, string profile)
         {
             var userRepository = new UserRepository(_context);
             var nationalityRepository = new NationalityRepository(_context);
@@ -34,7 +34,7 @@ namespace DatingSite.Controllers
             //}
             foreach (var user in userRepository.getUserGamesGenresPlatformsScore(User.Identity.Name))
             {
-                if (user.Item1.Mail.Equals(mail))
+                if (user.Item1.NickName.Equals(profile))
                 {
                     user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
                     user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
