@@ -3,6 +3,75 @@
     <div class="container h-100">
     @foreach (var item in Model)
     {
-        <partial name="_DisplayCardPartial" model="item" />
+        <div class="card mx-auto card-properties">
+            <div class="cardheader">
+                <img class="cardimg" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
+                @* @Url.Content(url) *@
+                <div class="card-body profile-info">
+                    <h2 class="card-title">@item.User.NickName, @item.User.Age </h2>
+                    <h4 class="card-subtitle">@item.User.FirstName @item.User.LastName</h4>
+                    <h4 class="card-subtitle">@item.User.Nationality.Name <img src="~/img/Countries-Icon/@(@item.User.Nationality.Name).png" style="width: 20px; height:20px;" /></h4>
+                    <h3 class="card-text"></h3>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush">
+                @if (item.Score.HasValue)
+                {
+                    <li class="list-group-item text-center">
+                        <h5 class="list-group-item">Score</h5>
+
+                        <div style="width:30%; display:inline-block;">
+                            <h1>@item.Score</h1>
+
+                        </div>
+
+                    </li>
+                }
+                <li class="list-group-item text-center">
+                    <h5 class="list-group-item">Games</h5>
+                    <div class="player-info-items">
+                        @foreach (var game in item.Games)
+                        {
+                            <div class="player-info">
+                                @(game.Name + " ")
+                                <img class="img-game" src="~/img/Game/@(game.Name).jpg" />
+                            </div>
+                        }
+                    </div>
+                </li>
+                <li class="list-group-item text-center">
+                    <h5 class="list-group-item">Genres</h5>
+                    <div class="player-info-items">
+                        @foreach (var genre in item.Genres)
+                        {
+                            <div class="player-info">
+                                @(genre.Name + " ")
+                                <img class="img-genre" src="~/img/Genre/@(genre.Name).png" />
+                            </div>
+                        }
+                    </div>
+                </li>
+                <li class="list-group-item text-center">
+                    <h5 class="list-group-item">Platforms</h5>
+                    <div class="player-info-items">
+                        @foreach (var platform in item.Platforms)
+                        {
+                            <div class="player-info">
+                                @(platform.Name + " ")
+                                <img class="img-platform" src="~/img/Platform/@(platform.Name).png" />
+                            </div>
+                        }
+                    </div>
+                </li>
+            </ul>
+            <div class="card-body player-info-items">
+                <a asp-controller="Profile" asp-action="Index" asp-route-profile="@item.User.NickName" class="card-link">
+                    Profile
+
+                </a>
+                <a asp-controller="Profile" asp-action="Index" class="card-link">Match</a>
+            </div>
+        </div>
     }
 </div>

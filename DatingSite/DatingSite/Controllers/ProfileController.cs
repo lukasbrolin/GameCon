@@ -19,8 +19,9 @@ namespace DatingSite.Controllers
             _context = context;
         }
         // GET: ProfileController
-        public ActionResult Index(CardViewModel model, string profile)
+        public ActionResult Index(ProfileViewModel model, string profile)
         {
+            var visitorRepository = new VisitRepository(_context);
             var userRepository = new UserRepository(_context);
             var nationalityRepository = new NationalityRepository(_context);
             var personalityRepository = new PersonalityRepository(_context);
@@ -36,28 +37,41 @@ namespace DatingSite.Controllers
             {
                 if (user.Item1.NickName.Equals(profile))
                 {
+                    var usersVisits = userRepository.GetUserVisitorsByMail(user.Item1.Mail);
+
                     user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
                     user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
                     model.User = user.Item1;
                     model.Games = user.Item2;
                     model.Genres = user.Item3;
                     model.Platforms = user.Item4;
+                    model.Visits = usersVisits;
+
                     //model.Score = user.Item5;
                     break;
                 }
                 else if (user.Item1.Mail.Equals(User.Identity.Name))
                 {
+                    var usersVisits = userRepository.GetUserVisitorsByMail(User.Identity.Name);
+
                     user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
                     user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
                     model.User = user.Item1;
                     model.Games = user.Item2;
                     model.Genres = user.Item3;
                     model.Platforms = user.Item4;
+                    model.Visits = usersVisits;
+
                     //model.Score = user.Item5;
                     break;
                 }
 
             }
+            return View(model);
+        }
+
+        public ActionResult Visitors(VisitorViewModel model)
+        {
             return View(model);
         }
 

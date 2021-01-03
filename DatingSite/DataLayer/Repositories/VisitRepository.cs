@@ -18,6 +18,7 @@ namespace DataLayer.Repositories
             return _context.Visits.ToList();
         }
 
+
         public void AddVisits(Visit visit)
         {
             _context.Visits.Add(visit);

@@ -52,6 +52,7 @@ namespace DataLayer.Repositories
             var list = new List<(User, List<Game>, List<Genre>, List<Platform>,int?)>();
             var users = _context.Users.ToList();
             ScoreCalculator scoreCalculator = new ScoreCalculator(_context);
+            
             int i = 0;
             foreach(var user in users)
             {
@@ -66,6 +67,7 @@ namespace DataLayer.Repositories
                 _context.Entry(user).Collection(x => x.Games).Load();
                 _context.Entry(user).Collection(x => x.Genres).Load();
                 _context.Entry(user).Collection(x => x.Platforms).Load();
+                _context.Entry(user).Collection(x => x.Visitors).Load();
                 foreach (var game in user.Games)
                 {
                     list[i].Item2.Add(game);
@@ -101,6 +103,23 @@ namespace DataLayer.Repositories
             //    }
             //}
             return list.OrderByDescending(o=>o.Item5);
+        }
+        public List<Visit> GetUserVisitorsByMail(string mail)
+        {
+            var list = new List<Visit>();
+            var users = _context.Users.ToList();
+            foreach(var user in users)
+            {
+                _context.Entry(user).Collection(x => x.Visitors).Load();
+                foreach(Visit v in user.Visitors)
+                {
+                    if (user.Mail.Equals(mail))
+                    {
+                        list.Add(v);
+                    }
+                }
+            }
+            return list;
         }
 
         public List<Game> GetUserGamesByMail(string mail)
