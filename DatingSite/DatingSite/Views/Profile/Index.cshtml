@@ -12,7 +12,9 @@
                 <h4 class="card-subtitle">@Model.User.Nationality.Name <img src="~/img/Countries-Icon/@(@Model.User.Nationality.Name).png" style="width: 20px; height:20px;" /></h4>
                 <h3 class="card-text"></h3>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a asp-controller="ChangeGGP" asp-action="Index" class="card-link">Preferences</a>
             </div>
+
         </div>
         <ul class="list-group list-group-flush">
             @if (Model.Score.HasValue)
