@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,12 +10,15 @@ namespace DataLayer.Models
         [Required]
         public virtual int UserId { get; set; }
 
+        [DisplayName("Nickname")]
         [Required]
         public virtual string NickName { get; set; }
 
+        [DisplayName("First name")]
         [Required]
         public virtual string FirstName { get; set; }
 
+        [DisplayName("Last name")]
         [Required]
         public virtual string LastName { get; set; }
 

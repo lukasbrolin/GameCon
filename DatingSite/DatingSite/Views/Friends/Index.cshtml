@@ -1,16 +1,10 @@
 ﻿@model IEnumerable<DataLayer.Models.Friend>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Friends";
 }
 
 <div class="container">
-
-    <form method="get" asp-action="Search" asp-controller="Search">
-        <input type="search" name="name" value="Search" />
-        <input type="submit" name="name" class="btn btn-primary" />
-    </form>
-
     <h1>Friends</h1>
     <table class="table table-hover">
         <thead>
@@ -31,7 +25,6 @@
             @foreach (var item in Model)
             {
                 <tr>
-
                     <td>
                         <a asp-controller="Profile" asp-action="Index" asp-route-profile="@item.Receiver.NickName" class="card-link">
                             @Html.DisplayFor(modelItem => item.Receiver.NickName)

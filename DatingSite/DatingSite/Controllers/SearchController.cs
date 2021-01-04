@@ -21,11 +21,12 @@ namespace DatingSite.Controllers
         public ActionResult Search(string searchString)
         {
             var users = from u in _context.Users
+                        .Include(u => u.Nationality)
                         select u;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                users = users.Where(s => s.FirstName.Contains(searchString) || s.NickName.Contains(searchString));
+                users = users.Where(u => u.FirstName.Contains(searchString) || u.LastName.Contains(searchString) || u.NickName.Contains(searchString));
             }
 
             return View(users.ToList());

@@ -26,12 +26,14 @@ namespace DatingSite.Controllers
             var userRepo = new UserRepository(_context);
             var userId = userRepo.getUserIdByMail(User.Identity.Name);
             var categoryRepo = new CategoryRepository(_context);
+
             var datingSiteContext = _context.Friends
                 .Include(f => f.Category)
                 .Include(f => f.Receiver)
                 .Include(f => f.Sender)
                 .Include(f => f.Status)
                 .Where(u => u.SenderId == userId);
+
             return View(await datingSiteContext.ToListAsync());
         }
 

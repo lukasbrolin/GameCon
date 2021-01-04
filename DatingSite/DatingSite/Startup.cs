@@ -67,7 +67,7 @@ namespace DatingSite
 
                 endpoints.MapControllerRoute(
                     name: "search-users",
-                    pattern: "{controller=Search}/{action=Index}/{id?}");
+                    pattern: "{controller=Search}/{action=Search}/{searchString?}");
 
                 endpoints.MapControllerRoute(
                     name: "chat",
