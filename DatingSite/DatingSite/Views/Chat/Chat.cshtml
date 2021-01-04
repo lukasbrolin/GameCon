@@ -1,0 +1,14 @@
+﻿@using DataLayer.Models
+@model List<Message>
+
+@{
+    ViewData["Title"] = "Chat";
+}
+
+<h1>Chat</h1>
+
+@foreach (var item in Model)
+{
+    @item.TimeStamp.Date
+    @item.Content
+}

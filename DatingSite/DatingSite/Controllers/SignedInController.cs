@@ -28,19 +28,20 @@ namespace DatingSite.Controllers
             List<CardViewModel> modelList = new List<CardViewModel>();
             foreach (var user in userRepository.getUserGamesGenresPlatformsScore(User.Identity.Name))
             {
-                if (!user.Item1.Mail.Equals(User.Identity.Name)) { 
-                user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
+                if (!user.Item1.Mail.Equals(User.Identity.Name))
+                {
+                    user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
                     user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
 
                     CardViewModel CModel = new CardViewModel();
 
-                CModel.User = user.Item1;
-                CModel.Games = user.Item2;
-                CModel.Genres = user.Item3;
-                CModel.Platforms = user.Item4;
-                CModel.Score = user.Item5;
+                    CModel.User = user.Item1;
+                    CModel.Games = user.Item2;
+                    CModel.Genres = user.Item3;
+                    CModel.Platforms = user.Item4;
+                    CModel.Score = user.Item5;
 
-                modelList.Add(CModel);
+                    modelList.Add(CModel);
                 }
             }
             return View(modelList);
@@ -113,15 +114,6 @@ namespace DatingSite.Controllers
             {
                 return View();
             }
-        }
-
-        public IActionResult Chat(ChatViewModel model)
-        {
-            var userRepo = new UserRepository(_context);
-            var user = userRepo.getUserByMail(User.Identity.Name);
-            var messageRepo = new MessageRepository(_context);
-            model.Messages = messageRepo.GetMessages(user.UserId);
-            return View(model);
         }
     }
 }
