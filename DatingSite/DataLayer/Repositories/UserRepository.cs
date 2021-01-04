@@ -10,10 +10,18 @@ namespace DataLayer.Repositories
     public class UserRepository
     {
         private readonly DatingSiteContext _context;
+        private GameRepository gamesRepository;
+        private GenreRepository genreRepository;
+        private PlatformRepository platformRepository;
+
 
         public UserRepository(DatingSiteContext context)
         {
             _context = context;
+            gamesRepository = new GameRepository(_context);
+            genreRepository = new GenreRepository(_context);
+            platformRepository = new PlatformRepository(_context);
+
         }
 
         public List<User> GetUsers()
@@ -29,7 +37,7 @@ namespace DataLayer.Repositories
         public List<string> getUserGamesById(int userId)
         {
             var list = new List<string>();
-            var games = _context.Games.ToList();
+            var games = gamesRepository.GetGames();
             var user = _context.Users.FirstOrDefault(x => x.UserId.Equals(userId));
             _context.Entry(user).Collection(x => x.Games).Load();
             _context.Entry(user).Collection(y => y.Genres).Load();
@@ -87,26 +95,6 @@ namespace DataLayer.Repositories
                 }
                 i++;
             }
-            //var games = _context.Games.ToList();
-            ////var user = _context.Users.FirstOrDefault(x => x.UserId.Equals(userId));
-            //_context.Entry(user).Collection(x => x.Games).Load();
-            //_context.Entry(user).Collection(y => y.Genres).Load();
-            //foreach (var game in user.Games)
-            //{
-            //    list.Add(game.Name);
-            //}
-            //foreach (var genre in user.Genres)
-            //{
-            //    list.Add(genre.Name);
-            //}
-            //foreach (var d in games)
-            //{
-            //    _context.Entry(d).Collection(x => x.Users).Load();
-            //    foreach (User c in d.Users)
-            //    {
-            //        list.Add(d.Name + " + " + c.FirstName);
-            //    }
-            //}
             return list.OrderByDescending(o=>o.Item5);
         }
         public List<Visit> GetUserVisitorsByMail(string mail)
@@ -130,7 +118,7 @@ namespace DataLayer.Repositories
         public List<Game> GetUserGamesByMail(string mail)
         {
             var list = new List<Game>();
-            var games = _context.Games.ToList();
+            var games = gamesRepository.GetGames();
             foreach (var d in games)
             {
                 _context.Entry(d).Collection(x => x.Users).Load();
@@ -146,7 +134,7 @@ namespace DataLayer.Repositories
         public List<Genre> GetUserGenresByMail(string mail)
         {
             var list = new List<Genre>();
-            var genres = _context.Genres.ToList();
+            var genres = genreRepository.GetGenres();
             foreach (var d in genres)
             {
                 _context.Entry(d).Collection(x => x.Users).Load();
@@ -162,7 +150,7 @@ namespace DataLayer.Repositories
         public List<Platform> GetUserPlatformsByMail(string mail)
         {
             var list = new List<Platform>();
-            var platforms = _context.Platforms.ToList();
+            var platforms = platformRepository.GetPlatforms();
             foreach (var d in platforms)
             {
                 _context.Entry(d).Collection(x => x.Users).Load();
@@ -177,7 +165,8 @@ namespace DataLayer.Repositories
 
         public void SetUserGames(string mail, string[] selectedGames)
         {
-            var games = _context.Games.ToList();
+
+            var games = gamesRepository.GetGames();
             foreach (var d in selectedGames)
             {
                 foreach (var e in games)
@@ -186,7 +175,7 @@ namespace DataLayer.Repositories
                     {
                         var x = _context.Users.FirstOrDefault<User>(x => x.Mail.Equals(mail));
                         x.Games.Add(e);
-                        var y = _context.Games.FirstOrDefault<Game>(y => y.Name.Equals(e.Name));
+                        var y = gamesRepository.GetGames().FirstOrDefault<Game>(y => y.Name.Equals(e.Name));
                         y.Users.Add(x);
                     }
                 }
@@ -196,7 +185,7 @@ namespace DataLayer.Repositories
 
         public void SetUserGenres(string mail, string[] selectedGenres)
         {
-            var genres = _context.Genres.ToList();
+            var genres = genreRepository.GetGenres();
             foreach (var d in selectedGenres)
             {
                 foreach (var e in genres)
@@ -205,7 +194,7 @@ namespace DataLayer.Repositories
                     {
                         var x = _context.Users.FirstOrDefault<User>(x => x.Mail.Equals(mail));
                         x.Genres.Add(e);
-                        var y = _context.Genres.FirstOrDefault<Genre>(y => y.Name.Equals(e.Name));
+                        var y = genreRepository.GetGenres().FirstOrDefault<Genre>(y => y.Name.Equals(e.Name));
                         y.Users.Add(x);
                     }
                 }
@@ -215,7 +204,7 @@ namespace DataLayer.Repositories
 
         public void SetUserPlatforms(string mail, string[] selectedPlatforms)
         {
-            var platforms = _context.Platforms.ToList();
+            var platforms = platformRepository.GetPlatforms();
             foreach (var d in selectedPlatforms)
             {
                 foreach (var e in platforms)
@@ -224,25 +213,13 @@ namespace DataLayer.Repositories
                     {
                         var x = _context.Users.FirstOrDefault<User>(x => x.Mail.Equals(mail));
                         x.Platforms.Add(e);
-                        var y = _context.Platforms.FirstOrDefault<Platform>(y => y.Name.Equals(e.Name));
+                        var y = platformRepository.GetPlatforms().FirstOrDefault<Platform>(y => y.Name.Equals(e.Name));
                         y.Users.Add(x);
                     }
                 }
             }
             _context.SaveChanges();
         }
-
-        //public void UpdateUserGames(string[] selectedGames, User userToUpdate)
-        //{
-        //    var selectedGamesList = new List<string>(selectedGames);
-        //    foreach(var game in _context.Games)
-        //    {
-        //        if (selectedGamesList.Contains(game.Name))
-        //        {
-        //            if(!)
-        //        }
-        //    }
-        //}
 
         public List<User> GetUserByName(string search)
         {

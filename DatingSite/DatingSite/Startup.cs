@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using DataLayer;
+using System.Web.Http;
 
 namespace DatingSite
 {
@@ -25,7 +26,7 @@ namespace DatingSite
         {
             services.AddDbContext<DatingSiteContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DatingSiteConnection")));
+                    Configuration.GetConnectionString("DatingSiteConnection")).EnableSensitiveDataLogging());
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
@@ -65,9 +66,18 @@ namespace DatingSite
                 endpoints.MapRazorPages();
 
                 endpoints.MapControllerRoute(
+                    name: "search-users",
+                    pattern: "{controller=Search}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
                     name: "chat",
                     pattern: "{controller=Chat}/{action=Chat}/{id?}");
                 endpoints.MapRazorPages();
+
+                endpoints.MapControllerRoute(
+                    name: "api",
+                    pattern: "api/{controller}/{id}",
+                    defaults: new { id = RouteParameter.Optional });
             });
         }
     }

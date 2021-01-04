@@ -25,7 +25,7 @@ namespace DataLayer.Repositories
         {
             Dictionary<int, int> ScoreList = new Dictionary<int, int>();
             List<Game> userGames = _userRepository.GetUserGamesByMail(mail);
-            var Users = _context.Users.ToList();
+            var Users = _userRepository.GetUsers();
             
             foreach(var user in Users)
             {
@@ -47,20 +47,8 @@ namespace DataLayer.Repositories
                 }
                 ScoreList.Add(user.UserId, i);
             }
-            foreach(KeyValuePair<int,int> kvp in ScoreList)
-            {
-                Console.WriteLine("User: " + kvp.Key + " has Score: " + kvp.Value);
-            }
             return ScoreList;
         }
-
-        //public int GetGameScoreUserPerUser(string mail, int id)
-        //{
-        //    List<Game> userGames = _userRepository.GetUserGamesByMail(mail);
-        //    List<Game> userGames = _userRepository.GetUserGamesByMail(mail);
-
-
-        //}
 
         public Dictionary<int, int> GetGenreScoreAllUsersPerUser(string mail)
         {
@@ -87,10 +75,6 @@ namespace DataLayer.Repositories
                     }
                 }
                 ScoreList.Add(user.UserId, i);
-            }
-            foreach (KeyValuePair<int, int> kvp in ScoreList)
-            {
-                Console.WriteLine("User: " + kvp.Key + " has Score: " + kvp.Value);
             }
             return ScoreList;
         }
@@ -121,10 +105,6 @@ namespace DataLayer.Repositories
                 }
                 ScoreList.Add(user.UserId, i);
             }
-            foreach (KeyValuePair<int, int> kvp in ScoreList)
-            {
-                Console.WriteLine("User: " + kvp.Key + " has Score: " + kvp.Value);
-            }
             return ScoreList;
         }
 
@@ -154,8 +134,6 @@ namespace DataLayer.Repositories
                 {
                     ScoreList.Add(user.UserId, i);
                 }
-                
-                
             }
             
             return ScoreList;
@@ -185,6 +163,28 @@ namespace DataLayer.Repositories
             return ScoreList;
         }
 
+        public Dictionary<int,int> GetAgeScoreAllUsersPerUser(string mail)
+        {
+            Dictionary<int, int> ScoreList = new Dictionary<int, int>();
+            List<User> Users = _userRepository.GetUsers();
+            User thisUser = _userRepository.getUserByMail(mail);
+
+            foreach (var user in Users)
+            {
+                int i = 0;
+                if (user.Mail.Equals(mail))
+                {
+                    continue;
+                }
+                if(user.Age < (user.Age + 2) && user.Age > (user.Age -2)){
+                    i++;
+                }
+                ScoreList.Add(user.UserId, i);
+            }
+
+            return ScoreList;
+        }
+
         public Dictionary<int,int> GetTotalScoreAllUsersPerUser(string mail)
         {
             Dictionary<int, int> TotalScore = new Dictionary<int, int>();
@@ -199,12 +199,10 @@ namespace DataLayer.Repositories
                 GetPersonalityScoreAllUsersPerUser(mail).TryGetValue(kvp.Key, out personalityScore);
                 int nationalityScore;
                 GetNationalityScoreAllUsersPerUser(mail).TryGetValue(kvp.Key, out nationalityScore);
-                score = (kvp.Value + genreScore + platformScore + personalityScore + nationalityScore);
+                int ageScore;
+                GetAgeScoreAllUsersPerUser(mail).TryGetValue(kvp.Key, out ageScore);
+                score = (kvp.Value + genreScore + platformScore + personalityScore + nationalityScore + ageScore);
                 TotalScore.Add(kvp.Key, score);
-            }
-            foreach (KeyValuePair<int, int> kvp in TotalScore)
-            {
-                Console.WriteLine("User: " + kvp.Key + " has Score: " + kvp.Value);
             }
             return TotalScore;
         }

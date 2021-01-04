@@ -25,6 +25,7 @@ namespace DatingSite.Controllers
             var userRepository = new UserRepository(_context);
             var nationalityRepository = new NationalityRepository(_context);
             var personalityRepository = new PersonalityRepository(_context);
+            var visitRepository = new VisitRepository(_context);
             var list = userRepository.GetUsers();
             List<CardViewModel> modelList = new List<CardViewModel>();
 
@@ -42,6 +43,9 @@ namespace DatingSite.Controllers
                     model.Platforms = user.Item4;
                     model.Visits = usersVisits;
 
+                    if (!user.Item1.Mail.Equals(User.Identity.Name)){
+                        visitRepository.AddVisits(visitRepository.CreateVisit(user.Item1, userRepository.getUserByMail(User.Identity.Name), DateTime.Now));
+                    }
                     //model.Score = user.Item5;
                     break;
                 }
@@ -64,6 +68,8 @@ namespace DatingSite.Controllers
             }
             return View(model);
         }
+
+
 
         public ActionResult Visitors(VisitorViewModel model)
         {

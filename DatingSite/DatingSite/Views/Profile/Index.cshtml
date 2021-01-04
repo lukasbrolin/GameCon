@@ -5,7 +5,6 @@
     <div class="card mx-auto card-properties">
         <div class="cardheader">
             <img class="cardimg" src="@Url.Content(Model.User.ImgUrl)" alt="Card image cap">
-            @* @Url.Content(url) *@
             <div class="card-body profile-info">
                 <h2 class="card-title">@Model.User.NickName, @Model.User.Age</h2>
                 <h4 class="card-subtitle">@Model.User.FirstName @Model.User.LastName</h4>
@@ -19,25 +18,25 @@
         <ul class="list-group list-group-flush">
             @if (Model.Score.HasValue)
             {
-                <li class="list-group-item text-center">
-                    <h5 class="list-group-item">Score</h5>
+            <li class="list-group-item text-center">
+                <h5 class="list-group-item">Score</h5>
 
-                    <div style="width:30%; display:inline-block;">
-                        <h1>@Model.Score</h1>
+                <div style="width:30%; display:inline-block;">
+                    <h1>@Model.Score</h1>
 
-                    </div>
+                </div>
 
-                </li>
+            </li>
             }
             <li class="list-group-item text-center">
                 <h5 class="list-group-item">Games</h5>
                 <div class="player-info-items">
                     @foreach (var game in Model.Games)
                     {
-                        <div class="player-info">
-                            @(game.Name + " ")
-                            <img class="img-game" src="~/img/Game/@(game.Name).jpg" />
-                        </div>
+                    <div class="player-info">
+                        @(game.Name + " ")
+                        <img class="img-game" src="~/img/Game/@(game.Name).jpg" />
+                    </div>
                     }
                 </div>
             </li>
@@ -46,10 +45,10 @@
                 <div class="player-info-items">
                     @foreach (var genre in Model.Genres)
                     {
-                        <div class="player-info">
-                            @(genre.Name + " ")
-                            <img class="img-genre" src="~/img/Genre/@(genre.Name).png" />
-                        </div>
+                    <div class="player-info">
+                        @(genre.Name + " ")
+                        <img class="img-genre" src="~/img/Genre/@(genre.Name).png" />
+                    </div>
                     }
                 </div>
             </li>
@@ -58,25 +57,23 @@
                 <div class="player-info-items">
                     @foreach (var platform in Model.Platforms)
                     {
-                        <div class="player-info">
-                            @(platform.Name + " ")
-                            <img class="img-platform" src="~/img/Platform/@(platform.Name).png" />
-                        </div>
+                    <div class="player-info">
+                        @(platform.Name + " ")
+                        <img class="img-platform" src="~/img/Platform/@(platform.Name).png" />
+                    </div>
                     }
                 </div>
             </li>
-            <li class="list-group-item text-center">
-                <h5 class="list-group-item">Latest Visitors</h5>
-                <div class="player-info-items">
-                    @foreach(var visitor in Model.Visits)
-                    {
-                        <div class="player-info">
-                            @(visitor.Sender.NickName + "")
-                            <img class="img-platform" src="@Url.Content(visitor.Sender.ImgUrl)" />
-                        </div>
+            @{if (Model.User.Mail.Equals(User.Identity.Name))
+                {
+                <li class="list-group-item text-center">
+                    <h5 id = "VisitorTitle"class="list-group-item">Latest Vistors</h5>
+                    <div class="player-info-items" id="Visits">
+                    <div class="player-info w-100 flexdirectionrow" id="visitDiv"></div>
+                    </div>
+                </li>
                     }
-                </div>
-            </li>
+                }
         </ul>
         <div class="card-body player-info-items">
             <a asp-controller="Profile" asp-action="Index" asp-route-profile="@Model.User.NickName" class="card-link">
@@ -90,3 +87,28 @@
         </div>
     </div>
 </div>
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+              $.ajax({
+                url: "/Api/Visitor/Visit",
+                  type: "Post",
+                  data: JSON.stringify(["@Model.User.Mail"]),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    var i = 0;
+                
+                    $.each(data, function () {
+                        console.log(data)
+                        $("#visitDiv").append("<div class=\" player-info\">" + data[i].name +
+                            "<img  class=\"img-platform\" src=\"" + data[i].img +"\"/></div > ");
+
+                        i++;
+                    });
+                    $.each
+                },
+                error: function () { bootbox.alert("Something went wrong, RIP"); }
+            });
+        });
+    </script>
+}

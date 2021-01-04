@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataLayer;
 using DataLayer.Models;
+using DataLayer.Repositories;
 
 namespace DatingSite.Controllers
 {
@@ -22,7 +23,15 @@ namespace DatingSite.Controllers
         // GET: Friends
         public async Task<IActionResult> Index()
         {
-            var datingSiteContext = _context.Friends.Include(f => f.Category).Include(f => f.Receiver).Include(f => f.Sender).Include(f => f.Status);
+            var userRepo = new UserRepository(_context);
+            var userId = userRepo.getUserIdByMail(User.Identity.Name);
+            var categoryRepo = new CategoryRepository(_context);
+            var datingSiteContext = _context.Friends
+                .Include(f => f.Category)
+                .Include(f => f.Receiver)
+                .Include(f => f.Sender)
+                .Include(f => f.Status)
+                .Where(u => u.SenderId == userId);
             return View(await datingSiteContext.ToListAsync());
         }
 
@@ -59,8 +68,6 @@ namespace DatingSite.Controllers
         }
 
         // POST: Friends/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FriendId,SenderId,ReceiverId,CategoryId,StatusId")] Friend friend)
@@ -92,15 +99,10 @@ namespace DatingSite.Controllers
                 return NotFound();
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", friend.CategoryId);
-            ViewData["ReceiverId"] = new SelectList(_context.Users, "UserId", "FirstName", friend.ReceiverId);
-            ViewData["SenderId"] = new SelectList(_context.Users, "UserId", "FirstName", friend.SenderId);
-            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "Description", friend.StatusId);
             return View(friend);
         }
 
         // POST: Friends/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("FriendId,SenderId,ReceiverId,CategoryId,StatusId")] Friend friend)
@@ -114,7 +116,8 @@ namespace DatingSite.Controllers
             {
                 try
                 {
-                    _context.Update(friend);
+                    _context.Friends.Attach(friend);
+                    _context.Entry(friend).Property(c => c.CategoryId).IsModified = true;
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -131,9 +134,6 @@ namespace DatingSite.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", friend.CategoryId);
-            ViewData["ReceiverId"] = new SelectList(_context.Users, "UserId", "FirstName", friend.ReceiverId);
-            ViewData["SenderId"] = new SelectList(_context.Users, "UserId", "FirstName", friend.SenderId);
-            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "Description", friend.StatusId);
             return View(friend);
         }
 
