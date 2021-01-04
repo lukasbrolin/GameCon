@@ -39,7 +39,6 @@ namespace DatingSite.API
                     Img = visit.ImgUrl.Substring(1)
                 });
             }
-            Console.WriteLine(returnData[0]);
             return returnData;
             //if (data != null)
             //{
