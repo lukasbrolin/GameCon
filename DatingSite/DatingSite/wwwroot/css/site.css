@@ -297,7 +297,7 @@ input::placeholder {
 }
 
 .img-genre, .img-platform{
-    width:2rem;
+    width:4rem;
 }
 
 .player-info-items{
@@ -363,4 +363,12 @@ input::placeholder {
     width: 100%;
     margin-right: auto;
     margin-left: auto;
+}
+
+.w-18{
+    width:18%!important;
+}
+
+.flexdirectionrow{
+    flex-direction:row;
 }

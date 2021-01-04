@@ -7,17 +7,18 @@ namespace DataLayer.Repositories
     public class PersonalityRepository
     {
         private readonly DatingSiteContext _context;
+        private GameRepository gameRepository;
 
         public PersonalityRepository(DatingSiteContext context)
         {
             _context = context;
-           
+            gameRepository = new GameRepository(_context);
         }
 
         public List<string> getAll()
         {
             var list = new List<string>();
-            var games = _context.Games.ToList();
+            var games = gameRepository.GetGames();
             foreach (var d in games)
             {
                 _context.Entry(d).Collection(x => x.Users).Load();

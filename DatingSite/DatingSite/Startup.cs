@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using DataLayer;
+using System.Web.Http;
 
 namespace DatingSite
 {
@@ -68,6 +69,11 @@ namespace DatingSite
                     name: "chat",
                     pattern: "{controller=Chat}/{action=Chat}/{id?}");
                 endpoints.MapRazorPages();
+
+                endpoints.MapControllerRoute(
+                    name: "api",
+                    pattern: "api/{controller}/{id}",
+                    defaults: new { id = RouteParameter.Optional });
             });
         }
     }
