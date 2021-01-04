@@ -5,7 +5,6 @@
     <div class="card mx-auto card-properties">
         <div class="cardheader">
             <img class="cardimg" src="@Url.Content(Model.User.ImgUrl)" alt="Card image cap">
-            @* @Url.Content(url) *@
             <div class="card-body profile-info">
                 <h2 class="card-title">@Model.User.NickName, @Model.User.Age</h2>
                 <h4 class="card-subtitle">@Model.User.FirstName @Model.User.LastName</h4>
@@ -63,19 +62,16 @@
                     }
                 </div>
             </li>
-            <li class="list-group-item text-center">
-                <h5 class="list-group-item">Latest Visitors</h5>
-                <div class="player-info-items" id="Visits">
-                    @*@foreach (var visitor in Model.Visits)
-                    {
-                    <div class="player-info">
-                        @(visitor.Sender.NickName + "")
-                        <img class="img-platform" src="@Url.Content(visitor.Sender.ImgUrl)" />
-                    </div>
-                    }*@
+            @{if (Model.User.Mail.Equals(User.Identity.Name))
+                {
+                <li class="list-group-item text-center">
+                    <h5 id = "VisitorTitle"class="list-group-item">Latest Vistors</h5>
+                    <div class="player-info-items" id="Visits">
                     <div class="player-info w-100 flexdirectionrow" id="visitDiv"></div>
-                </div>
-            </li>
+                    </div>
+                </li>
+                    }
+                }
         </ul>
         <div class="card-body player-info-items">
             <a asp-controller="Profile" asp-action="Index" asp-route-profile="@Model.User.NickName" class="card-link">
@@ -99,6 +95,7 @@
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     var i = 0;
+                
                     $.each(data, function () {
                         console.log(data)
                         $("#visitDiv").append("<div class=\" player-info\">" + data[i].name +

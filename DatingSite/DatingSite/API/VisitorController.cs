@@ -25,21 +25,25 @@ namespace DatingSite.API
         [HttpPost]
         public List<object> Visit(List<string> mail)
         {
-            var userRep = new UserRepository(_context);
-            var visitRep = new VisitRepository(_context);
-            var user = userRep.getUserByMail(mail[0]);
-            List<User> data = visitRep.GetLatestFiveVisitorsByMail(user.Mail);
-            List<object> returnData = new List<object>();
-            //List<object> returnData = new List<object>();
-            foreach (var visit in data)
-            {
-                returnData.Add(new
+            
+                var userRep = new UserRepository(_context);
+                var visitRep = new VisitRepository(_context);
+                var user = userRep.getUserByMail(mail[0]);
+                List<User> data = visitRep.GetLatestFiveVisitorsByMail(user.Mail);
+                List<object> returnData = new List<object>();
+                //List<object> returnData = new List<object>();
+                foreach (var visit in data)
                 {
-                    Name = visit.NickName,
-                    Img = visit.ImgUrl.Substring(1)
-                });
+                    returnData.Add(new
+                    {
+                        Name = visit.NickName,
+                        Img = visit.ImgUrl.Substring(1)
+                    });
+                }
+                return returnData;
             }
-            return returnData;
+            
+            
             //if (data != null)
             //{
             //    return data;
@@ -49,6 +53,7 @@ namespace DatingSite.API
             //{
             //    //return Content(HttpStatusCode.BadRequest, "No visitors yet.");
             //}
-        }
+        
     }
+    
 }
