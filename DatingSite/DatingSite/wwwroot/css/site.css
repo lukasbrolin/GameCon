@@ -120,6 +120,25 @@ body {
     position: relative;
 }
 
+.option_item .option_inner_selected {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 5px;
+    text-align: center;
+    padding: 58px 40px;
+    cursor: pointer;
+    color: #585c68;
+    display: block;
+    border: 5px solid transparent;
+    position: relative;
+}
+
+.option_item  .option_inner_selected.facebook {
+    border-color: #3b5999;
+    color: #3b5999;
+}
+
     .option_item .option_inner .icon {
         margin-bottom: 10px;
     }
@@ -136,6 +155,8 @@ body {
     border-color: #3b5999;
     color: #3b5999;
 }
+
+
 
 .option_item .option_inner .tickmark {
     position: absolute;
@@ -322,7 +343,7 @@ input::placeholder {
 }
 
 .gamelbl{
-    min-width:49%;
+    min-width:40%;
     height:22vh;
     
 }

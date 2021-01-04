@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataLayer.Models;
 
@@ -21,10 +22,24 @@ namespace DataLayer.Repositories
             return _context.Visits.ToList();
         }
 
+        public Visit CreateVisit(User reciever, User sender, DateTime date)
+        {
+            Visit visit = (new Visit
+            {
+                Receiver = reciever,
+                ReceiverId = reciever.UserId,
+                Sender = sender,
+                SenderId = sender.UserId,
+                TimeStamp = date
+            });
+            return visit;
+        }
 
         public void AddVisits(Visit visit)
         {
             _context.Visits.Add(visit);
+            _context.SaveChanges();
+
         }
 
         public Visit GetVisitById(int id)
@@ -46,7 +61,7 @@ namespace DataLayer.Repositories
 
         public List<User> GetLatestFiveVisitorsByMail(string mail)
         {
-            return GetVisitorsByMailOrderedByLatestDate(mail).Take(5).ToList();
+            return GetVisitorsByMailOrderedByLatestDate(mail).Distinct().Take(5).ToList();
             
         }
 
