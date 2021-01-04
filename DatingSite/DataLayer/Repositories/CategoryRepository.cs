@@ -21,6 +21,18 @@ namespace DataLayer.Repositories
             return _context.Categories.ToList();
         }
 
+        public List<string> GetCategorieNames()
+        {
+            var names = new List<string>();
+            var list = _context.Categories.ToList();
+            foreach (var item in list)
+            {
+                names.Add(item.Name);
+            }
+
+            return names;
+        }
+
         public void AddCategory(Category category)
         {
             _context.Categories.Add(category);

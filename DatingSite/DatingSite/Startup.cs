@@ -25,7 +25,7 @@ namespace DatingSite
         {
             services.AddDbContext<DatingSiteContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DatingSiteConnection")));
+                    Configuration.GetConnectionString("DatingSiteConnection")).EnableSensitiveDataLogging());
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
@@ -63,6 +63,10 @@ namespace DatingSite
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+
+                endpoints.MapControllerRoute(
+                    name: "search-users",
+                    pattern: "{controller=Search}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "chat",

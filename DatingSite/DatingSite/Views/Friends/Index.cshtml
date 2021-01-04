@@ -4,50 +4,47 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="container">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Sender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Receiver)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sender.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Receiver.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status.Description)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.FriendId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.FriendId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.FriendId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <form method="get" asp-action="Search" asp-controller="Search">
+        <input type="search" name="name" value="Search" />
+        <input type="submit" name="name" class="btn btn-primary" />
+    </form>
+
+    <h1>Friends</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Receiver.FirstName)
+                        @Html.DisplayFor(modelItem => item.Receiver.LastName)
+                    </td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.FriendId">@Html.DisplayFor(modelItem => item.Category.Name)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status.Description)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

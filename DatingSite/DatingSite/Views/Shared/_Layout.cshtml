@@ -27,16 +27,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Chat" asp-action="Index">Match</a>
                         </li>
-                        <li>
-                            <form method="get" asp-action="Search">
-                                <div class="input-group ">
-                                    <input class="form-control" @*asp-for="SearchTerm"*@ />
-                                    <div class="input-group-append">
-                                        <button type"submit" class="btn btn-primary">Search</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </li>
                     </ul>
                     <partial name="_LoginPartial" />
                     @* Create Partial for settings, account *@
