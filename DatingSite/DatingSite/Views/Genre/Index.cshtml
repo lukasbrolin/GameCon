@@ -4,52 +4,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="wrapper">
-    <div class="title">
-        Choose your favorite genres
+<div class="container-fluid mg-top-2 ">
+    <div class="row ">
+        <div class="col-md-8 mx-auto ">
+            <form asp-action="Submit" class="form-check mx-auto ">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="container-g display-inlineblock mb-4 ">
+                    @foreach (var item in Model)
+                    {
+                        <label class="option_item form-check-label genrelbl mt-1 m-4">
+                            <input type="checkbox" name="CheckBoxes" value="@item.Name" class="checkbox hide1 position-fixed">
+                            <div class="option_inner facebook paddingauto genrelbl">
+                                <img src="~/img/Genre/@(item.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
+                                
+                                <div class="name mg-top-80" >@item.Name</div>
+                            </div>
+
+                        </label>
+                    }
+                </div>
+
+                <div class="form_group">
+                    <input type="submit" value="Next step" class="btn btn-primary" />
+                </div>
+                <div class="progress mt-3">
+                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </form>
+
+        </div>
     </div>
-    <hr />
-    <form asp-action="Submit">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-        @*@Html.DisplayFor(modelItem => item.Name)*@
-
-        <div class="container">
-            @foreach (var item in Model)
-            {
-                <label class="option_item form-check-label" style="border: 0;">
-                    <input type="checkbox" name="CheckBoxes" value="@item.Name" class="checkbox">
-                    <div class="option_inner facebook" style="display:flex;">
-                        <img src="~/img/Genre/@(item.Name).png" style="position: absolute;top:0;left:0; width: 100%; height:100%; object-fit: contain;" />
-                        <div class="tickmark"></div>
-                        <div class="card-img" style="background-image: url('/wwwroot/img/Game/AMONG US.jpg')"></div>
-                        <div class="name" style="bottom:0">@item.Name</div>
-                    </div>
-
-                </label>
-                @*<label class="game_option">
-                    <input type="checkbox" name="CheckBoxes" value="@item.Name" class="checkbox">
-                    <div class="inner_option">
-                        <div class="tickmark"></div>
-                        <div class="icon"></div>
-                        <div class="name">
-                        </div>
-                    </div>
-                </label>*@
-
-            }
-        </div>
-
-        <div class="form_group">
-            @*@using (Html.BeginForm("MyAction", "GamesController"))
-            {*@
-            <input type="submit" value="Create" class="btn btn-primary" />
-            @*<input type="button" name="next_btn" class="next_btn" value="Next" />*@
-            @*}*@
-        </div>
-        <div class="progress mt-3">
-            <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-    </form>
-    
 </div>
