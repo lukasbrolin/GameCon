@@ -76,31 +76,19 @@ namespace DatingSite.Controllers
 
             return View(model);
 
-            //foreach (var user in userRepostitory.getUserGamesGenresPlatformsScore(User.Identity.Name))
-            //{
-            //    if (user.Item1.NickName.Equals(profile))
-            //    {
-
-            //        model.User = user.Item1;
-            //        model.Games = user.Item2;
-            //        model.Genres = user.Item3;
-            //        model.Platforms = user.Item4;
-
-            //        break;
-            //    }
-            //    else if (user.Item1.Mail.Equals(User.Identity.Name))
-            //    {
-            //        model.User = user.Item1;
-            //        model.Games = user.Item2;
-            //        model.Genres = user.Item3;
-            //        model.Platforms = user.Item4;
-
-            //        break;
-            //    }
-            //}
-            //return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Submit(string[] CheckBoxes)
+        {
+            var userRepository = new UserRepository(_context);
+
+            userRepository.SetUserGames(User.Identity.Name, CheckBoxes);
+            userRepository.SetUserGenres(User.Identity.Name, CheckBoxes);
+            userRepository.SetUserPlatforms(User.Identity.Name, CheckBoxes);
+
+            return RedirectToAction("Index", "Profile");
+        }
 
     }
 }

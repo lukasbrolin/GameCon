@@ -17,6 +17,7 @@ namespace DatingSite.Models
 
         public Dictionary<Platform, bool> Platforms { get; set; }
 
+        public virtual string ImageURL { get; set; }
 
 
 
