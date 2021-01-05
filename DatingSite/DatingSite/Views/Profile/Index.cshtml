@@ -10,8 +10,8 @@
                 <h4 class="card-subtitle">@Model.User.FirstName @Model.User.LastName</h4>
                 <h4 class="card-subtitle">@Model.User.Nationality.Name <img src="~/img/Countries-Icon/@(@Model.User.Nationality.Name).png" style="width: 20px; height:20px;" /></h4>
                 <h3 class="card-text"></h3>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a asp-controller="ChangeGGP" asp-action="Index" class="card-link">Preferences</a>
+                <h6 class="card-subtitle">Gaming personality: @Model.User.Personality.Description  </h6>
+                <a asp-controller="ChangeGGP" asp-action="Index" class="card-link"><img src="~/img/Icons/pencil.svg" style="width: 15px; height:15px;" />Edit Preferences</a>
             </div>
         </div>
         <ul class="list-group list-group-flush">
@@ -91,46 +91,20 @@
                                 <button class="btn btn-primary" id="btnSendMessage">Send Message</button>
                             </div>
                         </div>
-
-                        @*<hr />
-
-                            @if (Model.Posts != null)
-                            {
-                                var postList = Model.Posts;
-                                postList.Reverse();
-                                foreach (var post in postList)
-                                {
-                                    if (@post.Sender.Mail != User.Identity.Name)
-                                    {
-                                        <div class="row">
-                                            <a href="@Url.Action("VisitProfile", "Visit", new { username = @post.Sender.Mail })"><h3>From: @post.Sender.NickName</h3></a>
-                                            <p>
-                                                @post.Content
-                                            </p>
-                                            @post.TimeStamp
-                                            <hr />
-                                        </div> }
-                                    else
-                                    {
-                                        <div class="row">
-                                            <h3>From: You</h3>
-                                            <p>
-                                                @post.Content
-                                            </p>
-                                            @post.TimeStamp
-                                            <hr />
-                                        </div>}
-                                }
-                            }*@
                         <div class="player-info-items">
                             @foreach (var post in Model.Posts)
                             {
                                 <div class="player-info">
-                                    @*<a href="@Url.Action("VisitProfile", "Visit", new { username = @post.Sender.Username })"><h3>From: @post.Sender.Firstname @post.Sender.Lastname</h3></a>*@
-                                    @Html.ActionLink("Delete", "DeletePost", "Profile", new { id = post.PostId }, new { @class = "btn btn-danger btn-sm", id = "removePostBtn" })
+                                    @if (post.Receiver.Mail.Equals(User.Identity.Name))
+                                    {
+                                        @Html.ActionLink("Delete", "DeletePost", "Profile", new { id = post.PostId }, new { @class = "btn btn-danger btn-sm", id = "removePostBtn" });
+                                    }
                                     <hr />
-                                    @(post.Sender.NickName + " ")
-                                    <img class="img-platform" src="@Url.Content(post.Sender.ImgUrl)" />
+                                    <a href="@Url.Action("Index", "Profile", new { profile = @post.Sender.NickName })">
+                                        @*<h3>From: @post.Sender.Firstname @post.Sender.Lastname</h3>*@
+                                        @(post.Sender.NickName + " ")
+                                        <img class="img-platform" src="@Url.Content(post.Sender.ImgUrl)" />
+                                    </a>
                                     @(post.TimeStamp)
                                     @(post.Content)
                                 </div>
@@ -146,13 +120,17 @@
             </li>
         </ul>
 
-        <div class="card-body player-info-items">
-            <form asp-action="AddFriend" method="post">
-                <input type="hidden" name=receiverId value="@Model.User.UserId" />
-                <input type="hidden" name=senderId value="@ViewBag.currentUser" />
-                <input type="submit" value="Add Friend" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal" />
-            </form>
-        </div>
+        @if (!Model.User.Mail.Equals(User.Identity.Name))
+        {
+            <div class="card-body player-info-items">
+                <form asp-action="AddFriend" method="post">
+                    <input type="hidden" name=receiverId value="@Model.User.UserId" />
+                    <input type="hidden" name=senderId value="@ViewBag.currentUser" />
+                    <input type="submit" value="Add Friend" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal" />
+                </form>
+            </div>
+        }
+
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -180,6 +158,21 @@
                         alert("Message sent!");
                         location.reload();
                     });
+            });
+        });
+
+        $(function () {
+            $("#removePostBtn").on("click", function () {
+                var answer = confirm("Do you want to remove this post?");
+                if (!answer) {
+                    alert("The post was not removed.");
+                    event.preventDefault();
+                    location.reload();
+                }
+                else {
+                    alert("The post was removed.");
+                    location.reload();
+                }
             });
         });
 
