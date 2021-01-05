@@ -68,6 +68,7 @@ namespace DatingSite.Controllers
                     model.Genres = user.Item3;
                     model.Platforms = user.Item4;
                     model.Visits = usersVisits;
+                    model.Posts = userPosts;
                     //model.Score = user.Item5;
                     break;
                 }
@@ -160,6 +161,13 @@ namespace DatingSite.Controllers
             _context.SaveChanges();
             Thread.Sleep(1);
             return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+        public ActionResult DeletePost(int id)
+        {
+            var postRepository = new PostRepository(_context);
+            postRepository.DeletePost(id);
+            return RedirectToAction("Index", "Profile");
         }
     }
 }
