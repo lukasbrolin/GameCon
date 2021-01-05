@@ -1,4 +1,5 @@
 ﻿using DataLayer;
+using DataLayer.Models;
 using DataLayer.Repositories;
 using DatingSite.Models;
 using Microsoft.AspNetCore.Http;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DatingSite.Controllers
@@ -18,6 +20,7 @@ namespace DatingSite.Controllers
         {
             _context = context;
         }
+
         // GET: ProfileController
         public ActionResult Index(ProfileViewModel model, string profile)
         {
@@ -43,7 +46,8 @@ namespace DatingSite.Controllers
                     model.Platforms = user.Item4;
                     model.Visits = usersVisits;
 
-                    if (!user.Item1.Mail.Equals(User.Identity.Name)){
+                    if (!user.Item1.Mail.Equals(User.Identity.Name))
+                    {
                         visitRepository.AddVisits(visitRepository.CreateVisit(user.Item1, userRepository.getUserByMail(User.Identity.Name), DateTime.Now));
                     }
                     //model.Score = user.Item5;
@@ -60,23 +64,21 @@ namespace DatingSite.Controllers
                     model.Genres = user.Item3;
                     model.Platforms = user.Item4;
                     model.Visits = usersVisits;
-
                     //model.Score = user.Item5;
                     break;
                 }
-
             }
+
+            ViewBag.currentUser = userRepository.getUserIdByMail(User.Identity.Name);
             return View(model);
         }
-
-
 
         public ActionResult Visitors(VisitorViewModel model)
         {
             return View(model);
         }
 
-                        // GET: ProfileController/Details/5
+        // GET: ProfileController/Details/5
         public ActionResult Details(int id)
         {
             return View();
@@ -143,6 +145,17 @@ namespace DatingSite.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddFriend(int receiverId, int senderId)
+        {
+            var friend = new Friend { SenderId = senderId, ReceiverId = receiverId, CategoryId = 1, StatusId = 1 };
+            _context.Friends.Add(friend);
+            _context.SaveChanges();
+            Thread.Sleep(1);
+            return Redirect(Request.Headers["Referer"].ToString());
         }
     }
 }
