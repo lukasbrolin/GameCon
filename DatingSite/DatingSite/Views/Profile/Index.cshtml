@@ -71,33 +71,106 @@
                     </li>
                 }
             }
-        </ul>
+            <li class="list-group-item text-center">
+                <h5 id="PostsTitle" class="list-group-item">Posts</h5>
+                <div class="player-info-items">
+                    <div>
+                        <h3>Write something</h3>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="form-group required-field-block">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+                                    <textarea rows="5" size="30" id="sendPostTextArea" value="" class="form-control" placeholder="Write @Model.User.NickName a message..."></textarea>
+                                    <div class="required-icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <button class="btn btn-primary" id="btnSendMessage">Send Message</button>
+                            </div>
+                        </div>
 
-        <div class="card-body player-info-items">
-            <form asp-action="AddFriend" method="post">
-                <input type="hidden" name=receiverId value="@Model.User.UserId" />
-                <input type="hidden" name=senderId value="@ViewBag.currentUser" />
-                <input type="submit" value="Add Friend" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal" />
-            </form>
-        </div>
+                        @*<hr />
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title" id="exampleModalLabel">Friend request</h2>
-                    </div>
-                    <div class="modal-body">
-                        <p class="text-success">User added!</p>
+                            @if (Model.Posts != null)
+                            {
+                                var postList = Model.Posts;
+                                postList.Reverse();
+                                foreach (var post in postList)
+                                {
+                                    if (@post.Sender.Mail != User.Identity.Name)
+                                    {
+                                        <div class="row">
+                                            <a href="@Url.Action("VisitProfile", "Visit", new { username = @post.Sender.Mail })"><h3>From: @post.Sender.NickName</h3></a>
+                                            <p>
+                                                @post.Content
+                                            </p>
+                                            @post.TimeStamp
+                                            <hr />
+                                        </div> }
+                                    else
+                                    {
+                                        <div class="row">
+                                            <h3>From: You</h3>
+                                            <p>
+                                                @post.Content
+                                            </p>
+                                            @post.TimeStamp
+                                            <hr />
+                                        </div>}
+                                }
+                            }*@
+                        <div class="player-info-items">
+                            @foreach (var post in Model.Posts)
+                            {
+                <div class="player-info">
+                    @*<a href="@Url.Action("VisitProfile", "Visit", new { username = @post.Sender.Username })"><h3>From: @post.Sender.Firstname @post.Sender.Lastname</h3></a>*@
+                    @Html.ActionLink("Delete", "DeletePost", "Profile", new { id = post.PostId }, new { @class = "btn btn-danger btn-sm", id = "removePostBtn" })
+                    <hr />
+                    @(post.Sender.NickName + " ")
+                    <img class="img-platform" src="@Url.Content(post.Sender.ImgUrl)" />
+                    @(post.TimeStamp)
+                    @(post.Content)
+                </div>
+                        }
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-@section scripts{
-    <script type="text/javascript">
+                </div>
+                <div>
+                    <div class="player-info-items" id="Posts">
+                        <div class="player-info w-100 flexdirectionrow" id="postsDiv"></div>
+                    </div>
+                </div>
+                </li>
+                </ul>
+
+                <div class="card-body player-info-items">
+                    <form asp-action="AddFriend" method="post">
+                        <input type="hidden" name=receiverId value="@Model.User.UserId" />
+                        <input type="hidden" name=senderId value="@ViewBag.currentUser" />
+                        <input type="submit" value="Add Friend" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal" />
+                    </form>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title" id="exampleModalLabel">Friend request</h2>
+                            </div>
+                            <div class="modal-body">
+                                <p class="text-success">User added!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+                @section scripts{
+                    <script type="text/javascript">
         $(function () {
             $('#btnSendMessage').click(function () {
                 var content = $('#sendPostTextArea').val();
@@ -151,5 +224,5 @@
                 error: function () { bootbox.alert("Something went wrong, RIP"); }
             });
         });*@
-    </script>
-}
+                    </script>
+                }
