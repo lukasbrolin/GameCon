@@ -7,7 +7,7 @@ namespace DataLayer.Repositories
 {
     public class VisitRepository
     {
-        private readonly DatingSiteContext _context;
+        private DatingSiteContext _context;
         private UserRepository userRepository;
 
 

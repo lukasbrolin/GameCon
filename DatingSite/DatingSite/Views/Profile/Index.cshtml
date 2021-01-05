@@ -94,11 +94,22 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 @section scripts{
     <script type="text/javascript">
+        $(function () {
+            $('#btnSendMessage').click(function () {
+                var content = $('#sendPostTextArea').val();
+                var reciever = '@Model.User.Mail';
+                $.post("../API/Post/Post?reciever=" + reciever + "&content=" + content,
+                    function () {
+                        alert("Message sent!");
+                        location.reload();
+                    });
+            });
+        });
+
         $(document).ready(function () {
               $.ajax({
                 url: "/Api/Visitor/Visit",
@@ -120,5 +131,25 @@
                 error: function () { bootbox.alert("Something went wrong, RIP"); }
             });
         });
+        @*$(document).ready(function () {
+              $.ajax({
+                url: "/Api/Post/Posts",
+                  type: "Post",
+                  data: JSON.stringify(["@Model.User.Mail"]),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    var i = 0;
+
+                    $.each(data, function () {
+                        console.log(data)
+                        $("#postsDiv").append("<div class=\" player-info\">Sender: " + data[i].sender + " Date: "+ data[i].date +
+                            "<p>" + data[i].content + "</p></div > " );
+                        i++;
+                    });
+                    $.each
+                },
+                error: function () { bootbox.alert("Something went wrong, RIP"); }
+            });
+        });*@
     </script>
 }
