@@ -21,22 +21,16 @@ namespace DatingSite.Controllers
 
         public IActionResult Index()
         {
-            var userRepo = new UserRepository(_context);
-            var userId = userRepo.getUserIdByMail(User.Identity.Name);
-            var viewModel = from users in _context.Users
-                            join friends in _context.Friends on users.UserId equals friends.ReceiverId
-                            where friends.SenderId == userId
-                            orderby users.FirstName
-                            select new FriendViewModel { UserId = users.UserId, FirstName = users.FirstName, LastName = users.LastName, Online = users.Online };
+            //var userRepo = new UserRepository(_context);
+            //var userId = userRepo.getUserIdByMail(User.Identity.Name);
+            //var viewModel = from users in _context.Users
+            //                join friends in _context.Friends on users.UserId equals friends.ReceiverId
+            //                where friends.SenderId == userId
+            //                orderby users.FirstName
+            //                select new FriendViewModel { UserId = users.UserId, FirstName = users.FirstName, LastName = users.LastName, Online = users.Online };
 
-            return View(viewModel);
+            return View();
         }
-
-        [HttpGet]
-        public IActionResult Chat(int? id)
-        {
-            var messages = _context.Messages.Where(m => m.SenderId == id).ToList();
-            return View(messages);
-        }
+     
     }
 }

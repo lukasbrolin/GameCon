@@ -21,14 +21,14 @@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-controller="Friends" asp-action="Index" title="Friends">
                 <img style="width: 20px" src="~/img/Icons/people-fill.svg" alt="Friends" />
-                <span class="badge badge-notify">3</span>
+                <span class="badge badge-notify"></span>
             </a>
         </li>
-        @*<li class="nav-item">
-                <a class="nav-link text-dark" asp-controller="Chat" asp-action="Index" title="Chat"> <img style="width: 20px" src="~/img/Icons/chat-dots-fill.svg" alt="Chat" /> </a>
-            </li>*@
+        <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="Chat" asp-action="Index" title="Chat"> <img style="width: 20px;" src="~/img/Icons/chat-dots-fill.svg" alt="Chat" /> </a>
+            </li>
         <li class="nav-item notification">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><img style="width: 20px; margin-left: -20px" src="~/img/Icons/gear-fill.svg" alt="Alternate Text" /> </a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><img style="width: 20px;" src="~/img/Icons/gear-fill.svg" alt="Alternate Text" /> </a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

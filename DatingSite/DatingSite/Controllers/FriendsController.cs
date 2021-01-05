@@ -8,16 +8,21 @@ using Microsoft.EntityFrameworkCore;
 using DataLayer;
 using DataLayer.Models;
 using DataLayer.Repositories;
+using System.Threading;
+using Microsoft.AspNetCore.SignalR;
+using SignalRChat.Hubs;
 
 namespace DatingSite.Controllers
 {
     public class FriendsController : Controller
     {
         private readonly DatingSiteContext _context;
+        private readonly IHubContext<FriendHub> _friendHubContext;
 
-        public FriendsController(DatingSiteContext context)
+        public FriendsController(DatingSiteContext context, IHubContext<FriendHub> friendHubContext)
         {
             _context = context;
+            _friendHubContext = friendHubContext;
         }
 
         // GET: Friends
@@ -175,6 +180,19 @@ namespace DatingSite.Controllers
         private bool FriendExists(int id)
         {
             return _context.Friends.Any(e => e.FriendId == id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddFriend(int receiverId, int senderId)
+        {
+            var currentUser = User.Identity.Name;
+            var friend = new Friend { SenderId = senderId, ReceiverId = receiverId, CategoryId = 1, StatusId = 1 };
+            _context.Friends.Add(friend);
+            _friendHubContext.Clients.User(currentUser).SendAsync("refreshUI");
+            _friendHubContext.Clients.User("simon").SendAsync("added", currentUser);
+            _context.SaveChanges();
+            return Redirect(Request.Headers["Referer"].ToString());
         }
     }
 }

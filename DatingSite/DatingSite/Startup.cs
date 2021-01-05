@@ -59,7 +59,6 @@ namespace DatingSite
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -82,6 +81,7 @@ namespace DatingSite
                     defaults: new { id = RouteParameter.Optional });
 
                 endpoints.MapHub<ChatHub>("/chathub");
+                endpoints.MapHub<FriendHub>("/friendhub");
             });
         }
     }

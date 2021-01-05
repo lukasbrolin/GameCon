@@ -152,17 +152,6 @@ namespace DatingSite.Controllers
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult AddFriend(int receiverId, int senderId)
-        {
-            var friend = new Friend { SenderId = senderId, ReceiverId = receiverId, CategoryId = 1, StatusId = 1 };
-            _context.Friends.Add(friend);
-            _context.SaveChanges();
-            Thread.Sleep(1);
-            return Redirect(Request.Headers["Referer"].ToString());
-        }
-
         public ActionResult DeletePost(int id)
         {
             var postRepository = new PostRepository(_context);

@@ -123,14 +123,13 @@
         @if (!Model.User.Mail.Equals(User.Identity.Name))
         {
             <div class="card-body player-info-items">
-                <form asp-action="AddFriend" method="post">
+                <form asp-action="AddFriend" asp-controller="Friends" method="post">
                     <input type="hidden" name=receiverId value="@Model.User.UserId" />
                     <input type="hidden" name=senderId value="@ViewBag.currentUser" />
                     <input type="submit" value="Add Friend" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal" />
                 </form>
             </div>
         }
-
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
