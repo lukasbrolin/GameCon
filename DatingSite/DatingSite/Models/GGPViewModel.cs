@@ -11,11 +11,13 @@ namespace DatingSite.Models
     {
         public User User { get; set; }
 
-        public List<Game> Games { get; set; }
+        public Dictionary<Game, bool> Games { get; set; }
 
-        public List<Genre> Genres { get; set; }
+        public Dictionary<Genre, bool> Genres { get; set; }
 
-        public List<Platform> Platforms { get; set; }
+        public Dictionary<Platform, bool> Platforms { get; set; }
+
+
 
 
     }

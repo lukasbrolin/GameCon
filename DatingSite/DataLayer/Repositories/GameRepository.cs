@@ -15,7 +15,7 @@ namespace DataLayer.Repositories
             _context = context;
         }
 
-        public IList<Game> GetGames()
+        public List<Game> GetGames()
         {
             return _context.Games.ToList();
         }

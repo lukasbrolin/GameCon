@@ -26,6 +26,7 @@ namespace DatingSite.Controllers
             var nationalityRepository = new NationalityRepository(_context);
             var personalityRepository = new PersonalityRepository(_context);
             var visitRepository = new VisitRepository(_context);
+            var postRepository = new PostRepository(_context);
             var list = userRepository.GetUsers();
             List<CardViewModel> modelList = new List<CardViewModel>();
 
@@ -34,6 +35,7 @@ namespace DatingSite.Controllers
                 if (user.Item1.NickName.Equals(profile))
                 {
                     var usersVisits = userRepository.GetUserVisitorsByMail(user.Item1.Mail);
+                    var userPosts = postRepository.GetPostsByMailOrderedByLatestDate(user.Item1.Mail);
 
                     user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
                     user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
@@ -42,6 +44,7 @@ namespace DatingSite.Controllers
                     model.Genres = user.Item3;
                     model.Platforms = user.Item4;
                     model.Visits = usersVisits;
+                    model.Posts = userPosts;
 
                     if (!user.Item1.Mail.Equals(User.Identity.Name)){
                         visitRepository.AddVisits(visitRepository.CreateVisit(user.Item1, userRepository.getUserByMail(User.Identity.Name), DateTime.Now));
@@ -52,6 +55,8 @@ namespace DatingSite.Controllers
                 else if (user.Item1.Mail.Equals(User.Identity.Name))
                 {
                     var usersVisits = userRepository.GetUserVisitorsByMail(User.Identity.Name);
+                    var userPosts = postRepository.GetPostsByMailOrderedByLatestDate(user.Item1.Mail);
+
 
                     user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
                     user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
@@ -60,6 +65,8 @@ namespace DatingSite.Controllers
                     model.Genres = user.Item3;
                     model.Platforms = user.Item4;
                     model.Visits = usersVisits;
+                    model.Posts = userPosts;
+
 
                     //model.Score = user.Item5;
                     break;
@@ -143,6 +150,13 @@ namespace DatingSite.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult DeletePost(int id)
+        {
+            var postRepository = new PostRepository(_context);
+            postRepository.DeletePost(id);
+            return RedirectToAction("Index", "Profile");
         }
     }
 }

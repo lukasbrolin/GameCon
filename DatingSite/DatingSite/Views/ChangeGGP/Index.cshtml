@@ -13,15 +13,31 @@
     <div class="container-g display-inlineblock mb-4 ">
         @foreach (var game in Model.Games)
         {
-            <label class="option_item form-check-label genrelbl mt-1 m-4">
-                <input type="checkbox" name="CheckBoxes" value="@game.Name" class="checkbox hide1 position-fixed">
-                <div class="option_inner facebook paddingauto genrelbl">
-                    <img src="~/img/Game/@(game.Name).jpg" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
+            if (game.Value)
+            {
+                <label class="option_item form-check-label genrelbl mt-1 m-4">
+                    <input checked type="checkbox" name="CheckBoxes" value="@game.Key.Name" class="checkbox hide1 checkbox:checked position-fixed">
+                    <div class="option_inner facebook paddingauto genrelbl">
+                        <img src="~/img/Game/@(game.Key.Name).jpg" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
 
-                    <div class="name mg-top-80">@game.Name</div>
-                </div>
+                        <div class="name mg-top-80">@game.Key.Name</div>
+                    </div>
 
-            </label>
+                </label>
+            }
+            else
+            {
+                <label class="option_item form-check-label genrelbl mt-1 m-4">
+                    <input type="checkbox" name="CheckBoxes" value="@game.Key.Name" class="checkbox hide1 position-fixed">
+                    <div class="option_inner facebook paddingauto genrelbl">
+                        <img src="~/img/Game/@(game.Key.Name).jpg" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
+
+                        <div class="name mg-top-80">@game.Key.Name</div>
+                    </div>
+
+                </label>
+            }
+
         }
     </div>
 </li>
@@ -31,15 +47,31 @@
     <div class="container-g display-inlineblock mb-4 ">
         @foreach (var genre in Model.Genres)
         {
-            <label class="option_item form-check-label genrelbl mt-1 m-4">
-                <input type="checkbox" name="CheckBoxes" value="@genre.Name" class="checkbox hide1 position-fixed">
-                <div class="option_inner facebook paddingauto genrelbl">
-                    <img src="~/img/Genre/@(genre.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
+            if (genre.Value)
+            {
+                <label class="option_item form-check-label genrelbl mt-1 m-4">
+                    <input checked type="checkbox" name="CheckBoxes" value="@genre.Key.Name" class="checkbox hide1 checkbox:checked position-fixed">
+                    <div class="option_inner facebook paddingauto genrelbl">
+                        <img src="~/img/Genre/@(genre.Key.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
 
-                    <div class="name mg-top-80">@genre.Name</div>
-                </div>
+                        <div class="name mg-top-80">@genre.Key.Name</div>
+                    </div>
 
-            </label>
+                </label>
+            }
+            else
+            {
+                <label class="option_item form-check-label genrelbl mt-1 m-4">
+                    <input type="checkbox" name="CheckBoxes" value="@genre.Key.Name" class="checkbox hide1 position-fixed">
+                    <div class="option_inner facebook paddingauto genrelbl">
+                        <img src="~/img/Genre/@(genre.Key.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
+
+                        <div class="name mg-top-80">@genre.Key.Name</div>
+                    </div>
+
+                </label>
+            }
+
         }
     </div>
 </li>
@@ -49,15 +81,30 @@
     <div class="container-g display-inlineblock mb-4">
         @foreach (var platform in Model.Platforms)
         {
+            if (platform.Value)
+            {
+                <label class="option_item form-check-label genrelbl mt-1 m-4">
+                    <input checked type="checkbox" name="CheckBoxes" value="@platform.Key.Name" class="checkbox hide1 checkbox:checked position-fixed">
+                    <div class="option_inner facebook paddingauto genrelbl">
+                        <img src="~/img/Platform/@(platform.Key.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
 
-            <label class="option_item form-check-label genrelbl mt-1 m-4">
-                <input type="checkbox" name="CheckBoxes" value="@platform.Name" class="checkbox hide1 position-fixed">
-                <div class="option_inner facebook paddingauto genrelbl">
-                    <img src="~/img/platform/@(platform.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
-                    <div class="name mg-top-80">@platform.Name</div>
-                </div>
+                        <div class="name mg-top-80">@platform.Key.Name</div>
+                    </div>
 
-            </label>
+                </label>
+            }
+            else
+            {
+                <label class="option_item form-check-label genrelbl mt-1 m-4">
+                    <input type="checkbox" name="CheckBoxes" value="@platform.Key.Name" class="checkbox hide1 position-fixed">
+                    <div class="option_inner facebook paddingauto genrelbl">
+                        <img src="~/img/Platform/@(platform.Key.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
+
+                        <div class="name mg-top-80">@platform.Key.Name</div>
+                    </div>
+
+                </label>
+            }
 
         }
     </div>

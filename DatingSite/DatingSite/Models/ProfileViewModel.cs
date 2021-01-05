@@ -22,7 +22,7 @@ namespace DatingSite.Models
 
         public List<Visit> Visits { get; set; }
         public IList<User> Friends { get; set; }
-        public IList<Post> Posts { get; set; }
+        public List<Post> Posts { get; set; }
         public bool IsMatch { get; set; }
         public int IsFriend { get; set; }
     }
