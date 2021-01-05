@@ -24,19 +24,12 @@ namespace DatingSite.Controllers
 
         public IActionResult Index()
         {
-            Debug.Write(User.Identity.Name);
-            Console.Write(User.Identity.Name);
             return View();
         }
 
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        public IActionResult Test()
-        {
-            return View(_context.Users.ToList());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

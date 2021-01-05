@@ -246,11 +246,6 @@ body {
     border-color: #1861ac;
 }
 
-/*
-* ==========================================
-* CHAT
-* ==========================================
-*/
 body {
     min-height: 100vh;
 }
@@ -397,3 +392,13 @@ input::placeholder {
 .flexdirectionrow{
     flex-direction:row;
 }
+
+.badge-notify {
+    position: relative;
+    top: -10px;
+    right: 10px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+}
+

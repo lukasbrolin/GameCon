@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SignalRChat.Hubs;
 
 using DataLayer;
 using System.Web.Http;
@@ -36,6 +37,7 @@ namespace DatingSite
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,6 +80,8 @@ namespace DatingSite
                     name: "api",
                     pattern: "api/{controller}/{id}",
                     defaults: new { id = RouteParameter.Optional });
+
+                endpoints.MapHub<ChatHub>("/chathub");
             });
         }
     }

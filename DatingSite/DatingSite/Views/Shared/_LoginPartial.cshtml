@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using DataLayer.Models
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
@@ -7,26 +8,27 @@
     {
         <li>
             <form asp-controller="Search" asp-action="Search" method="get" class="input-group">
-                    <input type="text" name="SearchString" class="form-check mr-1">
-                    <input type="submit" value="Search" class="btn btn-primary"/>
+                <input type="text" name="SearchString" class="form-check mr-1">
+                <input type="submit" value="Search" class="btn btn-primary" />
             </form>
         </li>
         <li class="nav-item navbar-nav">
             <a class="nav-link text-dark " asp-controller="Profile" asp-action="Index"><img class="rounded-circle" style="width: 25px" src="~/img/Avatars/avatar5.png" /></a>
         </li>
+        @*<li class="nav-item">
+                <a class="nav-link text-dark" title="Notifications"> <img style="width: 20px" src="~/img/Icons/bell-fill.svg" alt="Notifications" /> </a>
+            </li>*@
         <li class="nav-item">
-            <a class="nav-link text-dark" title="Notifications"> <img style="width: 20px" src="~/img/Icons/bell-fill.svg" alt="Notifications" /> </a>
+            <a class="nav-link text-dark" asp-controller="Friends" asp-action="Index" title="Friends">
+                <img style="width: 20px" src="~/img/Icons/people-fill.svg" alt="Friends" />
+                <span class="badge badge-notify">3</span>
+            </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Friends" asp-action="Index" title="Friends"> <img style="width: 20px" src="~/img/Icons/people-fill.svg" alt="Friends" /> </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Chat" asp-action="Index" title="Chat"> <img style="width: 20px" src="~/img/Icons/chat-dots-fill.svg" alt="Chat" /> </a>
-        </li>
-        <li class="nav-item">
-
-            @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><img style="width: 20px" src="~/img/Icons/gear-fill.svg" alt="Alternate Text" /> </a>*@
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><img style="width: 20px" src="~/img/Icons/gear-fill.svg" alt="Alternate Text" /> </a>
+        @*<li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="Chat" asp-action="Index" title="Chat"> <img style="width: 20px" src="~/img/Icons/chat-dots-fill.svg" alt="Chat" /> </a>
+            </li>*@
+        <li class="nav-item notification">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><img style="width: 20px; margin-left: -20px" src="~/img/Icons/gear-fill.svg" alt="Alternate Text" /> </a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
