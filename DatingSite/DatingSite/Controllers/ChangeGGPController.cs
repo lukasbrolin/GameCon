@@ -1,7 +1,9 @@
 ﻿using DataLayer;
 using DataLayer.Models;
 using DataLayer.Repositories;
+using DatingSite.Data;
 using DatingSite.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,10 +15,15 @@ namespace DatingSite.Controllers
     public class ChangeGGPController : Controller
     {
         private readonly DatingSiteContext _context;
+        private readonly ApplicationDbContext _applicationDbContext;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public ChangeGGPController(DatingSiteContext context)
+        public ChangeGGPController(DatingSiteContext context, UserManager<IdentityUser> usermanager, SignInManager<IdentityUser> signInManager)
         {
             _context = context;
+            _userManager = usermanager;
+            _signInManager = signInManager;
         }
         public async Task<IActionResult> Index(GGPViewModel model)
         {
@@ -79,7 +86,7 @@ namespace DatingSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Submit(string[] CheckBoxesGame,string[] CheckBoxesGenre,string[] CheckBoxesPlatform)
+        public async Task<ActionResult> Submit(string[] CheckBoxesGame,string[] CheckBoxesGenre,string[] CheckBoxesPlatform)
         {
             var userRepository = new UserRepository(_context);
             var gameRepository = new GameRepository(_context);
@@ -123,7 +130,26 @@ namespace DatingSite.Controllers
             {
                 userRepository.RemoveUserPlatforms(User.Identity.Name, removedPlatformsList);
             }
+            userRepository.EditUserByMail();
+            var appList = _userManager.Users.ToList();
+            var identityUser = appList.FirstOrDefault(x => x.UserName.Equals(User.Identity.Name));
+            var setEmailResult = await _userManager.SetEmailAsync(identityUser, "lukas.brolin@dating.se");
+            var setUserNameResult = await _userManager.SetUserNameAsync(identityUser, "lukas.brolin@dating.se");
 
+            await _userManager.ChangePasswordAsync(identityUser, "123Asd!", "123Abc!"); 
+
+            await _signInManager.RefreshSignInAsync(identityUser);
+
+
+            //foreach (var user in appList)
+            //{
+            //    if (user.Email.Equals(User.Identity.Name))
+            //    {
+            //        user.Email = "lukas.brolin@dating.se";
+            //        user.UserName = "lukas.brolin@dating.se";
+            //    }
+
+            //}
 
             //userRepository.SetUserGenres(User.Identity.Name, CheckBoxes);
             //userRepository.SetUserPlatforms(User.Identity.Name, CheckBoxes);

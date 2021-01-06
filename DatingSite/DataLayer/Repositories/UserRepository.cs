@@ -299,6 +299,18 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        //public void EditUserByMail(string mail)
+
+        public void EditUserByMail()
+        {
+            //getUserByMail(mail);
+            var x = _context.Users.Find(getUserByMail("lukas.brolin@dating.com").UserId);
+            x.FirstName = "Lukas";
+            x.Mail = "lukas.brolin@dating.se";
+            _context.SaveChanges();
+
+        }
+
         public User getUserById(int id)
         {
             return _context.Users.FirstOrDefault(x => x.UserId.Equals(id));
