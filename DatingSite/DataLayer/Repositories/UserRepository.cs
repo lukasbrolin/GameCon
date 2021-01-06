@@ -339,12 +339,11 @@ namespace DataLayer.Repositories
 
         //public void EditUserByMail(string mail)
 
-        public void EditUserByMail()
+        public void EditUserByMail(string oldMail,string newMail)
         {
             //getUserByMail(mail);
-            var x = _context.Users.Find(getUserByMail("lukas.brolin@dating.com").UserId);
-            x.FirstName = "Lukas";
-            x.Mail = "lukas.brolin@dating.se";
+            var user = _context.Users.Find(getUserByMail(oldMail).UserId);
+            user.Mail = newMail;
             _context.SaveChanges();
 
         }

@@ -11,16 +11,21 @@ using DataLayer;
 using DataLayer.Models;
 using DatingSite.Data;
 using DataLayer.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 namespace DatingSite.Controllers
 {
     public class UsersController : Controller
     {
         private readonly DatingSiteContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public UsersController(DatingSiteContext context)
+        public UsersController(DatingSiteContext context, UserManager<IdentityUser> usermanager, SignInManager<IdentityUser> signInManager)
         {
             _context = context;
+            _userManager = usermanager;
+            _signInManager = signInManager;
         }
 
         public async Task<IActionResult> Index()
@@ -151,6 +156,34 @@ namespace DatingSite.Controllers
             user.IsHidden = true;
             _context.SaveChanges();
             return Redirect("/Identity/Account/Manage");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditMail(string usermail)
+        {
+            var userRepository = new UserRepository(_context);
+            userRepository.EditUserByMail(User.Identity.Name,usermail);
+            var appList = _userManager.Users.ToList();
+            var identityUser = appList.FirstOrDefault(x => x.UserName.Equals(User.Identity.Name));
+            var setEmailResult = await _userManager.SetEmailAsync(identityUser, usermail);
+            var setUserNameResult = await _userManager.SetUserNameAsync(identityUser, usermail);
+
+            //await _userManager.ChangePasswordAsync(identityUser, "123Asd!", "123Abc!");
+
+            await _signInManager.RefreshSignInAsync(identityUser);
+
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(string oldPassword, string newPassword, string confirmPassword)
+        {
+            var appList = _userManager.Users.ToList();
+            var identityUser = appList.FirstOrDefault(x => x.UserName.Equals(User.Identity.Name));
+            await _userManager.ChangePasswordAsync(identityUser, oldPassword, newPassword);
+            return Redirect(Request.Headers["Referer"].ToString());
         }
     }
 }
