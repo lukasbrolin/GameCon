@@ -11,7 +11,11 @@
                 <h4 class="card-subtitle">@Model.User.Nationality.Name <img src="~/img/Countries-Icon/@(@Model.User.Nationality.Name).png" style="width: 20px; height:20px;" /></h4>
                 <h3 class="card-text"></h3>
                 <h6 class="card-subtitle">Gaming personality: @Model.User.Personality.Description  </h6>
-                <a asp-controller="ChangeGGP" asp-action="Index" class="card-link"><img src="~/img/Icons/pencil.svg" style="width: 15px; height:15px;" />Edit Preferences</a>
+                @{if (Model.User.Mail.Equals(User.Identity.Name))
+                    {
+                                <a asp-controller="ChangeGGP" asp-action="Index" class="card-link"><img src="~/img/Icons/pencil.svg" style="width: 15px; height:15px;" />Edit Preferences</a>
+                    }
+                }
             </div>
         </div>
         <ul class="list-group list-group-flush">

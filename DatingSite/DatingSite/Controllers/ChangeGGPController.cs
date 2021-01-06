@@ -3,6 +3,7 @@ using DataLayer.Models;
 using DataLayer.Repositories;
 using DatingSite.Data;
 using DatingSite.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -31,7 +32,12 @@ namespace DatingSite.Controllers
             var gameRepository = new GameRepository(_context);
             var genreRepository = new GenreRepository(_context);
             var platformRepository = new PlatformRepository(_context);
+            var personalityRepository = new PersonalityRepository(_context);
+            var nationalyRepository = new NationalityRepository(_context);
             var userId = User.Identity.Name;
+
+            ViewBag.PList = personalityRepository.GetPersonalities();
+            ViewBag.NList = nationalyRepository.GetNationalities();
 
             List<Game> userGames = userRepostitory.GetUserGamesByMail(userId);
             List<Game> gameCollection = gameRepository.GetGames(); ;
@@ -86,20 +92,23 @@ namespace DatingSite.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Submit(string[] CheckBoxesGame,string[] CheckBoxesGenre,string[] CheckBoxesPlatform)
+        public async Task<ActionResult> Submit(string[] CheckBoxesGame,string[] CheckBoxesGenre,string[] CheckBoxesPlatform, GGPViewModel model)
         {
             var userRepository = new UserRepository(_context);
             var gameRepository = new GameRepository(_context);
             var genreRepository = new GenreRepository(_context);
             var platformRepository = new PlatformRepository(_context);
+            var user = User.Identity.Name;
 
             List<Game> userGames = userRepository.GetUserGamesByMail(User.Identity.Name);
             List<Genre> userGenres = userRepository.GetUserGenresByMail(User.Identity.Name);
             List<Platform> userPlatforms = userRepository.GetUserPlatformsByMail(User.Identity.Name);
 
+            
 
             var removedGamesList = userGames.Except(gameRepository.GetGamesByNames(CheckBoxesGame)).Select(x => x.Name).ToArray();
             var newSelectedGames = gameRepository.GetGamesByNames(CheckBoxesGame).Except(userGames).Select(x => x.Name).ToArray();
+            
             if(newSelectedGames.Length > 0)
             {
                 userRepository.SetUserGames(User.Identity.Name, newSelectedGames);
@@ -111,6 +120,7 @@ namespace DatingSite.Controllers
 
             var removedGenreList = userGenres.Except(genreRepository.GetGenresByNames(CheckBoxesGenre)).Select(x => x.Name).ToArray();
             var newSelectedGenre = genreRepository.GetGenresByNames(CheckBoxesGenre).Except(userGenres).Select(x => x.Name).ToArray();
+            
             if (newSelectedGenre.Length > 0)
             {
                 userRepository.SetUserGenres(User.Identity.Name, newSelectedGenre);
@@ -130,15 +140,60 @@ namespace DatingSite.Controllers
             {
                 userRepository.RemoveUserPlatforms(User.Identity.Name, removedPlatformsList);
             }
-            userRepository.EditUserByMail();
-            var appList = _userManager.Users.ToList();
-            var identityUser = appList.FirstOrDefault(x => x.UserName.Equals(User.Identity.Name));
-            var setEmailResult = await _userManager.SetEmailAsync(identityUser, "lukas.brolin@dating.se");
-            var setUserNameResult = await _userManager.SetUserNameAsync(identityUser, "lukas.brolin@dating.se");
 
-            await _userManager.ChangePasswordAsync(identityUser, "123Asd!", "123Abc!"); 
+            if (model.NickName != null)
+            {
+                userRepository.EditUserNickName(user, model.NickName);
+            }
+            
+            if (model.FirstName != null)
+            {
+                userRepository.EditUserFirstName(user, model.FirstName);
+            }
 
-            await _signInManager.RefreshSignInAsync(identityUser);
+            if (model.LastName != null)
+            {
+                userRepository.EditUserFirstName(user, model.LastName);
+            }
+
+            if (model.Age > 0)
+            {
+                userRepository.EditUserAge(user, model.Age);
+            }
+
+
+            //Noobens swagkod som inte funkar
+            //if (model.Gender != null)
+            //{
+            //    userRepository.EditUserGender(user, model.Gender);
+            //}
+
+
+            //if (model.Nationality != null)
+            //{
+            //    userRepository.EditUserNationality(user, model.Nationality);
+            //}
+
+            //if (model.Personality != null)
+            //{
+            //    userRepository.EditUserPersonality(user, model.Personality);
+            //}
+
+            if (model.ImageURL != null)
+            {
+                userRepository.EditUserPhoto(user, model.ImageURL);
+            }
+
+
+            //userRepository.EditUserByMail();
+            //var appList = _userManager.Users.ToList();
+            //var identityUser = appList.FirstOrDefault(x => x.UserName.Equals(User.Identity.Name));
+            //var setEmailResult = await _userManager.SetEmailAsync(identityUser, "lukas.brolin@dating.se");
+            //var setUserNameResult = await _userManager.SetUserNameAsync(identityUser, "lukas.brolin@dating.se");
+
+            //await _userManager.ChangePasswordAsync(identityUser, "123Asd!", "123Abc!"); 
+
+            //await _signInManager.RefreshSignInAsync(identityUser);
 
 
             //foreach (var user in appList)
