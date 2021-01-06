@@ -34,5 +34,16 @@ namespace DataLayer.Repositories
             return _context.Platforms.FirstOrDefault(x => x.PlatformId.Equals(id));
         }
 
+        public List<Platform> GetPlatformsByNames(string[] platformNames)
+        {
+            var platformList = new List<Platform>();
+            foreach (var i in platformNames)
+            {
+                platformList.Add(_context.Platforms.FirstOrDefault(x => x.Name.Equals(i)));
+            }
+
+            return platformList;
+        }
+
     }
 }

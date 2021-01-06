@@ -83,10 +83,48 @@ namespace DatingSite.Controllers
         {
             var userRepository = new UserRepository(_context);
             var gameRepository = new GameRepository(_context);
+            var genreRepository = new GenreRepository(_context);
+            var platformRepository = new PlatformRepository(_context);
+
             List<Game> userGames = userRepository.GetUserGamesByMail(User.Identity.Name);
-            
+            List<Genre> userGenres = userRepository.GetUserGenresByMail(User.Identity.Name);
+            List<Platform> userPlatforms = userRepository.GetUserPlatformsByMail(User.Identity.Name);
+
+
+            var removedGamesList = userGames.Except(gameRepository.GetGamesByNames(CheckBoxesGame)).Select(x => x.Name).ToArray();
             var newSelectedGames = gameRepository.GetGamesByNames(CheckBoxesGame).Except(userGames).Select(x => x.Name).ToArray();
-            userRepository.SetUserGames(User.Identity.Name, newSelectedGames);
+            if(newSelectedGames.Length > 0)
+            {
+                userRepository.SetUserGames(User.Identity.Name, newSelectedGames);
+            }
+            if(removedGamesList.Length > 0)
+            {
+                userRepository.RemoveUserGames(User.Identity.Name, removedGamesList);
+            }
+
+            var removedGenreList = userGenres.Except(genreRepository.GetGenresByNames(CheckBoxesGenre)).Select(x => x.Name).ToArray();
+            var newSelectedGenre = genreRepository.GetGenresByNames(CheckBoxesGenre).Except(userGenres).Select(x => x.Name).ToArray();
+            if (newSelectedGenre.Length > 0)
+            {
+                userRepository.SetUserGenres(User.Identity.Name, newSelectedGenre);
+            }
+            if (removedGenreList.Length > 0)
+            {
+                userRepository.RemoveUserGenres(User.Identity.Name, removedGenreList);
+            }
+
+            var removedPlatformsList = userPlatforms.Except(platformRepository.GetPlatformsByNames(CheckBoxesPlatform)).Select(x => x.Name).ToArray();
+            var newSelectedPlatforms = platformRepository.GetPlatformsByNames(CheckBoxesPlatform).Except(userPlatforms).Select(x => x.Name).ToArray();
+            if (newSelectedPlatforms.Length > 0)
+            {
+                userRepository.SetUserPlatforms(User.Identity.Name, newSelectedPlatforms);
+            }
+            if (removedPlatformsList.Length > 0)
+            {
+                userRepository.RemoveUserPlatforms(User.Identity.Name, removedPlatformsList);
+            }
+
+
             //userRepository.SetUserGenres(User.Identity.Name, CheckBoxes);
             //userRepository.SetUserPlatforms(User.Identity.Name, CheckBoxes);
 

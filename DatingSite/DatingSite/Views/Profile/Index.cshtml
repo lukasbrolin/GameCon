@@ -163,9 +163,9 @@
 
         $(function () {
             $("#removePostBtn").on("click", function () {
-                var answer = confirm("Do you want to remove this post?");
+                var answer = confirm("Are you sure you want to removed this post? It cannot be recovered once removed.");
                 if (!answer) {
-                    alert("The post was not removed.");
+                    alert("The action was canceled");
                     event.preventDefault();
                     location.reload();
                 }
