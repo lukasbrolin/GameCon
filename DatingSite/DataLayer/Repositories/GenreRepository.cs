@@ -35,5 +35,16 @@ namespace DataLayer.Repositories
         {
             return _context.Genres.FirstOrDefault(x => x.GenreId.Equals(id));
         }
+
+        public List<Genre> GetGenresByNames(string[] genreNames)
+        {
+            var genreList = new List<Genre>();
+            foreach (var i in genreNames)
+            {
+                genreList.Add(_context.Genres.FirstOrDefault(x => x.Name.Equals(i)));
+            }
+
+            return genreList;
+        }
     }
 }

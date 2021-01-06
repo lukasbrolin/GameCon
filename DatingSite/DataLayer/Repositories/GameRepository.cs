@@ -34,5 +34,16 @@ namespace DataLayer.Repositories
         {
             return _context.Games.FirstOrDefault(x => x.GameId.Equals(id));
         }
+
+        public List<Game> GetGamesByNames(string[] gameNames)
+        {
+            var gameList = new List<Game>();
+            foreach (var i in gameNames)
+            {
+                gameList.Add(_context.Games.FirstOrDefault(x => x.Name.Equals(i)));
+            }
+
+            return gameList;
+        }
     }
 }

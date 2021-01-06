@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\filip\\Source\\Repos\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj": {}
+    "C:\\Users\\Filip\\Source\\Repos\\Dating\\DatingSite\\DataLayer\\DataLayer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\filip\\Source\\Repos\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj": {
+    "C:\\Users\\Filip\\Source\\Repos\\Dating\\DatingSite\\DataLayer\\DataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\filip\\Source\\Repos\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj",
+        "projectUniqueName": "C:\\Users\\Filip\\Source\\Repos\\Dating\\DatingSite\\DataLayer\\DataLayer.csproj",
         "projectName": "DataLayer",
-        "projectPath": "C:\\Users\\filip\\Source\\Repos\\Dating_site\\DatingSite\\DataLayer\\DataLayer.csproj",
-        "packagesPath": "C:\\Users\\filip\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\filip\\Source\\Repos\\Dating_site\\DatingSite\\DataLayer\\obj\\",
+        "projectPath": "C:\\Users\\Filip\\Source\\Repos\\Dating\\DatingSite\\DataLayer\\DataLayer.csproj",
+        "packagesPath": "C:\\Users\\Filip\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Filip\\Source\\Repos\\Dating\\DatingSite\\DataLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\filip\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Filip\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

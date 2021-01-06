@@ -180,6 +180,26 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        public void RemoveUserGames(string mail, string[] selectedGames)
+        {
+            var games = gamesRepository.GetGames();
+            foreach (var d in selectedGames)
+            {
+                foreach (var e in games)
+                {
+                    if (e.Name.Equals(d))
+                    {
+                        var x = _context.Users.FirstOrDefault<User>(x => x.Mail.Equals(mail));
+                        x.Games.Remove(e);
+                        var y = gamesRepository.GetGames().FirstOrDefault<Game>(y => y.Name.Equals(e.Name));
+                        y.Users.Remove(x);
+                    }
+                }
+            }
+            _context.SaveChanges();
+
+        }
+
         public void SetUserGenres(string mail, string[] selectedGenres)
         {
             var genres = genreRepository.GetGenres();
@@ -197,6 +217,26 @@ namespace DataLayer.Repositories
                 }
             }
             _context.SaveChanges();
+        }
+
+        public void RemoveUserGenres(string mail, string[] selectedGenre)
+        {
+            var genre = genreRepository.GetGenres();
+            foreach (var d in selectedGenre)
+            {
+                foreach (var e in genre)
+                {
+                    if (e.Name.Equals(d))
+                    {
+                        var x = _context.Users.FirstOrDefault<User>(x => x.Mail.Equals(mail));
+                        x.Genres.Remove(e);
+                        var y = genreRepository.GetGenres().FirstOrDefault<Genre>(y => y.Name.Equals(e.Name));
+                        y.Users.Remove(x);
+                    }
+                }
+            }
+            _context.SaveChanges();
+
         }
 
         public void SetUserPlatforms(string mail, string[] selectedPlatforms)
@@ -218,6 +258,26 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        public void RemoveUserPlatforms(string mail, string[] selectedPlatform)
+        {
+            var platforms = platformRepository.GetPlatforms();
+            foreach (var d in selectedPlatform)
+            {
+                foreach (var e in platforms)
+                {
+                    if (e.Name.Equals(d))
+                    {
+                        var x = _context.Users.FirstOrDefault<User>(x => x.Mail.Equals(mail));
+                        x.Platforms.Remove(e);
+                        var y = platformRepository.GetPlatforms().FirstOrDefault<Platform>(y => y.Name.Equals(e.Name));
+                        y.Users.Remove(x);
+                    }
+                }
+            }
+            _context.SaveChanges();
+
+        }
+
         public List<User> GetUserByName(string search)
         {
             var users = GetUsers();
@@ -237,6 +297,18 @@ namespace DataLayer.Repositories
         {
             _context.Users.Add(user);
             _context.SaveChanges();
+        }
+
+        //public void EditUserByMail(string mail)
+
+        public void EditUserByMail()
+        {
+            //getUserByMail(mail);
+            var x = _context.Users.Find(getUserByMail("lukas.brolin@dating.com").UserId);
+            x.FirstName = "Lukas";
+            x.Mail = "lukas.brolin@dating.se";
+            _context.SaveChanges();
+
         }
 
         public User getUserById(int id)

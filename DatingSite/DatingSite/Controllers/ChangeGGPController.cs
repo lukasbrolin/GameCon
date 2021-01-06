@@ -1,7 +1,9 @@
 ﻿using DataLayer;
 using DataLayer.Models;
 using DataLayer.Repositories;
+using DatingSite.Data;
 using DatingSite.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,10 +15,15 @@ namespace DatingSite.Controllers
     public class ChangeGGPController : Controller
     {
         private readonly DatingSiteContext _context;
+        private readonly ApplicationDbContext _applicationDbContext;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public ChangeGGPController(DatingSiteContext context)
+        public ChangeGGPController(DatingSiteContext context, UserManager<IdentityUser> usermanager, SignInManager<IdentityUser> signInManager)
         {
             _context = context;
+            _userManager = usermanager;
+            _signInManager = signInManager;
         }
         public async Task<IActionResult> Index(GGPViewModel model)
         {
@@ -79,13 +86,73 @@ namespace DatingSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Submit(string[] CheckBoxes)
+        public async Task<ActionResult> Submit(string[] CheckBoxesGame,string[] CheckBoxesGenre,string[] CheckBoxesPlatform)
         {
             var userRepository = new UserRepository(_context);
+            var gameRepository = new GameRepository(_context);
+            var genreRepository = new GenreRepository(_context);
+            var platformRepository = new PlatformRepository(_context);
 
-            userRepository.SetUserGames(User.Identity.Name, CheckBoxes);
-            userRepository.SetUserGenres(User.Identity.Name, CheckBoxes);
-            userRepository.SetUserPlatforms(User.Identity.Name, CheckBoxes);
+            List<Game> userGames = userRepository.GetUserGamesByMail(User.Identity.Name);
+            List<Genre> userGenres = userRepository.GetUserGenresByMail(User.Identity.Name);
+            List<Platform> userPlatforms = userRepository.GetUserPlatformsByMail(User.Identity.Name);
+
+
+            var removedGamesList = userGames.Except(gameRepository.GetGamesByNames(CheckBoxesGame)).Select(x => x.Name).ToArray();
+            var newSelectedGames = gameRepository.GetGamesByNames(CheckBoxesGame).Except(userGames).Select(x => x.Name).ToArray();
+            if(newSelectedGames.Length > 0)
+            {
+                userRepository.SetUserGames(User.Identity.Name, newSelectedGames);
+            }
+            if(removedGamesList.Length > 0)
+            {
+                userRepository.RemoveUserGames(User.Identity.Name, removedGamesList);
+            }
+
+            var removedGenreList = userGenres.Except(genreRepository.GetGenresByNames(CheckBoxesGenre)).Select(x => x.Name).ToArray();
+            var newSelectedGenre = genreRepository.GetGenresByNames(CheckBoxesGenre).Except(userGenres).Select(x => x.Name).ToArray();
+            if (newSelectedGenre.Length > 0)
+            {
+                userRepository.SetUserGenres(User.Identity.Name, newSelectedGenre);
+            }
+            if (removedGenreList.Length > 0)
+            {
+                userRepository.RemoveUserGenres(User.Identity.Name, removedGenreList);
+            }
+
+            var removedPlatformsList = userPlatforms.Except(platformRepository.GetPlatformsByNames(CheckBoxesPlatform)).Select(x => x.Name).ToArray();
+            var newSelectedPlatforms = platformRepository.GetPlatformsByNames(CheckBoxesPlatform).Except(userPlatforms).Select(x => x.Name).ToArray();
+            if (newSelectedPlatforms.Length > 0)
+            {
+                userRepository.SetUserPlatforms(User.Identity.Name, newSelectedPlatforms);
+            }
+            if (removedPlatformsList.Length > 0)
+            {
+                userRepository.RemoveUserPlatforms(User.Identity.Name, removedPlatformsList);
+            }
+            userRepository.EditUserByMail();
+            var appList = _userManager.Users.ToList();
+            var identityUser = appList.FirstOrDefault(x => x.UserName.Equals(User.Identity.Name));
+            var setEmailResult = await _userManager.SetEmailAsync(identityUser, "lukas.brolin@dating.se");
+            var setUserNameResult = await _userManager.SetUserNameAsync(identityUser, "lukas.brolin@dating.se");
+
+            await _userManager.ChangePasswordAsync(identityUser, "123Asd!", "123Abc!"); 
+
+            await _signInManager.RefreshSignInAsync(identityUser);
+
+
+            //foreach (var user in appList)
+            //{
+            //    if (user.Email.Equals(User.Identity.Name))
+            //    {
+            //        user.Email = "lukas.brolin@dating.se";
+            //        user.UserName = "lukas.brolin@dating.se";
+            //    }
+
+            //}
+
+            //userRepository.SetUserGenres(User.Identity.Name, CheckBoxes);
+            //userRepository.SetUserPlatforms(User.Identity.Name, CheckBoxes);
 
             return RedirectToAction("Index", "Profile");
         }
