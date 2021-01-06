@@ -222,7 +222,7 @@ namespace DataLayer.Repositories
                 case 0:
                 case 1:
                 case 2:
-                    return "It couldnt be a wore match..";
+                    return "It couldnt be a worse match..";
                     break;
                 case 3:
                 case 4:
@@ -236,7 +236,7 @@ namespace DataLayer.Repositories
                     break;
                 case 9:
                 case 10:
-                    return "YOU ARE SOULMATES AND HAVE TO PLAY SOME TOGHETHER";
+                    return "YOU ARE SOULMATES AND HAVE TO PLAY SOME GAMES TOGHETHER";
                     break;
 
                 default:
