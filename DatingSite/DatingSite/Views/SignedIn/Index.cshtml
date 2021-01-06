@@ -7,13 +7,13 @@
             <div class="cardheader">
                 <img class="cardimg" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
                 @* @Url.Content(url) *@
-                <div class="card-body profile-info">
-                    <h2 class="card-title">@item.User.NickName, @item.User.Age </h2>
-                    <h4 class="card-subtitle">@item.User.FirstName @item.User.LastName</h4>
-                    <h4 class="card-subtitle">@item.User.Nationality.Name <img src="~/img/Countries-Icon/@(@item.User.Nationality.Name).png" style="width: 20px; height:20px;" /></h4>
-                    <h3 class="card-text"></h3>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
+            <div class="card-body profile-info">
+                <h2 class="card-title">@item.User.NickName, @item.User.Age </h2>
+                <h4 class="card-subtitle">@item.User.FirstName @item.User.LastName</h4>
+                <h4 class="card-subtitle">@item.User.Nationality.Name <img src="~/img/Countries-Icon/@(@item.User.Nationality.Name).png" style="width: 20px; height:20px;" /></h4>
+                <h3 class="card-text"></h3>
+                <h6 class="card-subtitle">Gaming personality: @item.User.Personality.Description  </h6>
+            </div>
             </div>
             <ul class="list-group list-group-flush">
                 @if (item.Score.HasValue)
@@ -22,7 +22,8 @@
                         <h5 class="list-group-item">Score</h5>
 
                         <div style="width:30%; display:inline-block;">
-                            <h1>@item.Score</h1>
+                            <h1>@item.Score/10</h1>
+                            <h1>@item.ScoreDescription</h1>
 
                         </div>
 

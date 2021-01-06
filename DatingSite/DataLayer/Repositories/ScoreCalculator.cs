@@ -202,9 +202,46 @@ namespace DataLayer.Repositories
                 int ageScore;
                 GetAgeScoreAllUsersPerUser(mail).TryGetValue(kvp.Key, out ageScore);
                 score = (kvp.Value + genreScore + platformScore + personalityScore + nationalityScore + ageScore);
-                TotalScore.Add(kvp.Key, score);
+                if(score <= 10)
+                {
+                    TotalScore.Add(kvp.Key, score);
+                }
+                else
+                {
+                    TotalScore.Add(kvp.Key, 10);
+                }
+                
             }
             return TotalScore;
+        }
+
+        public string ScoreDescription(int? score)
+        {
+            switch (score)
+            {
+                case 0:
+                case 1:
+                case 2:
+                    return "It couldnt be a wore match..";
+                    break;
+                case 3:
+                case 4:
+                case 5:
+                    return "Well, it could be a worse match..";
+                    break;
+                case 6:
+                case 7:
+                case 8:
+                    return "This is a good match!!";
+                    break;
+                case 9:
+                case 10:
+                    return "YOU ARE SOULMATES AND HAVE TO PLAY SOME TOGHETHER";
+                    break;
+
+                default:
+                    return null;
+            }
         }
 
 

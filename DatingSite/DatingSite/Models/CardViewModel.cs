@@ -24,6 +24,8 @@ namespace DatingSite.Models
 
         public Nullable<int> Score { get; set; }
 
+        public string ScoreDescription { get; set; }
+
         
     }
 }

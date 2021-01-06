@@ -24,6 +24,7 @@ namespace DatingSite.Controllers
             var userRepository = new UserRepository(_context);
             var nationalityRepository = new NationalityRepository(_context);
             var personalityRepository = new PersonalityRepository(_context);
+            var scoreCalculator = new ScoreCalculator(_context);
             var list = userRepository.GetUsers();
             List<CardViewModel> modelList = new List<CardViewModel>();
             foreach (var user in userRepository.getUserGamesGenresPlatformsScore(User.Identity.Name))
@@ -40,6 +41,8 @@ namespace DatingSite.Controllers
                     CModel.Genres = user.Item3;
                     CModel.Platforms = user.Item4;
                     CModel.Score = user.Item5;
+                    CModel.ScoreDescription = scoreCalculator.ScoreDescription(user.Item5);
+                    
 
                     modelList.Add(CModel);
                 }

@@ -20,6 +20,8 @@ namespace DatingSite.Models
 
         public Nullable<int> Score { get; set; }
 
+        public string ScoreDescription { get; set; }
+
         public List<Visit> Visits { get; set; }
         public IList<User> Friends { get; set; }
         public List<Post> Posts { get; set; }
