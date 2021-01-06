@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using DataLayer;
 using DataLayer.Models;
 using DatingSite.Data;
+using DataLayer.Repositories;
 
 namespace DatingSite.Controllers
 {
@@ -140,6 +141,16 @@ namespace DatingSite.Controllers
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.UserId == id);
+        }
+
+        public IActionResult Hide()
+        {
+            var repo = new UserRepository(_context);
+            var userId = repo.getUserIdByMail(User.Identity.Name);
+            var user = _context.Users.Find(userId);
+            user.IsHidden = true;
+            _context.SaveChanges();
+            return Redirect("/Identity/Account/Manage");
         }
     }
 }
