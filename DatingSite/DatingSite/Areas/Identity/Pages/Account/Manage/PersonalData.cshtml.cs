@@ -10,6 +10,7 @@ namespace DatingSite.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;
+        
 
         public PersonalDataModel(
             UserManager<IdentityUser> userManager,

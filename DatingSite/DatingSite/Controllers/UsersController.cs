@@ -143,12 +143,36 @@ namespace DatingSite.Controllers
             return _context.Users.Any(e => e.UserId == id);
         }
 
-        public IActionResult Hide()
+        public IActionResult HideOrUnhide()
         {
             var repo = new UserRepository(_context);
             var userId = repo.getUserIdByMail(User.Identity.Name);
             var user = _context.Users.Find(userId);
-            user.IsHidden = true;
+            if (user.IsHidden)
+            {
+                user.IsHidden = false;
+            }
+            else
+            {
+                user.IsHidden = true;
+            }
+            _context.SaveChanges();
+            return Redirect("/Identity/Account/Manage");
+        }
+
+        public IActionResult InactivateOrActivate()
+        {
+            var repo = new UserRepository(_context);
+            var userId = repo.getUserIdByMail(User.Identity.Name);
+            var user = _context.Users.Find(userId);
+            if (user.Active)
+            {
+                user.Active = false;
+            }
+            else
+            {
+                user.Active = true;
+            }
             _context.SaveChanges();
             return Redirect("/Identity/Account/Manage");
         }

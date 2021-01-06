@@ -36,7 +36,7 @@ namespace DatingSite.Controllers
                 .Include(f => f.Receiver)
                 .Include(f => f.Sender)
                 .Include(f => f.Status)
-                .Where(u => u.SenderId == userId);
+                .Where(u => u.SenderId == userId && u.Receiver.Active != false);
 
             return View(await datingSiteContext.ToListAsync());
         }

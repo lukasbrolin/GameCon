@@ -1,9 +1,7 @@
 ﻿/***************** SIGNALR *****************/
 /******************************************/
 $(function () {
-    const connection = new signalR.HubConnectionBuilder()
-        .withUrl("/friendHub")
-        .build();
+    const connection = new signalR.HubConnectionBuilder().withUrl("/friendHub").build();
     connection.start().catch(err => console.error(err));
     connection.on("added", (user) => {
         console.log(user);

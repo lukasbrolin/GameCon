@@ -23,19 +23,33 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+            <tr>
+                <td>
+                    <a asp-controller="Profile" asp-action="Index" asp-route-profile="@item.Receiver.NickName" class="card-link">
+                        @Html.DisplayFor(modelItem => item.Receiver.NickName)
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.FriendId">@Html.DisplayFor(modelItem => item.Category.Name)</a>
+                </td>
+                @if (item.Status.Description.Equals("Pending"))
+                {
                     <td>
-                        <a asp-controller="Profile" asp-action="Index" asp-route-profile="@item.Receiver.NickName" class="card-link">
-                            @Html.DisplayFor(modelItem => item.Receiver.NickName)
-                        </a>
+
+                        <span class="badge badge-pill badge-secondary">
+                            @Html.DisplayFor(modelItem => item.Status.Description)
+                        </span>
                     </td>
+                }
+                else
+                {
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.FriendId">@Html.DisplayFor(modelItem => item.Category.Name)</a>
+                        <span class="badge badge-pill badge-success">
+                            @Html.DisplayFor(modelItem => item.Status.Description)
+                        </span>
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status.Description)
-                    </td>
-                </tr>
+                }
+            </tr>
             }
         </tbody>
     </table>
