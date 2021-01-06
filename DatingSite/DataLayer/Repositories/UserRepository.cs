@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.AspNetCore.Http;
+
+using System.IO;
 
 namespace DataLayer.Repositories
 {
@@ -327,6 +330,7 @@ namespace DataLayer.Repositories
             return match;
         }
 
+
         public void AddUser(User user)
         {
             _context.Users.Add(user);
@@ -345,6 +349,7 @@ namespace DataLayer.Repositories
 
         }
 
+
         public User getUserById(int id)
         {
             return _context.Users.FirstOrDefault(x => x.UserId.Equals(id));
@@ -362,6 +367,106 @@ namespace DataLayer.Repositories
 
             return user;
         }
+
+        public void EditUserNickName(string mail, string newNick)
+        {
+            
+            var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
+
+            user.NickName = newNick;
+
+            _context.SaveChanges();
+        }
+
+        public void EditUserFirstName(string mail, string newFirstName)
+        {
+
+            var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
+
+            user.FirstName = newFirstName;
+
+            _context.SaveChanges();
+        }
+
+        public void EditUserLastName(string mail, string newLastName)
+        {
+
+            var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
+
+            user.LastName = newLastName;
+
+            _context.SaveChanges();
+        }
+
+        public void EditUserAge(string mail, int newAge)
+        {
+
+            var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
+
+            user.Age = newAge;
+
+            _context.SaveChanges();
+        }
+
+        public void EditUserGender(string mail, string newGender)
+        {
+
+            var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
+            user.Gender = newGender;
+
+            _context.SaveChanges();
+        }
+
+        public void EditUserNationality(string mail, string newNationality)
+        {
+
+            var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
+            user.Nationality.Name = newNationality;
+
+            _context.SaveChanges();
+        }
+
+        public void EditUserPersonality(string mail, string newPersonality)
+        {
+
+            var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
+            user.Personality.Description = newPersonality;
+
+            _context.SaveChanges();
+        }
+
+        //Noobens swagkod som inte funkar
+        public void EditUserPhoto(string mail, IFormFile newPhoto)
+        {
+
+            var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
+            if (newPhoto != null)
+            {
+                try
+                {
+                    string imgUrl = Guid.NewGuid().ToString() + Path.GetExtension(newPhoto.FileName);
+
+                    if (imgUrl.ToLower().Contains(".jpeg") || imgUrl.ToLower().Contains(".jpg") || imgUrl.Contains(".png"))
+                    {
+                        string savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img\\avatars", imgUrl);
+                        string relPath = System.IO.Path.Combine("~/img/avatars/" + imgUrl);
+                        using (var fileStream = new FileStream(savePath, FileMode.Create))
+                        {
+                            newPhoto.CopyTo(fileStream);
+                        }
+
+                        user.ImgUrl = relPath;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            _context.SaveChanges();
+        }
+
 
         public void DeleteUser(int id)
         {
