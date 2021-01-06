@@ -5,6 +5,7 @@ namespace DataLayer.Models
 {
     public class Game
     {
+
         [Required]
         public virtual int GameId { get; set; }
 

@@ -108,7 +108,7 @@ namespace DatingSite.Controllers
             {
                 return null;
             }
-            return RedirectToAction("Profile", "Index", User.Identity.Name);
+            return Redirect(Request.Headers["Referer"].ToString());
         }
 
         private SerializeProfile GetProfileData()
@@ -117,6 +117,7 @@ namespace DatingSite.Controllers
             User userSerialize = userRepository.getUserByMail(User.Identity.Name);
             SerializeProfile serializeProfile = new SerializeProfile()
             {
+                UserId = userSerialize.UserId,
                 NickName = userSerialize.NickName,
                 FirstName = userSerialize.FirstName,
                 LastName = userSerialize.LastName,
@@ -126,10 +127,6 @@ namespace DatingSite.Controllers
                 ImgUrl = userSerialize.ImgUrl,
                 Nationality = userSerialize.Nationality.Name,
                 Personality = userSerialize.Personality.Description,
-                Games = userSerialize.Games,
-                Genres = userSerialize.Genres,
-                Platforms = userSerialize.Platforms
-
             };
             return serializeProfile;
         }

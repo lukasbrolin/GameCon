@@ -17,8 +17,6 @@ namespace DataLayer.Serialize
         public string ImgUrl { get; set; }
         public string Nationality { get; set; }
         public string Personality { get; set; }
-        public IList<Game> Games { get; set; }
-        public IList<Genre> Genres { get; set; }
-        public IList<Platform> Platforms { get; set; }
+        
     }
 }

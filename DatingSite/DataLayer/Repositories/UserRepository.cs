@@ -51,14 +51,44 @@ namespace DataLayer.Repositories
             {
                 list.Add(genre.Name);
             }
-            //foreach (var d in games)
-            //{
-            //    _context.Entry(d).Collection(x => x.Users).Load();
-            //    foreach (User c in d.Users)
-            //    {
-            //        list.Add(d.Name + " + " + c.FirstName);
-            //    }
-            //}
+            return list;
+        }
+
+        public List<string> GetUserGameNamesById(int userId)
+        {
+            var list = new List<string>();
+            var games = gamesRepository.GetGames();
+            var user = _context.Users.FirstOrDefault(x => x.UserId.Equals(userId));
+            _context.Entry(user).Collection(x => x.Games).Load();
+            foreach(var game in user.Games)
+            {
+                list.Add(game.Name);
+            }
+            return list;
+
+        }
+        public List<string> GetUserPlatformNamesById(int userId)
+        {
+            var list = new List<string>();
+            var platforms = platformRepository.GetPlatforms();
+            var user = _context.Users.FirstOrDefault(x => x.UserId.Equals(userId));
+            _context.Entry(user).Collection(x => x.Platforms).Load();
+            foreach (var platform in user.Platforms)
+            {
+                list.Add(platform.Name);
+            }
+            return list;
+        }
+        public List<string> GetUserGenreNamesById(int userId)
+        {
+            var list = new List<string>();
+            var genres = genreRepository.GetGenres();
+            var user = _context.Users.FirstOrDefault(x => x.UserId.Equals(userId));
+            _context.Entry(user).Collection(x => x.Platforms).Load();
+            foreach (var platform in user.Platforms)
+            {
+                list.Add(platform.Name);
+            }
             return list;
         }
 
