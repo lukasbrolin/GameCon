@@ -13,6 +13,8 @@ namespace DataLayer.Repositories
         private GameRepository gamesRepository;
         private GenreRepository genreRepository;
         private PlatformRepository platformRepository;
+        private NationalityRepository nationalityRepository;
+        private PersonalityRepository personalityRepository;
 
         public UserRepository(DatingSiteContext context)
         {
@@ -20,6 +22,8 @@ namespace DataLayer.Repositories
             gamesRepository = new GameRepository(_context);
             genreRepository = new GenreRepository(_context);
             platformRepository = new PlatformRepository(_context);
+            nationalityRepository = new NationalityRepository(_context);
+            personalityRepository = new PersonalityRepository(_context);
         }
 
         public List<User> GetUsers()
@@ -318,7 +322,15 @@ namespace DataLayer.Repositories
 
         public User getUserByMail(string mail)
         {
-            return _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
+            var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
+            _context.Entry(user).Collection(x => x.Games).Load();
+            _context.Entry(user).Collection(x => x.Genres).Load();
+            _context.Entry(user).Collection(x => x.Platforms).Load();
+            user.Nationality = nationalityRepository.GetNationalityById(user.NationalityId);
+            user.Personality = personalityRepository.GetPersonalityById(user.PersonalityId);
+            _context.Entry(user).Collection(x => x.Platforms).Load();
+
+            return user;
         }
 
         public void DeleteUser(int id)
