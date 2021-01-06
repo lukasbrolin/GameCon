@@ -10,6 +10,7 @@ using DataLayer;
 using System.Web.Http;
 using Microsoft.AspNetCore.SignalR;
 using DatingSite.Application;
+using SignalRChat.Hubs;
 
 namespace DatingSite
 {
@@ -84,6 +85,7 @@ namespace DatingSite
                     defaults: new { id = RouteParameter.Optional });
 
                 endpoints.MapHub<FriendHub>("/friendHub");
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
         }
     }
