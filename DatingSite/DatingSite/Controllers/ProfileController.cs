@@ -1,5 +1,6 @@
 ﻿using DataLayer;
 using DataLayer.Models;
+using DataLayer.Serialize;
 using DataLayer.Repositories;
 using DatingSite.Models;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace DatingSite.Controllers
 {
@@ -80,6 +84,54 @@ namespace DatingSite.Controllers
 
             ViewBag.currentUser = userRepository.getUserIdByMail(User.Identity.Name);
             return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SerializeProfile()
+        {
+            SerializeProfile userProfile = GetProfileData();
+            try
+            {
+                XmlDocument xmlDocument = new XmlDocument();
+                XmlSerializer serializer = new XmlSerializer(userProfile.GetType());
+                string savePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + User.Identity.Name + ".xml";
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    serializer.Serialize(memoryStream, userProfile);
+                    memoryStream.Position = 0;
+                    xmlDocument.Load(memoryStream);
+                    xmlDocument.Save(savePath);
+                    memoryStream.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return RedirectToAction("Profile", "Index", User.Identity.Name);
+        }
+
+        private SerializeProfile GetProfileData()
+        {
+            var userRepository = new UserRepository(_context);
+            User userSerialize = userRepository.getUserByMail(User.Identity.Name);
+            SerializeProfile serializeProfile = new SerializeProfile()
+            {
+                NickName = userSerialize.NickName,
+                FirstName = userSerialize.FirstName,
+                LastName = userSerialize.LastName,
+                Mail = userSerialize.Mail,
+                Age = userSerialize.Age,
+                Gender = userSerialize.Gender,
+                ImgUrl = userSerialize.ImgUrl,
+                Nationality = userSerialize.Nationality.Name,
+                Personality = userSerialize.Personality.Description,
+                Games = userSerialize.Games,
+                Genres = userSerialize.Genres,
+                Platforms = userSerialize.Platforms
+
+            };
+            return serializeProfile;
         }
 
         public ActionResult Visitors(VisitorViewModel model)
