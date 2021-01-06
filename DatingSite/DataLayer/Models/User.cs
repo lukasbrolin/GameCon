@@ -46,6 +46,8 @@ namespace DataLayer.Models
         [Required]
         public virtual bool Active { get; set; }
 
+        public bool IsHidden { get; set; } = false;
+
         [Required]
         public virtual int PersonalityId { get; set; }
 
