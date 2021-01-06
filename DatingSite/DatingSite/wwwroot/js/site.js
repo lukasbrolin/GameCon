@@ -1,4 +1,19 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿/***************** SIGNALR *****************/
+/******************************************/
+$(function () {
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/friendHub")
+        .build();
+    connection.start().catch(err => console.error(err));
+    connection.on("added", (user) => {
+        console.log(user);
+    });
 
-// Write your JavaScript code.
+    connection.on("added", (user) => {
+        $("#notifications").html("Added by user: <strong>" + user + "</strong>");
+        window.setTimeout(function () {
+            $("#notifications").html("");
+        },
+            5000);
+    });
+});
