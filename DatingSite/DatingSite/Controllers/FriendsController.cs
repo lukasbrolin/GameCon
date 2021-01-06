@@ -8,6 +8,8 @@ using DataLayer;
 using DataLayer.Models;
 using DataLayer.Repositories;
 using Microsoft.AspNetCore.SignalR;
+using DatingSite.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace DatingSite.Controllers
 {
@@ -176,13 +178,17 @@ namespace DatingSite.Controllers
 
         private bool FriendExists(int id)
         {
-            return _context.Friends.Any(e => e.FriendId == id);
+            return _context.Friends.Any(e => e.ReceiverId == id);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddFriend(int receiverId, int senderId)
+        public IActionResult AddFriend(int receiverId, int senderId, FriendViewModel model)
         {
+            if (FriendExists(receiverId))
+            {
+                return Content("Najj");
+            }
             var repo = new UserRepository(_context);
             var addedFriend = repo.getUserById(receiverId);
             var currentUser = User.Identity.Name;
@@ -191,10 +197,11 @@ namespace DatingSite.Controllers
             _context.Friends.Add(friend);
             _context.SaveChanges();
 
-            // Refresh the calling page to reflect changes
+            // Refresh the calling page to reflect changes and notify the added user (if connected)
             _friendHubContext.Clients.User(currentUser).SendAsync("refreshUI");
-            // Notify the added user (if connected)
             _friendHubContext.Clients.User(addedFriend.Mail).SendAsync("added", currentUser);
+
+            //Return user to same profile page.
             return Redirect(Request.Headers["Referer"].ToString());
         }
     }
