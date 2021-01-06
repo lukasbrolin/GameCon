@@ -79,13 +79,16 @@ namespace DatingSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Submit(string[] CheckBoxes)
+        public ActionResult Submit(string[] CheckBoxesGame,string[] CheckBoxesGenre,string[] CheckBoxesPlatform)
         {
             var userRepository = new UserRepository(_context);
-
-            userRepository.SetUserGames(User.Identity.Name, CheckBoxes);
-            userRepository.SetUserGenres(User.Identity.Name, CheckBoxes);
-            userRepository.SetUserPlatforms(User.Identity.Name, CheckBoxes);
+            var gameRepository = new GameRepository(_context);
+            List<Game> userGames = userRepository.GetUserGamesByMail(User.Identity.Name);
+            
+            var newSelectedGames = gameRepository.GetGamesByNames(CheckBoxesGame).Except(userGames).Select(x => x.Name).ToArray();
+            userRepository.SetUserGames(User.Identity.Name, newSelectedGames);
+            //userRepository.SetUserGenres(User.Identity.Name, CheckBoxes);
+            //userRepository.SetUserPlatforms(User.Identity.Name, CheckBoxes);
 
             return RedirectToAction("Index", "Profile");
         }
