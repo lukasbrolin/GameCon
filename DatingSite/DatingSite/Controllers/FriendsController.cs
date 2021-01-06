@@ -183,29 +183,18 @@ namespace DatingSite.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddFriend(int receiverId, int senderId)
         {
-            if (ModelState.IsValid)
-            {
-                if (FriendExists(receiverId))
-                {
-                    ModelState.AddModelError("UserId", "You are already friend with this user!");
-                    return Redirect(Request.Headers["Referer"].ToString());
-                }
-                else
-                {
-                    var repo = new UserRepository(_context);
-                    var addedFriend = repo.getUserById(receiverId);
-                    var currentUser = User.Identity.Name;
+            var repo = new UserRepository(_context);
+            var addedFriend = repo.getUserById(receiverId);
+            var currentUser = User.Identity.Name;
 
-                    var friend = new Friend { SenderId = senderId, ReceiverId = receiverId, CategoryId = 1, StatusId = 1 };
-                    _context.Friends.Add(friend);
-                    _context.SaveChanges();
+            var friend = new Friend { SenderId = senderId, ReceiverId = receiverId, CategoryId = 1, StatusId = 1 };
+            _context.Friends.Add(friend);
+            _context.SaveChanges();
 
-                    // Refresh the calling page to reflect changes
-                    _friendHubContext.Clients.User(currentUser).SendAsync("refreshUI");
-                    // Notify the added user (if connected)
-                    _friendHubContext.Clients.User(addedFriend.Mail).SendAsync("added", currentUser);
-                }
-            }
+            // Refresh the calling page to reflect changes
+            _friendHubContext.Clients.User(currentUser).SendAsync("refreshUI");
+            // Notify the added user (if connected)
+            _friendHubContext.Clients.User(addedFriend.Mail).SendAsync("added", currentUser);
             return Redirect(Request.Headers["Referer"].ToString());
         }
     }
