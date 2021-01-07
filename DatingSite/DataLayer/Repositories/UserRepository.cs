@@ -349,6 +349,7 @@ namespace DataLayer.Repositories
         }
 
 
+
         public User getUserById(int id)
         {
             return _context.Users.FirstOrDefault(x => x.UserId.Equals(id));
@@ -478,5 +479,47 @@ namespace DataLayer.Repositories
         {
             return _context.Users.Any(user => user.UserId == id);
         }
+
+        public void HideUser(int userId)
+        {
+            var user = _context.Users.Find(userId);
+            user.IsHidden = true;
+            _context.SaveChanges();
+
+        }
+
+        public void ShowUser(int userId)
+        {
+            var user = _context.Users.Find(userId);
+            user.IsHidden = false;
+            _context.SaveChanges();
+
+        }
+
+        public bool GetHidden(int userId)
+        {
+            var user = _context.Users.Find(userId);
+            return user.IsHidden;
+        }
+
+        public void InactivateUser(int userId)
+        {
+            var user = _context.Users.Find(userId);
+            user.Active = false;
+            _context.SaveChanges();
+        }
+        public void ActivateUser(int userId)
+        {
+            var user = _context.Users.Find(userId);
+            user.Active = true;
+            _context.SaveChanges();
+        }
+
+        public bool GetActive(int userId)
+        {
+            var user = _context.Users.Find(userId);
+            return user.Active;
+        }
+
     }
 }

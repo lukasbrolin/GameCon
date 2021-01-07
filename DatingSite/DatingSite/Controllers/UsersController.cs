@@ -20,12 +20,14 @@ namespace DatingSite.Controllers
         private readonly DatingSiteContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private UserRepository _userRepository;
 
         public UsersController(DatingSiteContext context, UserManager<IdentityUser> usermanager, SignInManager<IdentityUser> signInManager)
         {
             _context = context;
             _userManager = usermanager;
             _signInManager = signInManager;
+            _userRepository = new UserRepository(_context);
         }
 
         public async Task<IActionResult> Index()
@@ -145,40 +147,34 @@ namespace DatingSite.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.Users.Any(e => e.UserId == id);
+            return _userRepository.UserExists(id);
         }
 
         public IActionResult HideOrUnhide()
         {
-            var repo = new UserRepository(_context);
-            var userId = repo.getUserIdByMail(User.Identity.Name);
-            var user = _context.Users.Find(userId);
-            if (user.IsHidden)
+            var userId = _userRepository.getUserIdByMail(User.Identity.Name);
+            if (_userRepository.GetHidden(userId))
             {
-                user.IsHidden = false;
+                _userRepository.ShowUser(userId);
             }
             else
             {
-                user.IsHidden = true;
+                _userRepository.HideUser(userId);
             }
-            _context.SaveChanges();
             return Redirect("/Identity/Account/Manage");
         }
 
         public IActionResult InactivateOrActivate()
         {
-            var repo = new UserRepository(_context);
-            var userId = repo.getUserIdByMail(User.Identity.Name);
-            var user = _context.Users.Find(userId);
-            if (user.Active)
+            var userId = _userRepository.getUserIdByMail(User.Identity.Name);
+            if (_userRepository.GetActive(userId))
             {
-                user.Active = false;
+                _userRepository.InactivateUser(userId);
             }
             else
             {
-                user.Active = true;
+                _userRepository.ActivateUser(userId);
             }
-            _context.SaveChanges();
             return Redirect("/Identity/Account/Manage");
         }
 
