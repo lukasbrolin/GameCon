@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Http;
-
 using System.IO;
 
 namespace DataLayer.Repositories
@@ -520,6 +519,17 @@ namespace DataLayer.Repositories
             var user = _context.Users.Find(userId);
             return user.Active;
         }
+
+
+        public List<User> GetFiveUsers()
+        {
+            Random r = new Random();
+            var userList = _context.Users.OrderBy(u => r.Next()).Take(5).Where(x => x.Active.Equals(true)).ToList();
+            return userList;
+            
+        }
+
+
 
     }
 }
