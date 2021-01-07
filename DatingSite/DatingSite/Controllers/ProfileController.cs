@@ -28,7 +28,6 @@ namespace DatingSite.Controllers
         // GET: ProfileController
         public ActionResult Index(ProfileViewModel model, string profile)
         {
-            var visitorRepository = new VisitRepository(_context);
             var userRepository = new UserRepository(_context);
             var nationalityRepository = new NationalityRepository(_context);
             var personalityRepository = new PersonalityRepository(_context);
@@ -62,7 +61,6 @@ namespace DatingSite.Controllers
                     model.Score = user.Item5;
                     model.ScoreDescription = scoreCalculator.ScoreDescription(user.Item5);
                     break;
-                    
                 }
                 else if (user.Item1.Mail.Equals(User.Identity.Name))
                 {
@@ -85,6 +83,7 @@ namespace DatingSite.Controllers
             ViewBag.currentUser = userRepository.getUserIdByMail(User.Identity.Name);
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult SerializeProfile()

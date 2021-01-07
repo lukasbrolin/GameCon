@@ -1,4 +1,5 @@
 ﻿using DataLayer.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,10 @@ namespace DataLayer.Repositories
         private readonly DatingSiteContext _context;
         private UserRepository userRepository;
 
-
         public PostRepository(DatingSiteContext context)
         {
             _context = context;
             userRepository = new UserRepository(_context);
-
         }
 
         public List<Post> GetPosts()
@@ -40,12 +39,16 @@ namespace DataLayer.Repositories
 
         public List<Post> GetPostsByMailOrderedByLatestDate(string mail)
         {
-            var list = _context.Posts.OrderByDescending(z => z.TimeStamp).Where(x => x.ReceiverId.Equals(userRepository.getUserByMail(mail).UserId)).ToList();
-            //var userList = new List<User>();
-            //foreach(var id in list)
-            //{
-            //    userList.Add(userRepository.getUserById(id));
-            //}
+            //var list = _context.Posts.OrderByDescending(z => z.TimeStamp)
+            //    .Where(x => x.ReceiverId.Equals(userRepository.getUserByMail(mail).UserId))
+            //    .ToList();
+
+            var list = _context.Posts
+                .Include(u => u.Sender)
+                .Include(u => u.Receiver)
+                .OrderByDescending(z => z.TimeStamp)
+                .Where(x => x.ReceiverId.Equals(userRepository.getUserByMail(mail).UserId) && x.Sender.Active == true)
+                .ToList();
             return list;
         }
 
