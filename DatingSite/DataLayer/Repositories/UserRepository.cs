@@ -525,7 +525,19 @@ namespace DataLayer.Repositories
             
         }
 
+        public void IsOnlineTrue(string currentUser)
+        {
+            var user = getUserByMail(currentUser);
+            user.Online = true;
+            _context.SaveChanges();
+        }
 
+        public void IsOnlineFalse(string currentUser)
+        {
+            var user = getUserByMail(currentUser);
+            user.Online = false;
+            _context.SaveChanges();
+        }
 
     }
 }

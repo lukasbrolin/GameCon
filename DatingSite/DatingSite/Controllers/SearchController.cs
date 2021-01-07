@@ -22,7 +22,7 @@ namespace DatingSite.Controllers
         {
             var users = from u in _context.Users
                         .Include(u => u.Nationality)
-                        .Where(u => u.IsHidden == false)
+                        .Where(u => u.IsHidden == false && u.Active == true)
                         select u;
 
             if (!String.IsNullOrEmpty(searchString))

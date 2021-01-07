@@ -10,7 +10,6 @@ namespace DataLayer.Repositories
         private DatingSiteContext _context;
         private UserRepository userRepository;
 
-
         public VisitRepository(DatingSiteContext context)
         {
             _context = context;
@@ -39,7 +38,6 @@ namespace DataLayer.Repositories
         {
             _context.Visits.Add(visit);
             _context.SaveChanges();
-
         }
 
         public Visit GetVisitById(int id)
@@ -49,9 +47,11 @@ namespace DataLayer.Repositories
 
         public List<User> GetVisitorsByMailOrderedByLatestDate(string mail)
         {
-            var list = _context.Visits.OrderByDescending(z=>z.TimeStamp).Where(x => x.ReceiverId.Equals(userRepository.getUserByMail(mail).UserId)).Select(y=>y.SenderId).ToList();
+            var list = _context.Visits.OrderByDescending(z => z.TimeStamp)
+                .Where(x => x.ReceiverId.Equals(userRepository.getUserByMail(mail).UserId) && x.Sender.Active == true)
+                .Select(y => y.SenderId).ToList();
             var userList = new List<User>();
-            foreach(var id in list)
+            foreach (var id in list)
             {
                 userList.Add(userRepository.getUserById(id));
             }
@@ -62,8 +62,6 @@ namespace DataLayer.Repositories
         public List<User> GetLatestFiveVisitorsByMail(string mail)
         {
             return GetVisitorsByMailOrderedByLatestDate(mail).Distinct().Take(5).ToList();
-            
         }
-
     }
 }

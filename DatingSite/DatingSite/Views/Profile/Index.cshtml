@@ -13,7 +13,7 @@
                 <h6 class="card-subtitle">Gaming personality: @Model.User.Personality.Description  </h6>
                 @{if (Model.User.Mail.Equals(User.Identity.Name))
                     {
-                                <a asp-controller="ChangeGGP" asp-action="Index" class="card-link"><img src="~/img/Icons/pencil.svg" style="width: 15px; height:15px;" />Edit Preferences</a>
+                        <a asp-controller="ChangeGGP" asp-action="Index" class="card-link"><img src="~/img/Icons/pencil.svg" style="width: 15px; height:15px;" />Edit Preferences</a>
                     }
                 }
             </div>
@@ -173,7 +173,6 @@
             </div>
         </div>
     </div>
-</div>
 @section scripts
         {
     <script type="text/javascript">
