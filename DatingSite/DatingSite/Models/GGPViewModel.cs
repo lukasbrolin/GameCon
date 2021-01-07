@@ -17,16 +17,19 @@ namespace DatingSite.Models
 
         public Dictionary<Platform, bool> Platforms { get; set; }
 
-        
+        [StringLength(12, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
         [Display(Name = "Nick name")]
         public string NickName { get; set; }
 
+        [StringLength(12, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
         [Display(Name = "First name")]
         public string FirstName { get; set; }
 
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
         [Display(Name = "Last name")]
         public virtual string LastName { get; set; }
 
+        [Range(1, 99, ErrorMessage ="Age must be between 1-99.")]
         [Display(Name = "Age")]
         public virtual int Age { get; set; }
 
@@ -38,6 +41,7 @@ namespace DatingSite.Models
 
         [Display(Name = "Personality")]
         public virtual string Personality { get; set; }
+        
         [Display(Name = "Image")]
         public virtual string ImgURL { get; set; }
 

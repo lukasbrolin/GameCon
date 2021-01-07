@@ -123,6 +123,8 @@
                     </div>*@
                 </div>
             </li>
+            @if (Model.User.Mail.Equals(User.Identity.Name))
+            {
             <li>
                 <div class="card-body player-info-items">
                     <form asp-action="SerializeProfile" asp-controller="Profile">
@@ -131,6 +133,7 @@
                 </div>
                 @*@Html.ActionLink("Serialize", "Serialize", "SignedInUser", new { userName = User.Identity.Name }, new { @class = "btn btn-danger btn-sm", id = "serializeBtn" })}*@
             </li>
+            }
 
 
             @if (!Model.User.Mail.Equals(User.Identity.Name))
