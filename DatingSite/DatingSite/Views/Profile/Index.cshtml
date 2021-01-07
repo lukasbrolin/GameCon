@@ -4,20 +4,9 @@
 <div class="margin-container card-properties h-100">
     <div class="card mx-auto backgroundFrosty profile-border sketchy">
         <div class="cardheader">
-            <img class="cardimg" src="@Url.Content(Model.User.ImgUrl)" alt="Card image cap">
+            <img class="cardimg mg-1 padding-0" src="@Url.Content(Model.User.ImgUrl)" alt="Card image cap">
             <div class="card-body profile-info">
-                @if (!Model.User.Mail.Equals(User.Identity.Name))
-                {
-                    <li>
-                        <div class="card-body player-info-items">
-                            <form asp-action="FriendRequest" asp-controller="Friends" method="post">
-                                <input type="hidden" name=receiverId value="@Model.User.UserId" />
-                                <input type="hidden" name=senderId value="@ViewBag.currentUser" />
-                                <input type="submit" value="Add Friend" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal" />
-                            </form>
-                        </div>
-                    </li>
-                }
+
                 <h2 class="card-title">@Model.User.NickName, @Model.User.Age</h2>
                 <h4 class="card-subtitle">@Model.User.FirstName @Model.User.LastName</h4>
                 <h4 class="card-subtitle">@Model.User.Nationality.Name <img src="~/img/Countries-Icon/@(@Model.User.Nationality.Name).png" style="width: 20px; height:20px;" /></h4>
@@ -28,9 +17,21 @@
                         <a asp-controller="ChangeGGP" asp-action="Index" class="card-link"><img src="~/img/Icons/pencil.svg" style="width: 15px; height:15px;" />Edit Preferences</a>
                     }
                 }
+                @if (!Model.User.Mail.Equals(User.Identity.Name))
+                {
+                    <li class="pd-top-05">
+                        <div class="">
+                            <form asp-action="FriendRequest" asp-controller="Friends" method="post">
+                                <input type="hidden" name=receiverId value="@Model.User.UserId" />
+                                <input type="hidden" name=senderId value="@ViewBag.currentUser" />
+                                <input type="submit" value="Add Friend" class="btn btn-primary button-profile-border" data-toggle="modal" data-target="#exampleModal" />
+                            </form>
+                        </div>
+                    </li>
+                }
             </div>
         </div>
-        <ul class="list-group list-group-flush mg-1">
+        <ul class="list-group list-group-flush mg-1 in-card-border">
             @if (Model.Score.HasValue)
             {
                 <li class="list-group-item text-center backgroundFrosty">

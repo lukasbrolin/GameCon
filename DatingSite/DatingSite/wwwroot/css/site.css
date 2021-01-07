@@ -27,6 +27,7 @@ a {
 body {
     margin-bottom: 0 !important;
     background-color: black;
+    color:black;
 }
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -433,20 +434,25 @@ input::placeholder {
 }
 
 .profile-border {
+    border-left: 2px solid #C49B5B;
+    border-top: 3px solid #B5A691;
+    border-right: 4px solid #846547;
+}
 
-    
+.in-card-border{
+    border:1px solid rgba(0,0,0,0.5);
 }
 
 .button-profile-border {
-    color: #212529;
+    color: black;
     background-color: #887e71;
-    border-color: #212529;
+    border-color: black;
 }
 
     .button-profile-border:hover {
-        color: #212529;
+        color: black;
         background-color: #b7b2ac;
-        border-color: #212529;
+        border-color: black;
     }
 
     .button-profile-border:focus {
@@ -454,9 +460,9 @@ input::placeholder {
     }
 
     .button-profile-border:active {
-        color: #212529!important;
+        color: black!important;
         background-color: #887e71!important;
-        border-color: #212529!important;
+        border-color: black!important;
     }
 
 .profile-header {
@@ -467,9 +473,17 @@ input::placeholder {
     margin:1rem;
 }
 
+.padding-0{
+    padding:0;
+}
+
 .fit-content{
     margin:auto;
     width: fit-content;
+}
+
+li{
+    list-style-type:none;
 }
 
 
