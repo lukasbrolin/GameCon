@@ -14,7 +14,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+        <nav class="navbar nav-background navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DatingSite</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -43,6 +43,10 @@
     </div>
     <div class="container min-vw-100 min-vh-100 np">
         <main role="main">
+            <video id="home-video" @*style="left: 0; top: 0; z-index: -1; object-fit:cover"*@ playsinline autoplay muted loop poster="polina.jpg" id="bgvid" class="position-absolute display-1 w-100 ">
+                <source src="/img/Backgrounds/Wow.mp4" type="video/webm">
+                <source src="/img/Backgrounds/Wow.mp4" type="video/mp4">
+            </video>
             @RenderBody()
         </main>
     </div>

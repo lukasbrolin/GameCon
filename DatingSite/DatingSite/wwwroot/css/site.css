@@ -26,6 +26,7 @@ a {
 
 body {
     margin-bottom: 0 !important;
+    background-color: black;
 }
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -329,7 +330,7 @@ input::placeholder {
 .card-properties {
     width: 40vw;
     margin-bottom: 6rem;
-    margin-top:2rem;
+    padding-top:2rem;
 }
 
 .display-flex{
@@ -412,5 +413,14 @@ input::placeholder {
 
 .color-black{
     color: black;
+}
+
+.backgroundFrosty {
+    background-image: linear-gradient(to right, #c8a162ba, #8f786185);
+    background-color: unset;
+}
+
+.nav-background {
+    background-color: #b5a691!important;
 }
 

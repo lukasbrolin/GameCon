@@ -84,6 +84,11 @@ namespace DatingSite
                     pattern: "api/{controller}/{id}",
                     defaults: new { id = RouteParameter.Optional });
 
+                endpoints.MapControllerRoute(
+                    name: "profile-route",
+                    pattern: "{controller=Profile}/{action=Index}/{profile?}");
+                    //defaults: new { id = RouteParameter.Optional });
+
                 endpoints.MapHub<FriendHub>("/friendHub");
                 endpoints.MapHub<ChatHub>("/chatHub");
             });
