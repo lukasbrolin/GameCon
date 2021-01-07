@@ -29,11 +29,10 @@ namespace DatingSite.Controllers
             List<CardViewModel> modelList = new List<CardViewModel>();
             foreach (var user in userRepository.getUserGamesGenresPlatformsScore(User.Identity.Name))
             {
-                if (!user.Item1.Mail.Equals(User.Identity.Name))
+                if (!user.Item1.Mail.Equals(User.Identity.Name) && user.Item1.Active == true)
                 {
                     user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
                     user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
-
                     CardViewModel CModel = new CardViewModel();
 
                     CModel.User = user.Item1;
@@ -42,7 +41,6 @@ namespace DatingSite.Controllers
                     CModel.Platforms = user.Item4;
                     CModel.Score = user.Item5;
                     CModel.ScoreDescription = scoreCalculator.ScoreDescription(user.Item5);
-                    
 
                     modelList.Add(CModel);
                 }
@@ -118,7 +116,5 @@ namespace DatingSite.Controllers
                 return View();
             }
         }
-
-        
     }
 }
