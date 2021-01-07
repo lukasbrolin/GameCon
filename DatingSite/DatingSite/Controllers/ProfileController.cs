@@ -28,6 +28,7 @@ namespace DatingSite.Controllers
         // GET: ProfileController
         public ActionResult Index(ProfileViewModel model, string profile)
         {
+
             var visitorRepository = new VisitRepository(_context);
             var userRepository = new UserRepository(_context);
             var nationalityRepository = new NationalityRepository(_context);
@@ -37,6 +38,8 @@ namespace DatingSite.Controllers
             var scoreCalculator = new ScoreCalculator(_context);
             var list = userRepository.GetUsers();
             List<CardViewModel> modelList = new List<CardViewModel>();
+
+            var x = userRepository.GetFiveUsers();
 
             foreach (var user in userRepository.getUserGamesGenresPlatformsScore(User.Identity.Name))
             {

@@ -1,4 +1,5 @@
 ﻿using DataLayer;
+using DataLayer.Repositories;
 using DatingSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -22,9 +23,19 @@ namespace DatingSite.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(LightProfile model)
         {
-            return View();
+            var userRepository = new UserRepository(_context);
+            var list = userRepository.GetFiveUsers();
+            List<LightProfile> modelList = new List<LightProfile>();
+            foreach(var user in list)
+            {
+                LightProfile lightProfile = new LightProfile();
+                lightProfile.User = user;
+                modelList.Add(lightProfile);
+            }
+
+            return View(modelList);
         }
 
         public IActionResult Privacy()

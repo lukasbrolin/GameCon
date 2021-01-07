@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<LightProfile>
+@{
     ViewData["Title"] = "Home Page";
 }
 <div class="div-group">
@@ -7,6 +8,22 @@
         <source src="/img/Backgrounds/Wow.mp4" type="video/webm">
         <source src="/img/Backgrounds/Wow.mp4" type="video/mp4">
     </video>
-</div>
 
+
+    <div class="vw-100 margin-top-60 position-absolute display-flex justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class=" mx-1">
+                <div class="cardheader ">
+                    <div class="text-center">
+                        <a asp-area="Identity" asp-page="/Account/Login" class="card-link">
+                            <h6 class=" card-title color-black"><strong>@item.User.NickName</strong></h6>
+                            <img class="img-game" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 <div class="home-main-body text-dark " style="background-color: grey; z-index:1; text-align:center">

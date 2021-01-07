@@ -500,8 +500,28 @@ namespace DataLayer.Repositories
         public List<User> GetFiveUsers()
         {
             Random r = new Random();
-            var userList = _context.Users.OrderBy(u => r.Next()).Take(5).Where(x => x.Active.Equals(true)).ToList();
-            return userList;
+            int[] randomArray = new int[5];
+            for(int i = 0; i < randomArray.Length; i++)
+            {
+                var randomNumber = r.Next(1, GetUsers().Count());
+                while (randomArray.Contains(randomNumber))
+                {
+                    randomNumber = r.Next(1, GetUsers().Count());
+                }
+                
+                randomArray[i] = randomNumber;
+            }
+
+            var selectedList = new List<User>();
+            var userList = GetUsers();
+
+            foreach (var i in randomArray)
+            {
+                selectedList.Add(userList[i]);
+            }
+            
+            //var userList = _context.Users.OrderBy(u => r.Next()).Take(5).Where(x => x.Active.Equals(true)).ToList();
+            return selectedList;
             
         }
 
