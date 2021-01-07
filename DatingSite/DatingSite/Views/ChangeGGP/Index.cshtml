@@ -9,16 +9,15 @@
 
 
 <div class="container h-100">
-    <form asp-action="Submit" asp-controller="ChangeGGP" class="form-check mx-auto ">
+    <form asp-action="Submit" asp-controller="ChangeGGP" enctype="multipart/form-data" class="form-check mx-auto ">
         <div asp-validation-summary="ModelOnly" class="text-danger "></div>
         <a asp-controller="Profile" asp-action="Index" class="card-link">Back to profile</a>
         <h3>Change gaming preferences or profile pic</h3>
 
-        <div>
-
-            <label asp-for="ImageURL" class="control-label">Change ProfilePic</label>
-            <input asp-for="ImageURL" class="form-control" type="file" name="file" />
-            <span asp-validation-for="ImageURL" class="text-danger"></span>
+        <div class="form-group">
+            <label asp-for="ImgURL" class="control-label">Image</label>
+            <input asp-for="ImgURL" class="form-control" type="file" name="file" />
+            <span asp-validation-for="ImgURL" class="text-danger"></span>
         </div>
 
         
@@ -62,7 +61,15 @@
             <select asp-for="Nationality" class="form-control">
                 @foreach (var item in ViewBag.NList)
                 {
-                    <option>@item.Name</option>
+                    if (item.Name.Equals(Model.Nationality))
+                    {
+                        <option selected>@item.Name</option>
+                    }
+                    else
+                    {
+                        <option>@item.Name</option>
+
+                    }
                 }
             </select>
             <span asp-validation-for="Nationality" class="text-danger"></span>
@@ -72,7 +79,15 @@
             <select asp-for="Personality" class="form-control">
                 @foreach (var item in ViewBag.PList)
                 {
-                    <option>@item.Description</option>
+                    if (item.Description.Equals(Model.Personality))
+                    {
+                        <option selected>@item.Description</option>
+                    }
+                    else
+                    {
+                        <option>@item.Description</option>
+
+                    }
                 }
             </select>
             <span asp-validation-for="Personality" class="text-danger"></span>

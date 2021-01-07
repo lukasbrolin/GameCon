@@ -421,49 +421,25 @@ namespace DataLayer.Repositories
         {
 
             var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
-            user.Nationality.Name = newNationality;
-
+            var nationalityId = nationalityRepository.GetNationalityIdByName(newNationality);
+            user.NationalityId = nationalityId;
             _context.SaveChanges();
         }
 
         public void EditUserPersonality(string mail, string newPersonality)
         {
-
             var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
-            user.Personality.Description = newPersonality;
+            var personalityId = personalityRepository.GetPersonalityIdByName(newPersonality);
+            user.PersonalityId = personalityId;
 
             _context.SaveChanges();
         }
 
         //Noobens swagkod som inte funkar
-        public void EditUserPhoto(string mail, IFormFile newPhoto)
+        public void EditUserImgUrl(string mail, string newImgUrl)
         {
-
             var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
-            if (newPhoto != null)
-            {
-                try
-                {
-                    string imgUrl = Guid.NewGuid().ToString() + Path.GetExtension(newPhoto.FileName);
-
-                    if (imgUrl.ToLower().Contains(".jpeg") || imgUrl.ToLower().Contains(".jpg") || imgUrl.Contains(".png"))
-                    {
-                        string savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img\\avatars", imgUrl);
-                        string relPath = System.IO.Path.Combine("~/img/avatars/" + imgUrl);
-                        using (var fileStream = new FileStream(savePath, FileMode.Create))
-                        {
-                            newPhoto.CopyTo(fileStream);
-                        }
-
-                        user.ImgUrl = relPath;
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-
+            user.ImgUrl = newImgUrl;
             _context.SaveChanges();
         }
 
