@@ -424,3 +424,56 @@ input::placeholder {
     background-color: #b5a691!important;
 }
 
+.margin-container{
+    margin:0 auto 6rem auto;
+}
+
+.w-40vw{
+    width: 40vw;
+}
+
+.profile-border {
+
+    
+}
+
+.button-profile-border {
+    color: #212529;
+    background-color: #887e71;
+    border-color: #212529;
+}
+
+    .button-profile-border:hover {
+        color: #212529;
+        background-color: #b7b2ac;
+        border-color: #212529;
+    }
+
+    .button-profile-border:focus {
+        box-shadow: 0 0 0 0.2rem #212529a6
+    }
+
+    .button-profile-border:active {
+        color: #212529!important;
+        background-color: #887e71!important;
+        border-color: #212529!important;
+    }
+
+.profile-header {
+    background-color: #ccb79570;
+}
+
+.mg-1{
+    margin:1rem;
+}
+
+.fit-content{
+    margin:auto;
+    width: fit-content;
+}
+
+
+
+
+
+
