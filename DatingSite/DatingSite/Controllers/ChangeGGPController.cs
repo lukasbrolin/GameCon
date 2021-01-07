@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,11 +34,11 @@ namespace DatingSite.Controllers
             var genreRepository = new GenreRepository(_context);
             var platformRepository = new PlatformRepository(_context);
             var personalityRepository = new PersonalityRepository(_context);
-            var nationalyRepository = new NationalityRepository(_context);
+            var nationalityRepository = new NationalityRepository(_context);
             var userId = User.Identity.Name;
 
             ViewBag.PList = personalityRepository.GetPersonalities();
-            ViewBag.NList = nationalyRepository.GetNationalities();
+            ViewBag.NList = nationalityRepository.GetNationalities();
 
             List<Game> userGames = userRepostitory.GetUserGamesByMail(userId);
             List<Game> gameCollection = gameRepository.GetGames(); ;
@@ -45,8 +46,7 @@ namespace DatingSite.Controllers
             List<Platform> platformCollection = platformRepository.GetPlatforms();
             List<Genre> userGenres = userRepostitory.GetUserGenresByMail(userId);
             List<Genre> genreCollection = genreRepository.GetGenres();
-
-
+            User thisUser = userRepostitory.getUserByMail(userId);
 
             var userNonSelectedGames = gameCollection.Except(userGames).ToList();
             var userNonSelectedPlatforms = platformCollection.Except(userPlatforms).ToList();
@@ -55,7 +55,6 @@ namespace DatingSite.Controllers
             var modelGames = new Dictionary<Game, bool>();
             var modelPlatforms = new Dictionary<Platform, bool>();
             var modelGenres = new Dictionary<Genre, bool>();
-
 
             foreach (var x in userGames)
             {
@@ -85,14 +84,16 @@ namespace DatingSite.Controllers
             model.Games = modelGames;
             model.Platforms = modelPlatforms;
             model.Genres = modelGenres;
-
+            model.Gender = thisUser.Gender;
+            model.Nationality = nationalityRepository.GetNationalityById(thisUser.NationalityId).Name;
+            model.Personality = personalityRepository.GetPersonalityById(thisUser.PersonalityId).Description;
 
             return View(model);
 
         }
 
         [HttpPost]
-        public async Task<ActionResult> Submit(string[] CheckBoxesGame,string[] CheckBoxesGenre,string[] CheckBoxesPlatform, GGPViewModel model)
+        public async Task<ActionResult> Submit(string[] CheckBoxesGame,string[] CheckBoxesGenre,string[] CheckBoxesPlatform, GGPViewModel model, IFormFile file)
         {
             var userRepository = new UserRepository(_context);
             var gameRepository = new GameRepository(_context);
@@ -163,25 +164,45 @@ namespace DatingSite.Controllers
 
 
             //Noobens swagkod som inte funkar
-            //if (model.Gender != null)
-            //{
-            //    userRepository.EditUserGender(user, model.Gender);
-            //}
-
-
-            //if (model.Nationality != null)
-            //{
-            //    userRepository.EditUserNationality(user, model.Nationality);
-            //}
-
-            //if (model.Personality != null)
-            //{
-            //    userRepository.EditUserPersonality(user, model.Personality);
-            //}
-
-            if (model.ImageURL != null)
+            if (model.Gender != null)
             {
-                userRepository.EditUserPhoto(user, model.ImageURL);
+                userRepository.EditUserGender(user, model.Gender);
+            }
+
+
+            if (model.Nationality != null)
+            {
+                userRepository.EditUserNationality(user, model.Nationality);
+            }
+
+            if (model.Personality != null)
+            {
+                userRepository.EditUserPersonality(user, model.Personality);
+            }
+
+            
+            if (file != null)
+            {
+                try
+                {
+                    string imgUrl = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+
+                    if (imgUrl.ToLower().Contains(".jpeg") || imgUrl.ToLower().Contains(".jpg") || imgUrl.Contains(".png"))
+                    {
+                        string savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img\\avatars", imgUrl);
+                        string relPath = System.IO.Path.Combine("~/img/avatars/" + imgUrl);
+                        using (var fileStream = new FileStream(savePath, FileMode.Create))
+                        {
+                            file.CopyTo(fileStream);
+                        }
+
+                        userRepository.EditUserImgUrl(user, relPath);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
 
 
