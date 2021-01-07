@@ -16,10 +16,20 @@
             <div class=" mx-1">
                 <div class="cardheader ">
                     <div class="text-center">
-                        <a asp-area="Identity" asp-page="/Account/Login" class="card-link">
-                            <h6 class=" card-title color-black"><strong>@item.User.NickName</strong></h6>
-                            <img class="img-game" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
-                        </a>
+                        @if (User.Identity.Name != null)
+                        {
+                            <a asp-controller="Profile" asp-action="Index" asp-route-profile="@item.User.NickName" class="card-link">
+                                <h6 class=" card-title color-black"><strong>@item.User.NickName</strong></h6>
+                                <img class="img-game" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-area="Identity" asp-page="/Account/Login" class="card-link">
+                                <h6 class=" card-title color-black"><strong>@item.User.NickName</strong></h6>
+                                <img class="img-game" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
+                            </a>
+                        }
                     </div>
                 </div>
             </div>
