@@ -11,8 +11,6 @@ namespace DatingSite.Models
 {
     public class GGPViewModel
     {
-        public User User { get; set; }
-
         public Dictionary<Game, bool> Games { get; set; }
 
         public Dictionary<Genre, bool> Genres { get; set; }
@@ -40,8 +38,8 @@ namespace DatingSite.Models
 
         [Display(Name = "Personality")]
         public virtual string Personality { get; set; }
-
-        public virtual IFormFile ImageURL { get; set; }
+        [Display(Name = "Image")]
+        public virtual string ImgURL { get; set; }
 
 
 
