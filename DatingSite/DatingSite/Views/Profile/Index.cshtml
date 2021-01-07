@@ -137,7 +137,7 @@
             {
                 <li>
                     <div class="card-body player-info-items">
-                        <form asp-action="AddFriend" asp-controller="Friends" method="post">
+                        <form asp-action="FriendRequest" asp-controller="Friends" method="post">
                             <input type="hidden" name=receiverId value="@Model.User.UserId" />
                             <input type="hidden" name=senderId value = "@ViewBag.currentUser" />
                             <input type="submit" value="Add Friend" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal" />
