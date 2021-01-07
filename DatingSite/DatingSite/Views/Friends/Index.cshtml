@@ -18,6 +18,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Status)
                 </th>
+                <th>
+                    Action
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -32,25 +35,22 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.FriendId">@Html.DisplayFor(modelItem => item.Category.Name)</a>
                 </td>
-                @if (item.Status.Description.Equals("Pending"))
-                {
-                    <td>
-
-                        <span class="badge badge-pill badge-secondary">
-                            @Html.DisplayFor(modelItem => item.Status.Description)
-                        </span>
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        <span class="badge badge-pill badge-success">
-                            @Html.DisplayFor(modelItem => item.Status.Description)
-                        </span>
-                    </td>
-                }
+                <td>
+                    @item.Status.Description
+                </td>
+                <td>
+                    @if (item.Status.Description.Equals("Pending"))
+                    {
+                        <form asp-action="AnswerRequest" asp-controller="Friends" method="post">
+                            <input type="hidden" name=receiverId value="@item.ReceiverId" />
+                            <input type="hidden" name=senderId value="@item.SenderId" />
+                            <button type="submit"><i class="far fa-check-circle"></i></button>
+                        </form>
+                    }
+                </td>
             </tr>
             }
         </tbody>
     </table>
 </div>
+

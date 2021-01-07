@@ -183,17 +183,13 @@ namespace DatingSite.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddFriend(int receiverId, int senderId, FriendViewModel model)
+        public IActionResult FriendRequest(int receiverId, int senderId)
         {
-            if (FriendExists(receiverId))
-            {
-                return Content("Najj");
-            }
             var repo = new UserRepository(_context);
             var addedFriend = repo.getUserById(receiverId);
             var currentUser = User.Identity.Name;
 
-            var friend = new Friend { SenderId = senderId, ReceiverId = receiverId, CategoryId = 1, StatusId = 1 };
+            var friend = new Friend { SenderId = receiverId, ReceiverId = senderId, CategoryId = 1, StatusId = 1 };
             _context.Friends.Add(friend);
             _context.SaveChanges();
 
@@ -203,6 +199,20 @@ namespace DatingSite.Controllers
 
             //Return user to same profile page.
             return Redirect(Request.Headers["Referer"].ToString());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AnswerRequest(int receiverId, int senderId)
+        {
+            var requestingFriend = _context.Friends.First(f => f.SenderId == senderId);
+            requestingFriend.StatusId = 2;
+            var friend = new Friend { SenderId = receiverId, ReceiverId = senderId, CategoryId = 1, StatusId = 2 };
+
+            _context.Friends.Add(friend);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }
