@@ -502,10 +502,21 @@ namespace DataLayer.Repositories
             Random r = new Random();
             var userList = _context.Users.OrderBy(u => r.Next()).Take(5).Where(x => x.Active.Equals(true)).ToList();
             return userList;
-            
         }
 
+        public void IsOnlineTrue(string currentUser)
+        {
+            var user = getUserByMail(currentUser);
+            user.Online = true;
+            _context.SaveChanges();
+        }
 
+        public void IsOnlineFalse(string currentUser)
+        {
+            var user = getUserByMail(currentUser);
+            user.Online = false;
+            _context.SaveChanges();
+        }
 
     }
 }
