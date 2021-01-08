@@ -46,7 +46,7 @@ namespace DatingSite.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage ="Must be a valid E-mail adress.")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
