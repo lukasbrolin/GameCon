@@ -313,10 +313,11 @@ input::placeholder {
     height: auto;
 }
 
-.img-game {
-    width: 6rem;
+#img-game {
+    width: 20px;
     border-radius: calc(.25rem - 1px);
 }
+
 
 .img-genre, .img-platform{
     width:4rem;
