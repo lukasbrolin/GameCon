@@ -419,6 +419,7 @@ input::placeholder {
 .backgroundFrosty {
     background-image: linear-gradient(to right, #c8a162ba, #8f786185);
     background-color: unset;
+    min-width: 315px;
 }
 
 .nav-background {

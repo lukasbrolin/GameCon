@@ -107,7 +107,7 @@ namespace DatingSite.Controllers
                     memoryStream.Close();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }

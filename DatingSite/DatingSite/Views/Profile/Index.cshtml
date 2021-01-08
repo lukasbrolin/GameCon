@@ -1,16 +1,15 @@
 ﻿@using DataLayer.Models
 @model DatingSite.Models.ProfileViewModel
 
-<div class="margin-container card-properties h-100">
-    <div class="card mx-auto backgroundFrosty profile-border sketchy">
-        <div class="cardheader">
-            <img class="cardimg mg-1 padding-0" src="@Url.Content(Model.User.ImgUrl)" alt="Card image cap">
+<div class="container card-properties h-100 w-50">
+    <div class="col backgroundFrosty profile-border align-items-center">
+        <div class="cardheader row">
+            <img class="cardimg mg-1 padding-0 img-fluid" src="@Url.Content(Model.User.ImgUrl)" >
             <div class="card-body profile-info">
 
                 <h2 class="card-title">@Model.User.NickName, @Model.User.Age</h2>
                 <h4 class="card-subtitle">@Model.User.FirstName @Model.User.LastName</h4>
                 <h4 class="card-subtitle">@Model.User.Nationality.Name <img src="~/img/Countries-Icon/@(@Model.User.Nationality.Name).png" style="width: 20px; height:20px;" /></h4>
-                <h3 class="card-text"></h3>
                 <h6 class="card-subtitle">Gaming personality: @Model.User.Personality.Description  </h6>
                 @{if (Model.User.Mail.Equals(User.Identity.Name))
                     {
@@ -31,26 +30,23 @@
                 }
             </div>
         </div>
-        <ul class="list-group list-group-flush mg-1 in-card-border">
+        <ul class="list-group mx-auto mg-1 in-card-border">
             @if (Model.Score.HasValue)
             {
-                <li class="list-group-item text-center backgroundFrosty">
-                    <h5 class="list-group-item profile-header">Score</h5>
+                <li class="list-group-item">
+                    <h5 class="list-group-item profile-header">Score: @Model.Score/10</h5>
 
-                    <div style="width:30%; display:inline-block;">
-                        <h1>@Model.Score/10</h1>
-                        <h1>@Model.ScoreDescription</h1>
-                    </div>
+                        <h5>@Model.ScoreDescription</h5>
                 </li>
             }
-            <li class="list-group-item text-center backgroundFrosty">
+            <li class="list-group mx-auto mg-1 in-card-border">
                 <h5 class="list-group-item profile-header">Games</h5>
-                <div class="player-info-items">
+                <div class="list-group-item">
                     @foreach (var game in Model.Games)
                     {
-                        <div class="player-info">
+                        <div>
                             @(game.Name + " ")
-                            <img class="img-game" src="~/img/Game/@(game.Name).jpg" />
+                            <img class="img-fluid" src="~/img/Game/@(game.Name).jpg" />
                         </div>
                     }
                 </div>
@@ -189,7 +185,8 @@
             </div>
         </div>
     </div>
-</div>
+
+
 @section scripts
         {
     <script type="text/javascript">
