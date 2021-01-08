@@ -33,6 +33,7 @@ namespace DatingSite.Models
         [Display(Name = "Age")]
         public virtual int Age { get; set; }
 
+
         [Display(Name = "Gender")]
         public virtual string Gender { get; set; }
 
