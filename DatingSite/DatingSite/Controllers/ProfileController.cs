@@ -115,7 +115,7 @@ namespace DatingSite.Controllers
                     memoryStream.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
 
