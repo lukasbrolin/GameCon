@@ -208,10 +208,30 @@ namespace DatingSite.Controllers
             var requestingFriend = _context.Friends.First(f => f.SenderId == senderId);
             requestingFriend.StatusId = 2;
             var friend = new Friend { SenderId = receiverId, ReceiverId = senderId, CategoryId = 1, StatusId = 2 };
-
             _context.Friends.Add(friend);
             _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DenyRequest(int friendId)
+        {
+            var friend = _context.Friends.Find(friendId);
+            _context.Friends.Remove(friend);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RemoveFriend(int senderId, int receiverId)
+        {
+            var sender = _context.Friends.First(f => f.SenderId == senderId && f.ReceiverId == receiverId);
+            var receiver = _context.Friends.First(f => f.SenderId == receiverId && f.ReceiverId == senderId);
+            _context.Friends.Remove(sender);
+            _context.Friends.Remove(receiver);
+            _context.SaveChanges();
             return RedirectToAction("Index");
         }
     }
