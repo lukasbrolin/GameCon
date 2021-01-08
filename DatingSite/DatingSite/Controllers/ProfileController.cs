@@ -87,6 +87,7 @@ namespace DatingSite.Controllers
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
             

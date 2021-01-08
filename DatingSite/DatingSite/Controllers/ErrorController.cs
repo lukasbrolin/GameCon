@@ -11,11 +11,11 @@ namespace DatingSite.Controllers
 {
     public class ErrorController : Controller
     {
-        public ActionResult Index(ErrorViewModel model, Exception exception)
+        public ActionResult Index(ErrorViewModel model, string exception)
         {
-            Debug.WriteLine(exception.Message);
+            Debug.WriteLine(exception);
             model.SiteMessage = "Sorry, something went wrong. Derp.";
-            model.RequestId =  exception.Message;
+            model.RequestId = exception;
             return View(model);
         }
     }
