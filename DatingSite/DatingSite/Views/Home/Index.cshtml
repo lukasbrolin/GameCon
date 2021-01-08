@@ -3,13 +3,12 @@
     ViewData["Title"] = "Home Page";
 }
 <div class="div-group">
-    <div class="overlay w-100 h-100 bg-div"></div>
-    <video id="home-video" style="left: 0; top: 0; z-index: -1; object-fit:cover" playsinline autoplay muted loop poster="polina.jpg" id="bgvid" class="position-absolute display-1 w-100 ">
-        <source src="/img/Backgrounds/WowLogo.mp4" type="video/webm">
-        <source src="/img/Backgrounds/WowLogo.mp4" type="video/mp4">
-    </video>
-
+    @*<video id="home-vid" playsinline="" autoplay="" muted="" loop="" class="position-absolute display-1 w-100 ">
+        <source src="/img/Backgrounds/Wow.mp4" type="video/webm">
+        <source src="/img/Backgrounds/Wow.mp4" type="video/mp4">
+    </video>*@
     <div class="vw-100 margin-top-60 position-absolute display-flex justify-content-center">
+        <img src="~/img/Border/Frame.png" class="home-border" />
         @foreach (var item in Model)
         {
             <div class=" mx-1">
@@ -19,14 +18,14 @@
                         {
                             <a asp-controller="Profile" asp-action="Index" asp-route-profile="@item.User.NickName" class="card-link">
                                 <h6 class=" card-title color-black"><strong>@item.User.NickName</strong></h6>
-                                <img class="img-game" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
+                                <img class="img-game home-avatars" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
                             </a>
                         }
                         else
                         {
                             <a asp-area="Identity" asp-page="/Account/Login" class="card-link">
                                 <h6 class=" card-title color-black"><strong>@item.User.NickName</strong></h6>
-                                <img class="img-game" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
+                                <img class="img-game home-avatars" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
                             </a>
                         }
                     </div>

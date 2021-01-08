@@ -490,6 +490,39 @@ video {
     filter: opacity(40%);
 }
 
+#home-vid{
+    filter:opacity(100%);
+}
+
+.home-border {
+    position: absolute;
+    z-index: -1;
+    width: 50em;
+    top: -6rem;
+}
+
+.home-avatars {
+    border: 1px solid rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0px 0px 7px 0px #000000;
+    box-shadow: 0px 0px 7px 0px #000000;
+    filter: opacity(70%);
+}
+    .home-avatars:hover {
+        color: black;
+        border: 1px solid rgba(0,0,0,0.5);
+        -webkit-box-shadow: 0px 0px 7px 0px #000000;
+        box-shadow: 0px 0px 7px 0px #000000;
+/*        -webkit-box-shadow: 0px 10px 13px -7px #000000, 0px 0px 7px 0px rgba(0,0,0,0);
+        box-shadow: 0px 10px 13px -7px #000000, 0px 0px 7px 0px rgba(0,0,0,0);*/
+        filter: opacity(100%);
+    }
+
+    .home-avatars:active {
+        -webkit-box-shadow: inset 0px 0px 7px 5px #000000 !important;
+        box-shadow: inset 0px 0px 7px 5px #000000 !important;
+    }
+
+
 
 
 
