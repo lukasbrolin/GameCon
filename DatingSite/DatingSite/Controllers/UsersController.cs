@@ -30,6 +30,11 @@ namespace DatingSite.Controllers
             _userRepository = new UserRepository(_context);
         }
 
+        public UsersController(DatingSiteContext context)
+        {
+            _context = context;
+        }
+
         public async Task<IActionResult> Index()
         {
             try
@@ -267,5 +272,8 @@ namespace DatingSite.Controllers
             }
 
         }
+
+        
+
     }
 }

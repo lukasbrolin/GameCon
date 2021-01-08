@@ -1,76 +1,193 @@
 ﻿@model List<DatingSite.Models.CardViewModel>
 
-    <div class="container card-properties h-100">
-    @foreach (var item in Model)
-    {
-        <div class="backgroundFrosty profile-border card mx-auto card-properties">
-            <div class="cardheader">
-                <img class="cardimg" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
-                @* @Url.Content(url) *@
-            <div class="card-body profile-info">
-                <h2 class="card-title">@item.User.NickName, @item.User.Age </h2>
-                <h4 class="card-subtitle">@item.User.FirstName @item.User.LastName</h4>
-                <h4 class="card-subtitle">@item.User.Nationality.Name <img src="~/img/Countries-Icon/@(@item.User.Nationality.Name).png" style="width: 20px; height:20px;" /></h4>
-                <h3 class="card-text"></h3>
-                <h6 class="card-subtitle">Gaming personality: @item.User.Personality.Description  </h6>
-            </div>
-            </div>
-            <ul class="list-group list-group-flush">
-                @if (item.Score.HasValue)
+<div id="carouselExampleIndicators" class="container card-properties h-100 carousel slide w-50 profileMain" data-ride="carousel">
+    <ol class="carousel-indicators">
+        @{int i = 0;
+            @foreach (var item in Model)
+            {
+                if (i == 0)
                 {
-                    <li class="becomeTrans list-group-item text-center">
-                        <h5 class="becomeTrans list-group-item">Score</h5>
-
-                        <div style="width:30%; display:inline-block;">
-                            <h1>@item.Score/10</h1>
-                            <h6>@item.ScoreDescription</h6>
-
-                        </div>
-
-                    </li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="active"></li>
                 }
-                <li class="becomeTrans list-group-item text-center">
-                    <h5 class="becomeTrans list-group-item">Games</h5>
-                    <div class="player-info-items">
-                        @foreach (var game in item.Games)
-                        {
-                            <div class="player-info">
-                                @(game.Name + " ")
-                                <img class="img-game" src="~/img/Game/@(game.Name).jpg" />
+                else
+                {
+                    <li data-target="#carouselExampleIndicators" data-slide-to="@i"></li>
+                }
+                i++;
+            }
+        }
+    </ol>
+    <div class="carousel-inner">
+        @{int x = 0;
+            @foreach (var item in Model)
+            {
+                if (x == 0)
+                {
+                    <div class="carousel-item active">
+                        <div class="col backgroundFrosty profile-border align-items-center d-block w-100">
+                            <div class="cardheader row">
+                                <img class="cardimg mg-1 padding-0 img-fluid" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
+                                @* @Url.Content(url) *@
+                                <div class="card-body profile-info">
+                                    <h2 class="card-title mt-n4">@item.User.NickName, @item.User.Age </h2>
+                                    <h4 class="card-subtitle">@item.User.FirstName @item.User.LastName</h4>
+                                    <h4 class="card-subtitle">@item.User.Nationality.Name <img src="~/img/Countries-Icon/@(@item.User.Nationality.Name).png" style="width: 20px; height:20px;" /></h4>
+                                    <h3 class="card-subtitle"></h3>
+                                    <h6 class="card-subtitle">Gaming personality: @item.User.Personality.Description  </h6>
+                                </div>
                             </div>
-                        }
-                    </div>
-                </li>
-                <li class="becomeTrans list-group-item text-center">
-                    <h5 class="becomeTrans list-group-item">Genres</h5>
-                    <div class="player-info-items">
-                        @foreach (var genre in item.Genres)
-                        {
-                            <div class="player-info">
-                                @(genre.Name + " ")
-                                <img class="img-genre" src="~/img/Genre/@(genre.Name).png" />
+                            <ul class="list-group mx-auto mg-1">
+                                @if (item.Score.HasValue)
+                                {
+                                    <li class="becomeTrans list-group mg-1 mx-auto in-card-border">
+                                        <h5 class="becomeTrans list-group-item profile-header backgroundFrosty">Score</h5>
+
+                                        <div class="list-group-item backgroundFrosty">
+                                            <h1>@item.Score/10</h1>
+                                            <h6>@item.ScoreDescription</h6>
+
+                                        </div>
+
+                                    </li>
+                                }
+                                <li class="becomeTrans list-group mg-1 mx-auto in-card-border">
+                                    <h5 class="becomeTrans list-group-item profile-header backgroundFrosty">Games</h5>
+                                    <div class="player-info-items backgroundFrosty">
+                                        @foreach (var game in item.Games)
+                                        {
+                                        <div class="col p-2 mb-3">
+                                            <img class="img-game" src="~/img/Game/@(game.Name).jpg" />
+                                            @(game.Name + " ")
+                                        </div>
+                                        }
+                                    </div>
+                                </li>
+                                <li class="becomeTrans list-group mg-1 mx-auto in-card-border w-100">
+                                    <h5 class="becomeTrans list-group-item backgroundFrosty profile-header">Genres</h5>
+                                    <div class="list-group-item backgroundFrosty d-flex">
+                                        @foreach (var genre in item.Genres)
+                                        {
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col p-1 m-1">
+                                                        <img class="d-block mx-auto img-genre" src="~/img/Genre/@(genre.Name).png" />
+                                                        <h6 class="text-center">@(genre.Name + " ")</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </li>
+                                <li class="becomeTrans list-group mg-1 mx-auto in-card-border w-100">
+                                    <h5 class="becomeTrans list-group-item backgroundFrosty profile-header">Platforms</h5>
+                                    <div class="list-group-item backgroundFrosty d-flex">
+                                        @foreach (var platform in item.Platforms)
+                                        {
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col p-1 m-1">
+                                                        <img class="mx-auto d-block img-genre" src="~/img/Platform/@(platform.Name).png" />
+                                                        <h6 class="text-center">@(platform.Name + " ")</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="card-body player-info-items">
+                                <a asp-controller="Profile" asp-action="Index" asp-route-profile="@item.User.NickName" class="beWhite card-link">
+                                    Look at @item.User.NickName Profile
+                                </a>
                             </div>
-                        }
+                        </div>
                     </div>
-                </li>
-                <li class="becomeTrans list-group-item text-center">
-                    <h5 class="becomeTrans list-group-item">Platforms</h5>
-                    <div class="player-info-items">
-                        @foreach (var platform in item.Platforms)
-                        {
-                            <div class="player-info">
-                                @(platform.Name + " ")
-                                <img class="img-platform" src="~/img/Platform/@(platform.Name).png" />
+                }
+                else
+                {
+                    <div class="carousel-item">
+                        <div class="backgroundFrosty profile-border card mx-auto card-properties d-block w-100">
+                            <div class="cardheader">
+                                <img class="cardimg" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
+                                @* @Url.Content(url) *@
+                                <div class="card-body profile-info">
+                                    <h2 class="card-title">@item.User.NickName, @item.User.Age </h2>
+                                    <h4 class="card-subtitle">@item.User.FirstName @item.User.LastName</h4>
+                                    <h4 class="card-subtitle">@item.User.Nationality.Name <img src="~/img/Countries-Icon/@(@item.User.Nationality.Name).png" style="width: 20px; height:20px;" /></h4>
+                                    <h3 class="card-text"></h3>
+                                    <h6 class="card-subtitle">Gaming personality: @item.User.Personality.Description  </h6>
+                                </div>
                             </div>
-                        }
+                            <ul class="list-group list-group-flush">
+                                @if (item.Score.HasValue)
+                                {
+                                    <li class="becomeTrans list-group-item text-center">
+                                        <h5 class="becomeTrans list-group-item">Score</h5>
+
+                                        <div style="width:30%; display:inline-block;">
+                                            <h1>@item.Score/10</h1>
+                                            <h6>@item.ScoreDescription</h6>
+
+                                        </div>
+
+                                    </li>
+                                }
+                                <li class="becomeTrans list-group-item text-center">
+                                    <h5 class="becomeTrans list-group-item">Games</h5>
+                                    <div class="player-info-items">
+                                        @foreach (var game in item.Games)
+                                        {
+                                            <div class="player-info">
+                                                @(game.Name + " ")
+                                                <img class="img-game" src="~/img/Game/@(game.Name).jpg" />
+                                            </div>
+                                        }
+                                    </div>
+                                </li>
+                                <li class="becomeTrans list-group-item text-center">
+                                    <h5 class="becomeTrans list-group-item">Genres</h5>
+                                    <div class="player-info-items">
+                                        @foreach (var genre in item.Genres)
+                                        {
+                                            <div class="player-info">
+                                                @(genre.Name + " ")
+                                                <img class="img-genre" src="~/img/Genre/@(genre.Name).png" />
+                                            </div>
+                                        }
+                                    </div>
+                                </li>
+                                <li class="becomeTrans list-group-item text-center">
+                                    <h5 class="becomeTrans list-group-item">Platforms</h5>
+                                    <div class="player-info-items">
+                                        @foreach (var platform in item.Platforms)
+                                        {
+                                            <div class="player-info">
+                                                @(platform.Name + " ")
+                                                <img class="img-platform" src="~/img/Platform/@(platform.Name).png" />
+                                            </div>
+                                        }
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="card-body player-info-items">
+                                <a asp-controller="Profile" asp-action="Index" asp-route-profile="@item.User.NickName" class="beWhite card-link">
+                                    Look at @item.User.NickName Profile
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </li>
-            </ul>
-            <div class="card-body player-info-items">
-                <a asp-controller="Profile" asp-action="Index" asp-route-profile="@item.User.NickName" class="beWhite card-link">
-                    Look at @item.User.NickName Profile
-                </a>
-            </div>
-        </div>
-    }
+                }
+                x++;
+            }
+        }
+
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 </div>
