@@ -3,7 +3,7 @@
     <div class="container card-properties h-100">
     @foreach (var item in Model)
     {
-        <div class="card mx-auto card-properties">
+        <div class="backgroundFrosty profile-border card mx-auto card-properties">
             <div class="cardheader">
                 <img class="cardimg" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
                 @* @Url.Content(url) *@
@@ -18,8 +18,8 @@
             <ul class="list-group list-group-flush">
                 @if (item.Score.HasValue)
                 {
-                    <li class="list-group-item text-center">
-                        <h5 class="list-group-item">Score</h5>
+                    <li class="becomeTrans list-group-item text-center">
+                        <h5 class="becomeTrans list-group-item">Score</h5>
 
                         <div style="width:30%; display:inline-block;">
                             <h1>@item.Score/10</h1>
@@ -29,8 +29,8 @@
 
                     </li>
                 }
-                <li class="list-group-item text-center">
-                    <h5 class="list-group-item">Games</h5>
+                <li class="becomeTrans list-group-item text-center">
+                    <h5 class="becomeTrans list-group-item">Games</h5>
                     <div class="player-info-items">
                         @foreach (var game in item.Games)
                         {
@@ -41,8 +41,8 @@
                         }
                     </div>
                 </li>
-                <li class="list-group-item text-center">
-                    <h5 class="list-group-item">Genres</h5>
+                <li class="becomeTrans list-group-item text-center">
+                    <h5 class="becomeTrans list-group-item">Genres</h5>
                     <div class="player-info-items">
                         @foreach (var genre in item.Genres)
                         {
@@ -53,8 +53,8 @@
                         }
                     </div>
                 </li>
-                <li class="list-group-item text-center">
-                    <h5 class="list-group-item">Platforms</h5>
+                <li class="becomeTrans list-group-item text-center">
+                    <h5 class="becomeTrans list-group-item">Platforms</h5>
                     <div class="player-info-items">
                         @foreach (var platform in item.Platforms)
                         {
@@ -67,11 +67,9 @@
                 </li>
             </ul>
             <div class="card-body player-info-items">
-                <a asp-controller="Profile" asp-action="Index" asp-route-profile="@item.User.NickName" class="card-link">
-                    Profile
-
+                <a asp-controller="Profile" asp-action="Index" asp-route-profile="@item.User.NickName" class="beWhite card-link">
+                    Look at @item.User.NickName Profile
                 </a>
-                @*<a asp-controller="Profile" asp-action="Index" class="card-link">Match</a>*@
             </div>
         </div>
     }
