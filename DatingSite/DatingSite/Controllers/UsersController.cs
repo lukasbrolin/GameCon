@@ -267,49 +267,5 @@ namespace DatingSite.Controllers
             }
 
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditMail(string usermail)
-        {
-            try
-            {
-                var userRepository = new UserRepository(_context);
-                userRepository.EditUserByMail(User.Identity.Name, usermail);
-                var appList = _userManager.Users.ToList();
-                var identityUser = appList.FirstOrDefault(x => x.UserName.Equals(User.Identity.Name));
-                var setEmailResult = await _userManager.SetEmailAsync(identityUser, usermail);
-                var setUserNameResult = await _userManager.SetUserNameAsync(identityUser, usermail);
-
-                //await _userManager.ChangePasswordAsync(identityUser, "123Asd!", "123Abc!");
-
-                await _signInManager.RefreshSignInAsync(identityUser);
-
-                return Redirect(Request.Headers["Referer"].ToString());
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangePassword(string oldPassword, string newPassword, string confirmPassword)
-        {
-            try
-            {
-                var appList = _userManager.Users.ToList();
-                var identityUser = appList.FirstOrDefault(x => x.UserName.Equals(User.Identity.Name));
-                await _userManager.ChangePasswordAsync(identityUser, oldPassword, newPassword);
-                return Redirect(Request.Headers["Referer"].ToString());
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
     }
 }
