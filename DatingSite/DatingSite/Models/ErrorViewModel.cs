@@ -6,6 +6,8 @@ namespace DatingSite.Models
     {
         public string RequestId { get; set; }
 
+        public string SiteMessage { get; set; }
+
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }

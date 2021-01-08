@@ -20,17 +20,24 @@ namespace DatingSite.Controllers
         [HttpGet]
         public ActionResult Search(string searchString)
         {
-            var users = from u in _context.Users
+            try
+            {
+                var users = from u in _context.Users
                         .Include(u => u.Nationality)
                         .Where(u => u.IsHidden == false && u.Active == true)
-                        select u;
+                            select u;
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                users = users.Where(u => u.FirstName.Contains(searchString) || u.LastName.Contains(searchString) || u.NickName.Contains(searchString));
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    users = users.Where(u => u.FirstName.Contains(searchString) || u.LastName.Contains(searchString) || u.NickName.Contains(searchString));
+                }
+
+                return View(users.ToList());
             }
-
-            return View(users.ToList());
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
     }
 }

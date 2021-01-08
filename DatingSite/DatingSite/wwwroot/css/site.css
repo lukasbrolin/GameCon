@@ -372,6 +372,10 @@ input::placeholder {
     margin-top:80%;
 }
 
+.mg-top-30 {
+    margin-top: 30vh;
+}
+
 .mg-top-2{
     margin-top:2rem;
 }
@@ -522,6 +526,20 @@ video {
         -webkit-box-shadow: inset 0px 0px 7px 5px #000000 !important;
         box-shadow: inset 0px 0px 7px 5px #000000 !important;
     }
+
+a:hover{
+    color:black;
+}
+
+#edit-profile-svg {
+    width: 0.8em; 
+    height:0.8em;
+}
+
+#error-message{
+    font-size: 1em;
+    max-width:30vw;
+}
 
 
 

@@ -24,44 +24,20 @@ namespace DatingSite.API
         [Route("post")]
         public void post(string reciever, string content)
         {
+            try
+            {
+                var userRepository = new UserRepository(_context);
+                var postRepository = new PostRepository(_context);
+                var sender = userRepository.getUserByMail(User.Identity.Name);
+                var UserReciever = userRepository.getUserByMail(reciever);
+                postRepository.CreatePost(UserReciever, sender, content);
+            }
+            catch (Exception e)
+            {
+                 RedirectToAction("Index", "Error", new { exception = e });
+            }
 
-            var userRepository = new UserRepository(_context);
-            var postRepository = new PostRepository(_context);
-            var sender = userRepository.getUserByMail(User.Identity.Name);
-            var UserReciever = userRepository.getUserByMail(reciever);
-            postRepository.CreatePost(UserReciever, sender, content);
         }
-
-        //[Route("posts")]
-        //[HttpPost]
-        //public List<object> Posts(List<string> mail)
-        //{
-
-        //    var userRep = new UserRepository(_context);
-        //    var postsRep = new PostRepository(_context);
-        //    var user = userRep.getUserByMail(mail[0]);
-        //    List<Post> data = postsRep.GetPostsByMailOrderedByLatestDate(user.Mail);
-        //    List<object> returnData = new List<object>();
-        //    //List<object> returnData = new List<object>();
-        //    foreach (var post in data)
-        //    {
-        //        returnData.Add(new
-        //        {
-        //            Sender = userRep.getUserById(post.SenderId).NickName,
-        //            Content = post.Content,
-        //            Date = post.TimeStamp
-        //        });
-        //    }
-        //    return returnData;
-        //}
-
-        //[Route("detelepost")]
-        //public void DeletePost(string mail)
-        //{
-        //    var postRepository = new PostRepository(_context);
-        //    //postRepository.DeletePost();
-        //}
-
 
     }
 

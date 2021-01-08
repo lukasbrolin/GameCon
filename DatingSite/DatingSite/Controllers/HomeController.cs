@@ -25,28 +25,49 @@ namespace DatingSite.Controllers
 
         public IActionResult Index(LightProfile model)
         {
-            var userRepository = new UserRepository(_context);
-            var list = userRepository.GetFiveUsers();
-            List<LightProfile> modelList = new List<LightProfile>();
-            foreach(var user in list)
+            try
             {
-                LightProfile lightProfile = new LightProfile();
-                lightProfile.User = user;
-                modelList.Add(lightProfile);
-            }
+                var userRepository = new UserRepository(_context);
+                var list = userRepository.GetFiveUsers();
+                List<LightProfile> modelList = new List<LightProfile>();
+                foreach (var user in list)
+                {
+                    LightProfile lightProfile = new LightProfile();
+                    lightProfile.User = user;
+                    modelList.Add(lightProfile);
+                }
 
-            return View(modelList);
+                return View(modelList);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         public IActionResult Privacy()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            try
+            {
+                return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
     }
 }

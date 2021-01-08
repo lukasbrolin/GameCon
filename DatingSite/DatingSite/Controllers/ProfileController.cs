@@ -28,6 +28,7 @@ namespace DatingSite.Controllers
         // GET: ProfileController
         public ActionResult Index(ProfileViewModel model, string profile)
         {
+            
 
             var visitorRepository = new VisitRepository(_context);
             var userRepository = new UserRepository(_context);
@@ -36,53 +37,60 @@ namespace DatingSite.Controllers
             var visitRepository = new VisitRepository(_context);
             var postRepository = new PostRepository(_context);
             var scoreCalculator = new ScoreCalculator(_context);
-            var list = userRepository.GetUsers();
             List<CardViewModel> modelList = new List<CardViewModel>();
 
-            var x = userRepository.GetFiveUsers();
+            try {
+                var list = userRepository.GetUsers();
 
-            foreach (var user in userRepository.getUserGamesGenresPlatformsScore(User.Identity.Name))
-            {
-                if (user.Item1.NickName.Equals(profile))
+                foreach (var user in userRepository.getUserGamesGenresPlatformsScore(User.Identity.Name))
                 {
-                    var usersVisits = userRepository.GetUserVisitorsByMail(user.Item1.Mail);
-                    var userPosts = postRepository.GetPostsByMailOrderedByLatestDate(user.Item1.Mail);
-
-                    user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
-                    user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
-                    model.User = user.Item1;
-                    model.Games = user.Item2;
-                    model.Genres = user.Item3;
-                    model.Platforms = user.Item4;
-                    model.Visits = usersVisits;
-                    model.Posts = userPosts;
-
-                    if (!user.Item1.Mail.Equals(User.Identity.Name))
+                    if (user.Item1.NickName.Equals(profile))
                     {
-                        visitRepository.AddVisits(visitRepository.CreateVisit(user.Item1, userRepository.getUserByMail(User.Identity.Name), DateTime.Now));
+                        var usersVisits = userRepository.GetUserVisitorsByMail(user.Item1.Mail);
+                        var userPosts = postRepository.GetPostsByMailOrderedByLatestDate(user.Item1.Mail);
+
+                        user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
+                        user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
+                        model.User = user.Item1;
+                        model.Games = user.Item2;
+                        model.Genres = user.Item3;
+                        model.Platforms = user.Item4;
+                        model.Visits = usersVisits;
+                        model.Posts = userPosts;
+
+                        if (!user.Item1.Mail.Equals(User.Identity.Name))
+                        {
+                            visitRepository.AddVisits(visitRepository.CreateVisit(user.Item1, userRepository.getUserByMail(User.Identity.Name), DateTime.Now));
+                        }
+
+                        model.Score = user.Item5;
+                        model.ScoreDescription = scoreCalculator.ScoreDescription(user.Item5);
+                        break;
                     }
+                    else if (user.Item1.Mail.Equals(User.Identity.Name))
+                    {
+                        var usersVisits = userRepository.GetUserVisitorsByMail(User.Identity.Name);
+                        var userPosts = postRepository.GetPostsByMailOrderedByLatestDate(user.Item1.Mail);
 
-                    model.Score = user.Item5;
-                    model.ScoreDescription = scoreCalculator.ScoreDescription(user.Item5);
-                    break;
-                }
-                else if (user.Item1.Mail.Equals(User.Identity.Name))
-                {
-                    var usersVisits = userRepository.GetUserVisitorsByMail(User.Identity.Name);
-                    var userPosts = postRepository.GetPostsByMailOrderedByLatestDate(user.Item1.Mail);
-
-                    user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
-                    user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
-                    model.User = user.Item1;
-                    model.Games = user.Item2;
-                    model.Genres = user.Item3;
-                    model.Platforms = user.Item4;
-                    model.Visits = usersVisits;
-                    model.Posts = userPosts;
-                    //model.Score = user.Item5;
-                    break;
+                        user.Item1.Nationality = nationalityRepository.GetNationalityById(user.Item1.NationalityId);
+                        user.Item1.Personality = personalityRepository.GetPersonalityById(user.Item1.PersonalityId);
+                        model.User = user.Item1;
+                        model.Games = user.Item2;
+                        model.Genres = user.Item3;
+                        model.Platforms = user.Item4;
+                        model.Visits = usersVisits;
+                        model.Posts = userPosts;
+                        //model.Score = user.Item5;
+                        break;
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
+            
 
             ViewBag.currentUser = userRepository.getUserIdByMail(User.Identity.Name);
             return View(model);
@@ -109,29 +117,38 @@ namespace DatingSite.Controllers
             }
             catch (Exception)
             {
-                return null;
+                return RedirectToAction("Index", "Error", new { exception = e });
+
             }
             return Redirect(Request.Headers["Referer"].ToString());
         }
 
         private SerializeProfile GetProfileData()
         {
-            var userRepository = new UserRepository(_context);
-            User userSerialize = userRepository.getUserByMail(User.Identity.Name);
-            SerializeProfile serializeProfile = new SerializeProfile()
+            try
             {
-                UserId = userSerialize.UserId,
-                NickName = userSerialize.NickName,
-                FirstName = userSerialize.FirstName,
-                LastName = userSerialize.LastName,
-                Mail = userSerialize.Mail,
-                Age = userSerialize.Age,
-                Gender = userSerialize.Gender,
-                ImgUrl = userSerialize.ImgUrl,
-                Nationality = userSerialize.Nationality.Name,
-                Personality = userSerialize.Personality.Description,
-            };
-            return serializeProfile;
+                var userRepository = new UserRepository(_context);
+                User userSerialize = userRepository.getUserByMail(User.Identity.Name);
+                SerializeProfile serializeProfile = new SerializeProfile()
+                {
+                    UserId = userSerialize.UserId,
+                    NickName = userSerialize.NickName,
+                    FirstName = userSerialize.FirstName,
+                    LastName = userSerialize.LastName,
+                    Mail = userSerialize.Mail,
+                    Age = userSerialize.Age,
+                    Gender = userSerialize.Gender,
+                    ImgUrl = userSerialize.ImgUrl,
+                    Nationality = userSerialize.Nationality.Name,
+                    Personality = userSerialize.Personality.Description,
+                };
+                return serializeProfile;
+            }
+            catch(Exception e)
+            {
+                RedirectToAction("Index", "Error", new { exception = e });
+                return null;
+            }
         }
 
         public ActionResult Visitors(VisitorViewModel model)

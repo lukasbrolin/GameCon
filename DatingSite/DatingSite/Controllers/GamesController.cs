@@ -23,29 +23,45 @@ namespace DatingSite.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var gameRepository = new GameRepository(_context);
-            List<GameViewModel> model = new List<GameViewModel>();
-            foreach(var index in gameRepository.GetGamesNames())
+            try
             {
-                model.Add(new GameViewModel(index));
+                var gameRepository = new GameRepository(_context);
+                List<GameViewModel> model = new List<GameViewModel>();
+                foreach (var index in gameRepository.GetGamesNames())
+                {
+                    model.Add(new GameViewModel(index));
+                }
+                return View(model);
             }
-           
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
+
+
             //model.AddRange(new ProfileViewModel(gameRepository.GetGamesNames))
             //return View(await _context.Games.ToListAsync());
-            return View(model);
         }
 
         [HttpPost]
         public ActionResult Submit(string[] CheckBoxes)
         {
-            var userRepository = new UserRepository(_context);
-            //var list = new List<string>();
-            //foreach (var index in model)
-            //{
-            //    list.Add(index.Name);
-            //}
-            userRepository.SetUserGames(User.Identity.Name, CheckBoxes);
-            return RedirectToAction("Index", "Genre");
+            try
+            {
+                var userRepository = new UserRepository(_context);
+                //var list = new List<string>();
+                //foreach (var index in model)
+                //{
+                //    list.Add(index.Name);
+                //}
+                userRepository.SetUserGames(User.Identity.Name, CheckBoxes);
+                return RedirectToAction("Index", "Genre");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
+
         }
 
     }

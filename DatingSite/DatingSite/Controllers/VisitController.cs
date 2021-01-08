@@ -12,19 +12,40 @@ namespace DatingSite.Controllers
         // GET: MessageController
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         // GET: MessageController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         // GET: MessageController/Create
         public ActionResult Create()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         // POST: MessageController/Create
@@ -36,16 +57,23 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
         }
 
         // GET: MessageController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         // POST: MessageController/Edit/5
@@ -57,16 +85,23 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
         }
 
         // GET: MessageController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         // POST: MessageController/Delete/5
@@ -78,9 +113,9 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
         }
 

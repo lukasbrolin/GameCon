@@ -13,7 +13,7 @@
                 <h6 class="card-subtitle">Gaming personality: @Model.User.Personality.Description  </h6>
                 @{if (Model.User.Mail.Equals(User.Identity.Name))
                     {
-                        <a asp-controller="ChangeGGP" asp-action="Index" class="card-link"><img src="~/img/Icons/pencil.svg" style="width: 15px; height:15px;" />Edit Preferences</a>
+                        <a asp-controller="ChangeGGP" asp-action="Index" class="card-link"><img id="edit-profile-svg" src="~/img/Icons/pencil.svg"  />Edit Preferences</a>
                     }
                 }
                 @if (!Model.User.Mail.Equals(User.Identity.Name))
@@ -151,7 +151,7 @@
             <li class="list-group-item text-center backgroundFrosty">
                 <div class="card-body player-info-items">
                     <form asp-action="SerializeProfile" asp-controller="Profile">
-                        <input type="submit" value="Serialize your profile" class="btn btn-outline-success" data-toggle="modal" data-target="#SerializeModal" />
+                        <input type="submit" value="Serialize your profile" class="btn btn-outline-success button-profile-border" data-toggle="modal" data-target="#SerializeModal" />
                     </form>
                 </div>
                 @*@Html.ActionLink("Serialize", "Serialize", "SignedInUser", new { userName = User.Identity.Name }, new { @class = "btn btn-danger btn-sm", id = "serializeBtn" })}*@

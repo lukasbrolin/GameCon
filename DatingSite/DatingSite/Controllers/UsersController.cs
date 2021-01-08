@@ -32,178 +32,284 @@ namespace DatingSite.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var list = await _context.Users.ToListAsync();
-            return View(list);
+            try
+            {
+                var list = await _context.Users.ToListAsync();
+                return View(list);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
+
         }
 
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var user = await _context.Users
+                    .FirstOrDefaultAsync(m => m.UserId == id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                return View(user);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
         }
 
         public IActionResult Create()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Mail,Age,Gender,PreferedLanguage,Online,Active")] User user)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(user);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(user);
             }
-            return View(user);
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
+
         }
 
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var user = await _context.Users.FindAsync(id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                return View(user);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
 
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return View(user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Mail,Age,Gender,PreferedLanguage,Online,Active")] User user)
         {
-            if (id != user.UserId)
+            try
             {
-                return NotFound();
+                if (id != user.UserId)
+                {
+                    return NotFound();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(user);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!UserExists(user.UserId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(user);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.UserId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(user);
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var user = await _context.Users
+                    .FirstOrDefaultAsync(m => m.UserId == id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                return View(user);
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
 
-            var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.UserId == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                var user = await _context.Users.FindAsync(id);
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
+
         }
 
         private bool UserExists(int id)
         {
-            return _userRepository.UserExists(id);
+            try
+            {
+                return _userRepository.UserExists(id);
+            }
+
+            catch (Exception e)
+            {
+                RedirectToAction("Index", "Error", new { exception = e });
+                return false;
+            }
         }
 
         public IActionResult HideOrUnhide()
         {
-            var userId = _userRepository.getUserIdByMail(User.Identity.Name);
-            if (_userRepository.GetHidden(userId))
+            try
             {
-                _userRepository.ShowUser(userId);
+                var userId = _userRepository.getUserIdByMail(User.Identity.Name);
+                if (_userRepository.GetHidden(userId))
+                {
+                    _userRepository.ShowUser(userId);
+                }
+                else
+                {
+                    _userRepository.HideUser(userId);
+                }
+                return Redirect("/Identity/Account/Manage");
             }
-            else
+            catch (Exception e)
             {
-                _userRepository.HideUser(userId);
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
-            return Redirect("/Identity/Account/Manage");
+
+
         }
 
         public IActionResult InactivateOrActivate()
         {
-            var userId = _userRepository.getUserIdByMail(User.Identity.Name);
-            if (_userRepository.GetActive(userId))
+            try
             {
-                _userRepository.InactivateUser(userId);
+                var userId = _userRepository.getUserIdByMail(User.Identity.Name);
+                if (_userRepository.GetActive(userId))
+                {
+                    _userRepository.InactivateUser(userId);
+                }
+                else
+                {
+                    _userRepository.ActivateUser(userId);
+                }
+                return Redirect("/Identity/Account/Manage");
             }
-            else
+
+            catch (Exception e)
             {
-                _userRepository.ActivateUser(userId);
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
-            return Redirect("/Identity/Account/Manage");
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditMail(string usermail)
         {
-            var userRepository = new UserRepository(_context);
-            userRepository.EditUserByMail(User.Identity.Name,usermail);
-            var appList = _userManager.Users.ToList();
-            var identityUser = appList.FirstOrDefault(x => x.UserName.Equals(User.Identity.Name));
-            var setEmailResult = await _userManager.SetEmailAsync(identityUser, usermail);
-            var setUserNameResult = await _userManager.SetUserNameAsync(identityUser, usermail);
+            try
+            {
+                var userRepository = new UserRepository(_context);
+                userRepository.EditUserByMail(User.Identity.Name, usermail);
+                var appList = _userManager.Users.ToList();
+                var identityUser = appList.FirstOrDefault(x => x.UserName.Equals(User.Identity.Name));
+                var setEmailResult = await _userManager.SetEmailAsync(identityUser, usermail);
+                var setUserNameResult = await _userManager.SetUserNameAsync(identityUser, usermail);
 
-            //await _userManager.ChangePasswordAsync(identityUser, "123Asd!", "123Abc!");
+                //await _userManager.ChangePasswordAsync(identityUser, "123Asd!", "123Abc!");
 
-            await _signInManager.RefreshSignInAsync(identityUser);
+                await _signInManager.RefreshSignInAsync(identityUser);
 
-            return Redirect(Request.Headers["Referer"].ToString());
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(string oldPassword, string newPassword, string confirmPassword)
         {
-            var appList = _userManager.Users.ToList();
-            var identityUser = appList.FirstOrDefault(x => x.UserName.Equals(User.Identity.Name));
-            await _userManager.ChangePasswordAsync(identityUser, oldPassword, newPassword);
-            return Redirect(Request.Headers["Referer"].ToString());
+            try
+            {
+                var appList = _userManager.Users.ToList();
+                var identityUser = appList.FirstOrDefault(x => x.UserName.Equals(User.Identity.Name));
+                await _userManager.ChangePasswordAsync(identityUser, oldPassword, newPassword);
+                return Redirect(Request.Headers["Referer"].ToString());
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
+
         }
     }
 }

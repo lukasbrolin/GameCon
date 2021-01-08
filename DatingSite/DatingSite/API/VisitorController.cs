@@ -25,6 +25,8 @@ namespace DatingSite.API
         [HttpPost]
         public List<object> Visit(List<string> mail)
         {
+            try
+            {
                 var userRep = new UserRepository(_context);
                 var visitRep = new VisitRepository(_context);
                 var user = userRep.getUserByMail(mail[0]);
@@ -41,18 +43,13 @@ namespace DatingSite.API
                 }
                 return returnData;
             }
-            
-            
-            //if (data != null)
-            //{
-            //    return data;
+            catch (Exception e)
+            {
+                RedirectToAction("Index", "Error", new { exception = e });
+                return null;
+            }
 
-            //}
-            //else
-            //{
-            //    //return Content(HttpStatusCode.BadRequest, "No visitors yet.");
-            //}
-        
+        }
     }
 
 }
