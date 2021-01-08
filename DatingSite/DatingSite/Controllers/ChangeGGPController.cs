@@ -163,7 +163,7 @@ namespace DatingSite.Controllers
 
                 if (model.LastName != null)
                 {
-                    userRepository.EditUserFirstName(user, model.LastName);
+                    userRepository.EditUserLastName(user, model.LastName);
                 }
 
                 if (model.Age > 0)
