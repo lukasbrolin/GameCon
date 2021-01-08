@@ -20,37 +20,66 @@ namespace DatingSite.Controllers
         // GET: GenreController
         public async Task<IActionResult> Index()
         {
-            var genreRepository = new GenreRepository(_context);
-            List<GenreViewModel> model = new List<GenreViewModel>();
-            foreach (var index in genreRepository.GetGenreNames())
+            try
             {
-                model.Add(new GenreViewModel(index));
+                var genreRepository = new GenreRepository(_context);
+                List<GenreViewModel> model = new List<GenreViewModel>();
+                foreach (var index in genreRepository.GetGenreNames())
+                {
+                    model.Add(new GenreViewModel(index));
+                }
+                //model.AddRange(new ProfileViewModel(gameRepository.GetGamesNames))
+                //return View(await _context.Games.ToListAsync());
+
+                return View(model);
             }
-            //model.AddRange(new ProfileViewModel(gameRepository.GetGamesNames))
-            //return View(await _context.Games.ToListAsync());
-            
-            return View(model);
-            
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
+
+
         }
 
         [HttpPost]
         public ActionResult Submit(string[] CheckBoxes)
         {
-            var userRepository = new UserRepository(_context);
-            userRepository.SetUserGenres(User.Identity.Name, CheckBoxes);
-            return RedirectToAction("Index", "Platform");
+            try
+            {
+                var userRepository = new UserRepository(_context);
+                userRepository.SetUserGenres(User.Identity.Name, CheckBoxes);
+                return RedirectToAction("Index", "Platform");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         // GET: GenreController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         // GET: GenreController/Create
         public ActionResult Create()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         // POST: GenreController/Create
@@ -62,16 +91,24 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
         }
 
         // GET: GenreController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         // POST: GenreController/Edit/5
@@ -83,16 +120,23 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
         }
 
         // GET: GenreController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         // POST: GenreController/Delete/5
@@ -106,7 +150,7 @@ namespace DatingSite.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
         }
     }

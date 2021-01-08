@@ -1,0 +1,13 @@
+﻿@model ErrorViewModel
+    <div class="div-group">
+        <div class="vw-100 mg-top-30 position-absolute display-flex justify-content-center">
+            <img class="home-border" src="~/img/Border/Frame.png" />
+            <div class=" mx-1">
+                <div class="text-center">
+                    <h1>Error:</h1>
+                    <p id="error-message">@Model.SiteMessage</p>
+                    <p id="error-message">Errormessage: @Model.RequestId</p>
+                </div>
+            </div>
+        </div>
+    </div>

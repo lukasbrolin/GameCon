@@ -21,35 +21,43 @@ namespace DatingSite.Controllers
 
         public ActionResult Index()
         {
-            var personalityRepo = new PersonalityRepository(_context);
-            var nationalityRepo = new NationalityRepository(_context);
-            ViewBag.PList = personalityRepo.GetPersonalities();
-            ViewBag.NList = nationalityRepo.GetNationalities();
-            return View(new RegisterViewModel());
+            try
+            {
+                var personalityRepo = new PersonalityRepository(_context);
+                var nationalityRepo = new NationalityRepository(_context);
+                ViewBag.PList = personalityRepo.GetPersonalities();
+                ViewBag.NList = nationalityRepo.GetNationalities();
+                return View(new RegisterViewModel());
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
+
         }
 
         [HttpPost]
         public ActionResult Register(RegisterViewModel model, IFormFile file)
         {
-            var userRepo = new UserRepository(_context);
-            var nationalityRepo = new NationalityRepository(_context);
-            var personalityRepo = new PersonalityRepository(_context);
-            var user = new User();
-
-            user.NickName = model.NickName;
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
-            user.Mail = User.Identity.Name;
-            user.Age = model.Age;
-            user.Gender = model.Gender;
-            user.NationalityId = nationalityRepo.GetNationalityIdByName(model.Nationality);
-            user.PersonalityId = personalityRepo.GetPersonalityIdByName(model.Personality);
-            user.Active = true;
-            user.Online = true;
-
-            if (file != null)
+            try
             {
-                try
+                var userRepo = new UserRepository(_context);
+                var nationalityRepo = new NationalityRepository(_context);
+                var personalityRepo = new PersonalityRepository(_context);
+                var user = new User();
+
+                user.NickName = model.NickName;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Mail = User.Identity.Name;
+                user.Age = model.Age;
+                user.Gender = model.Gender;
+                user.NationalityId = nationalityRepo.GetNationalityIdByName(model.Nationality);
+                user.PersonalityId = personalityRepo.GetPersonalityIdByName(model.Personality);
+                user.Active = true;
+                user.Online = true;
+
+                if (file != null)
                 {
                     string imgUrl = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
 
@@ -65,13 +73,14 @@ namespace DatingSite.Controllers
                         user.ImgUrl = relPath;
                     }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                userRepo.AddUser(user);
+                return RedirectToAction("Index", "Games");
             }
-            userRepo.AddUser(user);
-            return RedirectToAction("Index", "Games");
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
+
         }
     }
 }

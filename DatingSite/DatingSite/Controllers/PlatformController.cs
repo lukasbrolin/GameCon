@@ -22,33 +22,63 @@ namespace DatingSite.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var platformRepository = new PlatformRepository(_context);
-            List<PlatformViewModel> model = new List<PlatformViewModel>();
-            foreach (var index in platformRepository.GetPlatformNames())
+            try
             {
-                model.Add(new PlatformViewModel(index));
+                var platformRepository = new PlatformRepository(_context);
+                List<PlatformViewModel> model = new List<PlatformViewModel>();
+                foreach (var index in platformRepository.GetPlatformNames())
+                {
+                    model.Add(new PlatformViewModel(index));
+                }
+                return View(model);
             }
-            return View(model);
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
+
         }
 
         [HttpPost]
         public ActionResult Submit(string[] CheckBoxes)
         {
-            var userRepository = new UserRepository(_context);
-            userRepository.SetUserPlatforms(User.Identity.Name, CheckBoxes);
-            return RedirectToAction("Index", "SignedIn");
+            try
+            {
+                var userRepository = new UserRepository(_context);
+                userRepository.SetUserPlatforms(User.Identity.Name, CheckBoxes);
+                return RedirectToAction("Index", "SignedIn");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
+
         }
 
         // GET: PlatformController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         // GET: PlatformController/Create
         public ActionResult Create()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         // POST: PlatformController/Create
@@ -60,16 +90,23 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception e)
             {
-                return View();
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
         }
 
         // GET: PlatformController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         // POST: PlatformController/Edit/5
@@ -81,16 +118,23 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
         }
 
         // GET: PlatformController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Index", "Error", new { exception = e });
+            }
         }
 
         // POST: PlatformController/Delete/5
@@ -102,9 +146,9 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                return RedirectToAction("Index", "Error", new { exception = e });
             }
         }
     }
