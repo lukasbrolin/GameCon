@@ -1,10 +1,10 @@
 ﻿@using DataLayer.Models
 @model DatingSite.Models.ProfileViewModel
 
-<div class="container card-properties h-100 w-50">
+<div class="container card-properties h-100 w-50 profileMain">
     <div class="col backgroundFrosty profile-border align-items-center">
         <div class="cardheader row">
-            <img class="cardimg mg-1 padding-0 img-fluid" src="@Url.Content(Model.User.ImgUrl)" >
+            <img class="cardimg mg-1 padding-0 img-fluid" src="@Url.Content(Model.User.ImgUrl)">
             <div class="card-body profile-info">
 
                 <h1 class="card-title mt-n4">@Model.User.NickName</h1>
@@ -13,7 +13,7 @@
                 <h6 class="card-subtitle">Gaming personality: @Model.User.Personality.Description  </h6>
                 @{if (Model.User.Mail.Equals(User.Identity.Name))
                     {
-                        <a asp-controller="ChangeGGP" asp-action="Index" class="card-link"><img id="edit-profile-svg" src="~/img/Icons/pencil.svg"  />Edit Preferences</a>
+                        <a asp-controller="ChangeGGP" asp-action="Index" class="card-link"><img id="edit-profile-svg" src="~/img/Icons/pencil.svg" />Edit Preferences</a>
                     }
                 }
                 @if (!Model.User.Mail.Equals(User.Identity.Name))
@@ -59,7 +59,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col  p-1 m-1 ">
-                                    <img id="img-game" class="mx-auto d-block" src="~/img/Genre/@(genre.Name).png" />
+                                    <img class="mx-auto d-block img-genre" src="~/img/Genre/@(genre.Name).png" />
                                     <h6 class="text-center">@(genre.Name)</h6>
                                 </div>
                             </div>
@@ -104,31 +104,30 @@
                                     <textarea rows="5" size="30" id="sendPostTextArea" maxlength="140" class="form-control" placeholder="Write @Model.User.NickName a message..."></textarea>
                                 </div>
                                 @*<div class="form-group">
-                                    <textarea>dada</textarea>
-                                </div>*@
+                                        <textarea>dada</textarea>
+                                    </div>*@
                             </div>
                         </div>
-                             <button class="btn btn-primary button-profile-border mt-n2 ml-1" id="btnSendMessage">Send Message</button>
+                        <button class="btn btn-primary button-profile-border mt-n2 ml-1" id="btnSendMessage">Send Message</button>
                         <div>
-                            <hr />
                             @foreach (var post in Model.Posts)
                             {
                                 <!--<div class="player-info">
-                                    @if (post.Receiver.Mail.Equals(User.Identity.Name))
-                                    {
-                                        @Html.ActionLink("Delete", "DeletePost", "Profile", new { id = post.PostId }, new { @class = "btn btn-danger btn-sm", id = "removePostBtn" });
-                                    }
-                                    <hr />
-                                    <a href="@Url.Action("Index", "Profile", new { profile = @post.Sender.NickName })">-->
-                                        @*<h3>From: @post.Sender.Firstname @post.Sender.Lastname</h3>*@
-                                        <!--@(post.Sender.NickName + " ")
+                                @if (post.Receiver.Mail.Equals(User.Identity.Name))
+                                {
+                                    @Html.ActionLink("Delete", "DeletePost", "Profile", new { id = post.PostId }, new { @class = "btn btn-danger btn-sm", id = "removePostBtn" });
+                                }
+                                <hr />
+                                <a href="@Url.Action("Index", "Profile", new { profile = @post.Sender.NickName })">-->
+                                @*<h3>From: @post.Sender.Firstname @post.Sender.Lastname</h3>*@
+                                <!--@(post.Sender.NickName + " ")
                                         <img class="img-platform" src="@Url.Content(post.Sender.ImgUrl)" />
                                     </a>
                                     @(post.TimeStamp)
                                     @(post.Content)
                                 </div>-->
 
-                                <div class="card mt-2" >
+                                <div class="card mt-2">
                                     <div class="card-body text-left">
                                         <div class="col">
                                             <div class="row d-flex align-items-center">
@@ -144,53 +143,47 @@
                                         }
                                     </div>
                                 </div>
-
-
                             }
                         </div>
                     </div>
                 </div>
             </li>
-            @if (Model.User.Mail.Equals(User.Identity.Name))
-            {
-            <li class="list-group-item text-center backgroundFrosty">
-                <div class="card-body player-info-items">
-                    <form asp-action="SerializeProfile" asp-controller="Profile">
-                        <input type="submit" value="Serialize your profile" class="btn btn-outline-success button-profile-border" data-toggle="modal" data-target="#SerializeModal" />
-                    </form>
-                </div>
-                @*@Html.ActionLink("Serialize", "Serialize", "SignedInUser", new { userName = User.Identity.Name }, new { @class = "btn btn-danger btn-sm", id = "serializeBtn" })}*@
-            </li>
-            }
         </ul>
+        @if (Model.User.Mail.Equals(User.Identity.Name))
+        {
+            <div class="card-body player-info-items">
+                <form asp-action="SerializeProfile" asp-controller="Profile">
+                    <input type="submit" value="Serialize your profile" class="btn btn-outline-success button-profile-border" data-toggle="modal" data-target="#SerializeModal" />
+                </form>
+            </div>
+        }
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="modal-title" id="exampleModalLabel">Friend request</h2>
-                        </div>
-                        <div class="modal-body">
-                            <p class="text-success">User added!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="SerializeModal" tabindex="-1" role="dialog" aria-labelledby="SerializeModal" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 class="modal-title" id="SerializeModalLabel">Serialize</h2>
+                        <h2 class="modal-title" id="exampleModalLabel">Friend request</h2>
                     </div>
                     <div class="modal-body">
-                        <p class="text-success">Serialize Succeded!</p>
+                        <p class="text-success">User added!</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <div class="modal fade" id="SerializeModal" tabindex="-1" role="dialog" aria-labelledby="SerializeModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="SerializeModalLabel">Serialize</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="text-success">Serialize Succeded!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts
         {
@@ -244,8 +237,6 @@
 
         //$(function () {
 
-
-
         //$(function () {
 
         //});
@@ -275,4 +266,4 @@
         });
     });*@
     </script>
-    }
+}
