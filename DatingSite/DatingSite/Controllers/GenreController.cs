@@ -148,7 +148,7 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
