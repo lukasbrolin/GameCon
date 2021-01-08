@@ -31,6 +31,7 @@ namespace DataLayer.Repositories
         public List<User> GetUsers()
         {
             return _context.Users.ToList();
+            throw new System.ArgumentOutOfRangeException();
         }
 
         public int getUserIdByMail(string mail)

@@ -7,8 +7,8 @@
             <img class="cardimg mg-1 padding-0 img-fluid" src="@Url.Content(Model.User.ImgUrl)" >
             <div class="card-body profile-info">
 
-                <h2 class="card-title">@Model.User.NickName, @Model.User.Age</h2>
-                <h4 class="card-subtitle">@Model.User.FirstName @Model.User.LastName</h4>
+                <h1 class="card-title mt-n4">@Model.User.NickName</h1>
+                <h4 class="card-subtitle">@Model.User.FirstName @Model.User.LastName @Model.User.Age</h4>
                 <h4 class="card-subtitle">@Model.User.Nationality.Name <img src="~/img/Countries-Icon/@(@Model.User.Nationality.Name).png" style="width: 20px; height:20px;" /></h4>
                 <h6 class="card-subtitle">Gaming personality: @Model.User.Personality.Description  </h6>
                 @{if (Model.User.Mail.Equals(User.Identity.Name))
@@ -30,48 +30,57 @@
                 }
             </div>
         </div>
-        <ul class="list-group mx-auto mg-1 in-card-border">
+        <ul class="list-group mx-auto mg-1 ">
             @if (Model.Score.HasValue)
             {
-                <li class="list-group-item">
-                    <h5 class="list-group-item profile-header">Score: @Model.Score/10</h5>
-
-                        <h5>@Model.ScoreDescription</h5>
+                <li class="list-group mx-auto mg-1 in-card-border w-100 ">
+                    <h5 class="list-group-item profile-header backgroundFrosty">Score</h5>
+                    <h5 class="list-group-item backgroundFrosty backgroundFrosty">@Model.Score/10</h5>
+                    <p class="list-group-item backgroundFrosty backgroundFrosty"> @Model.ScoreDescription</p>
                 </li>
             }
             <li class="list-group mx-auto mg-1 in-card-border">
-                <h5 class="list-group-item profile-header">Games</h5>
-                <div class="list-group-item">
+                <h5 class="list-group-item profile-header backgroundFrosty">Games</h5>
+                <div class="list-group-item backgroundFrosty">
                     @foreach (var game in Model.Games)
                     {
-                        <div>
-                            @(game.Name + " ")
+                        <div class="col p-2 mb-3 border rounded">
+                            <h6>@(game.Name)</h6>
                             <img class="img-fluid" src="~/img/Game/@(game.Name).jpg" />
                         </div>
                     }
                 </div>
             </li>
-            <li class="list-group-item text-center backgroundFrosty">
-                <h5 class="list-group-item profile-header">Genres</h5>
-                <div class="player-info-items">
+            <li class="list-group mx-auto mg-1 in-card-border w-100">
+                <h5 class="list-group-item  backgroundFrosty profile-header">Genres</h5>
+                <div class="list-group-item backgroundFrosty d-flex">
                     @foreach (var genre in Model.Genres)
                     {
-                        <div class="player-info">
-                            @(genre.Name + " ")
-                            <img class="img-genre" src="~/img/Genre/@(genre.Name).png" />
+                        <div class="container">
+                            <div class="row">
+                                <div class="col  p-1 m-1 ">
+                                    <img id="img-game" class="mx-auto d-block" src="~/img/Genre/@(genre.Name).png" />
+                                    <h6 class="text-center">@(genre.Name)</h6>
+                                </div>
+                            </div>
                         </div>
                     }
                 </div>
             </li>
-            <li class="list-group-item text-center backgroundFrosty">
-                <h5 class="list-group-item profile-header">Platforms</h5>
-                <div class="player-info-items">
+            <li class="list-group mx-auto mg-1 in-card-border w-100">
+                <h5 class="list-group-item backgroundFrosty profile-header">Platforms</h5>
+                <div class="list-group-item backgroundFrosty d-flex">
                     @foreach (var platform in Model.Platforms)
                     {
-                        <div class="player-info">
-                            @(platform.Name + " ")
-                            <img class="img-platform" src="~/img/Platform/@(platform.Name).png" />
+                        <div class="container">
+                            <div class="row">
+                                <div class="col  p-1 m-1 ">
+                                    <img class="mx-auto d-block img-genre" src="~/img/Platform/@(platform.Name).png" />
+                                    <h6 class="text-center">@(platform.Name)</h6>
+                                </div>
+                            </div>
                         </div>
+
                     }
                 </div>
             </li>
@@ -85,27 +94,23 @@
                     </li>
                 }
             }
-            <li class="list-group-item text-center backgroundFrosty">
+            <li class="list-group mx-auto mg-1 in-card-border w-100">
                 <h5 id="PostsTitle" class="list-group-item profile-header">Posts</h5>
                 <div>
                     <div>
-                        <h6 class="mg-top-2">Write something</h6>
-                        <div class="row">
-                            <div class="form-group w-100">
-                                <div class="form-group required-field-block">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
-                                    <textarea rows="5" size="30" id="sendPostTextArea"  maxlength="140" value="" class="form-control" placeholder="Write @Model.User.NickName a message..."></textarea>
-                                    <div class="required-icon">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row fit-content">
-                            <div class="form-group">
-                                <button class="btn btn-primary button-profile-border" id="btnSendMessage"><strong>Send Message</strong></button>
-                            </div>
-                        </div>
                         <div>
+                            <div class="form-group w-100">
+                                <div class="form-group">
+                                    <textarea rows="5" size="30" id="sendPostTextArea" maxlength="140" class="form-control" placeholder="Write @Model.User.NickName a message..."></textarea>
+                                </div>
+                                @*<div class="form-group">
+                                    <textarea>dada</textarea>
+                                </div>*@
+                            </div>
+                        </div>
+                             <button class="btn btn-primary button-profile-border mt-n2 ml-1" id="btnSendMessage">Send Message</button>
+                        <div>
+                            <hr />
                             @foreach (var post in Model.Posts)
                             {
                                 <!--<div class="player-info">
