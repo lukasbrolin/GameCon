@@ -10,7 +10,12 @@ a.navbar-brand {
 /* Provide sufficient contrast against white background */
 a {
     color: #0366d6;
+
 }
+
+/*p, h1, h2, h3, h4, h5, h6, a {
+    font-family: 'Roboto', sans-serif;
+}*/
 
 .btn-primary {
     color: #fff;
