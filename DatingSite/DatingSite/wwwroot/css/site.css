@@ -313,8 +313,8 @@ input::placeholder {
     height: auto;
 }
 
-#img-game {
-    width: 20px;
+.img-game {
+    width: 6rem;
     border-radius: calc(.25rem - 1px);
 }
 
@@ -413,6 +413,10 @@ input::placeholder {
     z-index:10;
 }
 
+.profileMain {
+   min-width: 345px;
+}
+
 .margin-top-60{
     margin-top: 60vh;
 }
@@ -424,7 +428,6 @@ input::placeholder {
 .backgroundFrosty {
     background-image: linear-gradient(to right, #c8a162ba, #8f786185);
     background-color: unset;
-    min-width: 315px;
 }
 
 .nav-background {
@@ -542,6 +545,13 @@ a:hover{
     max-width:30vw;
 }
 
+.becomeTrans {
+    background: transparent;
+}
+
+.beWhite {
+    color: white;
+}
 
 
 
