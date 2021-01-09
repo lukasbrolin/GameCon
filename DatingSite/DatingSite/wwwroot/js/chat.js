@@ -7,9 +7,9 @@ document.getElementById("sendButton").disabled = true;
 
 connection.on("ReceiveMessage", function (user, message) {
     var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    var encodedMsg = user + " " + msg;
+    var encodedMsg = user + ":  " + msg;
     var li = document.createElement("li");
-    li.classList.add("list-group-item")
+    li.classList.add("list-group-item", "mb-2")
     li.textContent = encodedMsg;
     document.getElementById("messagesList").appendChild(li);
 });
