@@ -552,10 +552,16 @@ a:hover{
 
 .becomeTrans {
     background: transparent;
+    width: 100%;
 }
 
 .beWhite {
     color: white;
+}
+
+.wh-200{
+    width: 200px;
+    height: 200px;
 }
 
 
