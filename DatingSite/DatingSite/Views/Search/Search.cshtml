@@ -4,70 +4,72 @@
     ViewData["Title"] = "Search";
 }
 
-<div class="container">
-    <h1>Search</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.NickName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Age)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Gender)
-                </th>
-                <th>
-                    Status
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nationality)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+<div class="container card-properties h-100 w-50 profileMain">
+    <div class="col backgroundFrosty profile-border align-content-center min-vh-100">
+        <h1>Search</h1>
+        <table class="table table-hover table-responsive">
+            <thead class="profile-header backgroundFrosty in-card-border">
                 <tr>
-                    <td>
-                        <a asp-controller="Profile" asp-action="Index" asp-route-profile="@item.NickName" class="card-link">
-                            @Html.DisplayFor(modelItem => item.NickName)
-                        </a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Age)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gender)
-                    </td>
-                    <td>
-                        @if (item.Online == true)
-                        {
-                            <span class="badge badge-pill badge-success">Online</span>
-                        }
-                        else
-                        {
-                        <span class="badge badge-pill badge-danger">Offline</span>
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nationality.Name)
-                    </td>
+                    <th class="margin-container">
+                        @Html.DisplayNameFor(model => model.NickName)
+                    </th>
+                    <th class="margin-container">
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th class="margin-container">
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th class="margin-container">
+                        @Html.DisplayNameFor(model => model.Age)
+                    </th>
+                    <th class="margin-container">
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </th>
+                    <th class="margin-container">
+                        Status
+                    </th>
+                    <th class="margin-container">
+                        @Html.DisplayNameFor(model => model.Nationality)
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="profile-header backgroundFrosty in-card-border justify-content-center">
+                        <td>
+                            <a asp-controller="Profile" asp-action="Index" asp-route-profile="@item.NickName" class="card-link">
+                                @Html.DisplayFor(modelItem => item.NickName)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Age)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gender)
+                        </td>
+                        <td>
+                            @if (item.Online == true)
+                            {
+                                <span class="badge badge-pill badge-success">Online</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-pill badge-danger">Offline</span>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nationality.Name)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    </div>

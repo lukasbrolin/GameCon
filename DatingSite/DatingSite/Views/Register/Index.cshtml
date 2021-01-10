@@ -7,79 +7,80 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 mx-auto">
-            <h1 class="text-left">Lets get to know you more!</h1>
-            <hr />
-            <form asp-action="Register" enctype="multipart/form-data">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="NickName" class="control-label"></label>
-                    <input asp-for="NickName" class="form-control" />
-                    <span asp-validation-for="NickName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="FirstName" class="control-label"></label>
-                    <input asp-for="FirstName" class="form-control" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LastName" class="control-label"></label>
-                    <input asp-for="LastName" class="form-control" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Age" class="control-label"></label>
-                    <input asp-for="Age" class="form-control" />
-                    <span asp-validation-for="Age" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Gender" class="control-label"></label>
-                    <select asp-for="Gender" class="form-control">
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Xer</option>
-                        <option>Xir</option>
-                        <option>They</option>
-                        <option>Xor</option>
-                        <option>Them</option>
-                        <option>Herself</option>
-                        <option>Attach Helicopter</option>
-                    </select>
-                    <span asp-validation-for="Gender" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Nationality" class="control-label"></label>
-                    <select asp-for="Nationality" class="form-control">
-                        @foreach (var item in ViewBag.NList)
-                        {
-                            <option>@item.Name</option>
-                        }
-                    </select>
-                    <span asp-validation-for="Nationality" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Personality" class="control-label"></label>
-                    <select asp-for="Personality" class="form-control">
-                        @foreach (var item in ViewBag.PList)
-                        {
-                            <option>@item.Description</option>
-                        }
-                    </select>
-                    <span asp-validation-for="Personality" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ImageURL" class="control-label">Image</label>
-                    <input asp-for="ImageURL" class="form-control" type="file" name="file" />
-
-                    <span asp-validation-for="ImageURL" class="text-danger"></span>
-                </div>
-                <div class=" form-group">
-                    <input type="submit" value="Next step" class="btn btn-primary" />
-                </div>
-                <div class="progress mt-3">
-                    <div class="progress-bar" role="progressbar" style="width:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </form>
+        <div class="container card-properties h-100 w-50 profileMain">
+            <div class="col backgroundFrosty profile-border align-items-center">
+                <h1 class="text-left">Lets get to know you more!</h1>
+                <hr />
+                <form asp-action="Register" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="NickName" class="control-label"></label>
+                        <input asp-for="NickName" class="form-control" />
+                        <span asp-validation-for="NickName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Age" class="control-label"></label>
+                        <input asp-for="Age" class="form-control" />
+                        <span asp-validation-for="Age" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Gender" class="control-label"></label>
+                        <select asp-for="Gender" class="form-control">
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Xer</option>
+                            <option>Xir</option>
+                            <option>They</option>
+                            <option>Xor</option>
+                            <option>Them</option>
+                            <option>Herself</option>
+                            <option>Attach Helicopter</option>
+                        </select>
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Nationality" class="control-label"></label>
+                        <select asp-for="Nationality" class="form-control">
+                            @foreach (var item in ViewBag.NList)
+                            {
+                                <option>@item.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Nationality" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Personality" class="control-label"></label>
+                        <select asp-for="Personality" class="form-control">
+                            @foreach (var item in ViewBag.PList)
+                            {
+                                <option>@item.Description</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Personality" class="text-danger"></span>
+                    </div>
+                    <div class="form-group pb-2">
+                        <label asp-for="ImageURL" class="control-label">Image</label>
+                        <input asp-for="ImageURL" class="form-control" type="file" name="file" />
+                        <span asp-validation-for="ImageURL" class="text-danger"></span>
+                    </div>
+                    <div class=" form-group">
+                        <input type="submit" value="Next step" class="btn btn-primary" />
+                    </div>
+                    <div class="progress mt-3 mb-3 pb-3">
+                        <div class="progress-bar mb-3 pb-3" role="progressbar" style="width:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

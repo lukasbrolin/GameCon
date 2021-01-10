@@ -19,7 +19,7 @@
                 @if (!Model.User.Mail.Equals(User.Identity.Name))
                 {
                     <li class="pd-top-05">
-                        <div class="">
+                        <div>
                             <form asp-action="FriendRequest" asp-controller="Friends" method="post">
                                 <input type="hidden" name=receiverId value="@Model.User.UserId" />
                                 <input type="hidden" name=senderId value="@ViewBag.currentUser" />
@@ -42,14 +42,14 @@
                 </li>
             }
 
-            <li class="list-group mx-auto mg-1 in-card-border">
-                <h5 class="list-group-item profile-header backgroundFrosty">Games</h5>
-                <div class="player-info-items backgroundFrosty text-center">
+            <li class="list-group mx-auto mg-1 in-card-border w-100">
+                <h5 class="list-group-item  backgroundFrosty profile-header">Games</h5>
+                <div class="list-group-item backgroundFrosty d-flex">
                     @foreach (var game in Model.Games)
                     {
                         <div class="container">
                             <div class="row">
-                                <div class="col p-3 mb-3">
+                                <div class="col p-1 m-1">
                                     <img class="img-fluid in-card-border max-width40" src="~/img/Game/@(game.Name).jpg" />
                                     <h6 class="text-center">@(game.Name)</h6>
                                 </div>
@@ -65,7 +65,7 @@
                     {
                         <div class="container">
                             <div class="row">
-                                <div class="col  p-1 m-1 ">
+                                <div class="col p-1 m-1">
                                     <img class="mx-auto d-block img-genre " src="~/img/Genre/@(genre.Name).png" />
                                     <h6 class="text-center">@(genre.Name)</h6>
                                 </div>
@@ -116,30 +116,12 @@
                                 <div class="form-group">
                                     <textarea rows="5" size="30" id="sendPostTextArea" maxlength="140" class="form-control" placeholder="Write @Model.User.NickName a message..."></textarea>
                                 </div>
-                                @*<div class="form-group">
-                                <textarea>dada</textarea>
-                            </div>*@
                             </div>
                         </div>
-                        <button class="btn btn-primary button-profile-border mt-n2 ml-1" id="btnSendMessage">Send Message</button>
                         <div>
+                        <button class="btn btn-primary button-profile-border mt-n2 ml-1 mb-1" id="btnSendMessage">Send Message</button>
                             @foreach (var post in Model.Posts)
                             {
-                                <!--<div class="player-info">
-                        @if (post.Receiver.Mail.Equals(User.Identity.Name))
-                        {
-                            @Html.ActionLink("Delete", "DeletePost", "Profile", new { id = post.PostId }, new { @class = "btn btn-danger btn-sm", id = "removePostBtn" });
-                        }
-                        <hr />
-                        <a href="@Url.Action("Index", "Profile", new { profile = @post.Sender.NickName })">-->
-                                @*<h3>From: @post.Sender.Firstname @post.Sender.Lastname</h3>*@
-                                <!--@(post.Sender.NickName + " ")
-                                <img class="img-platform" src="@Url.Content(post.Sender.ImgUrl)" />
-                            </a>
-                            @(post.TimeStamp)
-                            @(post.Content)
-                        </div>-->
-
                                 <div class="card mt-2">
                                     <div class="card-body text-left">
                                         <div class="col">
