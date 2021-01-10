@@ -5,9 +5,9 @@
 }
 
 <div class="container card-properties h-100 w-50 profileMain min-vh-100">
-    <div class="col backgroundFrosty profile-border align-items-center min-vh80">
+    <div class="col backgroundFrosty profile-border align-items-center">
         <h1 class="text-left">Registration</h1>
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="pb-3">
             <h4>Create a new account.</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>

@@ -9,15 +9,15 @@
 
 
 <div class="container card-properties h-100 w-50 profileMain">
-    <div class="col backgroundFrosty profile-border align-items-center">
-        <form asp-action="Submit" asp-controller="ChangeGGP" enctype="multipart/form-data" class="form-check mx-auto ">
+    <div class="col backgroundFrosty profile-border align-items-center form-check-all">
+        <form asp-action="Submit" asp-controller="ChangeGGP" enctype="multipart/form-data" class="backgroundFrosty form-check mx-auto form-check-all ">
             <div asp-validation-summary="ModelOnly" class="text-danger "></div>
-            <a asp-controller="Profile" asp-action="Index" class="card-link">Back to profile</a>
-            <h3>Change gaming preferences or profile pic</h3>
+            <a asp-controller="Profile" asp-action="Index" class="card-link mb-4">Back to profile</a>
+            <h3 class="border-bottom pb-1">Change gaming preferences and settings</h3>
 
             <div class="form-group">
                 <label asp-for="ImgURL" class="control-label">Image</label>
-                <input asp-for="ImgURL" class="form-control" type="file" name="file" />
+                <input asp-for="ImgURL" class="form-control img-url-button" type="file" name="file" />
                 <span asp-validation-for="ImgURL" class="text-danger"></span>
             </div>
 
@@ -94,7 +94,7 @@
                 <span asp-validation-for="Personality" class="text-danger"></span>
             </div>
 
-            <li class="backgroundFrosty list-group-item text-center">
+            <li class="backgroundFrosty list-group-item text-center in-card-border">
                 <h5>Favorite Games</h5>
                 <div class="container-g display-inlineblock mb-4 ">
                     @foreach (var game in Model.Games)
@@ -104,7 +104,7 @@
                             <label class="option_item form-check-label genrelbl mt-1 m-4">
                                 <input checked type="checkbox" name="CheckBoxesGame" value="@game.Key.Name" class="checkbox hide1 checkbox:checked position-fixed">
                                 <div class="option_inner facebook paddingauto genrelbl">
-                                    <img src="~/img/Game/@(game.Key.Name).jpg" class="img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
+                                    <img src="~/img/Game/@(game.Key.Name).jpg" class="img-fluid position-absolute fixed-top " />
                                     <div class="name mg-top60">@game.Key.Name</div>
                                 </div>
                             </label>
@@ -114,7 +114,7 @@
                             <label class="option_item form-check-label genrelbl mt-1 m-4">
                                 <input type="checkbox" name="CheckBoxesGame" value="@game.Key.Name" class="checkbox hide1 position-fixed">
                                 <div class="option_inner facebook paddingauto genrelbl">
-                                    <img src="~/img/Game/@(game.Key.Name).jpg" class="img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
+                                    <img src="~/img/Game/@(game.Key.Name).jpg" class="img-fluid position-absolute fixed-top " />
 
                                     <div class="name mg-top60">@game.Key.Name</div>
                                 </div>
@@ -126,7 +126,7 @@
                 </div>
             </li>
 
-            <li class="backgroundFrosty list-group-item text-center">
+            <li class="backgroundFrosty list-group-item text-center in-card-border">
                 <h5>Favorite Genres</h5>
                 <div class="container-g display-inlineblock mb-4 ">
                     @foreach (var genre in Model.Genres)
@@ -160,7 +160,7 @@
                 </div>
             </li>
 
-            <li class="backgroundFrosty list-group-item text-center">
+            <li class="backgroundFrosty list-group-item text-center in-card-border">
                 <h5>Favorite Platforms</h5>
                 <div class="container-g display-inlineblock mb-4">
                     @foreach (var platform in Model.Platforms)
@@ -194,7 +194,7 @@
                 </div>
             </li>
 
-            <div class=" form-group">
+            <div class=" form-group mg-top-2 text-center">
                 <input type="submit" value="Save Changes" class="btn btn-primary" />
             </div>
         </form>

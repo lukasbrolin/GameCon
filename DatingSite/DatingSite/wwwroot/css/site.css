@@ -350,7 +350,7 @@ input::placeholder {
 }
 
 .gamelbl{
-    min-width:40%;
+    min-width:49%;
     height:22vh;
     
 }
@@ -631,6 +631,26 @@ a:hover{
     .mg-top60{
         margin-top:70%;
     }
+
+.form-check-all {
+    padding: 1.25rem
+}
+
+.img-url-button{
+    background: none!important;
+    border:none;
+    color: black;
+    padding-left:0;
+}
+
+.border-bottom{
+    border-bottom-color:black!important;
+}
+
+.form-control:focus {
+    border-color: black;
+    box-shadow: 0 0 0 0.2rem #212529a6 !important;
+}
 
 
 
