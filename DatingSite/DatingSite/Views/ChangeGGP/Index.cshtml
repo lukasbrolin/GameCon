@@ -8,198 +8,200 @@
 
 
 
-<div class="container h-100">
-    <form asp-action="Submit" asp-controller="ChangeGGP" enctype="multipart/form-data" class="form-check mx-auto ">
-        <div asp-validation-summary="ModelOnly" class="text-danger "></div>
-        <a asp-controller="Profile" asp-action="Index" class="card-link">Back to profile</a>
-        <h3>Change gaming preferences or profile pic</h3>
+<div class="container card-properties h-100 w-50 profileMain">
+    <div class="col backgroundFrosty profile-border align-items-center">
+        <form asp-action="Submit" asp-controller="ChangeGGP" enctype="multipart/form-data" class="form-check mx-auto ">
+            <div asp-validation-summary="ModelOnly" class="text-danger "></div>
+            <a asp-controller="Profile" asp-action="Index" class="card-link">Back to profile</a>
+            <h3>Change gaming preferences or profile pic</h3>
 
-        <div class="form-group">
-            <label asp-for="ImgURL" class="control-label">Image</label>
-            <input asp-for="ImgURL" class="form-control" type="file" name="file" />
-            <span asp-validation-for="ImgURL" class="text-danger"></span>
-        </div>
-
-
-        <div class="form-group">
-            <label asp-for="NickName" class="control-label"></label>
-            <input asp-for="NickName" class="form-control" />
-            <span asp-validation-for="NickName" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="FirstName" class="control-label"></label>
-            <input asp-for="FirstName" class="form-control" />
-            <span asp-validation-for="FirstName" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="LastName" class="control-label"></label>
-            <input asp-for="LastName" class="form-control" />
-            <span asp-validation-for="LastName" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Age" class="control-label"></label>
-            <input value="1" asp-for="Age" class="form-control" />
-            <span asp-validation-for="Age" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Gender" class="control-label"></label>
-            <select asp-for="Gender" class="form-control">
-                <option>Male</option>
-                <option>Female</option>
-                <option>Xer</option>
-                <option>Xir</option>
-                <option>They</option>
-                <option>Xor</option>
-                <option>Them</option>
-                <option>Herself</option>
-                <option>Attach Helicopter</option>
-            </select>
-            <span asp-validation-for="Gender" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Nationality" class="control-label"></label>
-            <select asp-for="Nationality" class="form-control">
-                @foreach (var item in ViewBag.NList)
-                {
-                    if (item.Name.Equals(Model.Nationality))
-                    {
-                        <option selected>@item.Name</option>
-                    }
-                    else
-                    {
-                        <option>@item.Name</option>
-
-                    }
-                }
-            </select>
-            <span asp-validation-for="Nationality" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Personality" class="control-label"></label>
-            <select asp-for="Personality" class="form-control">
-                @foreach (var item in ViewBag.PList)
-                {
-                    if (item.Description.Equals(Model.Personality))
-                    {
-                        <option selected>@item.Description</option>
-                    }
-                    else
-                    {
-                        <option>@item.Description</option>
-
-                    }
-                }
-            </select>
-            <span asp-validation-for="Personality" class="text-danger"></span>
-        </div>
-
-        <li class="list-group-item text-center">
-            <h5>Favorite Games</h5>
-            <div class="container-g display-inlineblock mb-4 ">
-                @foreach (var game in Model.Games)
-                {
-                    if (game.Value)
-                    {
-                        <label class="option_item form-check-label genrelbl mt-1 m-4">
-                            <input checked type="checkbox" name="CheckBoxesGame" value="@game.Key.Name" class="checkbox hide1 checkbox:checked position-fixed">
-                            <div class="option_inner facebook paddingauto genrelbl">
-                                <img src="~/img/Game/@(game.Key.Name).jpg" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
-
-                                <div class="name mg-top-80">@game.Key.Name</div>
-                            </div>
-
-                        </label>
-                    }
-                    else
-                    {
-                        <label class="option_item form-check-label genrelbl mt-1 m-4">
-                            <input type="checkbox" name="CheckBoxesGame" value="@game.Key.Name" class="checkbox hide1 position-fixed">
-                            <div class="option_inner facebook paddingauto genrelbl">
-                                <img src="~/img/Game/@(game.Key.Name).jpg" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
-
-                                <div class="name mg-top-80">@game.Key.Name</div>
-                            </div>
-
-                        </label>
-                    }
-
-                }
+            <div class="form-group">
+                <label asp-for="ImgURL" class="control-label">Image</label>
+                <input asp-for="ImgURL" class="form-control" type="file" name="file" />
+                <span asp-validation-for="ImgURL" class="text-danger"></span>
             </div>
-        </li>
 
-        <li class="list-group-item text-center">
-            <h5>Favorite Genres</h5>
-            <div class="container-g display-inlineblock mb-4 ">
-                @foreach (var genre in Model.Genres)
-                {
-                    if (genre.Value)
-                    {
-                        <label class="option_item form-check-label genrelbl mt-1 m-4">
-                            <input checked type="checkbox" name="CheckBoxesGenre" value="@genre.Key.Name" class="checkbox hide1 checkbox:checked position-fixed">
-                            <div class="option_inner facebook paddingauto genrelbl">
-                                <img src="~/img/Genre/@(genre.Key.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
 
-                                <div class="name mg-top-80">@genre.Key.Name</div>
-                            </div>
-
-                        </label>
-                    }
-                    else
-                    {
-                        <label class="option_item form-check-label genrelbl mt-1 m-4">
-                            <input type="checkbox" name="CheckBoxesGenre" value="@genre.Key.Name" class="checkbox hide1 position-fixed">
-                            <div class="option_inner facebook paddingauto genrelbl">
-                                <img src="~/img/Genre/@(genre.Key.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
-
-                                <div class="name mg-top-80">@genre.Key.Name</div>
-                            </div>
-
-                        </label>
-                    }
-
-                }
+            <div class="form-group">
+                <label asp-for="NickName" class="control-label"></label>
+                <input asp-for="NickName" class="form-control" />
+                <span asp-validation-for="NickName" class="text-danger"></span>
             </div>
-        </li>
-
-        <li class="list-group-item text-center">
-            <h5>Favorite Platforms</h5>
-            <div class="container-g display-inlineblock mb-4">
-                @foreach (var platform in Model.Platforms)
-                {
-                    if (platform.Value)
-                    {
-                        <label class="option_item form-check-label genrelbl mt-1 m-4">
-                            <input checked type="checkbox" name="CheckBoxesPlatform" value="@platform.Key.Name" class="checkbox hide1 checkbox:checked position-fixed">
-                            <div class="option_inner facebook paddingauto genrelbl">
-                                <img src="~/img/Platform/@(platform.Key.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
-
-                                <div class="name mg-top-80">@platform.Key.Name</div>
-                            </div>
-
-                        </label>
-                    }
-                    else
-                    {
-                        <label class="option_item form-check-label genrelbl mt-1 m-4">
-                            <input type="checkbox" name="CheckBoxesPlatform" value="@platform.Key.Name" class="checkbox hide1 position-fixed">
-                            <div class="option_inner facebook paddingauto genrelbl">
-                                <img src="~/img/Platform/@(platform.Key.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
-
-                                <div class="name mg-top-80">@platform.Key.Name</div>
-                            </div>
-
-                        </label>
-                    }
-
-                }
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
-        </li>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input value="1" asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <select asp-for="Gender" class="form-control">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Xer</option>
+                    <option>Xir</option>
+                    <option>They</option>
+                    <option>Xor</option>
+                    <option>Them</option>
+                    <option>Herself</option>
+                    <option>Attach Helicopter</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nationality" class="control-label"></label>
+                <select asp-for="Nationality" class="form-control">
+                    @foreach (var item in ViewBag.NList)
+                    {
+                        if (item.Name.Equals(Model.Nationality))
+                        {
+                            <option selected>@item.Name</option>
+                        }
+                        else
+                        {
+                            <option>@item.Name</option>
 
-        <div class=" form-group">
-            <input type="submit" value="Save Changes" class="btn btn-primary" />
-        </div>
-    </form>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="Nationality" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Personality" class="control-label"></label>
+                <select asp-for="Personality" class="form-control">
+                    @foreach (var item in ViewBag.PList)
+                    {
+                        if (item.Description.Equals(Model.Personality))
+                        {
+                            <option selected>@item.Description</option>
+                        }
+                        else
+                        {
+                            <option>@item.Description</option>
 
+                        }
+                    }
+                </select>
+                <span asp-validation-for="Personality" class="text-danger"></span>
+            </div>
+
+            <li class="backgroundFrosty list-group-item text-center">
+                <h5>Favorite Games</h5>
+                <div class="container-g display-inlineblock mb-4 ">
+                    @foreach (var game in Model.Games)
+                    {
+                        if (game.Value)
+                        {
+                            <label class="option_item form-check-label genrelbl mt-1 m-4">
+                                <input checked type="checkbox" name="CheckBoxesGame" value="@game.Key.Name" class="checkbox hide1 checkbox:checked position-fixed">
+                                <div class="option_inner facebook paddingauto genrelbl">
+                                    <img src="~/img/Game/@(game.Key.Name).jpg" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
+
+                                    <div class="name mg-top-80">@game.Key.Name</div>
+                                </div>
+
+                            </label>
+                        }
+                        else
+                        {
+                            <label class="option_item form-check-label genrelbl mt-1 m-4">
+                                <input type="checkbox" name="CheckBoxesGame" value="@game.Key.Name" class="checkbox hide1 position-fixed">
+                                <div class="option_inner facebook paddingauto genrelbl">
+                                    <img src="~/img/Game/@(game.Key.Name).jpg" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
+
+                                    <div class="name mg-top-80">@game.Key.Name</div>
+                                </div>
+
+                            </label>
+                        }
+
+                    }
+                </div>
+            </li>
+
+            <li class="backgroundFrosty list-group-item text-center">
+                <h5>Favorite Genres</h5>
+                <div class="container-g display-inlineblock mb-4 ">
+                    @foreach (var genre in Model.Genres)
+                    {
+                        if (genre.Value)
+                        {
+                            <label class="option_item form-check-label genrelbl mt-1 m-4">
+                                <input checked type="checkbox" name="CheckBoxesGenre" value="@genre.Key.Name" class="checkbox hide1 checkbox:checked position-fixed">
+                                <div class="option_inner facebook paddingauto genrelbl">
+                                    <img src="~/img/Genre/@(genre.Key.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
+
+                                    <div class="name mg-top-80">@genre.Key.Name</div>
+                                </div>
+
+                            </label>
+                        }
+                        else
+                        {
+                            <label class="option_item form-check-label genrelbl mt-1 m-4">
+                                <input type="checkbox" name="CheckBoxesGenre" value="@genre.Key.Name" class="checkbox hide1 position-fixed">
+                                <div class="option_inner facebook paddingauto genrelbl">
+                                    <img src="~/img/Genre/@(genre.Key.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
+
+                                    <div class="name mg-top-80">@genre.Key.Name</div>
+                                </div>
+
+                            </label>
+                        }
+
+                    }
+                </div>
+            </li>
+
+            <li class="backgroundFrosty list-group-item text-center">
+                <h5>Favorite Platforms</h5>
+                <div class="container-g display-inlineblock mb-4">
+                    @foreach (var platform in Model.Platforms)
+                    {
+                        if (platform.Value)
+                        {
+                            <label class="option_item form-check-label genrelbl mt-1 m-4">
+                                <input checked type="checkbox" name="CheckBoxesPlatform" value="@platform.Key.Name" class="checkbox hide1 checkbox:checked position-fixed">
+                                <div class="option_inner facebook paddingauto genrelbl">
+                                    <img src="~/img/Platform/@(platform.Key.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
+
+                                    <div class="name mg-top-80">@platform.Key.Name</div>
+                                </div>
+
+                            </label>
+                        }
+                        else
+                        {
+                            <label class="option_item form-check-label genrelbl mt-1 m-4">
+                                <input type="checkbox" name="CheckBoxesPlatform" value="@platform.Key.Name" class="checkbox hide1 position-fixed">
+                                <div class="option_inner facebook paddingauto genrelbl">
+                                    <img src="~/img/Platform/@(platform.Key.Name).png" class="genreimg img-fluid position-absolute fixed-top card-img-top pd-top-05 " />
+
+                                    <div class="name mg-top-80">@platform.Key.Name</div>
+                                </div>
+
+                            </label>
+                        }
+
+                    }
+                </div>
+            </li>
+
+            <div class=" form-group">
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
+            </div>
+        </form>
+
+    </div>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
