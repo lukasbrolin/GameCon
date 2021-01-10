@@ -457,27 +457,7 @@ input::placeholder {
     border:1px solid rgba(0,0,0,0.5);
 }
 
-.button-profile-border {
-    color: black;
-    background-color: #887e71;
-    border-color: black;
-}
 
-    .button-profile-border:hover {
-        color: black;
-        background-color: #b7b2ac;
-        border-color: black;
-    }
-
-    .button-profile-border:focus {
-        box-shadow: 0 0 0 0.2rem #212529a6
-    }
-
-    .button-profile-border:active {
-        color: black!important;
-        background-color: #887e71!important;
-        border-color: black!important;
-    }
 
 .profile-header {
     background-color: #ccb79570;
@@ -564,7 +544,93 @@ a:hover{
     height: 200px;
 }
 
+.min-vh80{
+    min-height: 80vh;
+}
 
+.button-profile-border {
+    color: black;
+    background-color: #887e71;
+    border-color: black;
+}
+
+    .button-profile-border:hover {
+        color: black;
+        background-color: #b7b2ac;
+        border-color: black;
+    }
+
+    .button-profile-border:focus {
+        box-shadow: 0 0 0 0.2rem #212529a6
+    }
+
+    .button-profile-border:active {
+        color: black !important;
+        background-color: #887e71 !important;
+        border-color: black !important;
+    }
+
+.progress-bar {
+    background-color: #887e71;
+}
+
+.btn-primary {
+    color: black;
+    background-color: #887e71;
+    border-color: black;
+}
+    .btn-primary:hover {
+        color: black;
+        background-color: #b7b2ac;
+        border-color: black;
+    }
+
+    .btn-primary:focus {
+        box-shadow: 0 0 0 0.2rem #212529a6
+    }
+
+    .btn-primary:active  {
+        color: black !important;
+        background-color: #887e71 !important;
+        border-color: black !important;
+    }
+        .btn-primary:active:focus {
+            box-shadow: 0 0 0 0.2rem #212529a6!important;
+        }
+
+        .b
+
+        .max-width40 {
+            max-width: 40%;
+        }
+
+    a{
+        color:white;
+    }
+
+    a:hover{
+        color:black;
+    }
+
+    .option_inner{
+        background: none!important;
+    }
+
+    .option_item name{
+        color:black!important;
+    }
+
+    .option_item .option_inner {
+        color: black !important;
+    }
+    .option_item .checkbox:checked ~ .option_inner.facebook {
+        color: black !important;
+        border-color: black !important;
+    }
+
+    .mg-top60{
+        margin-top:70%;
+    }
 
 
 

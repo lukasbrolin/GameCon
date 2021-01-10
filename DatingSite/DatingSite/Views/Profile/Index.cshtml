@@ -44,13 +44,13 @@
 
             <li class="list-group mx-auto mg-1 in-card-border">
                 <h5 class="list-group-item profile-header backgroundFrosty">Games</h5>
-                <div class="player-info-items backgroundFrosty">
+                <div class="player-info-items backgroundFrosty text-center">
                     @foreach (var game in Model.Games)
                     {
                         <div class="container">
                             <div class="row">
                                 <div class="col p-3 mb-3">
-                                    <img class="img-fluid in-card-border" src="~/img/Game/@(game.Name).jpg" />
+                                    <img class="img-fluid in-card-border max-width40" src="~/img/Game/@(game.Name).jpg" />
                                     <h6 class="text-center">@(game.Name)</h6>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col  p-1 m-1 ">
-                                    <img class="mx-auto d-block img-genre" src="~/img/Genre/@(genre.Name).png" />
+                                    <img class="mx-auto d-block img-genre " src="~/img/Genre/@(genre.Name).png" />
                                     <h6 class="text-center">@(genre.Name)</h6>
                                 </div>
                             </div>
@@ -90,19 +90,25 @@
 
                     }
                 </div>
-            </li>
+            </li >
             @{if (Model.User.Mail.Equals(User.Identity.Name))
                 {
-                    <li class="list-group-item text-center backgroundFrosty">
-                        <h5 id="VisitorTitle" class="list-group-item profile-header">Latest Vistors</h5>
-                        <div class="player-info-items" id="Visits">
-                            <div class="player-info w-100 flexdirectionrow" id="visitDiv"></div>
+                    <li class="list-group mx-auto mg-1 in-card-border w-100">
+                        <h5 id="VisitorTitle" class="list-group-item backgroundFrosty profile-header">Latest Vistors</h5>
+                        <div class="list-group-item backgroundFrosty d-flex" id="Visits">
+                            <div id="visitDiv" class="container">
+                                @*<div class="row">
+                                    <div class="col  p-1 m-1 ">
+                                        <div class="player-info w-100 flexdirectionrow" id="visitDiv"></div>
+                                    </div>
+                                </div>*@
+                            </div>
                         </div>
                     </li>
                 }
             }
             <li class="list-group mx-auto mg-1 in-card-border w-100">
-                <h5 id="PostsTitle" class="list-group-item profile-header">Posts</h5>
+                <h5 id="PostsTitle" class="list-group-item profile-header backgroundFrosty">Posts</h5>
                 <div>
                     <div>
                         <div>
@@ -160,7 +166,7 @@
         {
             <div class="card-body player-info-items">
                 <form asp-action="SerializeProfile" asp-controller="Profile">
-                    <input type="submit" value="Serialize your profile" class="btn btn-outline-success button-profile-border" data-toggle="modal" data-target="#SerializeModal" />
+                    <input type="submit" value="Serialize your profile" class="btn button-profile-border" data-toggle="modal" data-target="#SerializeModal" />
                 </form>
             </div>
         }
@@ -230,10 +236,18 @@
                 contentType: "application/json; charset=utf-8",
                 success: function(data) {
                     var i = 0;
-                    $.each(data, function() {
-                        $("#visitDiv").append("<div class=\" player-info\">" + data[i].name +
-                            "<img  class=\"img-platform\" src=\"" + data[i].img + "\" /></div > ");
+                    $.each(data, function () {
 
+                        $("#visitDiv").append("<div class=\"container\">" +
+                            "<div class=\"row\">" +
+                            "<div class=\"col p-1 m-1\">" +
+                            "<img class=\"mx-auto d-block img-game\" src=\"" + data[i].img + "\"/>" +
+                            "<h6 class=\"text-center\">" + data[i].name + "</h6>" +
+                            "</div>" +
+                            "</div>" +
+                            "</div>");
+                        //$("#visitDiv").append("<div class=\" player-info\">" + data[i].name +
+                        //    "<img  class=\"img-platform\" src=\"" + data[i].img + "\" /></div > ");
                         i++;
                     });
                     $.each
@@ -241,6 +255,7 @@
                 error: function() { bootbox.alert("Something went wrong, RIP"); }
                 });
         });
+            
 
         //$(function () {
 
