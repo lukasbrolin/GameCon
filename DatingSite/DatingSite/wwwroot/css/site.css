@@ -652,6 +652,16 @@ a:hover{
     box-shadow: 0 0 0 0.2rem #212529a6 !important;
 }
 
+.w-60{
+    width:60%!important
+}
+
+.nav-pills .nav-link.active {
+    color: black;
+    background-color: #B5A691;
+    border-color: black;
+}
+
 
 
 
