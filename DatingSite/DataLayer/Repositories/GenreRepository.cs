@@ -15,27 +15,32 @@ namespace DataLayer.Repositories
             _context = context;
         }
 
+        //Get all genres
         public List<Genre> GetGenres()
         {
             return _context.Genres.ToList();
         }
 
+        //Get genre names to list
         public IList<String> GetGenreNames()
         {
             return _context.Genres.Cast<Genre>().Select(x => x.Name).ToList();
 
         }
 
+        //Add new genre to database
         public void AddGenre(Genre genre)
         {
             _context.Genres.Add(genre);
         }
 
+        //Get genre by Id
         public Genre GetGenreById(int id)
         {
             return _context.Genres.FirstOrDefault(x => x.GenreId.Equals(id));
         }
 
+        //Collect genres to list by selected genres
         public List<Genre> GetGenresByNames(string[] genreNames)
         {
             var genreList = new List<Genre>();

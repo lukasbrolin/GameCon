@@ -11,23 +11,23 @@
             </form>
         </li>
         <li class="nav-item navbar-nav">
-            <a class="nav-link text-dark " asp-controller="Profile" asp-action="Index" title="Profile"><img class="rounded-circle" style="width: 25px" src="~/img/Icons/person-fill.svg" alt="profile" /></a>
+            <a class="nav-link text-dark nav-padding" asp-controller="Profile" asp-action="Index" title="Profile"><img class="rounded-circle" style="width: 25px" src="~/img/Icons/person-fill.svg" alt="profile" /></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Friends" asp-action="Index" title="Friends">
+            <a class="nav-link text-dark nav-padding" asp-controller="Friends" asp-action="Index" title="Friends">
                 <img style="width: 25px" src="~/img/Icons/people-fill.svg" alt="Friends" />
                 <span class="badge badge-notify" id="badge"></span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Chat" asp-action="Index" title="Chat"> <img style="width: 20px;" src="~/img/Icons/chat-dots-fill.svg" alt="Chat" /> </a>
+            <a class="nav-link text-dark nav-padding" asp-controller="Chat" asp-action="Index" title="Chat"> <img style="width: 20px;" src="~/img/Icons/chat-dots-fill.svg" alt="Chat" /> </a>
         </li>
         <li class="nav-item notification">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><img style="width: 20px;" src="~/img/Icons/gear-fill.svg" alt="Alternate Text" /> </a>
+            <a class="nav-link text-dark nav-padding" asp-area="Identity" asp-page="/Account/Manage/Email" title="Manage"><img style="width: 20px;" src="~/img/Icons/gear-fill.svg" alt="Alternate Text" /> </a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                <button type="submit" class="nav-link btn btn-link text-dark nav-padding">Logout</button>
             </form>
         </li>
     }

@@ -16,11 +16,8 @@ namespace DataLayer.Repositories
             _context = context;
             _userRepository = new UserRepository(_context);
         }
-        public User BestMatch(string mail)
-        {
-            return null;
-        }
 
+        //Get match score based on games by mail/username
         public Dictionary<int,int> GetGameScoreAllUsersPerUser(string mail)
         {
             Dictionary<int, int> ScoreList = new Dictionary<int, int>();
@@ -50,6 +47,7 @@ namespace DataLayer.Repositories
             return ScoreList;
         }
 
+        //Get match score based on genres by mail/username
         public Dictionary<int, int> GetGenreScoreAllUsersPerUser(string mail)
         {
             Dictionary<int, int> ScoreList = new Dictionary<int, int>();
@@ -79,6 +77,7 @@ namespace DataLayer.Repositories
             return ScoreList;
         }
 
+        //Get match score based on platforms by mail/username
         public Dictionary<int, int> GetPlatformScoreAllUsersPerUser(string mail)
         {
             Dictionary<int, int> ScoreList = new Dictionary<int, int>();
@@ -108,6 +107,7 @@ namespace DataLayer.Repositories
             return ScoreList;
         }
 
+        //Get match score based on personality by mail/username
         public Dictionary<int, int> GetPersonalityScoreAllUsersPerUser(string mail)
         {
             Dictionary<int, int> ScoreList = new Dictionary<int, int>();
@@ -139,6 +139,7 @@ namespace DataLayer.Repositories
             return ScoreList;
         }
 
+        //Get match score based on nationality by mail/username
         public Dictionary<int, int> GetNationalityScoreAllUsersPerUser(string mail)
         {
             Dictionary<int, int> ScoreList = new Dictionary<int, int>();
@@ -163,6 +164,7 @@ namespace DataLayer.Repositories
             return ScoreList;
         }
 
+        //Get match score based on Age by mail/username
         public Dictionary<int,int> GetAgeScoreAllUsersPerUser(string mail)
         {
             Dictionary<int, int> ScoreList = new Dictionary<int, int>();
@@ -185,6 +187,7 @@ namespace DataLayer.Repositories
             return ScoreList;
         }
 
+        //Get match score based on all factors by mail/username
         public Dictionary<int,int> GetTotalScoreAllUsersPerUser(string mail)
         {
             Dictionary<int, int> TotalScore = new Dictionary<int, int>();
@@ -215,6 +218,7 @@ namespace DataLayer.Repositories
             return TotalScore;
         }
 
+        //Get Score description based on score
         public string ScoreDescription(int? score)
         {
             switch (score)

@@ -16,11 +16,13 @@ namespace DataLayer.Repositories
             _context = context;
         }
 
+        //Collect all categories to list
         public List<Category> GetCategories()
         {
             return _context.Categories.ToList();
         }
 
+        //Collect all category names to lists
         public List<string> GetCategorieNames()
         {
             var names = new List<string>();
@@ -33,11 +35,13 @@ namespace DataLayer.Repositories
             return names;
         }
 
+        //Add new category to database
         public void AddCategory(Category category)
         {
             _context.Categories.Add(category);
         }
 
+        //Get category by ID
         public Category GetCategoryById(int id)
         {
             return _context.Categories.FirstOrDefault(x => x.CategoryId.Equals(id));

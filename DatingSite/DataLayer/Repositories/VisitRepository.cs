@@ -16,11 +16,13 @@ namespace DataLayer.Repositories
             userRepository = new UserRepository(_context);
         }
 
+        //Get visits
         public List<Visit> GetVisits()
         {
             return _context.Visits.ToList();
         }
 
+        //Create new visit and return
         public Visit CreateVisit(User reciever, User sender, DateTime date)
         {
             Visit visit = (new Visit
@@ -34,17 +36,20 @@ namespace DataLayer.Repositories
             return visit;
         }
 
+        //Add visit to database
         public void AddVisits(Visit visit)
         {
             _context.Visits.Add(visit);
             _context.SaveChanges();
         }
 
+        //Get visit by user Id
         public Visit GetVisitById(int id)
         {
             return _context.Visits.FirstOrDefault(x => x.VisitId.Equals(id));
         }
 
+        //Get vistors order by latest visit by mail/username 
         public List<User> GetVisitorsByMailOrderedByLatestDate(string mail)
         {
             var list = _context.Visits.OrderByDescending(z => z.TimeStamp)
@@ -59,6 +64,7 @@ namespace DataLayer.Repositories
             return userList;
         }
 
+        //Get five latest visitors by mail/username
         public List<User> GetLatestFiveVisitorsByMail(string mail)
         {
             return GetVisitorsByMailOrderedByLatestDate(mail).Distinct().Take(5).ToList();

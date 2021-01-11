@@ -26,7 +26,7 @@ namespace DatingSite.Controllers
             _context = context;
         }
 
-        //hides or unhide the account in settings. a hidden account wont show up in search for other users. 
+        //hides or unhide the account in settings. a hidden account wont show up in search for other users.
         public IActionResult HideOrUnhide()
         {
             try
@@ -48,7 +48,7 @@ namespace DatingSite.Controllers
             }
         }
 
-        //activate or inactivate the account in settings. an inactivated account wont show up in search, match, or in other users friendlist. 
+        //activate or inactivate the account in settings. an inactivated account wont show up in search, match, or in other users friendlist.
         public IActionResult InactivateOrActivate()
         {
             try

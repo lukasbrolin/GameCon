@@ -13,16 +13,19 @@ namespace DataLayer.Repositories
             _context = context;
         }
 
+        //Get all statuses
         public List<Status> GetStatuses()
         {
             return _context.Statuses.ToList();
         }
 
+        //Add new status to database
         public void AddStatus(Status status)
         {
             _context.Statuses.Add(status);
         }
 
+        //Get status by Id
         public Status GetStatusById(int id)
         {
             return _context.Statuses.FirstOrDefault(x => x.StatusId.Equals(id));

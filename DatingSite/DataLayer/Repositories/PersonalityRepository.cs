@@ -14,37 +14,26 @@ namespace DataLayer.Repositories
             _context = context;
             gameRepository = new GameRepository(_context);
         }
-
-        public List<string> getAll()
-        {
-            var list = new List<string>();
-            var games = gameRepository.GetGames();
-            foreach (var d in games)
-            {
-                _context.Entry(d).Collection(x => x.Users).Load();
-                foreach (User c in d.Users)
-                {
-                    list.Add(d.Name + " + " +c.FirstName);
-                }
-            }
-            return list;
-        }
-
+        
+        //Get all personalities to list
         public List<Personality> GetPersonalities()
         {
             return _context.Personalities.ToList();
         }
 
+        //Add new personality to Database
         public void AddPersonality(Personality personality)
         {
             _context.Personalities.Add(personality);
         }
 
+        //Get Personality by Id
         public Personality GetPersonalityById(int id)
         {
             return _context.Personalities.FirstOrDefault(x => x.PersonalityId.Equals(id));
         }
 
+        //Get personality Id by name
         public int GetPersonalityIdByName(string name)
         {
             return _context.Personalities.FirstOrDefault(i => i.Description == name).PersonalityId;
