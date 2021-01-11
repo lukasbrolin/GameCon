@@ -436,7 +436,8 @@ input::placeholder {
 }
 
 .nav-background {
-    background-color: #b5a691!important;
+    background-color: #b5a691 !important;
+    background-image: linear-gradient(to right, #84745e,#d2ba97,#d2ba97,#d2ba97,#84745e);
 }
 
 .margin-container{
