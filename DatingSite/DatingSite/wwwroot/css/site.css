@@ -663,6 +663,20 @@ a:hover{
     border-color: black;
 }
 
+#logo{
+    width:10rem;
+}
+
+.nav-padding{
+    padding-top: 0.8rem;
+    padding-bottom:0rem;
+    color:black!important;
+}
+
+.icon-padding {
+    padding-top: 0.8rem;
+}
+
 
 
 
