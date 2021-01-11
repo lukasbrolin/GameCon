@@ -27,6 +27,8 @@ namespace DatingSite.Controllers
             _userManager = usermanager;
             _signInManager = signInManager;
         }
+
+        //Return view with information about user
         public async Task<IActionResult> Index(GGPViewModel model)
         {
             try
@@ -99,6 +101,7 @@ namespace DatingSite.Controllers
 
         }
 
+        //Edit and save user personal preferences such as favorite games/genres/platforms + personal information when Save Changes button is clicked
         [HttpPost]
         public async Task<ActionResult> Submit(string[] CheckBoxesGame,string[] CheckBoxesGenre,string[] CheckBoxesPlatform, GGPViewModel model, IFormFile file)
         {
@@ -113,8 +116,6 @@ namespace DatingSite.Controllers
                 List<Game> userGames = userRepository.GetUserGamesByMail(User.Identity.Name);
                 List<Genre> userGenres = userRepository.GetUserGenresByMail(User.Identity.Name);
                 List<Platform> userPlatforms = userRepository.GetUserPlatformsByMail(User.Identity.Name);
-
-            
 
                 var removedGamesList = userGames.Except(gameRepository.GetGamesByNames(CheckBoxesGame)).Select(x => x.Name).ToArray();
                 var newSelectedGames = gameRepository.GetGamesByNames(CheckBoxesGame).Except(userGames).Select(x => x.Name).ToArray();
@@ -171,13 +172,10 @@ namespace DatingSite.Controllers
                     userRepository.EditUserAge(user, model.Age);
                 }
 
-
-                //Noobens swagkod som inte funkar
                 if (model.Gender != null)
                 {
                     userRepository.EditUserGender(user, model.Gender);
                 }
-
 
                 if (model.Nationality != null)
                 {

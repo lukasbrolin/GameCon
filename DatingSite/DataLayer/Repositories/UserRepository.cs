@@ -28,17 +28,20 @@ namespace DataLayer.Repositories
             personalityRepository = new PersonalityRepository(_context);
         }
 
+        //Get all users
         public List<User> GetUsers()
         {
             return _context.Users.ToList();
             throw new System.ArgumentOutOfRangeException();
         }
 
+        //Get users id mail/usernamne
         public int getUserIdByMail(string mail)
         {
             return _context.Users.FirstOrDefault(x => x.Mail.Equals(mail)).UserId;
         }
 
+        //Get user games by user id
         public List<string> getUserGamesById(int userId)
         {
             var list = new List<string>();
@@ -57,6 +60,7 @@ namespace DataLayer.Repositories
             return list;
         }
 
+        //Get user game names by user Id
         public List<string> GetUserGameNamesById(int userId)
         {
             var list = new List<string>();
@@ -70,6 +74,8 @@ namespace DataLayer.Repositories
             return list;
 
         }
+
+        //Get user platform names by user Id
         public List<string> GetUserPlatformNamesById(int userId)
         {
             var list = new List<string>();
@@ -82,6 +88,8 @@ namespace DataLayer.Repositories
             }
             return list;
         }
+
+        //Get user genre names by user Id
         public List<string> GetUserGenreNamesById(int userId)
         {
             var list = new List<string>();
@@ -95,6 +103,7 @@ namespace DataLayer.Repositories
             return list;
         }
 
+        //Get user score based on games, genres, platforms by mail/username
         public IOrderedEnumerable<(User, List<Game>, List<Genre>, List<Platform>, int?)> getUserGamesGenresPlatformsScore(string mail)
         {
             var list = new List<(User, List<Game>, List<Genre>, List<Platform>, int?)>();
@@ -132,6 +141,7 @@ namespace DataLayer.Repositories
             return list.OrderByDescending(o => o.Item5);
         }
 
+        //Get users latest visitors by mail/username
         public List<Visit> GetUserVisitorsByMail(string mail)
         {
             var list = new List<Visit>();
@@ -150,6 +160,7 @@ namespace DataLayer.Repositories
             return list;
         }
 
+        //Get user games by mail/username
         public List<Game> GetUserGamesByMail(string mail)
         {
             var list = new List<Game>();
@@ -166,6 +177,7 @@ namespace DataLayer.Repositories
             return list;
         }
 
+        //Get user genres by mail/username
         public List<Genre> GetUserGenresByMail(string mail)
         {
             var list = new List<Genre>();
@@ -182,6 +194,7 @@ namespace DataLayer.Repositories
             return list;
         }
 
+        //Get user platforms by mail/username
         public List<Platform> GetUserPlatformsByMail(string mail)
         {
             var list = new List<Platform>();
@@ -198,6 +211,7 @@ namespace DataLayer.Repositories
             return list;
         }
 
+        //Set new user games by mail/username 
         public void SetUserGames(string mail, string[] selectedGames)
         {
             var games = gamesRepository.GetGames();
@@ -217,6 +231,7 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        //Remove unselected user games by mail/username
         public void RemoveUserGames(string mail, string[] selectedGames)
         {
             var games = gamesRepository.GetGames();
@@ -237,6 +252,7 @@ namespace DataLayer.Repositories
 
         }
 
+        //Set new user genres by mail/username
         public void SetUserGenres(string mail, string[] selectedGenres)
         {
             var genres = genreRepository.GetGenres();
@@ -256,6 +272,7 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        //Remove unselected user genres by mail/username
         public void RemoveUserGenres(string mail, string[] selectedGenre)
         {
             var genre = genreRepository.GetGenres();
@@ -276,6 +293,7 @@ namespace DataLayer.Repositories
 
         }
 
+        //Set new user platforms by mail/username
         public void SetUserPlatforms(string mail, string[] selectedPlatforms)
         {
             var platforms = platformRepository.GetPlatforms();
@@ -295,6 +313,7 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        //Remove unselected user platforms by mail/username
         public void RemoveUserPlatforms(string mail, string[] selectedPlatform)
         {
             var platforms = platformRepository.GetPlatforms();
@@ -315,6 +334,7 @@ namespace DataLayer.Repositories
 
         }
 
+        //Get user by search-name
         public List<User> GetUserByName(string search)
         {
             var users = GetUsers();
@@ -330,15 +350,14 @@ namespace DataLayer.Repositories
             return match;
         }
 
-
+        //Add new user to database
         public void AddUser(User user)
         {
             _context.Users.Add(user);
             _context.SaveChanges();
         }
 
-        //public void EditUserByMail(string mail)
-
+        //Edit user mail/username by current mail/username
         public void EditUserByMail(string oldMail,string newMail)
         {
             //getUserByMail(mail);
@@ -348,13 +367,13 @@ namespace DataLayer.Repositories
 
         }
 
-
-
+        //Get user by Id
         public User getUserById(int id)
         {
             return _context.Users.FirstOrDefault(x => x.UserId.Equals(id));
         }
 
+        //Get user by mail/username
         public User getUserByMail(string mail)
         {
             var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
@@ -368,6 +387,7 @@ namespace DataLayer.Repositories
             return user;
         }
 
+        //Edit user nickname by mail/username
         public void EditUserNickName(string mail, string newNick)
         {
             
@@ -378,6 +398,7 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        //Edit user Firstname by mail/username
         public void EditUserFirstName(string mail, string newFirstName)
         {
 
@@ -388,6 +409,7 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        //Edit user lastname by mail/username
         public void EditUserLastName(string mail, string newLastName)
         {
 
@@ -398,6 +420,7 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        //Edit user age by mail/username
         public void EditUserAge(string mail, int newAge)
         {
 
@@ -408,6 +431,7 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        //Edit user gender by mail/username
         public void EditUserGender(string mail, string newGender)
         {
 
@@ -417,6 +441,7 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        //Edit user nationality by mail/username
         public void EditUserNationality(string mail, string newNationality)
         {
 
@@ -426,6 +451,7 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        //Edit user personality by mail/username
         public void EditUserPersonality(string mail, string newPersonality)
         {
             var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
@@ -435,7 +461,7 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
-        //Noobens swagkod som inte funkar
+        //Edit user profile picture by mail/username
         public void EditUserImgUrl(string mail, string newImgUrl)
         {
             var user = _context.Users.FirstOrDefault(x => x.Mail.Equals(mail));
@@ -443,7 +469,7 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
-
+        //Delete user by Id
         public void DeleteUser(int id)
         {
             var user = _context.Users.Find(id);
@@ -451,11 +477,13 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        //Check if user exists by id
         public bool UserExists(int id)
         {
             return _context.Users.Any(user => user.UserId == id);
         }
 
+        //Hide user from search
         public void HideUser(int userId)
         {
             var user = _context.Users.Find(userId);
@@ -464,6 +492,7 @@ namespace DataLayer.Repositories
 
         }
 
+        //Show user on search
         public void ShowUser(int userId)
         {
             var user = _context.Users.Find(userId);
@@ -472,18 +501,22 @@ namespace DataLayer.Repositories
 
         }
 
+        //Get hidden users by user Id
         public bool GetHidden(int userId)
         {
             var user = _context.Users.Find(userId);
             return user.IsHidden;
         }
 
+        //Make user account inactive
         public void InactivateUser(int userId)
         {
             var user = _context.Users.Find(userId);
             user.Active = false;
             _context.SaveChanges();
         }
+
+        //Make user account active
         public void ActivateUser(int userId)
         {
             var user = _context.Users.Find(userId);
@@ -491,13 +524,14 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        //Get active user by Id
         public bool GetActive(int userId)
         {
             var user = _context.Users.Find(userId);
             return user.Active;
         }
 
-
+        //Get five random users
         public List<User> GetFiveUsers()
         {
             Random r = new Random();
@@ -526,6 +560,7 @@ namespace DataLayer.Repositories
             
         }
 
+        //Set user Online
         public void IsOnlineTrue(string currentUser)
         {
             var user = getUserByMail(currentUser);
@@ -533,14 +568,13 @@ namespace DataLayer.Repositories
             _context.SaveChanges();
         }
 
+        //Set user Offline
         public void IsOnlineFalse(string currentUser)
         {
             var user = getUserByMail(currentUser);
             user.Online = false;
             _context.SaveChanges();
         }
-
-        
 
     }
 }

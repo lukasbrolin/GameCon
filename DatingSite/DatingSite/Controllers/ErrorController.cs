@@ -11,6 +11,7 @@ namespace DatingSite.Controllers
 {
     public class ErrorController : Controller
     {
+        //Return view with Error-screen + exception
         public ActionResult Index(ErrorViewModel model, string exception)
         {
             Debug.WriteLine(exception);

@@ -13,27 +13,32 @@ namespace DataLayer.Repositories
             _context = context;
         }
 
+        //Get all platforms to list
         public List<Platform> GetPlatforms()
         {
             return _context.Platforms.ToList();
         }
 
+        //Get all platform names to list
         public IList<string> GetPlatformNames()
         {
             return _context.Platforms.Cast<Platform>().Select(x => x.Name).ToList();
 
         }
 
+        //Add new platform to database
         public void AddPlatform(Platform platform)
         {
             _context.Platforms.Add(platform);
         }
 
+        //Get platform by Id
         public Platform GetPlatformById(int id)
         {
             return _context.Platforms.FirstOrDefault(x => x.PlatformId.Equals(id));
         }
 
+        //Collect platforms to list by selected genres
         public List<Platform> GetPlatformsByNames(string[] platformNames)
         {
             var platformList = new List<Platform>();

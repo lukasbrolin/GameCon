@@ -13,11 +13,13 @@ namespace DataLayer.Repositories
             _context = context;
         }
 
+        //Get all friends to list
         public List<Friend> GetFriends()
         {
             return _context.Friends.ToList();
         }
 
+        //Get friend Id by mail/usernamne to list
         public List<User> GetFriendsIdByMail(string mail)
         {
             var userRepository = new UserRepository(_context);
@@ -31,16 +33,19 @@ namespace DataLayer.Repositories
             return friendList;
         }
 
+        //Add new friend
         public void AddFriend(Friend friend)
         {
             _context.Friends.Add(friend);
         }
 
+        //Get friend by Id
         public Friend GetFriendById(int id)
         {
             return _context.Friends.FirstOrDefault(x => x.FriendId.Equals(id));
         }
 
+        //Get friend Id by Id 
         public List<int> GetFriendsIdByUserId(int id)
         {
             return _context.Friends.Where(y => y.SenderId.Equals(id)).Select(x => x.ReceiverId).ToList();
