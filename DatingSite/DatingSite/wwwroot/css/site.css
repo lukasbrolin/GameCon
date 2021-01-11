@@ -13,10 +13,6 @@ a {
 
 }
 
-/*p, h1, h2, h3, h4, h5, h6, a {
-    font-family: 'Roboto', sans-serif;
-}*/
-
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
@@ -163,12 +159,6 @@ body {
     color: #3b5999;
 }
 
-
-
-
-
-
-
 .option_item .option_inner .tickmark {
     position: absolute;
     top: -1px;
@@ -285,11 +275,6 @@ body {
 
 .rounded-lg {
     border-radius: 0.5rem;
-}
-
-input::placeholder {
-    font-size: 0.9rem;
-    color: #999;
 }
 
 .cardheader{
@@ -436,7 +421,8 @@ input::placeholder {
 }
 
 .nav-background {
-    background-color: #b5a691!important;
+    background-color: #b5a691 !important;
+    background-image: linear-gradient(to right, #84745e,#d2ba97,#d2ba97,#d2ba97,#84745e);
 }
 
 .margin-container{
@@ -506,8 +492,6 @@ video {
         border: 1px solid rgba(0,0,0,0.5);
         -webkit-box-shadow: 0px 0px 7px 0px #000000;
         box-shadow: 0px 0px 7px 0px #000000;
-/*        -webkit-box-shadow: 0px 10px 13px -7px #000000, 0px 0px 7px 0px rgba(0,0,0,0);
-        box-shadow: 0px 10px 13px -7px #000000, 0px 0px 7px 0px rgba(0,0,0,0);*/
         filter: opacity(100%);
     }
 
@@ -660,6 +644,20 @@ a:hover{
     color: black;
     background-color: #B5A691;
     border-color: black;
+}
+
+#logo{
+    width:10rem;
+}
+
+.nav-padding{
+    padding-top: 0.8rem;
+    padding-bottom:0rem;
+    color:black!important;
+}
+
+.icon-padding {
+    padding-top: 0.8rem;
 }
 
 
