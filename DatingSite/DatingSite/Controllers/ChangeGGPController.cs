@@ -29,7 +29,7 @@ namespace DatingSite.Controllers
         }
 
         //Return view with information about user
-        public async Task<IActionResult> Index(GGPViewModel model)
+        public ActionResult Index(GGPViewModel model)
         {
             try
             {

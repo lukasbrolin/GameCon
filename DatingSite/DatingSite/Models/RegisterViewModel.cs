@@ -45,6 +45,7 @@ namespace DatingSite.Models
         [Display(Name = "Personality")]
         public virtual string Personality { get; set; }
 
+        [Required]
         [DataType(DataType.ImageUrl)]
         [Display(Name = "Image")]
         public virtual string ImageURL { get; set; }
