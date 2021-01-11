@@ -24,7 +24,8 @@ namespace DatingSite.Controllers
             _friendHubContext = friendHubContext;
         }
 
-        // GET: Friends
+        //displays a view of your friends. uses include to follow the navigation properties for the tables to display more information.
+        //only displays friends that are active.
         public async Task<IActionResult> Index()
         {
             try
@@ -46,84 +47,9 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
         }
 
-        // GET: Friends/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            try
-            {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var friend = await _context.Friends
-                    .Include(f => f.Category)
-                    .Include(f => f.Receiver)
-                    .Include(f => f.Sender)
-                    .Include(f => f.Status)
-                    .FirstOrDefaultAsync(m => m.FriendId == id);
-                if (friend == null)
-                {
-                    return NotFound();
-                }
-
-                return View(friend);
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
-
-        // GET: Friends/Create
-        public IActionResult Create()
-        {
-            try
-            {
-                ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
-                ViewData["ReceiverId"] = new SelectList(_context.Users, "UserId", "FirstName");
-                ViewData["SenderId"] = new SelectList(_context.Users, "UserId", "FirstName");
-                ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "Description");
-                return View();
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
-
-        // POST: Friends/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FriendId,SenderId,ReceiverId,CategoryId,StatusId")] Friend friend)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    _context.Add(friend);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", friend.CategoryId);
-                ViewData["ReceiverId"] = new SelectList(_context.Users, "UserId", "FirstName", friend.ReceiverId);
-                ViewData["SenderId"] = new SelectList(_context.Users, "UserId", "FirstName", friend.SenderId);
-                ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "Description", friend.StatusId);
-                return View(friend);
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
-
-        // GET: Friends/Edit/5
+        //displays view for editing a friends category
         public async Task<IActionResult> Edit(int? id)
         {
             try
@@ -145,10 +71,9 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
         }
 
-        // POST: Friends/Edit/5
+        //method for handling the update of a friends category.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("FriendId,SenderId,ReceiverId,CategoryId,StatusId")] Friend friend)
@@ -162,10 +87,10 @@ namespace DatingSite.Controllers
 
                 if (ModelState.IsValid)
                 {
-                     _context.Friends.Attach(friend);
-                     _context.Entry(friend).Property(c => c.CategoryId).IsModified = true;
-                     await _context.SaveChangesAsync();
-                
+                    _context.Friends.Attach(friend);
+                    _context.Entry(friend).Property(c => c.CategoryId).IsModified = true;
+                    await _context.SaveChangesAsync();
+
                     return RedirectToAction(nameof(Index));
                 }
                 ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name", friend.CategoryId);
@@ -177,41 +102,12 @@ namespace DatingSite.Controllers
             }
         }
 
-        // GET: Friends/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            try
-            {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var friend = await _context.Friends
-                    .Include(f => f.Category)
-                    .Include(f => f.Receiver)
-                    .Include(f => f.Sender)
-                    .Include(f => f.Status)
-                    .FirstOrDefaultAsync(m => m.FriendId == id);
-                if (friend == null)
-                {
-                    return NotFound();
-                }
-
-                return View(friend);
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
-
-        // POST: Friends/Delete/5
+        //method for deleting a friend from your friendslist.
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            //finds the user and removes them.
             try
             {
                 var friend = await _context.Friends.FindAsync(id);
@@ -223,9 +119,9 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
         }
 
+        //check if a friend exists in the db.
         private bool FriendExists(int id)
         {
             try
@@ -239,6 +135,8 @@ namespace DatingSite.Controllers
             }
         }
 
+        //method for handling the sending of a friend request. the receiving users gets a notification from SignalR.
+        //the receiving user needs to accept the request in order to appear for the sending user.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult FriendRequest(int receiverId, int senderId)
@@ -264,9 +162,10 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
         }
 
+        //method for handling the answer of a friend request from the receiver.
+        //two records is creating in the database connecting the two users. the sender gets the receing users in their friendslist.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AnswerRequest(int receiverId, int senderId)
@@ -284,9 +183,9 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
         }
 
+        //method for handling the deny of a friend request from the receiver. the request is aborted and the pending request is removed from the database.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DenyRequest(int friendId)
@@ -302,9 +201,9 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
         }
 
+        //method for handling the removeal of a friend from the friendlist. the two correspoding rows in the friends table connecting the users is removed.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult RemoveFriend(int senderId, int receiverId)
@@ -322,7 +221,6 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
         }
     }
 }

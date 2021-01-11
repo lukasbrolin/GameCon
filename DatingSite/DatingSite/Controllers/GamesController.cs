@@ -21,7 +21,8 @@ namespace DatingSite.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        //last step in the registration process. Lets the user select from available games in the list.
+        public IActionResult Index()
         {
             try
             {
@@ -37,23 +38,15 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
-
-            //model.AddRange(new ProfileViewModel(gameRepository.GetGamesNames))
-            //return View(await _context.Games.ToListAsync());
         }
 
+        //method for handling the submitted answers from the users.
         [HttpPost]
         public ActionResult Submit(string[] CheckBoxes)
         {
             try
             {
                 var userRepository = new UserRepository(_context);
-                //var list = new List<string>();
-                //foreach (var index in model)
-                //{
-                //    list.Add(index.Name);
-                //}
                 userRepository.SetUserGames(User.Identity.Name, CheckBoxes);
                 return RedirectToAction("Index", "Genre");
             }
@@ -61,8 +54,6 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
         }
-
     }
 }

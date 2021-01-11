@@ -118,8 +118,5 @@ namespace DatingSite.Controllers
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
         }
-
-        
-
     }
 }

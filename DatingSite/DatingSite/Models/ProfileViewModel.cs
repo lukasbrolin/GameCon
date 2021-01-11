@@ -11,8 +11,6 @@ namespace DatingSite.Models
     {
         public User User { get; set; }
 
-        //public IOrderedEnumerable<(User, List<Game>, List<Genre>, List<Platform>, int)> UserGamesGenrePlatforms { get; set; }
-
         public List<Game> Games { get; set; }
 
         public List<Genre> Genres { get; set; }

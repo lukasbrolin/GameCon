@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-
 namespace DatingSite.Models
 {
     public class GGPViewModel
@@ -29,10 +28,9 @@ namespace DatingSite.Models
         [Display(Name = "Last name")]
         public virtual string LastName { get; set; }
 
-        [Range(1, 99, ErrorMessage ="Age must be between 1-99.")]
+        [Range(1, 99, ErrorMessage = "Age must be between 1-99.")]
         [Display(Name = "Age")]
         public virtual int Age { get; set; }
-
 
         [Display(Name = "Gender")]
         public virtual string Gender { get; set; }
@@ -42,12 +40,8 @@ namespace DatingSite.Models
 
         [Display(Name = "Personality")]
         public virtual string Personality { get; set; }
-        
+
         [Display(Name = "Image")]
         public virtual string ImgURL { get; set; }
-
-
-
     }
-
 }

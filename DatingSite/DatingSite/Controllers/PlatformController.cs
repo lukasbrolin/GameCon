@@ -20,7 +20,8 @@ namespace DatingSite.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        //returns view with the names of all the available platforms and lets users select which one they like.
+        public IActionResult Index()
         {
             try
             {
@@ -36,9 +37,9 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
         }
 
+        //postmethod for submitting the form. collect the answers from the checkboxes and sends them to this method.
         [HttpPost]
         public ActionResult Submit(string[] CheckBoxes)
         {
@@ -47,104 +48,6 @@ namespace DatingSite.Controllers
                 var userRepository = new UserRepository(_context);
                 userRepository.SetUserPlatforms(User.Identity.Name, CheckBoxes);
                 return RedirectToAction("Index", "SignedIn");
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
-
-        // GET: PlatformController/Details/5
-        public ActionResult Details(int id)
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-        }
-
-        // GET: PlatformController/Create
-        public ActionResult Create()
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-        }
-
-        // POST: PlatformController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch(Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-        }
-
-        // GET: PlatformController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-        }
-
-        // POST: PlatformController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-        }
-
-        // GET: PlatformController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-        }
-
-        // POST: PlatformController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
             {

@@ -12,7 +12,6 @@
                         <div class="col backgroundFrosty profile-border align-items-center d-block w-100">
                             <div class="cardheader row">
                                 <img class="cardimg mg-1 padding-0 img-fluid in-card-border" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
-                                @* @Url.Content(url) *@
                                 <div class="card-body profile-info">
                                     <h2 class="card-title mt-n4">@item.User.NickName, @item.User.Age </h2>
                                     <h4 class="card-subtitle">@item.User.FirstName @item.User.LastName</h4>
@@ -30,9 +29,7 @@
                                         <div class="list-group-item backgroundFrosty">
                                             <h1>@item.Score/10</h1>
                                             <h6>@item.ScoreDescription</h6>
-
                                         </div>
-
                                     </li>
                                 }
                                 <li class="becomeTrans list-group mg-1 mx-auto in-card-border">
@@ -40,14 +37,14 @@
                                     <div class="player-info-items backgroundFrosty">
                                         @foreach (var game in item.Games)
                                         {
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col p-3 mb-3">
-                                                    <img class="img-fluid in-card-border" src="~/img/Game/@(game.Name).jpg" />
-                                                    <h6 class="text-center">@(game.Name)</h6>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col p-3 mb-3">
+                                                        <img class="img-fluid in-card-border" src="~/img/Game/@(game.Name).jpg" />
+                                                        <h6 class="text-center">@(game.Name)</h6>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         }
                                     </div>
                                 </li>
@@ -98,7 +95,6 @@
                         <div class="col backgroundFrosty profile-border align-items-center d-block w-100">
                             <div class="cardheader row">
                                 <img class="cardimg mg-1 padding-0 img-fluid in-card-border" src="@Url.Content(item.User.ImgUrl)" alt="Card image cap">
-                                @* @Url.Content(url) *@
                                 <div class="card-body profile-info">
                                     <h2 class="card-title mt-n4">@item.User.NickName, @item.User.Age </h2>
                                     <h4 class="card-subtitle">@item.User.FirstName @item.User.LastName</h4>
@@ -116,9 +112,7 @@
                                         <div class="list-group-item backgroundFrosty">
                                             <h1>@item.Score/10</h1>
                                             <h6>@item.ScoreDescription</h6>
-
                                         </div>
-
                                     </li>
                                 }
                                 <li class="becomeTrans list-group mg-1 mx-auto in-card-border">
@@ -126,14 +120,14 @@
                                     <div class="player-info-items backgroundFrosty">
                                         @foreach (var game in item.Games)
                                         {
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col p-3 mb-3">
-                                                    <img class="img-fluid in-card-border" src="~/img/Game/@(game.Name).jpg" />
-                                                    <h6 class="text-center">@(game.Name)</h6>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col p-3 mb-3">
+                                                        <img class="img-fluid in-card-border" src="~/img/Game/@(game.Name).jpg" />
+                                                        <h6 class="text-center">@(game.Name)</h6>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         }
                                     </div>
                                 </li>
@@ -181,7 +175,6 @@
                 x++;
             }
         }
-
     </div>
     <ol class="carousel-indicators position-fixed">
         @{int i = 0;
@@ -208,4 +201,3 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-

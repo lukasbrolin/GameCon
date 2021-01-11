@@ -43,7 +43,6 @@ namespace DatingSite
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -89,8 +88,8 @@ namespace DatingSite
                 endpoints.MapControllerRoute(
                     name: "profile-route",
                     pattern: "{controller=Profile}/{action=Index}/{profile?}");
-                    //defaults: new { id = RouteParameter.Optional });
 
+                //used by SignalR for friendrequest and chat.
                 endpoints.MapHub<FriendHub>("/friendHub");
                 endpoints.MapHub<ChatHub>("/chatHub");
             });

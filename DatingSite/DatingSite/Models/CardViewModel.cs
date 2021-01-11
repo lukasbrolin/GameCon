@@ -8,13 +8,7 @@ namespace DatingSite.Models
 {
     public class CardViewModel
     {
-        public CardViewModel()
-        {
-        }
-
         public User User { get; set; }
-
-        //public IOrderedEnumerable<(User, List<Game>, List<Genre>, List<Platform>, int)> UserGamesGenrePlatforms { get; set; }
 
         public List<Game> Games { get; set; }
 
@@ -25,7 +19,5 @@ namespace DatingSite.Models
         public Nullable<int> Score { get; set; }
 
         public string ScoreDescription { get; set; }
-
-        
     }
 }

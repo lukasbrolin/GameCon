@@ -17,216 +17,16 @@ namespace DatingSite.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly DatingSiteContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
         private UserRepository _userRepository;
-
-        public UsersController(DatingSiteContext context, UserManager<IdentityUser> usermanager, SignInManager<IdentityUser> signInManager)
-        {
-            _context = context;
-            _userManager = usermanager;
-            _signInManager = signInManager;
-            _userRepository = new UserRepository(_context);
-        }
+        private readonly DatingSiteContext _context;
 
         public UsersController(DatingSiteContext context)
         {
+            _userRepository = new UserRepository(_context);
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            try
-            {
-                var list = await _context.Users.ToListAsync();
-                return View(list);
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
-
-        public async Task<IActionResult> Details(int? id)
-        {
-            try
-            {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var user = await _context.Users
-                    .FirstOrDefaultAsync(m => m.UserId == id);
-                if (user == null)
-                {
-                    return NotFound();
-                }
-
-                return View(user);
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
-
-        public IActionResult Create()
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Mail,Age,Gender,PreferedLanguage,Online,Active")] User user)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    _context.Add(user);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                return View(user);
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
-
-        public async Task<IActionResult> Edit(int? id)
-        {
-            try
-            {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var user = await _context.Users.FindAsync(id);
-                if (user == null)
-                {
-                    return NotFound();
-                }
-                return View(user);
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Mail,Age,Gender,PreferedLanguage,Online,Active")] User user)
-        {
-            try
-            {
-                if (id != user.UserId)
-                {
-                    return NotFound();
-                }
-
-                if (ModelState.IsValid)
-                {
-                    try
-                    {
-                        _context.Update(user);
-                        await _context.SaveChangesAsync();
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-                        if (!UserExists(user.UserId))
-                        {
-                            return NotFound();
-                        }
-                        else
-                        {
-                            throw;
-                        }
-                    }
-                    return RedirectToAction(nameof(Index));
-                }
-                return View(user);
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
-
-        public async Task<IActionResult> Delete(int? id)
-        {
-            try
-            {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var user = await _context.Users
-                    .FirstOrDefaultAsync(m => m.UserId == id);
-                if (user == null)
-                {
-                    return NotFound();
-                }
-
-                return View(user);
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            try
-            {
-                var user = await _context.Users.FindAsync(id);
-                _context.Users.Remove(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
-
-        private bool UserExists(int id)
-        {
-            try
-            {
-                return _userRepository.UserExists(id);
-            }
-
-            catch (Exception e)
-            {
-                RedirectToAction("Index", "Error", new { exception = e });
-                return false;
-            }
-        }
-
+        //hides or unhide the account in settings. a hidden account wont show up in search for other users. 
         public IActionResult HideOrUnhide()
         {
             try
@@ -246,10 +46,9 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
-
         }
 
+        //activate or inactivate the account in settings. an inactivated account wont show up in search, match, or in other users friendlist. 
         public IActionResult InactivateOrActivate()
         {
             try
@@ -265,15 +64,10 @@ namespace DatingSite.Controllers
                 }
                 return Redirect("/Identity/Account/Manage");
             }
-
             catch (Exception e)
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
         }
-
-        
-
     }
 }

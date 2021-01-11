@@ -17,6 +17,7 @@ namespace DatingSite.Controllers
             _context = context;
         }
 
+        //search the database for users from the entered searchstring. Omitts users that are inactive or hidden from the resultset.
         [HttpGet]
         public ActionResult Search(string searchString)
         {
@@ -26,12 +27,10 @@ namespace DatingSite.Controllers
                         .Include(u => u.Nationality)
                         .Where(u => u.IsHidden == false && u.Active == true)
                             select u;
-
-                if (!String.IsNullOrEmpty(searchString))
+                if (!string.IsNullOrEmpty(searchString))
                 {
                     users = users.Where(u => u.FirstName.Contains(searchString) || u.LastName.Contains(searchString) || u.NickName.Contains(searchString));
                 }
-
                 return View(users.ToList());
             }
             catch (Exception e)

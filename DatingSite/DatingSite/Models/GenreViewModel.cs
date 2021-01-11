@@ -12,6 +12,4 @@ namespace DatingSite.Models
             this.Name = name;
         }
     }
-
-
 }

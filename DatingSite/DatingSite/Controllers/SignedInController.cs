@@ -19,8 +19,10 @@ namespace DatingSite.Controllers
             _context = context;
         }
 
+        //startpage for when a user finishes the registration and is shown other users profile as a card.
         public ActionResult Index(CardViewModel model)
         {
+            //fetches each users information and preferences and displays it in a card for other users to see.
             try
             {
                 var userRepository = new UserRepository(_context);
@@ -48,104 +50,6 @@ namespace DatingSite.Controllers
                     }
                 }
                 return View(modelList);
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-
-        }
-
-        // GET: SignedInController/Details/5
-        public ActionResult Details(int id)
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-        }
-
-        // GET: SignedInController/Create
-        public ActionResult Create()
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-        }
-
-        // POST: SignedInController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-        }
-
-        // GET: SignedInController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-        }
-
-        // POST: SignedInController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-        }
-
-        // GET: SignedInController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-        }
-
-        // POST: SignedInController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
             {

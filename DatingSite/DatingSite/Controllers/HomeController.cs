@@ -23,7 +23,9 @@ namespace DatingSite.Controllers
             _context = context;
         }
 
-        public IActionResult Index(LightProfile model)
+        //startpage for the application. shows 5 random users, their username and profile pictures.
+
+        public IActionResult Index()
         {
             try
             {
@@ -38,18 +40,6 @@ namespace DatingSite.Controllers
                 }
 
                 return View(modelList);
-            }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "Error", new { exception = e });
-            }
-        }
-
-        public IActionResult Privacy()
-        {
-            try
-            {
-                return View();
             }
             catch (Exception e)
             {

@@ -19,6 +19,8 @@ namespace DatingSite.Controllers
             _context = context;
         }
 
+        //returns a view for a user signing up for a site.
+        //fetches personalities and nationalities from the db and returns them dynamically to the view.
         public ActionResult Index()
         {
             try
@@ -33,9 +35,9 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
         }
 
+        //method for handling the submitted form and the input from the user.
         [HttpPost]
         public ActionResult Register(RegisterViewModel model, IFormFile file)
         {
@@ -57,6 +59,7 @@ namespace DatingSite.Controllers
                 user.Active = true;
                 user.Online = true;
 
+                //handling the picture upload from the user.
                 if (file != null)
                 {
                     string imgUrl = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
@@ -80,7 +83,6 @@ namespace DatingSite.Controllers
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
         }
     }
 }

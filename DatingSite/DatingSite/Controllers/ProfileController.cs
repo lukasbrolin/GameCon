@@ -25,12 +25,10 @@ namespace DatingSite.Controllers
             _context = context;
         }
 
-        // GET: ProfileController
+        //displays a view for the users profile. fetches preferences and info from db together with user score
         public ActionResult Index(ProfileViewModel model, string profile)
         {
-            
-
-            var visitorRepository = new VisitRepository(_context);
+            //fetches everything and saves it in fields
             var userRepository = new UserRepository(_context);
             var nationalityRepository = new NationalityRepository(_context);
             var personalityRepository = new PersonalityRepository(_context);
@@ -39,9 +37,10 @@ namespace DatingSite.Controllers
             var scoreCalculator = new ScoreCalculator(_context);
             List<CardViewModel> modelList = new List<CardViewModel>();
 
-            try {
+            try
+            {
                 var list = userRepository.GetUsers();
-
+                //loops through each user and returns a list with all the users and their corresponding information
                 foreach (var user in userRepository.getUserGamesGenresPlatformsScore(User.Identity.Name))
                 {
                     if (user.Item1.NickName.Equals(profile))
@@ -80,7 +79,6 @@ namespace DatingSite.Controllers
                         model.Platforms = user.Item4;
                         model.Visits = usersVisits;
                         model.Posts = userPosts;
-                        //model.Score = user.Item5;
                         break;
                     }
                 }
@@ -90,12 +88,12 @@ namespace DatingSite.Controllers
                 Console.WriteLine(e);
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-            
 
             ViewBag.currentUser = userRepository.getUserIdByMail(User.Identity.Name);
             return View(model);
         }
 
+        //method for saving the users data to an XML file to the desktop
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult SerializeProfile()
@@ -118,11 +116,11 @@ namespace DatingSite.Controllers
             catch (Exception e)
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
-
             }
             return Redirect(Request.Headers["Referer"].ToString());
         }
 
+        //gets the current information and preferences from the db
         private SerializeProfile GetProfileData()
         {
             try
@@ -144,49 +142,17 @@ namespace DatingSite.Controllers
                 };
                 return serializeProfile;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 RedirectToAction("Index", "Error", new { exception = e });
                 return null;
             }
         }
 
+        //publish visitors on your profile page.
         public ActionResult Visitors(VisitorViewModel model)
         {
             return View(model);
-        }
-
-        // GET: ProfileController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: ProfileController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ProfileController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ProfileController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
         }
 
         // POST: ProfileController/Edit/5
@@ -204,27 +170,7 @@ namespace DatingSite.Controllers
             }
         }
 
-        // GET: ProfileController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ProfileController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+        //deletes post from the users profile
         public ActionResult DeletePost(int id)
         {
             var postRepository = new PostRepository(_context);

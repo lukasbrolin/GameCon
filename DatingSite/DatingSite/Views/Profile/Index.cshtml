@@ -90,18 +90,13 @@
 
                     }
                 </div>
-            </li >
+            </li>
             @{if (Model.User.Mail.Equals(User.Identity.Name))
                 {
                     <li class="list-group mx-auto mg-1 in-card-border w-100">
                         <h5 id="VisitorTitle" class="list-group-item backgroundFrosty profile-header">Latest Vistors</h5>
                         <div class="list-group-item backgroundFrosty d-flex" id="Visits">
                             <div id="visitDiv" class="container d-flex">
-                                @*<div class="row">
-                                    <div class="col  p-1 m-1 ">
-                                        <div class="player-info w-100 flexdirectionrow" id="visitDiv"></div>
-                                    </div>
-                                </div>*@
                             </div>
                         </div>
                     </li>
@@ -119,7 +114,7 @@
                             </div>
                         </div>
                         <div>
-                        <button class="btn btn-primary button-profile-border mt-n2 ml-1 mb-1" id="btnSendMessage">Send Message</button>
+                            <button class="btn btn-primary button-profile-border mt-n2 ml-1 mb-1" id="btnSendMessage">Send Message</button>
                             @foreach (var post in Model.Posts)
                             {
                                 <div class="card mt-2">
@@ -152,7 +147,7 @@
                 </form>
             </div>
         }
-        <!-- Modal -->
+        <!-- Modal for adding friend -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -166,6 +161,7 @@
             </div>
         </div>
     </div>
+    <!-- Modal for serializing your data -->
     <div class="modal fade" id="SerializeModal" tabindex="-1" role="dialog" aria-labelledby="SerializeModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -223,13 +219,11 @@
                         $("#visitDiv").append("<div class=\"container\">" +
                             "<div class=\"row\">" +
                             "<div class=\"col p-1 m-1\">" +
-                            "<img class=\"mx-auto d-block img-game\" src=\"" + data[i].img + "\"/>" +
+                            "<img class=\"mx-auto d-block img-game\" src=\"" + data[i].img + "\" />" +
                             "<h6 class=\"text-center\">" + data[i].name + "</h6>" +
                             "</div>" +
                             "</div>" +
                             "</div>");
-                        //$("#visitDiv").append("<div class=\" player-info\">" + data[i].name +
-                        //    "<img  class=\"img-platform\" src=\"" + data[i].img + "\" /></div > ");
                         i++;
                     });
                     $.each
@@ -237,37 +231,5 @@
                 error: function() { bootbox.alert("Something went wrong, RIP"); }
                 });
         });
-            
-
-        //$(function () {
-
-        //$(function () {
-
-        //});
-
-        //$(document).ready(function () {
-
-        //    });
-
-            @*$(document).ready(function () {
-          $.ajax({
-            url: "/Api/Post/Posts",
-              type: "Post",
-              data: JSON.stringify(["@Model.User.Mail"]),
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                var i = 0;
-
-                $.each(data, function () {
-                    console.log(data)
-                    $("#postsDiv").append("<div class=\" player-info\">Sender: " + data[i].sender + " Date: "+ data[i].date +
-                        "<p>" + data[i].content + "</p></div > " );
-                    i++;
-                });
-                $.each
-            },
-            error: function () { bootbox.alert("Something went wrong, RIP"); }
-        });
-    });*@
     </script>
 }

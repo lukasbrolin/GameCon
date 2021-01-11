@@ -27,6 +27,7 @@ namespace DatingSite.Controllers
             _userManager = usermanager;
             _signInManager = signInManager;
         }
+
         public async Task<IActionResult> Index(GGPViewModel model)
         {
             try
@@ -92,18 +93,17 @@ namespace DatingSite.Controllers
 
                 return View(model);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
-
         }
 
         [HttpPost]
-        public async Task<ActionResult> Submit(string[] CheckBoxesGame,string[] CheckBoxesGenre,string[] CheckBoxesPlatform, GGPViewModel model, IFormFile file)
+        public async Task<ActionResult> Submit(string[] CheckBoxesGame, string[] CheckBoxesGenre, string[] CheckBoxesPlatform, GGPViewModel model, IFormFile file)
         {
-            try { 
-            
+            try
+            {
                 var userRepository = new UserRepository(_context);
                 var gameRepository = new GameRepository(_context);
                 var genreRepository = new GenreRepository(_context);
@@ -114,23 +114,21 @@ namespace DatingSite.Controllers
                 List<Genre> userGenres = userRepository.GetUserGenresByMail(User.Identity.Name);
                 List<Platform> userPlatforms = userRepository.GetUserPlatformsByMail(User.Identity.Name);
 
-            
-
                 var removedGamesList = userGames.Except(gameRepository.GetGamesByNames(CheckBoxesGame)).Select(x => x.Name).ToArray();
                 var newSelectedGames = gameRepository.GetGamesByNames(CheckBoxesGame).Except(userGames).Select(x => x.Name).ToArray();
-            
-                if(newSelectedGames.Length > 0)
+
+                if (newSelectedGames.Length > 0)
                 {
                     userRepository.SetUserGames(User.Identity.Name, newSelectedGames);
                 }
-                if(removedGamesList.Length > 0)
+                if (removedGamesList.Length > 0)
                 {
                     userRepository.RemoveUserGames(User.Identity.Name, removedGamesList);
                 }
 
                 var removedGenreList = userGenres.Except(genreRepository.GetGenresByNames(CheckBoxesGenre)).Select(x => x.Name).ToArray();
                 var newSelectedGenre = genreRepository.GetGenresByNames(CheckBoxesGenre).Except(userGenres).Select(x => x.Name).ToArray();
-            
+
                 if (newSelectedGenre.Length > 0)
                 {
                     userRepository.SetUserGenres(User.Identity.Name, newSelectedGenre);
@@ -155,7 +153,7 @@ namespace DatingSite.Controllers
                 {
                     userRepository.EditUserNickName(user, model.NickName);
                 }
-            
+
                 if (model.FirstName != null)
                 {
                     userRepository.EditUserFirstName(user, model.FirstName);
@@ -171,13 +169,11 @@ namespace DatingSite.Controllers
                     userRepository.EditUserAge(user, model.Age);
                 }
 
-
                 //Noobens swagkod som inte funkar
                 if (model.Gender != null)
                 {
                     userRepository.EditUserGender(user, model.Gender);
                 }
-
 
                 if (model.Nationality != null)
                 {
@@ -189,23 +185,21 @@ namespace DatingSite.Controllers
                     userRepository.EditUserPersonality(user, model.Personality);
                 }
 
-            
                 if (file != null)
                 {
-            
-                        string imgUrl = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string imgUrl = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
 
-                        if (imgUrl.ToLower().Contains(".jpeg") || imgUrl.ToLower().Contains(".jpg") || imgUrl.Contains(".png"))
+                    if (imgUrl.ToLower().Contains(".jpeg") || imgUrl.ToLower().Contains(".jpg") || imgUrl.Contains(".png"))
+                    {
+                        string savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img\\avatars", imgUrl);
+                        string relPath = System.IO.Path.Combine("~/img/avatars/" + imgUrl);
+                        using (var fileStream = new FileStream(savePath, FileMode.Create))
                         {
-                            string savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\img\\avatars", imgUrl);
-                            string relPath = System.IO.Path.Combine("~/img/avatars/" + imgUrl);
-                            using (var fileStream = new FileStream(savePath, FileMode.Create))
-                            {
-                                file.CopyTo(fileStream);
-                            }
-
-                            userRepository.EditUserImgUrl(user, relPath);
+                            file.CopyTo(fileStream);
                         }
+
+                        userRepository.EditUserImgUrl(user, relPath);
+                    }
                 }
 
                 return RedirectToAction("Index", "Profile");
@@ -215,7 +209,5 @@ namespace DatingSite.Controllers
                 return RedirectToAction("Index", "Error", new { exception = e });
             }
         }
-
     }
 }
-
