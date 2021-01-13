@@ -26,8 +26,6 @@ namespace DataLayer
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
 
-        //public virtual DbSet<FriendList> FriendLists { get; set; }
-        //public virtual DbSet<FriendRequest> FriendRequests { get; set; }
         public virtual DbSet<Visit> Visits { get; set; }
 
         public virtual DbSet<Status> Statuses { get; set; }
@@ -190,32 +188,6 @@ namespace DataLayer
                 new { UsersUserId = 11, PlatformsPlatformId = 3 })
                );
 
-            ////UserUser
-            //modelBuilder.Entity<User>()
-            //    .HasMany(g => g.Users)
-            //    .WithMany(g => g.Users)
-            //    .UsingEntity(j => j.ToTable("UserUser")
-            //    .HasData(new { UserId = 3, FriendsId = 2 })
-            //   );
-
-            //modelBuilder.Entity<User>()
-            //    .HasMany(p => p.Users)
-            //    .WithMany(p => p.Friends)
-            //    .UsingEntity<Dictionary<string, object>>(
-            //        "UserUser",
-            //        j => j
-            //            .HasOne<User>()
-            //            .WithMany()
-            //            .HasForeignKey("UserId")
-            //            .HasConstraintName("FK_UserUser_Users_UserId")
-            //            .OnDelete(DeleteBehavior.Cascade),
-            //        j => j
-            //            .HasOne<User>()
-            //            .WithMany()
-            //            .HasForeignKey("FriendId")
-            //            .HasConstraintName("FK_UserUser_Users_FriendId")
-            //            .OnDelete(DeleteBehavior.ClientCascade))
-            //            .HasData(new { UserId = 3, FriendId = 2, CategoryId = 1, StatusId = 1});
 
             //Message
             modelBuilder.Entity<Message>().HasData(
@@ -295,7 +267,7 @@ namespace DataLayer
                 new User() { UserId = 8, NationalityId = 1, PersonalityId = 5,NickName="Kentaflenta", FirstName = "Kent", LastName = "Andersson", Mail = "kent.andersson@dating.com", Age = 31, Online = false, Gender = "Male", Active = true, ImgUrl = "~/img/avatars/wow1.jpg" },
                 new User() { UserId = 9, NationalityId = 4, PersonalityId = 3,NickName="Vettelmano", FirstName = "Sebastian", LastName = "Vettel", Mail = "sebastian.vettel@dating.com", Age = 41, Online = false, Gender = "Male", Active = true, ImgUrl = "~/img/avatars/wow2.jpg" },
                 new User() { UserId = 10, NationalityId = 4, PersonalityId = 3,NickName="Spyking", FirstName = "Nico", LastName = "Rosberg", Mail = "nico.rosberg@dating.com", Age = 38, Online = false, Gender = "Male", Active = true, ImgUrl = "~/img/avatars/wow3.jpg" },
-                new User() { UserId = 11, NationalityId = 5, PersonalityId = 4,NickName="Hermione", FirstName = "Emma", LastName = "Watson", Mail = "emma.watson@dating.com", Age = 30, Online = false, Gender = "Female", Active = true, ImgUrl = "~/img/avatars/wow.6.jpg" });
+                new User() { UserId = 11, NationalityId = 5, PersonalityId = 4,NickName="Hermione", FirstName = "Emma", LastName = "Watson", Mail = "emma.watson@dating.com", Age = 30, Online = false, Gender = "Female", Active = true, ImgUrl = "~/img/avatars/wow6.jpg" });
         }
     }
 }

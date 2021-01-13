@@ -22,8 +22,8 @@ namespace DatingSite.Controllers
 
         public UsersController(DatingSiteContext context)
         {
-            _userRepository = new UserRepository(_context);
             _context = context;
+            _userRepository = new UserRepository(_context);
         }
 
         //hides or unhide the account in settings. a hidden account wont show up in search for other users.

@@ -175,6 +175,7 @@ namespace DatingSite.Controllers
                 var requestingFriend = _context.Friends.First(f => f.SenderId == senderId);
                 requestingFriend.StatusId = 2;
                 var friend = new Friend { SenderId = receiverId, ReceiverId = senderId, CategoryId = 1, StatusId = 2 };
+                _context.Friends.FirstOrDefault(x => x.SenderId.Equals(senderId) && x.ReceiverId.Equals(receiverId)).StatusId = 2;
                 _context.Friends.Add(friend);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
